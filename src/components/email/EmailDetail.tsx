@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -17,6 +16,7 @@ import {
   AlertCircle
 } from 'lucide-react';
 import { Email } from '@/types/email';
+import AIEmailDetail from './AIEmailDetail';
 
 interface EmailDetailProps {
   email: Email | null;
@@ -41,6 +41,11 @@ const EmailDetail: React.FC<EmailDetailProps> = ({
         </CardContent>
       </Card>
     );
+  }
+
+  // 如果是AI生成的邮件，显示AI专用界面
+  if (email.isAIGenerated) {
+    return <AIEmailDetail email={email} />;
   }
 
   const getPriorityColor = (priority: string) => {
