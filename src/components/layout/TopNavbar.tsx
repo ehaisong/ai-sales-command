@@ -14,26 +14,29 @@ import { Search, Bell, HelpCircle, Share, ChevronDown, User, Settings, CreditCar
 
 const TopNavbar = () => {
   return (
-    <header className="h-16 bg-white border-b border-border px-6 flex items-center justify-between w-full">
+    <header className="h-16 bg-white border-b border-border px-6 flex items-center justify-between w-full fixed top-0 left-0 right-0 z-50">
       {/* 左侧品牌选择 */}
       <div className="flex items-center space-x-4">
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="flex items-center space-x-2">
-              <span className="font-medium">我的品牌</span>
-              <ChevronDown className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuItem>
-              <span>我的品牌</span>
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <span>+ 添加新品牌</span>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <div className="flex items-center space-x-3">
+          <h1 className="text-xl font-semibold text-gray-900">思拓外贸助手</h1>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" className="flex items-center space-x-2">
+                <span className="font-medium">我的品牌</span>
+                <ChevronDown className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuItem>
+                <span>我的品牌</span>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>
+                <span>+ 添加新品牌</span>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </div>
 
       {/* 中间搜索栏 */}

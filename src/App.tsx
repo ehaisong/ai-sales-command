@@ -20,8 +20,8 @@ const App = () => (
       <BrowserRouter>
         <div className="min-h-screen flex flex-col w-full">
           <TopNavbar />
-          <SidebarProvider>
-            <div className="flex-1 flex w-full">
+          <div className="flex-1 flex w-full pt-16">
+            <SidebarProvider>
               <AppSidebar />
               <main className="flex-1 overflow-auto">
                 <Routes>
@@ -57,8 +57,8 @@ const App = () => (
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </main>
-            </div>
-          </SidebarProvider>
+            </SidebarProvider>
+          </div>
         </div>
       </BrowserRouter>
     </TooltipProvider>
