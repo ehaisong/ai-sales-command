@@ -28,27 +28,29 @@ const AIWorkflow = () => {
   }, [currentStep]);
 
   return (
-    <Card className="h-96">
-      <CardHeader>
+    <Card className="h-full flex flex-col">
+      <CardHeader className="flex-shrink-0">
         <CardTitle className="flex items-center space-x-2">
           <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
           <span>AI业务员工作流</span>
         </CardTitle>
       </CardHeader>
-      <CardContent className="space-y-3">
-        {visibleSteps.map((step, index) => (
-          <div
-            key={`${step}-${index}`}
-            className={`p-3 bg-secondary/50 rounded-lg fade-in transition-opacity duration-500 ${
-              index === 0 ? 'opacity-100' : 'opacity-70'
-            }`}
-          >
-            <div className="flex items-center space-x-2">
-              <div className="w-2 h-2 bg-primary rounded-full"></div>
-              <span className="text-sm">{step}</span>
+      <CardContent className="flex-1 flex items-center justify-center p-8">
+        <div className="w-full max-w-md space-y-3">
+          {visibleSteps.map((step, index) => (
+            <div
+              key={`${step}-${index}`}
+              className={`p-4 bg-secondary/50 rounded-lg fade-in transition-opacity duration-500 ${
+                index === 0 ? 'opacity-100' : 'opacity-70'
+              }`}
+            >
+              <div className="flex items-center space-x-2">
+                <div className="w-2 h-2 bg-primary rounded-full flex-shrink-0"></div>
+                <span className="text-sm">{step}</span>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </CardContent>
     </Card>
   );
