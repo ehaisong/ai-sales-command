@@ -137,7 +137,7 @@ const AppSidebar = () => {
                     <Collapsible className="group/collapsible">
                       <CollapsibleTrigger asChild>
                         <SidebarMenuButton className="flex items-center justify-between w-full text-left">
-                          <div className="flex items-center">
+                          <div className="flex items-center justify-start text-left">
                             <item.icon className="mr-3 h-4 w-4" />
                             <span className="text-left">{item.title}</span>
                           </div>
@@ -151,9 +151,9 @@ const AppSidebar = () => {
                               <SidebarMenuSubButton 
                                 asChild
                                 isActive={location.pathname === subItem.url}
-                                className="text-left justify-start"
+                                className="text-left justify-start w-full"
                               >
-                                <Link to={subItem.url}>
+                                <Link to={subItem.url} className="flex items-center justify-start text-left w-full">
                                   <span className="text-left">{subItem.title}</span>
                                 </Link>
                               </SidebarMenuSubButton>
@@ -166,9 +166,9 @@ const AppSidebar = () => {
                     <SidebarMenuButton 
                       asChild 
                       isActive={location.pathname === item.url}
-                      className="text-left justify-start"
+                      className="text-left justify-start w-full"
                     >
-                      <Link to={item.url}>
+                      <Link to={item.url} className="flex items-center justify-start text-left w-full">
                         <item.icon className="mr-3 h-4 w-4" />
                         <span className="text-left">{item.title}</span>
                       </Link>
