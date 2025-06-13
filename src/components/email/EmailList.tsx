@@ -15,7 +15,8 @@ interface EmailListProps {
 }
 
 const EmailList: React.FC<EmailListProps> = ({ emails, selectedEmailId, onEmailSelect }) => {
-  const getPriorityColor = (priority: string) => {
+  const getPriorityColor = (priority: string, isSelected: boolean) => {
+    if (isSelected) return 'text-white';
     switch (priority) {
       case 'high': return 'text-red-500';
       case 'medium': return 'text-yellow-500';
@@ -29,68 +30,86 @@ const EmailList: React.FC<EmailListProps> = ({ emails, selectedEmailId, onEmailS
 
   return (
     <div className="space-y-2">
-      {emails.map((email) => (
-        <Card 
-          key={email.id}
-          className={`cursor-pointer transition-colors hover:bg-accent/50 ${
-            selectedEmailId === email.id ? 'bg-accent' : ''
-          } ${!email.isRead ? 'border-l-4 border-l-primary' : ''}`}
-          onClick={() => onEmailSelect(email)}
-        >
-          <CardContent className="p-4">
-            <div className="flex items-start space-x-3">
-              {/* 发件人头像 */}
-              <Avatar className="h-10 w-10 bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white text-sm font-medium">
-                {getInitials(email.from)}
-              </Avatar>
-              
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center justify-between mb-1">
-                  <div className="flex items-center space-x-2">
-                    <span className={`text-sm font-medium ${!email.isRead ? 'text-foreground' : 'text-muted-foreground'}`}>
-                      {email.from}
+      {emails.map((email) => {
+        const isSelected = selectedEmailId === email.id;
+        return (
+          <Card 
+            key={email.id}
+            className={`cursor-pointer transition-colors hover:bg-accent/50 ${
+              isSelected ? '' : ''
+            } ${!email.isRead ? 'border-l-4 border-l-primary' : ''}`}
+            style={{
+              backgroundColor: isSelected ? '#E9EEF5' : undefined
+            }}
+            onClick={() => onEmailSelect(email)}
+          >
+            <CardContent className="p-4">
+              <div className="flex items-start space-x-3">
+                {/* 发件人头像 */}
+                <Avatar className="h-10 w-10 bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white text-sm font-medium">
+                  {getInitials(email.from)}
+                </Avatar>
+                
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center justify-between mb-1">
+                    <div className="flex items-center space-x-2">
+                      <span className={`text-sm font-medium ${
+                        isSelected 
+                          ? 'text-white' 
+                          : (!email.isRead ? 'text-foreground' : 'text-muted-foreground')
+                      }`}>
+                        {email.from}
+                      </span>
+                      {email.isAIGenerated && (
+                        <Badge variant="secondary" className="text-xs">AI</Badge>
+                      )}
+                      <AlertCircle className={`h-3 w-3 ${getPriorityColor(email.priority, isSelected)}`} />
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      {email.attachments && email.attachments.length > 0 && (
+                        <Paperclip className={`h-3 w-3 ${isSelected ? 'text-white' : 'text-muted-foreground'}`} />
+                      )}
+                      {email.isRead ? (
+                        <MailOpen className={`h-3 w-3 ${isSelected ? 'text-white' : 'text-muted-foreground'}`} />
+                      ) : (
+                        <Mail className={`h-3 w-3 ${isSelected ? 'text-white' : 'text-primary'}`} />
+                      )}
+                    </div>
+                  </div>
+                  
+                  <h4 className={`text-sm mb-1 ${
+                    isSelected 
+                      ? 'text-white font-semibold' 
+                      : (!email.isRead ? 'font-semibold' : 'font-normal')
+                  }`}>
+                    {email.subject}
+                  </h4>
+                  
+                  <p className={`text-xs mb-2 line-clamp-2 ${
+                    isSelected ? 'text-white' : 'text-muted-foreground'
+                  }`}>
+                    {email.content}
+                  </p>
+                  
+                  <div className="flex items-center justify-between">
+                    <span className={`text-xs ${
+                      isSelected ? 'text-white' : 'text-muted-foreground'
+                    }`}>
+                      {formatDistanceToNow(email.timestamp, { 
+                        addSuffix: true, 
+                        locale: zhCN 
+                      })}
                     </span>
-                    {email.isAIGenerated && (
-                      <Badge variant="secondary" className="text-xs">AI</Badge>
-                    )}
-                    <AlertCircle className={`h-3 w-3 ${getPriorityColor(email.priority)}`} />
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    {email.attachments && email.attachments.length > 0 && (
-                      <Paperclip className="h-3 w-3 text-muted-foreground" />
-                    )}
-                    {email.isRead ? (
-                      <MailOpen className="h-3 w-3 text-muted-foreground" />
-                    ) : (
-                      <Mail className="h-3 w-3 text-primary" />
+                    {!email.isRead && (
+                      <div className="w-2 h-2 bg-primary rounded-full"></div>
                     )}
                   </div>
-                </div>
-                
-                <h4 className={`text-sm mb-1 ${!email.isRead ? 'font-semibold' : 'font-normal'}`}>
-                  {email.subject}
-                </h4>
-                
-                <p className="text-xs text-muted-foreground mb-2 line-clamp-2">
-                  {email.content}
-                </p>
-                
-                <div className="flex items-center justify-between">
-                  <span className="text-xs text-muted-foreground">
-                    {formatDistanceToNow(email.timestamp, { 
-                      addSuffix: true, 
-                      locale: zhCN 
-                    })}
-                  </span>
-                  {!email.isRead && (
-                    <div className="w-2 h-2 bg-primary rounded-full"></div>
-                  )}
                 </div>
               </div>
-            </div>
-          </CardContent>
-        </Card>
-      ))}
+            </CardContent>
+          </Card>
+        );
+      })}
     </div>
   );
 };
