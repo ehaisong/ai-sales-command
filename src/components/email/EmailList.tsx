@@ -16,7 +16,6 @@ interface EmailListProps {
 
 const EmailList: React.FC<EmailListProps> = ({ emails, selectedEmailId, onEmailSelect }) => {
   const getPriorityColor = (priority: string, isSelected: boolean) => {
-    if (isSelected) return 'text-white';
     switch (priority) {
       case 'high': return 'text-red-500';
       case 'medium': return 'text-yellow-500';
@@ -54,9 +53,7 @@ const EmailList: React.FC<EmailListProps> = ({ emails, selectedEmailId, onEmailS
                   <div className="flex items-center justify-between mb-1">
                     <div className="flex items-center space-x-2">
                       <span className={`text-sm font-medium ${
-                        isSelected 
-                          ? 'text-white' 
-                          : (!email.isRead ? 'text-foreground' : 'text-muted-foreground')
+                        !email.isRead ? 'text-foreground' : 'text-muted-foreground'
                       }`}>
                         {email.from}
                       </span>
@@ -67,34 +64,28 @@ const EmailList: React.FC<EmailListProps> = ({ emails, selectedEmailId, onEmailS
                     </div>
                     <div className="flex items-center space-x-2">
                       {email.attachments && email.attachments.length > 0 && (
-                        <Paperclip className={`h-3 w-3 ${isSelected ? 'text-white' : 'text-muted-foreground'}`} />
+                        <Paperclip className="h-3 w-3 text-muted-foreground" />
                       )}
                       {email.isRead ? (
-                        <MailOpen className={`h-3 w-3 ${isSelected ? 'text-white' : 'text-muted-foreground'}`} />
+                        <MailOpen className="h-3 w-3 text-muted-foreground" />
                       ) : (
-                        <Mail className={`h-3 w-3 ${isSelected ? 'text-white' : 'text-primary'}`} />
+                        <Mail className="h-3 w-3 text-primary" />
                       )}
                     </div>
                   </div>
                   
                   <h4 className={`text-sm mb-1 ${
-                    isSelected 
-                      ? 'text-white font-semibold' 
-                      : (!email.isRead ? 'font-semibold' : 'font-normal')
+                    !email.isRead ? 'font-semibold' : 'font-normal'
                   }`}>
                     {email.subject}
                   </h4>
                   
-                  <p className={`text-xs mb-2 line-clamp-2 ${
-                    isSelected ? 'text-white' : 'text-muted-foreground'
-                  }`}>
+                  <p className="text-xs mb-2 line-clamp-2 text-muted-foreground">
                     {email.content}
                   </p>
                   
                   <div className="flex items-center justify-between">
-                    <span className={`text-xs ${
-                      isSelected ? 'text-white' : 'text-muted-foreground'
-                    }`}>
+                    <span className="text-xs text-muted-foreground">
                       {formatDistanceToNow(email.timestamp, { 
                         addSuffix: true, 
                         locale: zhCN 
