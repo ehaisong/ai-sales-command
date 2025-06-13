@@ -18,7 +18,11 @@ const TopNavbar = () => {
       {/* 左侧品牌选择 */}
       <div className="flex items-center space-x-4">
         <div className="flex items-center space-x-3">
-          <h1 className="text-xl font-semibold text-gray-900">思拓外贸助手</h1>
+          <img 
+            src="/lovable-uploads/a6b20fef-de43-4809-b7fc-a1d7b088160d.png" 
+            alt="思拓外贸助手" 
+            className="h-8 w-auto object-contain"
+          />
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" className="flex items-center space-x-2">
