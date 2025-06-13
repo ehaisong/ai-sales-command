@@ -136,10 +136,10 @@ const AppSidebar = () => {
                   {item.items ? (
                     <Collapsible className="group/collapsible">
                       <CollapsibleTrigger asChild>
-                        <SidebarMenuButton className="flex items-center justify-between w-full">
+                        <SidebarMenuButton className="flex items-center justify-between w-full text-left">
                           <div className="flex items-center">
                             <item.icon className="mr-3 h-4 w-4" />
-                            <span>{item.title}</span>
+                            <span className="text-left">{item.title}</span>
                           </div>
                           <ChevronRight className="h-4 w-4 transition-transform group-data-[state=open]/collapsible:rotate-90" />
                         </SidebarMenuButton>
@@ -151,9 +151,10 @@ const AppSidebar = () => {
                               <SidebarMenuSubButton 
                                 asChild
                                 isActive={location.pathname === subItem.url}
+                                className="text-left justify-start"
                               >
                                 <Link to={subItem.url}>
-                                  <span>{subItem.title}</span>
+                                  <span className="text-left">{subItem.title}</span>
                                 </Link>
                               </SidebarMenuSubButton>
                             </SidebarMenuSubItem>
@@ -165,10 +166,11 @@ const AppSidebar = () => {
                     <SidebarMenuButton 
                       asChild 
                       isActive={location.pathname === item.url}
+                      className="text-left justify-start"
                     >
                       <Link to={item.url}>
                         <item.icon className="mr-3 h-4 w-4" />
-                        <span>{item.title}</span>
+                        <span className="text-left">{item.title}</span>
                       </Link>
                     </SidebarMenuButton>
                   )}
