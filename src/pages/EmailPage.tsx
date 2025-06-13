@@ -1,3 +1,4 @@
+
 import React, { useState, useMemo } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -168,7 +169,7 @@ const EmailPage = () => {
                     <Send className="mr-1 h-3 w-3" />
                     人工处理
                     {getUnreadCount('manual') > 0 && (
-                      <Badge variant="destructive" className="ml-1 h-4 w-4 p-0 text-xs">
+                      <Badge variant="destructive" className="ml-1 h-4 w-4 p-0 text-xs flex items-center justify-center">
                         {getUnreadCount('manual')}
                       </Badge>
                     )}
@@ -177,7 +178,7 @@ const EmailPage = () => {
                     <Bot className="mr-1 h-3 w-3" />
                     AI发送
                     {getUnreadCount('ai') > 0 && (
-                      <Badge variant="destructive" className="ml-1 h-4 w-4 p-0 text-xs">
+                      <Badge variant="destructive" className="ml-1 h-4 w-4 p-0 text-xs flex items-center justify-center">
                         {getUnreadCount('ai')}
                       </Badge>
                     )}
