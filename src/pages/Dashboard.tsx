@@ -21,6 +21,7 @@ const Dashboard = () => {
               icon={Mail}
               trend="+2 新消息"
               trendUp={true}
+              iconColor="#4f46e5"
             />
             <StatCard
               title="今日客户"
@@ -28,6 +29,7 @@ const Dashboard = () => {
               icon={Users}
               trend="+12% 较昨日"
               trendUp={true}
+              iconColor="#FF5724"
             />
             <StatCard
               title="今日发信"
@@ -35,6 +37,7 @@ const Dashboard = () => {
               icon={Send}
               trend="+8% 较昨日"
               trendUp={true}
+              iconColor="#0EA5E9"
             />
             <StatCard
               title="官网访问量"
@@ -42,6 +45,7 @@ const Dashboard = () => {
               icon={Globe}
               trend="+23% 较昨日"
               trendUp={true}
+              iconColor="#10B981"
             />
           </div>
 
