@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
@@ -23,7 +22,8 @@ import {
   Share, 
   Settings,
   CreditCard,
-  ChevronRight
+  ChevronRight,
+  Tools
 } from 'lucide-react';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 
@@ -86,7 +86,7 @@ const menuItems = [
   },
   {
     title: "营销工具",
-    icon: Settings,
+    icon: Tools,
     items: [
       {
         title: "爆款趋势",
