@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Send } from 'lucide-react';
+import { Send, MessageSquare, Plus, Upload } from 'lucide-react';
 
 interface Message {
   id: string;
@@ -13,7 +13,14 @@ interface Message {
 }
 
 const ChatBox = () => {
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<Message[]>([
+    {
+      id: '1',
+      content: '您好！我是小思，您的AI业务员。有什么可以帮助您的吗？',
+      isUser: false,
+      timestamp: new Date(),
+    },
+  ]);
   const [inputValue, setInputValue] = useState('');
 
   const handleSendMessage = () => {
@@ -42,32 +49,38 @@ const ChatBox = () => {
   };
 
   return (
-    <Card className="h-[280px] flex flex-col">
-      <CardHeader className="flex-shrink-0 text-center">
-        <CardTitle className="text-lg">AI对话框</CardTitle>
+    <Card className="h-96 flex flex-col">
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
+        <CardTitle className="text-lg flex items-center space-x-2">
+          <MessageSquare className="h-5 w-5" />
+          <span>小思</span>
+        </CardTitle>
+        <div className="flex space-x-1">
+          <Button variant="ghost" size="sm">
+            历史对话
+          </Button>
+          <Button variant="ghost" size="sm">
+            <Plus className="h-4 w-4" />
+          </Button>
+        </div>
       </CardHeader>
       
       <CardContent className="flex-1 flex flex-col space-y-3">
         {/* 聊天内容区域 */}
-        <div className="flex-1 space-y-3 overflow-y-auto min-h-0">
-          {messages.length === 0 && (
-            <div className="flex items-center justify-center h-full text-muted-foreground text-sm">
-              开始与AI对话...
-            </div>
-          )}
+        <div className="flex-1 space-y-3 overflow-y-auto">
           {messages.map((message) => (
             <div
               key={message.id}
               className={`flex ${message.isUser ? 'justify-end' : 'justify-start'}`}
             >
               <div
-                className={`max-w-[80%] p-2 rounded-lg text-sm ${
+                className={`max-w-[80%] p-3 rounded-lg ${
                   message.isUser
                     ? 'bg-primary text-white'
                     : 'bg-secondary text-foreground'
                 }`}
               >
-                {message.content}
+                <p className="text-sm">{message.content}</p>
               </div>
             </div>
           ))}
@@ -75,6 +88,9 @@ const ChatBox = () => {
 
         {/* 输入区域 */}
         <div className="flex space-x-2">
+          <Button variant="outline" size="sm">
+            <Upload className="h-4 w-4" />
+          </Button>
           <Input
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
@@ -83,7 +99,7 @@ const ChatBox = () => {
             className="flex-1"
           />
           <Button onClick={handleSendMessage} size="sm">
-            发送
+            <Send className="h-4 w-4" />
           </Button>
         </div>
       </CardContent>
