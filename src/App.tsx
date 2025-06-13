@@ -1,10 +1,14 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
+import { SidebarProvider } from "@/components/ui/sidebar";
+import AppSidebar from "@/components/layout/AppSidebar";
+import TopNavbar from "@/components/layout/TopNavbar";
+import Dashboard from "@/pages/Dashboard";
+import NotFound from "@/pages/NotFound";
 
 const queryClient = new QueryClient();
 
@@ -14,11 +18,48 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <SidebarProvider>
+          <div className="min-h-screen flex w-full">
+            <AppSidebar />
+            <div className="flex-1 flex flex-col">
+              <TopNavbar />
+              <main className="flex-1 overflow-auto">
+                <Routes>
+                  <Route path="/" element={<Dashboard />} />
+                  {/* 营销对话 */}
+                  <Route path="/marketing/email" element={<div className="p-6">电子邮件页面开发中...</div>} />
+                  <Route path="/marketing/whatsapp" element={<div className="p-6">WhatsApp页面开发中...</div>} />
+                  
+                  {/* 客户管理 */}
+                  <Route path="/customers" element={<div className="p-6">客户管理页面开发中...</div>} />
+                  
+                  {/* AI业务员 */}
+                  <Route path="/ai-agent/knowledge" element={<div className="p-6">知识大脑页面开发中...</div>} />
+                  <Route path="/ai-agent/settings" element={<div className="p-6">AI设置页面开发中...</div>} />
+                  
+                  {/* 品牌建设 */}
+                  <Route path="/brand/social" element={<div className="p-6">社交媒体页面开发中...</div>} />
+                  <Route path="/brand/seo" element={<div className="p-6">SEO页面开发中...</div>} />
+                  <Route path="/brand/traffic" element={<div className="p-6">流量加热页面开发中...</div>} />
+                  
+                  {/* 营销工具 */}
+                  <Route path="/tools/trends" element={<div className="p-6">爆款趋势页面开发中...</div>} />
+                  <Route path="/tools/landing" element={<div className="p-6">落地页页面开发中...</div>} />
+                  <Route path="/tools/influencer" element={<div className="p-6">网红页面开发中...</div>} />
+                  <Route path="/tools/ads" element={<div className="p-6">广告助手页面开发中...</div>} />
+                  <Route path="/tools/competitor" element={<div className="p-6">竞品监控页面开发中...</div>} />
+                  <Route path="/tools/traffic-boost" element={<div className="p-6">流量加热页面开发中...</div>} />
+                  
+                  {/* 设置 */}
+                  <Route path="/settings" element={<div className="p-6">设置页面开发中...</div>} />
+                  
+                  {/* 404页面 */}
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </main>
+            </div>
+          </div>
+        </SidebarProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
