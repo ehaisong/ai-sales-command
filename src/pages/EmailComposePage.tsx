@@ -19,8 +19,6 @@ const EmailComposePage = () => {
   const [to, setTo] = useState(originalEmail?.from || '');
   const [subject, setSubject] = useState(originalEmail ? `Re: ${originalEmail.subject}` : '');
   const [content, setContent] = useState('');
-  const [cc, setCc] = useState('');
-  const [bcc, setBcc] = useState('');
 
   const handleSend = () => {
     console.log('发送邮件:', { to, subject, content });
@@ -67,25 +65,6 @@ const EmailComposePage = () => {
                     onChange={(e) => setTo(e.target.value)}
                     placeholder="输入收件人邮箱"
                   />
-                </div>
-                
-                <div className="grid grid-cols-2 gap-3">
-                  <div>
-                    <label className="text-sm font-medium mb-1 block">抄送</label>
-                    <Input
-                      value={cc}
-                      onChange={(e) => setCc(e.target.value)}
-                      placeholder="抄送（可选）"
-                    />
-                  </div>
-                  <div>
-                    <label className="text-sm font-medium mb-1 block">密送</label>
-                    <Input
-                      value={bcc}
-                      onChange={(e) => setBcc(e.target.value)}
-                      placeholder="密送（可选）"
-                    />
-                  </div>
                 </div>
                 
                 <div>
