@@ -8,6 +8,7 @@ import { SidebarProvider } from "@/components/ui/sidebar";
 import AppSidebar from "@/components/layout/AppSidebar";
 import TopNavbar from "@/components/layout/TopNavbar";
 import Dashboard from "@/pages/Dashboard";
+import EmailPage from "@/pages/EmailPage";
 import NotFound from "@/pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,7 +28,7 @@ const App = () => (
                 <Routes>
                   <Route path="/" element={<Dashboard />} />
                   {/* 营销对话 */}
-                  <Route path="/marketing/email" element={<div className="p-6">电子邮件页面开发中...</div>} />
+                  <Route path="/marketing/email" element={<EmailPage />} />
                   <Route path="/marketing/whatsapp" element={<div className="p-6">WhatsApp页面开发中...</div>} />
                   
                   {/* 客户管理 */}
