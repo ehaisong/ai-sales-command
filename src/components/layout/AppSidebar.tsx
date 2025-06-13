@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
@@ -124,7 +125,7 @@ const AppSidebar = () => {
   const location = useLocation();
 
   return (
-    <Sidebar className="w-64">
+    <Sidebar className="w-64" style={{ paddingTop: '64px' }}>
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupContent>
