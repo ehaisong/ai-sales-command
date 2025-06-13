@@ -49,23 +49,23 @@ const ChatBox = () => {
   };
 
   return (
-    <Card className="h-96 flex flex-col">
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
-        <CardTitle className="text-lg flex items-center space-x-2">
-          <MessageSquare className="h-5 w-5" />
+    <Card className="h-[calc(100vh-400px)] flex flex-col">
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3 px-4 py-3">
+        <CardTitle className="text-base flex items-center space-x-2">
+          <MessageSquare className="h-4 w-4" />
           <span>小思</span>
         </CardTitle>
         <div className="flex space-x-1">
-          <Button variant="ghost" size="sm">
+          <Button variant="ghost" size="sm" className="text-xs h-7">
             历史对话
           </Button>
-          <Button variant="ghost" size="sm">
-            <Plus className="h-4 w-4" />
+          <Button variant="ghost" size="sm" className="h-7 w-7 p-0">
+            <Plus className="h-3 w-3" />
           </Button>
         </div>
       </CardHeader>
       
-      <CardContent className="flex-1 flex flex-col space-y-3">
+      <CardContent className="flex-1 flex flex-col space-y-3 px-4 pb-4">
         {/* 聊天内容区域 */}
         <div className="flex-1 space-y-3 overflow-y-auto">
           {messages.map((message) => (
@@ -74,7 +74,7 @@ const ChatBox = () => {
               className={`flex ${message.isUser ? 'justify-end' : 'justify-start'}`}
             >
               <div
-                className={`max-w-[80%] p-3 rounded-lg ${
+                className={`max-w-[80%] p-2 rounded-lg ${
                   message.isUser
                     ? 'bg-primary text-white'
                     : 'bg-secondary text-foreground'
@@ -88,18 +88,18 @@ const ChatBox = () => {
 
         {/* 输入区域 */}
         <div className="flex space-x-2">
-          <Button variant="outline" size="sm">
-            <Upload className="h-4 w-4" />
+          <Button variant="outline" size="sm" className="h-8 w-8 p-0">
+            <Upload className="h-3 w-3" />
           </Button>
           <Input
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             placeholder="输入消息..."
             onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-            className="flex-1"
+            className="flex-1 h-8 text-sm"
           />
-          <Button onClick={handleSendMessage} size="sm">
-            <Send className="h-4 w-4" />
+          <Button onClick={handleSendMessage} size="sm" className="h-8">
+            <Send className="h-3 w-3" />
           </Button>
         </div>
       </CardContent>
