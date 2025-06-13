@@ -19,7 +19,7 @@ import { Email, EmailFilter } from '@/types/email';
 const EmailPage = () => {
   const [selectedEmail, setSelectedEmail] = useState<Email | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
-  const [activeTab, setActiveTab] = useState('all');
+  const [activeTab, setActiveTab] = useState('manual');
 
   // 模拟邮件数据
   const mockEmails: Email[] = [
@@ -99,7 +99,6 @@ const EmailPage = () => {
 
   // 获取未读邮件数量
   const getUnreadCount = (type: string) => {
-    if (type === 'all') return mockEmails.filter(e => !e.isRead).length;
     if (type === 'manual') return mockEmails.filter(e => !e.isRead && !e.isAIGenerated).length;
     if (type === 'ai') return mockEmails.filter(e => !e.isRead && e.isAIGenerated).length;
     return 0;
@@ -164,16 +163,7 @@ const EmailPage = () => {
           <Card className="h-full flex flex-col">
             <CardHeader className="pb-3">
               <Tabs value={activeTab} onValueChange={setActiveTab}>
-                <TabsList className="grid w-full grid-cols-3">
-                  <TabsTrigger value="all" className="text-xs">
-                    <Inbox className="mr-1 h-3 w-3" />
-                    全部
-                    {getUnreadCount('all') > 0 && (
-                      <Badge variant="destructive" className="ml-1 h-4 w-4 p-0 text-xs">
-                        {getUnreadCount('all')}
-                      </Badge>
-                    )}
-                  </TabsTrigger>
+                <TabsList className="grid w-full grid-cols-2">
                   <TabsTrigger value="manual" className="text-xs">
                     <Send className="mr-1 h-3 w-3" />
                     人工处理
