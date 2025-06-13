@@ -1,55 +1,49 @@
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
-const workflowSteps = [
-  "正在分析LinkedIn平台潜在客户...",
-  "发现32个目标客户，正在获取联系方式...",
-  "正在生成个性化邮件内容...",
-  "已发送邮件给5位客户，等待回复...",
-  "正在更新Instagram品牌内容...",
-  "分析竞品定价策略变化...",
-  "正在搜索行业关键词趋势...",
-  "生成本周营销报告...",
-];
-
 const AIWorkflow = () => {
-  const [currentStep, setCurrentStep] = useState(0);
-  const [visibleSteps, setVisibleSteps] = useState<string[]>([]);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const step = workflowSteps[currentStep % workflowSteps.length];
-      setVisibleSteps(prev => [step, ...prev.slice(0, 4)]);
-      setCurrentStep(prev => prev + 1);
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, [currentStep]);
-
   return (
-    <Card className="h-full flex flex-col">
-      <CardHeader className="flex-shrink-0">
-        <CardTitle className="flex items-center space-x-2">
-          <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-          <span>AI业务员工作流</span>
-        </CardTitle>
+    <Card className="h-[500px] flex flex-col">
+      <CardHeader className="flex-shrink-0 text-center">
+        <CardTitle className="text-xl font-bold">AI工作流</CardTitle>
       </CardHeader>
-      <CardContent className="flex-1 flex items-center justify-center p-8">
-        <div className="w-full max-w-md space-y-3">
-          {visibleSteps.map((step, index) => (
-            <div
-              key={`${step}-${index}`}
-              className={`p-4 bg-secondary/50 rounded-lg fade-in transition-opacity duration-500 ${
-                index === 0 ? 'opacity-100' : 'opacity-70'
-              }`}
-            >
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-primary rounded-full flex-shrink-0"></div>
-                <span className="text-sm">{step}</span>
-              </div>
+      <CardContent className="flex-1 flex flex-col items-center justify-center p-8">
+        <div className="w-full max-w-lg space-y-8">
+          {/* 描述文本 */}
+          <div className="text-center space-y-2">
+            <p className="text-sm text-muted-foreground">
+              一站式引流转化系统，24小时不停全网自动找客户，
+            </p>
+            <p className="text-sm text-muted-foreground">
+              自动发邮件接触客户，为每一位客户建立营销档案，
+            </p>
+            <p className="text-sm text-muted-foreground">
+              根据客户的背景及回复自动交流。
+            </p>
+          </div>
+
+          {/* 流程图 */}
+          <div className="flex flex-col items-center space-y-6">
+            {/* 两个输入框 */}
+            <div className="flex space-x-8">
+              <div className="w-24 h-12 border-2 border-gray-400 bg-white"></div>
+              <div className="w-24 h-12 border-2 border-gray-400 bg-white"></div>
             </div>
-          ))}
+            
+            {/* 连接线和汇聚点 */}
+            <div className="relative">
+              <div className="w-8 h-8 border-2 border-gray-400 bg-white transform rotate-45"></div>
+            </div>
+            
+            {/* 中间处理框 */}
+            <div className="w-32 h-12 border-2 border-gray-400 bg-white"></div>
+            
+            {/* 最终输出 */}
+            <div className="w-24 h-8 border-2 border-gray-400 bg-white flex items-center justify-center">
+              <span className="text-xs text-gray-600">启用/暂停</span>
+            </div>
+          </div>
         </div>
       </CardContent>
     </Card>
