@@ -49,17 +49,6 @@ const EmailComposePage = () => {
             {originalEmail ? '回复邮件' : '写邮件'}
           </h1>
         </div>
-        
-        <div className="flex space-x-2">
-          <Button variant="outline" onClick={handleSave}>
-            <Save className="h-4 w-4 mr-2" />
-            保存草稿
-          </Button>
-          <Button onClick={handleSend}>
-            <Send className="h-4 w-4 mr-2" />
-            发送
-          </Button>
-        </div>
       </div>
 
       <div className="grid grid-cols-1 xl:grid-cols-4 gap-6 h-[calc(100vh-200px)]">
@@ -127,6 +116,18 @@ const EmailComposePage = () => {
                 <div className="text-xs text-muted-foreground">
                   {content.length} 字符
                 </div>
+              </div>
+
+              {/* 发送和保存按钮 */}
+              <div className="flex justify-end space-x-2 pt-4 border-t">
+                <Button variant="outline" onClick={handleSave}>
+                  <Save className="h-4 w-4 mr-2" />
+                  保存草稿
+                </Button>
+                <Button onClick={handleSend}>
+                  <Send className="h-4 w-4 mr-2" />
+                  发送
+                </Button>
               </div>
             </CardContent>
           </Card>
