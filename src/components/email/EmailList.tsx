@@ -34,11 +34,21 @@ const EmailList: React.FC<EmailListProps> = ({ emails, selectedEmailId, onEmailS
         return (
           <Card 
             key={email.id}
-            className={`cursor-pointer transition-colors hover:bg-accent/50 ${
-              isSelected ? '' : ''
-            } ${!email.isRead ? 'border-l-4 border-l-primary' : ''}`}
+            className={`cursor-pointer transition-colors ${
+              !email.isRead ? 'border-l-4 border-l-primary' : ''
+            }`}
             style={{
               backgroundColor: isSelected ? '#E9EEF5' : undefined
+            }}
+            onMouseEnter={(e) => {
+              if (!isSelected) {
+                e.currentTarget.style.backgroundColor = '#E3EAFF';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (!isSelected) {
+                e.currentTarget.style.backgroundColor = '';
+              }
             }}
             onClick={() => onEmailSelect(email)}
           >
