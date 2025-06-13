@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -33,6 +34,8 @@ const EmailDetail: React.FC<EmailDetailProps> = ({
   onDelete, 
   onArchive 
 }) => {
+  const navigate = useNavigate();
+
   if (!email) {
     return (
       <Card className="h-full flex items-center justify-center">
@@ -47,6 +50,18 @@ const EmailDetail: React.FC<EmailDetailProps> = ({
   if (email.isAIGenerated) {
     return <AIEmailDetail email={email} />;
   }
+
+  const handleReply = () => {
+    navigate('/marketing/email/compose', { state: { email } });
+  };
+
+  const handleReplyAll = () => {
+    navigate('/marketing/email/compose', { state: { email, replyAll: true } });
+  };
+
+  const handleForwardClick = () => {
+    navigate('/marketing/email/compose', { state: { email, forward: true } });
+  };
 
   const getPriorityColor = (priority: string) => {
     switch (priority) {
@@ -122,15 +137,15 @@ const EmailDetail: React.FC<EmailDetailProps> = ({
       
       <div className="border-t p-4">
         <div className="flex space-x-2">
-          <Button onClick={() => onReply(email)} className="flex-1">
+          <Button onClick={handleReply} className="flex-1">
             <Reply className="mr-2 h-4 w-4" />
             回复
           </Button>
-          <Button variant="outline" onClick={() => onReply(email)}>
+          <Button variant="outline" onClick={handleReplyAll}>
             <ReplyAll className="mr-2 h-4 w-4" />
             全部回复
           </Button>
-          <Button variant="outline" onClick={() => onForward(email)}>
+          <Button variant="outline" onClick={handleForwardClick}>
             <Forward className="mr-2 h-4 w-4" />
             转发
           </Button>
