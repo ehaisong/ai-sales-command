@@ -136,22 +136,20 @@ const AppSidebar = () => {
                   {item.items ? (
                     <Collapsible className="group/collapsible">
                       <CollapsibleTrigger asChild>
-                        <SidebarMenuButton className="flex items-center justify-between w-full text-left">
-                          <div className="flex items-center">
-                            <item.icon className="mr-3 h-4 w-4" />
-                            <span className="text-left">{item.title}</span>
-                          </div>
-                          <ChevronRight className="h-4 w-4 transition-transform duration-300 group-data-[state=open]/collapsible:rotate-90" />
+                        <SidebarMenuButton className="flex w-full items-center justify-start text-left p-2 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors">
+                          <item.icon className="mr-3 h-4 w-4 flex-shrink-0" />
+                          <span className="flex-1 text-left">{item.title}</span>
+                          <ChevronRight className="h-4 w-4 transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
                         </SidebarMenuButton>
                       </CollapsibleTrigger>
-                      <CollapsibleContent>
+                      <CollapsibleContent className="overflow-hidden data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
                         <SidebarMenuSub>
                           {item.items.map((subItem) => (
                             <SidebarMenuSubItem key={subItem.title}>
                               <SidebarMenuSubButton 
                                 asChild
                                 isActive={location.pathname === subItem.url}
-                                className="text-left justify-start"
+                                className="text-left justify-start pl-8 py-2 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors"
                               >
                                 <Link to={subItem.url}>
                                   <span className="text-left">{subItem.title}</span>
@@ -166,10 +164,10 @@ const AppSidebar = () => {
                     <SidebarMenuButton 
                       asChild 
                       isActive={location.pathname === item.url}
-                      className="text-left justify-start"
+                      className="flex w-full items-center justify-start text-left p-2 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors"
                     >
                       <Link to={item.url}>
-                        <item.icon className="mr-3 h-4 w-4" />
+                        <item.icon className="mr-3 h-4 w-4 flex-shrink-0" />
                         <span className="text-left">{item.title}</span>
                       </Link>
                     </SidebarMenuButton>
