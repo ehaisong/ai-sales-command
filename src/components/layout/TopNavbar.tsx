@@ -14,7 +14,7 @@ import { Search, Bell, HelpCircle, Share, ChevronDown, User, Settings, CreditCar
 
 const TopNavbar = () => {
   return (
-    <header className="h-16 bg-white border-b border-border px-6 flex items-center justify-between">
+    <header className="h-16 bg-white border-b border-border px-6 flex items-center justify-between w-full">
       {/* 左侧品牌选择 */}
       <div className="flex items-center space-x-4">
         <DropdownMenu>

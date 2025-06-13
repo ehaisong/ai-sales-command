@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
@@ -7,7 +6,6 @@ import {
   SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -23,7 +21,6 @@ import {
   User, 
   Share, 
   Settings,
-  Mail,
   CreditCard,
   ChevronRight
 } from 'lucide-react';
@@ -130,9 +127,6 @@ const AppSidebar = () => {
     <Sidebar className="w-64">
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel className="text-base font-semibold text-primary mb-4">
-            思拓智能外贸助手
-          </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {menuItems.map((item) => (

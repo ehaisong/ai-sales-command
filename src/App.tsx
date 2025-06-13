@@ -18,11 +18,11 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <SidebarProvider>
-          <div className="min-h-screen flex w-full">
-            <AppSidebar />
-            <div className="flex-1 flex flex-col">
-              <TopNavbar />
+        <div className="min-h-screen flex flex-col w-full">
+          <TopNavbar />
+          <SidebarProvider>
+            <div className="flex-1 flex w-full">
+              <AppSidebar />
               <main className="flex-1 overflow-auto">
                 <Routes>
                   <Route path="/" element={<Dashboard />} />
@@ -58,8 +58,8 @@ const App = () => (
                 </Routes>
               </main>
             </div>
-          </div>
-        </SidebarProvider>
+          </SidebarProvider>
+        </div>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
