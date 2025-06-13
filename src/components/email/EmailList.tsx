@@ -33,11 +33,8 @@ const EmailList: React.FC<EmailListProps> = ({ emails, selectedEmailId, onEmailS
         <Card 
           key={email.id}
           className={`cursor-pointer transition-colors hover:bg-accent/50 ${
-            selectedEmailId === email.id ? '' : ''
+            selectedEmailId === email.id ? 'bg-accent' : ''
           } ${!email.isRead ? 'border-l-4 border-l-primary' : ''}`}
-          style={{
-            backgroundColor: selectedEmailId === email.id ? '#E9EEF5' : undefined
-          }}
           onClick={() => onEmailSelect(email)}
         >
           <CardContent className="p-4">
@@ -50,12 +47,7 @@ const EmailList: React.FC<EmailListProps> = ({ emails, selectedEmailId, onEmailS
               <div className="flex-1 min-w-0">
                 <div className="flex items-center justify-between mb-1">
                   <div className="flex items-center space-x-2">
-                    <span 
-                      className={`text-sm font-medium`}
-                      style={{
-                        color: selectedEmailId === email.id ? '#666666' : (!email.isRead ? undefined : undefined)
-                      }}
-                    >
+                    <span className={`text-sm font-medium ${!email.isRead ? 'text-foreground' : 'text-muted-foreground'}`}>
                       {email.from}
                     </span>
                     {email.isAIGenerated && (
@@ -75,31 +67,16 @@ const EmailList: React.FC<EmailListProps> = ({ emails, selectedEmailId, onEmailS
                   </div>
                 </div>
                 
-                <h4 
-                  className={`text-sm mb-1 ${!email.isRead ? 'font-semibold' : 'font-normal'}`}
-                  style={{
-                    color: selectedEmailId === email.id ? '#666666' : undefined
-                  }}
-                >
+                <h4 className={`text-sm mb-1 ${!email.isRead ? 'font-semibold' : 'font-normal'}`}>
                   {email.subject}
                 </h4>
                 
-                <p 
-                  className="text-xs mb-2 line-clamp-2"
-                  style={{
-                    color: selectedEmailId === email.id ? '#666666' : undefined
-                  }}
-                >
+                <p className="text-xs text-muted-foreground mb-2 line-clamp-2">
                   {email.content}
                 </p>
                 
                 <div className="flex items-center justify-between">
-                  <span 
-                    className="text-xs"
-                    style={{
-                      color: selectedEmailId === email.id ? '#666666' : undefined
-                    }}
-                  >
+                  <span className="text-xs text-muted-foreground">
                     {formatDistanceToNow(email.timestamp, { 
                       addSuffix: true, 
                       locale: zhCN 
