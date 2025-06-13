@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -8,8 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { 
   Mail, 
   Search, 
-  Filter, 
-  Plus,
+  Filter,
   Inbox,
   Send,
   Bot
@@ -140,27 +138,23 @@ const EmailPage = () => {
             <Mail className="h-6 w-6" />
             <h1 className="text-2xl font-bold">电子邮件</h1>
           </div>
-          <Button>
-            <Plus className="mr-2 h-4 w-4" />
-            写邮件
-          </Button>
-        </div>
-        
-        {/* 搜索和筛选栏 */}
-        <div className="flex items-center space-x-3 mb-4">
-          <div className="relative flex-1 max-w-md">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <Input
-              placeholder="搜索邮件..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10"
-            />
+          
+          {/* 搜索栏移到标题行 */}
+          <div className="flex items-center space-x-3">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Input
+                placeholder="搜索邮件..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-10 w-80"
+              />
+            </div>
+            <Button variant="outline" size="sm">
+              <Filter className="mr-2 h-4 w-4" />
+              筛选
+            </Button>
           </div>
-          <Button variant="outline" size="sm">
-            <Filter className="mr-2 h-4 w-4" />
-            筛选
-          </Button>
         </div>
       </div>
 
