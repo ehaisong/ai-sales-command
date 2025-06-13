@@ -141,10 +141,10 @@ const AppSidebar = () => {
                             <item.icon className="mr-3 h-4 w-4" />
                             <span className="text-left">{item.title}</span>
                           </div>
-                          <ChevronRight className="h-4 w-4 transition-transform group-data-[state=open]/collapsible:rotate-90" />
+                          <ChevronRight className="h-4 w-4 transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
                         </SidebarMenuButton>
                       </CollapsibleTrigger>
-                      <CollapsibleContent>
+                      <CollapsibleContent className="overflow-hidden">
                         <SidebarMenuSub>
                           {item.items.map((subItem) => (
                             <SidebarMenuSubItem key={subItem.title}>
