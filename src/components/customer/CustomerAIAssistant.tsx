@@ -78,14 +78,8 @@ const CustomerAIAssistant: React.FC<CustomerAIAssistantProps> = ({ customer }) =
     <div className="space-y-4">
       <Card>
         <CardHeader>
-          <CardTitle className="flex items-center space-x-2">
-            <MessageSquare className="h-5 w-5" />
-            <span>客户信息</span>
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          {/* 客户基础信息 */}
-          <div className="flex items-start space-x-4">
+          {/* 顶部标题：头像+客户名称 */}
+          <div className="flex items-center space-x-3">
             <Avatar className="h-12 w-12">
               <AvatarFallback>
                 {customer.type === 'company' ? (
@@ -95,19 +89,22 @@ const CustomerAIAssistant: React.FC<CustomerAIAssistantProps> = ({ customer }) =
                 )}
               </AvatarFallback>
             </Avatar>
-            <div className="flex-1">
-              <h3 className="font-semibold text-lg">{customer.name}</h3>
+            <div>
+              <h3 className="font-semibold text-lg leading-tight">{customer.name}</h3>
               {customer.company && (
-                <p className="text-sm text-muted-foreground">{customer.company}</p>
+                <div className="text-sm text-muted-foreground">{customer.company}</div>
               )}
-              <div className="flex items-center space-x-2 mt-2">
-                <div className="flex items-center space-x-1">
-                  <TrendingUp className="h-4 w-4" />
-                  <span className="text-sm font-medium">{customer.customerScore}</span>
-                </div>
-                <span className={`text-sm ${insight.color}`}>{insight.text}</span>
-              </div>
             </div>
+          </div>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          {/* 客户分数与标签等信息（不变） */}
+          <div className="flex items-center space-x-2 mt-2">
+            <div className="flex items-center space-x-1">
+              <TrendingUp className="h-4 w-4" />
+              <span className="text-sm font-medium">{customer.customerScore}</span>
+            </div>
+            <span className={`text-sm ${insight.color}`}>{insight.text}</span>
           </div>
 
           {/* 标签 */}
