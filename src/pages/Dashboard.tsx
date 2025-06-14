@@ -8,13 +8,13 @@ import { Mail, Users, Send, Globe } from 'lucide-react';
 
 const Dashboard = () => {
   return (
-    <div className="p-6 h-full">
+    <div className="p-6 h-full bg-[#F8FAFC]">
       {/* 主要内容区域 */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-full">
-        {/* 中间列：统计卡片和工作流 */}
-        <div className="lg:col-span-2 space-y-6">
-          {/* 统计卡片集中显示 */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 xl:grid-cols-4 gap-6 h-full">
+        {/* 左侧：统计卡片和工作流 */}
+        <div className="xl:col-span-3 space-y-6">
+          {/* 统计卡片 - 大屏时四个一行 */}
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
             <StatCard
               title="待处理信息"
               value={12}
@@ -56,7 +56,7 @@ const Dashboard = () => {
         </div>
 
         {/* 右侧列：AI业务员信息和聊天框 */}
-        <div className="space-y-6 h-full">
+        <div className="xl:col-span-1 space-y-6 h-full">
           <AIAgentCard />
           <div className="flex-1">
             <ChatBox />
