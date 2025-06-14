@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
@@ -69,11 +68,11 @@ const menuItems = [
     icon: User,
     items: [
       {
-        title: "知识大脑",
+        title: "品牌知识库",
         url: "/ai-agent/knowledge",
       },
       {
-        title: "设置信息",
+        title: "设置",
         url: "/ai-agent/settings",
       },
     ],
