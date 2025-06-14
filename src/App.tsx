@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -12,6 +11,7 @@ import EmailPage from "@/pages/EmailPage";
 import EmailComposePage from "@/pages/EmailComposePage";
 import CustomerManagement from "@/pages/CustomerManagement";
 import NotFound from "@/pages/NotFound";
+import AIKnowledgeBase from "@/pages/AIKnowledgeBase";
 
 const queryClient = new QueryClient();
 
@@ -38,7 +38,7 @@ const App = () => (
                   <Route path="/customers" element={<CustomerManagement />} />
                   
                   {/* AI业务员 */}
-                  <Route path="/ai-agent/knowledge" element={<div className="p-6">知识大脑页面开发中...</div>} />
+                  <Route path="/ai-agent/knowledge" element={<AIKnowledgeBase />} />
                   <Route path="/ai-agent/settings" element={<div className="p-6">AI设置页面开发中...</div>} />
                   
                   {/* 品牌建设 */}
