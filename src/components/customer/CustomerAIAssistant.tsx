@@ -4,9 +4,10 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { Building2, User, MessageSquare, Phone, Mail, Calendar, TrendingUp, Send } from 'lucide-react';
+import { Building2, User, MessageSquare, Phone, Mail, Calendar, TrendingUp, Send, Book } from 'lucide-react';
 import { Customer } from '@/types/customer';
 import CustomerInsightsPanel from "./CustomerInsightsPanel";
+import CustomerKnowledgeDialog from "./CustomerKnowledgeDialog";
 
 // 导入Dialog相关组件
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
@@ -27,6 +28,8 @@ const CustomerAIAssistant: React.FC<CustomerAIAssistantProps> = ({ customer }) =
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [knowledgeDialogOpen, setKnowledgeDialogOpen] = useState(false);
+  const [knowledgeEntries, setKnowledgeEntries] = useState<string[]>([]);
 
   const handleSendMessage = () => {
     if (!inputValue.trim() || !customer) return;
@@ -110,6 +113,30 @@ const CustomerAIAssistant: React.FC<CustomerAIAssistantProps> = ({ customer }) =
               </DialogTrigger>
               {dialogOpen && (
                 <CustomerConversationHistoryDialog customer={customer} />
+              )}
+            </Dialog>
+            {/* 新增：知识库按钮 */}
+            <Dialog open={knowledgeDialogOpen} onOpenChange={setKnowledgeDialogOpen}>
+              <DialogTrigger asChild>
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="ml-2 h-8 px-3 py-1 text-xs flex items-center gap-1"
+                  title="客户知识库"
+                >
+                  <Book className="h-4 w-4" />
+                  知识库
+                </Button>
+              </DialogTrigger>
+              {/* 弹窗内容 */}
+              {knowledgeDialogOpen && (
+                <CustomerKnowledgeDialog
+                  open={knowledgeDialogOpen}
+                  onOpenChange={setKnowledgeDialogOpen}
+                  knowledgeList={knowledgeEntries}
+                  onAddKnowledge={(entry) => setKnowledgeEntries(prev => [entry, ...prev])}
+                  customerName={customer.name}
+                />
               )}
             </Dialog>
           </div>
