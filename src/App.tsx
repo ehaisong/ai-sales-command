@@ -12,6 +12,7 @@ import EmailComposePage from "@/pages/EmailComposePage";
 import CustomerManagement from "@/pages/CustomerManagement";
 import NotFound from "@/pages/NotFound";
 import AIKnowledgeBase from "@/pages/AIKnowledgeBase";
+import AISettings from "@/pages/AISettings";
 
 const queryClient = new QueryClient();
 
@@ -39,7 +40,7 @@ const App = () => (
                   
                   {/* AI业务员 */}
                   <Route path="/ai-agent/knowledge" element={<AIKnowledgeBase />} />
-                  <Route path="/ai-agent/settings" element={<div className="p-6">AI设置页面开发中...</div>} />
+                  <Route path="/ai-agent/settings" element={<AISettings />} />
                   
                   {/* 品牌建设 */}
                   <Route path="/brand/social" element={<div className="p-6">社交媒体页面开发中...</div>} />
