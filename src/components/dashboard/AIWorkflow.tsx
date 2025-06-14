@@ -3,51 +3,19 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const workflowSteps = [
-  {
-    text: "正在分析LinkedIn平台潜在客户...",
-    category: "客户获取",
-    color: "bg-blue-100 border-blue-200 text-blue-800"
-  },
-  {
-    text: "发现32个目标客户，正在获取联系方式...",
-    category: "客户获取", 
-    color: "bg-blue-100 border-blue-200 text-blue-800"
-  },
-  {
-    text: "正在生成个性化邮件内容...",
-    category: "邮件营销",
-    color: "bg-green-100 border-green-200 text-green-800"
-  },
-  {
-    text: "已发送邮件给5位客户，等待回复...",
-    category: "邮件营销",
-    color: "bg-green-100 border-green-200 text-green-800"
-  },
-  {
-    text: "正在更新Instagram品牌内容...",
-    category: "内容管理",
-    color: "bg-purple-100 border-purple-200 text-purple-800"
-  },
-  {
-    text: "分析竞品定价策略变化...",
-    category: "数据分析",
-    color: "bg-orange-100 border-orange-200 text-orange-800"
-  },
-  {
-    text: "正在搜索行业关键词趋势...",
-    category: "数据分析",
-    color: "bg-orange-100 border-orange-200 text-orange-800"
-  },
-  {
-    text: "生成本周营销报告...",
-    category: "数据分析",
-    color: "bg-orange-100 border-orange-200 text-orange-800"
-  },
+  "正在分析LinkedIn平台潜在客户...",
+  "发现32个目标客户，正在获取联系方式...",
+  "正在生成个性化邮件内容...",
+  "已发送邮件给5位客户，等待回复...",
+  "正在更新Instagram品牌内容...",
+  "分析竞品定价策略变化...",
+  "正在搜索行业关键词趋势...",
+  "生成本周营销报告...",
 ];
 
 const AIWorkflow = () => {
   const [currentStep, setCurrentStep] = useState(0);
-  const [visibleSteps, setVisibleSteps] = useState<typeof workflowSteps>([]);
+  const [visibleSteps, setVisibleSteps] = useState<string[]>([]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -60,7 +28,7 @@ const AIWorkflow = () => {
   }, [currentStep]);
 
   return (
-    <Card className="h-full flex flex-col bg-white">
+    <Card className="h-full flex flex-col">
       <CardHeader className="flex-shrink-0">
         <CardTitle className="flex items-center space-x-2">
           <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
@@ -71,17 +39,14 @@ const AIWorkflow = () => {
         <div className="w-full max-w-md space-y-3">
           {visibleSteps.map((step, index) => (
             <div
-              key={`${step.text}-${index}`}
-              className={`p-4 rounded-lg border transition-opacity duration-500 ${
-                step.color
-              } ${index === 0 ? 'opacity-100' : 'opacity-70'}`}
+              key={`${step}-${index}`}
+              className={`p-4 bg-secondary/50 rounded-lg fade-in transition-opacity duration-500 ${
+                index === 0 ? 'opacity-100' : 'opacity-70'
+              }`}
             >
-              <div className="flex items-start space-x-3">
-                <div className="w-2 h-2 bg-current rounded-full flex-shrink-0 mt-2"></div>
-                <div className="flex-1">
-                  <div className="text-xs font-medium mb-1">{step.category}</div>
-                  <span className="text-sm">{step.text}</span>
-                </div>
+              <div className="flex items-center space-x-2">
+                <div className="w-2 h-2 bg-primary rounded-full flex-shrink-0"></div>
+                <span className="text-sm">{step}</span>
               </div>
             </div>
           ))}
