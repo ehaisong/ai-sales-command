@@ -1,6 +1,9 @@
 
 import React from "react";
 import SocialMediaAccountCard from "@/components/ui/SocialMediaAccountCard";
+import { Button } from "@/components/ui/button";
+import { Plus } from "lucide-react";
+import { toast } from "@/components/ui/use-toast";
 
 const platforms = [
   {
@@ -40,6 +43,10 @@ const SocialMediaAccounts: React.FC = () => {
     instagram: false,
   };
 
+  const handleAddPlatform = () => {
+    toast({ description: "敬请期待更多平台的支持！" });
+  };
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
       {platforms.map((p) => (
@@ -51,6 +58,18 @@ const SocialMediaAccounts: React.FC = () => {
           isBound={bindStatus[p.key]}
         />
       ))}
+      {/* 添加平台按钮卡片 */}
+      <div className="flex items-center bg-gray-50 rounded-lg px-4 py-3 border border-dashed border-primary/40 justify-center min-h-[88px]">
+        <Button
+          variant="outline"
+          size="sm"
+          className="flex items-center gap-2 text-primary"
+          onClick={handleAddPlatform}
+        >
+          <Plus className="w-5 h-5" />
+          添加平台账号
+        </Button>
+      </div>
     </div>
   );
 };
