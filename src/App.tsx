@@ -10,6 +10,7 @@ import TopNavbar from "@/components/layout/TopNavbar";
 import Dashboard from "@/pages/Dashboard";
 import EmailPage from "@/pages/EmailPage";
 import EmailComposePage from "@/pages/EmailComposePage";
+import CustomerManagement from "@/pages/CustomerManagement";
 import NotFound from "@/pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,7 +35,7 @@ const App = () => (
                   <Route path="/marketing/whatsapp" element={<div className="p-6">WhatsApp页面开发中...</div>} />
                   
                   {/* 客户管理 */}
-                  <Route path="/customers" element={<div className="p-6">客户管理页面开发中...</div>} />
+                  <Route path="/customers" element={<CustomerManagement />} />
                   
                   {/* AI业务员 */}
                   <Route path="/ai-agent/knowledge" element={<div className="p-6">知识大脑页面开发中...</div>} />
