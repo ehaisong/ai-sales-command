@@ -7,7 +7,6 @@ import { Badge } from "@/components/ui/badge";
 import { Search, Filter, RefreshCw, Download, Trash2 } from "lucide-react";
 import DataSourceCards from "@/components/ai-knowledge/DataSourceCards";
 import KnowledgeList from "@/components/ai-knowledge/KnowledgeList";
-import TagCloud from "@/components/ai-knowledge/TagCloud";
 import AIChat from "@/components/ai-knowledge/AIChat";
 import KnowledgeDetailDialog from "@/components/ai-knowledge/KnowledgeDetailDialog";
 import FileUploadDialog from "@/components/ai-knowledge/FileUploadDialog";
@@ -77,11 +76,6 @@ const AIKnowledgeBase = () => {
                 onUploadFile={() => setShowFileUpload(true)}
                 onConfig={() => setShowConfig(true)}
               />
-            </div>
-
-            {/* 产品标签云 */}
-            <div>
-              <TagCloud />
             </div>
 
             {/* 知识库内容列表 */}

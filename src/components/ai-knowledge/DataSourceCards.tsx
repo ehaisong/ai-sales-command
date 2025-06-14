@@ -3,7 +3,8 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Globe, Newspaper, FileUp, Settings, CheckCircle, Clock, AlertCircle } from "lucide-react";
+import { Globe, FileUp, Settings, CheckCircle, Hash } from "lucide-react";
+import TagCloud from "./TagCloud";
 
 type Props = {
   onUploadFile: () => void;
@@ -52,42 +53,41 @@ const DataSourceCards = ({ onUploadFile, onConfig }: Props) => {
         </Button>
       </Card>
 
-      {/* 公司新闻监控 */}
+      {/* 产品标签云 - 移到原新闻监控卡片位置 */}
       <Card className="p-6 hover:shadow-md transition-shadow">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-              <Newspaper className="w-6 h-6 text-green-600" />
+              <Hash className="w-6 h-6 text-green-600" />
             </div>
             <div>
-              <h3 className="font-semibold text-gray-900">新闻监控</h3>
-              <p className="text-sm text-gray-500">多平台新闻采集</p>
+              <h3 className="font-semibold text-gray-900">产品标签云</h3>
+              <p className="text-sm text-gray-500">智能产品定位标签</p>
             </div>
           </div>
-          <Badge variant="secondary" className="bg-orange-100 text-orange-700">
-            <Clock className="w-3 h-3 mr-1" />
-            待配置
+          <Badge variant="secondary" className="bg-blue-100 text-blue-700">
+            就绪
           </Badge>
         </div>
         
         <div className="space-y-3 mb-4">
           <div className="flex justify-between text-sm">
-            <span className="text-gray-600">监控平台:</span>
-            <span className="font-medium">6个</span>
+            <span className="text-gray-600">标签总数:</span>
+            <span className="font-medium">12个</span>
           </div>
           <div className="flex justify-between text-sm">
-            <span className="text-gray-600">今日采集:</span>
-            <span className="font-medium">12条</span>
+            <span className="text-gray-600">热门标签:</span>
+            <span className="font-medium">智能家居</span>
           </div>
           <div className="flex justify-between text-sm">
-            <span className="text-gray-600">关键词:</span>
-            <span className="font-medium">15个</span>
+            <span className="text-gray-600">更新状态:</span>
+            <span className="font-medium">实时更新</span>
           </div>
         </div>
 
         <Button size="sm" variant="outline" onClick={onConfig} className="w-full">
           <Settings className="w-4 h-4 mr-2" />
-          配置监控关键词
+          调整产品定位标签
         </Button>
       </Card>
 
