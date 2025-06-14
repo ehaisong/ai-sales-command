@@ -131,7 +131,7 @@ const CustomerList: React.FC<CustomerListProps> = ({
               col.sortable ? (
                 <TableHead
                   key={col.label}
-                  className="cursor-pointer select-none"
+                  className="cursor-pointer select-none underline decoration-primary/60 underline-offset-4"
                   onClick={() => handleSort(col.key as SortField)}
                 >
                   <span className="inline-flex items-center">
