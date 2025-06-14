@@ -12,7 +12,7 @@ const platforms = [
   {
     name: "Meta",
     key: "meta",
-    logo: "settings",
+    logo: "settings", // Use "settings" as placeholder for Meta (Facebook)
     desc: "绑定Meta(Facebook)账号，与客户互动",
   },
   {
@@ -27,11 +27,13 @@ const platforms = [
     logo: "instagram",
     desc: "绑定Instagram账号，提升品牌形象",
   },
-];
+] as const;
+
+type PlatformLogoType = "linkedin" | "instagram" | "twitter" | "settings";
 
 const SocialMediaAccounts: React.FC = () => {
   // 模拟绑定状态。实际应从后端获取并传递
-  const bindStatus = {
+  const bindStatus: Record<(typeof platforms)[number]["key"], boolean> = {
     linkedin: false,
     meta: false,
     twitter: false,
@@ -44,9 +46,9 @@ const SocialMediaAccounts: React.FC = () => {
         <SocialMediaAccountCard
           key={p.key}
           name={p.name}
-          logo={p.logo}
+          logo={p.logo as PlatformLogoType}
           desc={p.desc}
-          isBound={bindStatus[p.key as keyof typeof bindStatus]}
+          isBound={bindStatus[p.key]}
         />
       ))}
     </div>

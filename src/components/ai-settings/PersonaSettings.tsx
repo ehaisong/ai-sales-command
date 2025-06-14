@@ -4,6 +4,7 @@ import ImageUpload from "@/components/ui/ImageUpload";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { toast } from "@/components/ui/use-toast";
 
 const PersonaSettings: React.FC = () => {
   const [avatar, setAvatar] = useState<string | null>(null);
@@ -12,8 +13,8 @@ const PersonaSettings: React.FC = () => {
   const [desc, setDesc] = useState("");
 
   const handleSave = () => {
-    // 这里使用toast可提示“保存成功”，实际应发往后端
-    window?.toast?.success?.("数字形象已保存");
+    // 使用 toast 显示保存成功提示
+    toast({ description: "数字形象已保存" });
     // TODO: 保存逻辑
   };
 
