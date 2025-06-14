@@ -2,12 +2,16 @@
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { User, Settings, User as Brain } from 'lucide-react';
+import { User, Settings, User as Brain, Linkedin, Facebook, X, Instagram } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const AIAgentCard = () => {
-  const socialPlatforms = ['LinkedIn', 'Meta', 'X', 'Instagram'];
+  const socialPlatforms = [
+    { name: 'LinkedIn', icon: Linkedin, color: '#0A66C2' },
+    { name: 'Meta', icon: Facebook, color: '#1877F2' },
+    { name: 'X', icon: X, color: '#000000' },
+    { name: 'Instagram', icon: Instagram, color: '#E4405F' },
+  ];
 
   return (
     <Card className="card-hover">
@@ -30,13 +34,23 @@ const AIAgentCard = () => {
 
         {/* 绑定的社交媒体 */}
         <div>
-          <p className="text-xs font-medium mb-1">已绑定平台</p>
-          <div className="flex flex-wrap gap-1">
-            {socialPlatforms.map((platform) => (
-              <Badge key={platform} variant="secondary" className="text-xs px-1 py-0">
-                {platform}
-              </Badge>
-            ))}
+          <p className="text-xs font-medium mb-2">已绑定平台</p>
+          <div className="grid grid-cols-2 gap-2">
+            {socialPlatforms.map((platform) => {
+              const IconComponent = platform.icon;
+              return (
+                <div 
+                  key={platform.name} 
+                  className="flex items-center space-x-2 p-2 bg-gray-50 rounded-lg"
+                >
+                  <IconComponent 
+                    className="h-4 w-4" 
+                    style={{ color: platform.color }}
+                  />
+                  <span className="text-xs font-medium">{platform.name}</span>
+                </div>
+              );
+            })}
           </div>
         </div>
 
