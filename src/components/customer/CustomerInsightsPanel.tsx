@@ -9,7 +9,7 @@ interface CustomerInsightsPanelProps {
 }
 
 const CustomerInsightsPanel: React.FC<CustomerInsightsPanelProps> = ({ customer }) => {
-  // 模拟AI生成洞察
+  // 模拟AI生成画像
   const insights = [
     {
       icon: <Lightbulb className="h-5 w-5 text-yellow-500 mr-2" />,
@@ -50,7 +50,7 @@ const CustomerInsightsPanel: React.FC<CustomerInsightsPanelProps> = ({ customer 
       <CardHeader className="p-3 pb-2">
         <CardTitle className="text-base flex items-center">
           <Lightbulb className="h-4 w-4 mr-2 text-yellow-400" />
-          AI驱动的客户洞察
+          AI驱动的客户画像
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-3 p-3 pt-1">
@@ -69,4 +69,3 @@ const CustomerInsightsPanel: React.FC<CustomerInsightsPanelProps> = ({ customer 
 };
 
 export default CustomerInsightsPanel;
-
