@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
@@ -34,8 +33,7 @@ import {
   CreditCard,
   ChevronRight,
   Wrench,
-  ChevronDown,
-  Zap
+  ChevronDown
 } from 'lucide-react';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 
@@ -142,11 +140,11 @@ const AppSidebar = () => {
     <Sidebar className="w-64 bg-white border-r border-gray-200">
       <SidebarHeader className="p-4 border-b border-gray-100">
         {/* Logo and Brand Section */}
-        <div className="flex items-center space-x-3">
+        <div className="flex items-center justify-center space-x-3">
           {!isCollapsed ? (
             <>
               <img 
-                src="/lovable-uploads/a6b20fef-de43-4809-b7fc-a1d7b088160d.png" 
+                src="/lovable-uploads/56ed091b-6bad-4dc4-ad2e-f85357de67e5.png" 
                 alt="思拓外贸助手" 
                 className="h-8 w-auto object-contain"
               />
@@ -169,8 +167,12 @@ const AppSidebar = () => {
               </DropdownMenu>
             </>
           ) : (
-            <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-              <Zap className="h-5 w-5 text-white" />
+            <div className="flex justify-center w-full">
+              <img 
+                src="/lovable-uploads/56ed091b-6bad-4dc4-ad2e-f85357de67e5.png" 
+                alt="思拓外贸助手" 
+                className="h-10 w-10 object-contain"
+              />
             </div>
           )}
         </div>
@@ -185,8 +187,11 @@ const AppSidebar = () => {
                   {item.items ? (
                     <Collapsible className="group/collapsible">
                       <CollapsibleTrigger asChild>
-                        <SidebarMenuButton className="flex w-full items-center justify-start text-left p-2 hover:bg-gray-50 transition-colors">
-                          <item.icon className="ml-4 mr-3 h-4 w-4 flex-shrink-0" />
+                        <SidebarMenuButton 
+                          className="flex w-full items-center justify-center text-left p-3 hover:bg-gray-50 transition-colors"
+                          tooltip={isCollapsed ? item.title : undefined}
+                        >
+                          <item.icon className={`h-5 w-5 flex-shrink-0 ${isCollapsed ? 'mx-auto' : 'ml-4 mr-3'}`} />
                           {!isCollapsed && (
                             <>
                               <span className="flex-1 text-left">{item.title}</span>
@@ -219,10 +224,11 @@ const AppSidebar = () => {
                     <SidebarMenuButton 
                       asChild 
                       isActive={location.pathname === item.url}
-                      className="flex w-full items-center justify-start text-left p-2 hover:bg-gray-50 transition-colors"
+                      className="flex w-full items-center justify-center text-left p-3 hover:bg-gray-50 transition-colors"
+                      tooltip={isCollapsed ? item.title : undefined}
                     >
                       <Link to={item.url}>
-                        <item.icon className="ml-4 mr-3 h-4 w-4 flex-shrink-0" />
+                        <item.icon className={`h-5 w-5 flex-shrink-0 ${isCollapsed ? 'mx-auto' : 'ml-4 mr-3'}`} />
                         {!isCollapsed && <span className="text-left">{item.title}</span>}
                       </Link>
                     </SidebarMenuButton>
@@ -253,8 +259,8 @@ const AppSidebar = () => {
           </>
         ) : (
           <div className="flex justify-center">
-            <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-              <User className="h-4 w-4 text-white" />
+            <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+              <User className="h-5 w-5 text-white" />
             </div>
           </div>
         )}
