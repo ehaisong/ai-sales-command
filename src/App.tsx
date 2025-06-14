@@ -20,12 +20,12 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <div className="min-h-screen flex w-full">
-          <SidebarProvider>
-            <AppSidebar />
-            <main className="flex-1 flex flex-col bg-[#F8FAFC] overflow-auto">
-              <TopNavbar />
-              <div className="flex-1 overflow-auto">
+        <div className="min-h-screen flex flex-col w-full">
+          <TopNavbar />
+          <div className="flex-1 flex w-full pt-16">
+            <SidebarProvider>
+              <AppSidebar />
+              <main className="flex-1 overflow-auto">
                 <Routes>
                   <Route path="/" element={<Dashboard />} />
                   {/* 营销对话 */}
@@ -59,9 +59,9 @@ const App = () => (
                   {/* 404页面 */}
                   <Route path="*" element={<NotFound />} />
                 </Routes>
-              </div>
-            </main>
-          </SidebarProvider>
+              </main>
+            </SidebarProvider>
+          </div>
         </div>
       </BrowserRouter>
     </TooltipProvider>
