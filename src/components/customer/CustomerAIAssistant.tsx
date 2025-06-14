@@ -8,6 +8,10 @@ import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Building2, User, MessageSquare, Phone, Mail, Calendar, TrendingUp, Send } from 'lucide-react';
 import { Customer } from '@/types/customer';
 
+// 导入Dialog相关组件
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import CustomerConversationHistoryDialog from "./CustomerConversationHistoryDialog";
+
 interface CustomerAIAssistantProps {
   customer: Customer | null;
 }
@@ -22,6 +26,7 @@ interface ChatMessage {
 const CustomerAIAssistant: React.FC<CustomerAIAssistantProps> = ({ customer }) => {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputValue, setInputValue] = useState('');
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   const handleSendMessage = () => {
     if (!inputValue.trim() || !customer) return;
@@ -95,6 +100,17 @@ const CustomerAIAssistant: React.FC<CustomerAIAssistantProps> = ({ customer }) =
                 <div className="text-sm text-muted-foreground">{customer.company}</div>
               )}
             </div>
+            {/* 交流历史按钮 */}
+            <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+              <DialogTrigger asChild>
+                <Button variant="outline" size="sm" className="ml-4">
+                  交流历史
+                </Button>
+              </DialogTrigger>
+              {dialogOpen && (
+                <CustomerConversationHistoryDialog customer={customer} />
+              )}
+            </Dialog>
           </div>
         </CardHeader>
         <CardContent className="space-y-4">
