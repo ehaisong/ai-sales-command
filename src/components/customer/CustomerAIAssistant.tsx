@@ -1,29 +1,65 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { Building2, User, MessageSquare, Phone, Mail, Calendar, TrendingUp } from 'lucide-react';
+import { Building2, User, MessageSquare, Phone, Mail, Calendar, TrendingUp, Send } from 'lucide-react';
 import { Customer } from '@/types/customer';
 
 interface CustomerAIAssistantProps {
   customer: Customer | null;
 }
 
+interface ChatMessage {
+  id: string;
+  content: string;
+  isUser: boolean;
+  timestamp: Date;
+}
+
 const CustomerAIAssistant: React.FC<CustomerAIAssistantProps> = ({ customer }) => {
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [inputValue, setInputValue] = useState('');
+
+  const handleSendMessage = () => {
+    if (!inputValue.trim() || !customer) return;
+
+    const newMessage: ChatMessage = {
+      id: Date.now().toString(),
+      content: inputValue,
+      isUser: true,
+      timestamp: new Date(),
+    };
+
+    setMessages(prev => [...prev, newMessage]);
+    setInputValue('');
+
+    // 模拟AI业务员回复
+    setTimeout(() => {
+      const aiResponse: ChatMessage = {
+        id: (Date.now() + 1).toString(),
+        content: `关于客户${customer.name}的信息：基于${customer.customerScore}分的评分，这是一个${customer.customerScore >= 80 ? '高价值' : customer.customerScore >= 60 ? '中等价值' : '低价值'}客户。建议重点关注其在${customer.dataSource}平台的活跃度，并根据其${customer.tags.join('、')}等标签制定针对性的沟通策略。`,
+        isUser: false,
+        timestamp: new Date(),
+      };
+      setMessages(prev => [...prev, aiResponse]);
+    }, 1000);
+  };
+
   if (!customer) {
     return (
       <Card className="h-fit">
         <CardHeader>
           <CardTitle className="flex items-center space-x-2">
             <MessageSquare className="h-5 w-5" />
-            <span>AI 客户助手</span>
+            <span>AI 业务员</span>
           </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="text-center py-8 text-muted-foreground">
-            点击左侧客户列表中的客户查看详细信息
+            点击左侧客户列表中的客户，开始与AI业务员对话
           </div>
         </CardContent>
       </Card>
@@ -44,7 +80,7 @@ const CustomerAIAssistant: React.FC<CustomerAIAssistantProps> = ({ customer }) =
         <CardHeader>
           <CardTitle className="flex items-center space-x-2">
             <MessageSquare className="h-5 w-5" />
-            <span>AI 客户助手</span>
+            <span>客户信息</span>
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -105,56 +141,53 @@ const CustomerAIAssistant: React.FC<CustomerAIAssistantProps> = ({ customer }) =
         </CardContent>
       </Card>
 
-      {/* AI 分析洞察 */}
-      <Card>
+      {/* AI业务员对话框 */}
+      <Card className="h-[400px] flex flex-col">
         <CardHeader>
-          <CardTitle className="text-base">AI 分析洞察</CardTitle>
+          <CardTitle className="text-base flex items-center space-x-2">
+            <MessageSquare className="h-4 w-4" />
+            <span>AI 业务员</span>
+          </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-3">
-          <div className="p-3 bg-blue-50 rounded-lg">
-            <h4 className="font-medium text-sm mb-2">客户价值分析</h4>
-            <p className="text-sm text-muted-foreground">
-              基于{customer.customerScore}分的客户评分，该客户属于{insight.text}。
-              建议重点关注其需求变化，及时跟进商机。
-            </p>
+        <CardContent className="flex-1 flex flex-col space-y-3">
+          {/* 对话历史 */}
+          <div className="flex-1 space-y-3 overflow-y-auto">
+            {messages.length === 0 && (
+              <div className="text-center py-4 text-muted-foreground text-sm">
+                向AI业务员咨询关于 {customer.name} 的信息
+              </div>
+            )}
+            {messages.map((message) => (
+              <div
+                key={message.id}
+                className={`flex ${message.isUser ? 'justify-end' : 'justify-start'}`}
+              >
+                <div
+                  className={`max-w-[80%] p-3 rounded-lg text-sm ${
+                    message.isUser
+                      ? 'bg-primary text-white'
+                      : 'bg-secondary text-foreground'
+                  }`}
+                >
+                  <p>{message.content}</p>
+                </div>
+              </div>
+            ))}
           </div>
 
-          {customer.conversationHistory && customer.conversationHistory.length > 0 && (
-            <div className="p-3 bg-green-50 rounded-lg">
-              <h4 className="font-medium text-sm mb-2">最近交流总结</h4>
-              <p className="text-sm text-muted-foreground">
-                {customer.conversationHistory[0].summary}
-              </p>
-            </div>
-          )}
-
-          <div className="p-3 bg-yellow-50 rounded-lg">
-            <h4 className="font-medium text-sm mb-2">下一步建议</h4>
-            <p className="text-sm text-muted-foreground">
-              建议在3天内主动联系客户，了解最新需求并提供针对性解决方案。
-            </p>
+          {/* 输入框 */}
+          <div className="flex space-x-2">
+            <Input
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              placeholder={`询问关于${customer.name}的信息...`}
+              onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+              className="flex-1"
+            />
+            <Button onClick={handleSendMessage} size="sm">
+              <Send className="h-4 w-4" />
+            </Button>
           </div>
-        </CardContent>
-      </Card>
-
-      {/* 快捷操作 */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-base">快捷操作</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-2">
-          <Button variant="outline" size="sm" className="w-full justify-start">
-            <Mail className="h-4 w-4 mr-2" />
-            发送邮件
-          </Button>
-          <Button variant="outline" size="sm" className="w-full justify-start">
-            <Calendar className="h-4 w-4 mr-2" />
-            安排会议
-          </Button>
-          <Button variant="outline" size="sm" className="w-full justify-start">
-            <MessageSquare className="h-4 w-4 mr-2" />
-            查看对话历史
-          </Button>
         </CardContent>
       </Card>
     </div>
