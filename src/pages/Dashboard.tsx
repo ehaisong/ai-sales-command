@@ -9,10 +9,10 @@ import { Mail, Users, Send, Globe } from 'lucide-react';
 const Dashboard = () => {
   return (
     <div className="p-6 h-full">
-      {/* 主要内容区域 - 改为两列布局 */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-full">
-        {/* 左列：统计卡片 + AI工作流 */}
-        <div className="flex flex-col space-y-6">
+      {/* 主要内容区域 - 改为8:4比例布局 */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 h-full">
+        {/* 左列：统计卡片 + AI工作流 - 占8/12宽度 */}
+        <div className="lg:col-span-8 flex flex-col space-y-6">
           {/* 统计卡片区域 - 2x2网格 */}
           <div className="grid grid-cols-2 gap-4">
             <StatCard 
@@ -55,8 +55,8 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* 右列：AI业务员信息和聊天框 */}
-        <div className="space-y-6 h-full">
+        {/* 右列：AI业务员信息和聊天框 - 占4/12宽度 */}
+        <div className="lg:col-span-4 space-y-6 h-full">
           <AIAgentCard />
           <div className="flex-1">
             <ChatBox />
