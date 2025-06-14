@@ -1,13 +1,16 @@
-
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Download, Upload, FileSpreadsheet, FileText } from 'lucide-react';
+import ImportFileDialog from "./ImportFileDialog";
 
 const ImportExportButtons: React.FC = () => {
-  const handleImport = (type: string) => {
-    console.log(`导入 ${type} 文件`);
-    // 实际实现中这里会处理文件导入逻辑
+  const [importDialogOpen, setImportDialogOpen] = useState(false);
+  const [importType, setImportType] = useState<"csv" | "excel">("csv");
+
+  const handleImportClick = (type: "csv" | "excel") => {
+    setImportType(type);
+    setImportDialogOpen(true);
   };
 
   const handleExport = (type: string) => {
@@ -25,16 +28,22 @@ const ImportExportButtons: React.FC = () => {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-          <DropdownMenuItem onClick={() => handleImport('csv')}>
+          <DropdownMenuItem onClick={() => handleImportClick('csv')}>
             <FileSpreadsheet className="h-4 w-4 mr-2" />
             导入 CSV 文件
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => handleImport('excel')}>
+          <DropdownMenuItem onClick={() => handleImportClick('excel')}>
             <FileSpreadsheet className="h-4 w-4 mr-2" />
             导入 Excel 文件
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
+      {/* 导入弹窗 */}
+      <ImportFileDialog
+        open={importDialogOpen}
+        onOpenChange={setImportDialogOpen}
+        importType={importType}
+      />
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
