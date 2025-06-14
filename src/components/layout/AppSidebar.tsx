@@ -7,14 +7,24 @@ import {
   SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
+  SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
+  SidebarTrigger,
+  useSidebar,
 } from '@/components/ui/sidebar';
 import { Button } from '@/components/ui/button';
+import { 
+  DropdownMenu, 
+  DropdownMenuContent, 
+  DropdownMenuItem, 
+  DropdownMenuTrigger,
+  DropdownMenuSeparator 
+} from '@/components/ui/dropdown-menu';
 import { 
   Home, 
   MessageSquare, 
@@ -24,7 +34,11 @@ import {
   Settings,
   CreditCard,
   ChevronRight,
-  Wrench
+  ChevronDown,
+  Wrench,
+  Linkedin,
+  Instagram,
+  Zap
 } from 'lucide-react';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 
@@ -122,12 +136,77 @@ const menuItems = [
   },
 ];
 
+const platformIcons = [
+  { name: 'LinkedIn', icon: Linkedin, color: '#0A66C2' },
+  { name: 'Instagram', icon: Instagram, color: '#E4405F' },
+];
+
 const AppSidebar = () => {
   const location = useLocation();
+  const { state } = useSidebar();
+  const isCollapsed = state === 'collapsed';
 
   return (
-    <Sidebar className="w-64" style={{ paddingTop: '64px' }}>
-      <SidebarContent>
+    <Sidebar className="bg-white border-r border-gray-200">
+      <SidebarHeader className="p-4 border-b border-gray-200">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-3">
+            {isCollapsed ? (
+              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+                <Zap className="h-5 w-5 text-white" />
+              </div>
+            ) : (
+              <img 
+                src="/lovable-uploads/a6b20fef-de43-4809-b7fc-a1d7b088160d.png" 
+                alt="思拓外贸助手" 
+                className="h-8 w-auto object-contain"
+              />
+            )}
+            {!isCollapsed && (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline" size="sm" className="flex items-center space-x-2">
+                    <span className="font-medium">我的品牌</span>
+                    <ChevronDown className="h-3 w-3" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem>
+                    <span>我的品牌</span>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem>
+                    <span>+ 添加新品牌</span>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )}
+          </div>
+          <SidebarTrigger className="h-8 w-8" />
+        </div>
+        
+        {!isCollapsed && (
+          <div className="mt-4">
+            <div className="text-xs text-gray-600 mb-2">绑定平台</div>
+            <div className="flex space-x-2">
+              {platformIcons.map((platform) => (
+                <div 
+                  key={platform.name}
+                  className="w-8 h-8 rounded-lg flex items-center justify-center"
+                  style={{ backgroundColor: `${platform.color}10` }}
+                >
+                  <platform.icon 
+                    className="h-4 w-4" 
+                    style={{ color: platform.color }}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </SidebarHeader>
+
+      <SidebarContent className="px-2">
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
@@ -136,39 +215,45 @@ const AppSidebar = () => {
                   {item.items ? (
                     <Collapsible className="group/collapsible">
                       <CollapsibleTrigger asChild>
-                        <SidebarMenuButton className="flex w-full items-center justify-start text-left p-2 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors">
-                          <item.icon className="mr-3 h-4 w-4 flex-shrink-0" />
-                          <span className="flex-1 text-left">{item.title}</span>
-                          <ChevronRight className="h-4 w-4 transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+                        <SidebarMenuButton className="flex w-full items-center justify-start text-left p-2 hover:bg-gray-100 transition-colors">
+                          <item.icon className={`h-4 w-4 flex-shrink-0 ${isCollapsed ? 'mx-auto' : 'mr-3 ml-4'}`} />
+                          {!isCollapsed && (
+                            <>
+                              <span className="flex-1 text-left">{item.title}</span>
+                              <ChevronRight className="h-4 w-4 transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+                            </>
+                          )}
                         </SidebarMenuButton>
                       </CollapsibleTrigger>
-                      <CollapsibleContent className="overflow-hidden data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
-                        <SidebarMenuSub>
-                          {item.items.map((subItem) => (
-                            <SidebarMenuSubItem key={subItem.title}>
-                              <SidebarMenuSubButton 
-                                asChild
-                                isActive={location.pathname === subItem.url}
-                                className="text-left justify-start pl-8 py-2 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors"
-                              >
-                                <Link to={subItem.url}>
-                                  <span className="text-left">{subItem.title}</span>
-                                </Link>
-                              </SidebarMenuSubButton>
-                            </SidebarMenuSubItem>
-                          ))}
-                        </SidebarMenuSub>
-                      </CollapsibleContent>
+                      {!isCollapsed && (
+                        <CollapsibleContent className="overflow-hidden data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
+                          <SidebarMenuSub>
+                            {item.items.map((subItem) => (
+                              <SidebarMenuSubItem key={subItem.title}>
+                                <SidebarMenuSubButton 
+                                  asChild
+                                  isActive={location.pathname === subItem.url}
+                                  className="text-left justify-start pl-12 py-2 hover:bg-gray-100 transition-colors"
+                                >
+                                  <Link to={subItem.url}>
+                                    <span className="text-left">{subItem.title}</span>
+                                  </Link>
+                                </SidebarMenuSubButton>
+                              </SidebarMenuSubItem>
+                            ))}
+                          </SidebarMenuSub>
+                        </CollapsibleContent>
+                      )}
                     </Collapsible>
                   ) : (
                     <SidebarMenuButton 
                       asChild 
                       isActive={location.pathname === item.url}
-                      className="flex w-full items-center justify-start text-left p-2 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors"
+                      className="flex w-full items-center justify-start text-left p-2 hover:bg-gray-100 transition-colors"
                     >
                       <Link to={item.url}>
-                        <item.icon className="mr-3 h-4 w-4 flex-shrink-0" />
-                        <span className="text-left">{item.title}</span>
+                        <item.icon className={`h-4 w-4 flex-shrink-0 ${isCollapsed ? 'mx-auto' : 'mr-3 ml-4'}`} />
+                        {!isCollapsed && <span className="text-left">{item.title}</span>}
                       </Link>
                     </SidebarMenuButton>
                   )}
@@ -179,20 +264,33 @@ const AppSidebar = () => {
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter className="p-4 border-t">
-        <div className="flex items-center space-x-3 mb-3">
-          <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
-            <User className="h-5 w-5 text-white" />
+      <SidebarFooter className="p-4 border-t border-gray-200">
+        {!isCollapsed ? (
+          <>
+            <div className="flex items-center space-x-3 mb-3">
+              <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+                <User className="h-5 w-5 text-white" />
+              </div>
+              <div className="flex-1">
+                <div className="text-sm font-medium">张三</div>
+                <div className="text-xs text-muted-foreground">剩余积分: 1,280</div>
+              </div>
+            </div>
+            <Button size="sm" className="w-full">
+              <CreditCard className="mr-2 h-4 w-4" />
+              充值积分
+            </Button>
+          </>
+        ) : (
+          <div className="flex flex-col items-center space-y-2">
+            <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+              <User className="h-4 w-4 text-white" />
+            </div>
+            <Button size="sm" className="w-8 h-8 p-0">
+              <CreditCard className="h-4 w-4" />
+            </Button>
           </div>
-          <div className="flex-1">
-            <div className="text-sm font-medium">张三</div>
-            <div className="text-xs text-muted-foreground">剩余积分: 1,280</div>
-          </div>
-        </div>
-        <Button size="sm" className="w-full">
-          <CreditCard className="mr-2 h-4 w-4" />
-          充值积分
-        </Button>
+        )}
       </SidebarFooter>
     </Sidebar>
   );
