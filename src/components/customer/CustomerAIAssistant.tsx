@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -7,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Building2, User, MessageSquare, Phone, Mail, Calendar, TrendingUp, Send } from 'lucide-react';
 import { Customer } from '@/types/customer';
+import CustomerInsightsPanel from "./CustomerInsightsPanel";
 
 // 导入Dialog相关组件
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
@@ -80,30 +80,31 @@ const CustomerAIAssistant: React.FC<CustomerAIAssistantProps> = ({ customer }) =
   const insight = getScoreInsight(customer.customerScore);
 
   return (
-    <div className="space-y-4">
-      <Card>
-        <CardHeader>
+    <div className="space-y-3">
+      {/* 客户信息精简卡片 */}
+      <Card className="!p-0">
+        <CardHeader className="p-3 pb-2">
           {/* 顶部标题：头像+客户名称 */}
           <div className="flex items-center space-x-3">
-            <Avatar className="h-12 w-12">
+            <Avatar className="h-10 w-10">
               <AvatarFallback>
                 {customer.type === 'company' ? (
-                  <Building2 className="h-6 w-6" />
+                  <Building2 className="h-5 w-5" />
                 ) : (
-                  <User className="h-6 w-6" />
+                  <User className="h-5 w-5" />
                 )}
               </AvatarFallback>
             </Avatar>
             <div>
-              <h3 className="font-semibold text-lg leading-tight">{customer.name}</h3>
+              <h3 className="font-semibold text-base leading-tight">{customer.name}</h3>
               {customer.company && (
-                <div className="text-sm text-muted-foreground">{customer.company}</div>
+                <div className="text-xs text-muted-foreground">{customer.company}</div>
               )}
             </div>
             {/* 交流历史按钮 */}
             <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
               <DialogTrigger asChild>
-                <Button variant="outline" size="sm" className="ml-4">
+                <Button variant="outline" size="sm" className="ml-4 h-8 px-3 py-1 text-xs">
                   交流历史
                 </Button>
               </DialogTrigger>
@@ -113,58 +114,41 @@ const CustomerAIAssistant: React.FC<CustomerAIAssistantProps> = ({ customer }) =
             </Dialog>
           </div>
         </CardHeader>
-        <CardContent className="space-y-4">
-          {/* 客户分数与标签等信息（不变） */}
-          <div className="flex items-center space-x-2 mt-2">
+        <CardContent className="space-y-2 p-3 pt-0">
+          {/* 客户分数与标签等信息 */}
+          <div className="flex items-center space-x-2 mt-0">
             <div className="flex items-center space-x-1">
               <TrendingUp className="h-4 w-4" />
               <span className="text-sm font-medium">{customer.customerScore}</span>
             </div>
-            <span className={`text-sm ${insight.color}`}>{insight.text}</span>
+            <span className={`text-xs ${insight.color}`}>{insight.text}</span>
           </div>
-
           {/* 标签 */}
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-1">
             {customer.tags.map((tag, index) => (
-              <Badge key={index} variant="secondary">
+              <Badge key={index} variant="secondary" className="text-xs px-2 py-0.5">
                 {tag}
               </Badge>
             ))}
           </div>
-
-          {/* 联系信息 */}
-          <div className="space-y-2">
-            <div className="flex items-center space-x-2 text-sm">
-              <Mail className="h-4 w-4 text-muted-foreground" />
-              <span>{customer.email}</span>
-            </div>
-            {customer.phone && (
-              <div className="flex items-center space-x-2 text-sm">
-                <Phone className="h-4 w-4 text-muted-foreground" />
-                <span>{customer.phone}</span>
-              </div>
-            )}
-            {customer.lastContact && (
-              <div className="flex items-center space-x-2 text-sm">
-                <Calendar className="h-4 w-4 text-muted-foreground" />
-                <span>最后联系: {customer.lastContact}</span>
-              </div>
-            )}
-          </div>
+          {/* 联系方式与最后联系时间已移除 */}
         </CardContent>
       </Card>
 
+      {/* AI客户洞察面板 */}
+      <CustomerInsightsPanel customer={customer} />
+
       {/* AI业务员对话框 */}
-      <Card className="h-[400px] flex flex-col">
-        <CardHeader>
+      <Card className="h-[360px] flex flex-col mt-3">
+        <CardHeader className="p-4 pb-2">
           <CardTitle className="text-base flex items-center space-x-2">
             <MessageSquare className="h-4 w-4" />
             <span>AI 业务员</span>
           </CardTitle>
         </CardHeader>
-        <CardContent className="flex-1 flex flex-col space-y-3">
+        <CardContent className="flex-1 flex flex-col space-y-2 p-4 pt-0">
           {/* 对话历史 */}
-          <div className="flex-1 space-y-3 overflow-y-auto">
+          <div className="flex-1 space-y-2 overflow-y-auto">
             {messages.length === 0 && (
               <div className="text-center py-4 text-muted-foreground text-sm">
                 向AI业务员咨询关于 {customer.name} 的信息
