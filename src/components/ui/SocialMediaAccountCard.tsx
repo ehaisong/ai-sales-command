@@ -8,6 +8,7 @@ type Props = {
   logo: "linkedin" | "instagram" | "twitter" | "settings";
   desc: string;
   isBound: boolean;
+  onBind?: () => void; // 新增，点击绑定的回调
 };
 
 const iconMap = {
@@ -17,7 +18,7 @@ const iconMap = {
   settings: Settings,
 };
 
-const SocialMediaAccountCard: React.FC<Props> = ({ name, logo, desc, isBound }) => {
+const SocialMediaAccountCard: React.FC<Props> = ({ name, logo, desc, isBound, onBind }) => {
   const Icon = iconMap[logo];
 
   return (
@@ -38,9 +39,13 @@ const SocialMediaAccountCard: React.FC<Props> = ({ name, logo, desc, isBound }) 
       </div>
       <div>
         {isBound ? (
-          <Button variant="outline" size="sm" className="text-red-600 hover:text-red-700">解绑</Button>
+          <Button variant="outline" size="sm" className="text-red-600 hover:text-red-700" disabled>
+            解绑
+          </Button>
         ) : (
-          <Button variant="outline" size="sm" className="text-primary">绑定</Button>
+          <Button variant="outline" size="sm" className="text-primary" onClick={onBind}>
+            绑定
+          </Button>
         )}
       </div>
     </div>
@@ -48,3 +53,4 @@ const SocialMediaAccountCard: React.FC<Props> = ({ name, logo, desc, isBound }) 
 };
 
 export default SocialMediaAccountCard;
+
