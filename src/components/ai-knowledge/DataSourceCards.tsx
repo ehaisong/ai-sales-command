@@ -48,7 +48,7 @@ const DataSourceCards = ({ onUploadFile, onConfig }: Props) => {
 
         <Button size="sm" variant="outline" onClick={onConfig} className="w-full">
           <Settings className="w-4 h-4 mr-2" />
-          配置采集规则
+          采集网址配置
         </Button>
       </Card>
 
