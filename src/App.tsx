@@ -18,6 +18,7 @@ import SocialMediaManagement from "@/pages/SocialMediaManagement";
 import AutoSEOPage from "@/pages/AutoSEOPage";
 import TrafficHeatingPage from "@/pages/TrafficHeatingPage";
 import ProfilePage from "@/pages/ProfilePage";
+import BrandProfilePage from "@/pages/BrandProfilePage";
 
 const queryClient = new QueryClient();
 
@@ -51,6 +52,7 @@ const App = () => (
                   <Route path="/brand/social-media" element={<SocialMediaManagement />} />
                   <Route path="/brand/seo" element={<AutoSEOPage />} />
                   <Route path="/brand/traffic" element={<TrafficHeatingPage />} />
+                  <Route path="/brand/profile" element={<BrandProfilePage />} />
                   
                   {/* 营销工具 */}
                   <Route path="/tools/trends" element={<div className="p-6">爆款趋势页面开发中...</div>} />

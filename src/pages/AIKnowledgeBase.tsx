@@ -1,23 +1,39 @@
 import React, { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { RefreshCw, Download, Trash2 } from "lucide-react";
+import { RefreshCw, Download, Trash2, Edit } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import DataSourceCards from "@/components/ai-knowledge/DataSourceCards";
 import KnowledgeList from "@/components/ai-knowledge/KnowledgeList";
 import AIChat from "@/components/ai-knowledge/AIChat";
 import KnowledgeDetailDialog from "@/components/ai-knowledge/KnowledgeDetailDialog";
 import FileUploadDialog from "@/components/ai-knowledge/FileUploadDialog";
 import SourceConfigDialog from "@/components/ai-knowledge/SourceConfigDialog";
+
 const AIKnowledgeBase = () => {
+  const navigate = useNavigate();
   const [selectedKnowledge, setSelectedKnowledge] = useState(null);
   const [showDetail, setShowDetail] = useState(false);
   const [showFileUpload, setShowFileUpload] = useState(false);
   const [showConfig, setShowConfig] = useState(false);
-  return <div className="min-h-screen bg-gray-50 p-6">
+
+  return (
+    <div className="min-h-screen bg-gray-50 p-6">
       <div className="max-w-full mx-auto">
         {/* 页面标题和描述 */}
         <div className="mb-6">
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">我的品牌</h1>
+          <div className="flex items-center gap-3 mb-2">
+            <h1 className="text-2xl font-bold text-gray-900">我的品牌</h1>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => navigate('/brand/profile')}
+              className="flex items-center gap-2"
+            >
+              <Edit className="w-4 h-4" />
+              编辑
+            </Button>
+          </div>
           <p className="text-gray-600">
             管理公司与产品相关知识，通过AI分析提取产品标签，为精准营销提供支持
           </p>
@@ -71,6 +87,8 @@ const AIKnowledgeBase = () => {
       <KnowledgeDetailDialog open={showDetail} knowledge={selectedKnowledge} onClose={() => setShowDetail(false)} />
       <FileUploadDialog open={showFileUpload} onClose={() => setShowFileUpload(false)} />
       <SourceConfigDialog open={showConfig} onClose={() => setShowConfig(false)} />
-    </div>;
+    </div>
+  );
 };
+
 export default AIKnowledgeBase;
