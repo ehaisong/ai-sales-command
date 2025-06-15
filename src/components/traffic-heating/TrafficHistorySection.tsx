@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -135,7 +136,7 @@ const TrafficHistorySection: React.FC<TrafficHistorySectionProps> = ({
             size="sm"
             variant="outline"
             onClick={() => handleRestartClick(record)}
-            className="p-1 h-6 w-6 text-green-600 hover:bg-green-50 hover:border-green-300"
+            className="p-1 h-6 w-6 text-green-600 hover:bg-green-100 hover:text-green-700 hover:border-green-400 transition-colors"
             title="重新开始"
           >
             <RotateCcw className="w-3 h-3" />
@@ -144,7 +145,7 @@ const TrafficHistorySection: React.FC<TrafficHistorySectionProps> = ({
             size="sm"
             variant="outline"
             onClick={() => handleDeleteClick(record.id)}
-            className="p-1 h-6 w-6 text-red-600 hover:bg-red-50 hover:border-red-300"
+            className="p-1 h-6 w-6 text-red-600 hover:bg-red-100 hover:text-red-700 hover:border-red-400 transition-colors"
             title="删除"
           >
             <Trash2 className="w-3 h-3" />
