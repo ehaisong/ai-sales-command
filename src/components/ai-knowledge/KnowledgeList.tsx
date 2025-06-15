@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -57,23 +58,26 @@ const mockKnowledge = [
 ];
 
 const sourceConfig = {
-  news: { 
-    icon: Newspaper, 
-    label: "新闻", 
+  news: {
+    icon: Newspaper,
+    label: "新闻",
     color: "bg-green-100 text-green-700",
-    bgColor: "bg-green-50"
+    badgeClassName: "border-green-700 text-green-700",
+    bgColor: "bg-green-50",
   },
-  website: { 
-    icon: Globe, 
-    label: "官网", 
+  website: {
+    icon: Globe,
+    label: "官网",
     color: "bg-blue-100 text-blue-700",
-    bgColor: "bg-blue-50"
+    badgeClassName: "border-blue-700 text-blue-700",
+    bgColor: "bg-blue-50",
   },
-  file: { 
-    icon: FileText, 
-    label: "文件", 
+  file: {
+    icon: FileText,
+    label: "文件",
     color: "bg-purple-100 text-purple-700",
-    bgColor: "bg-purple-50"
+    badgeClassName: "border-purple-700 text-purple-700",
+    bgColor: "bg-purple-50",
   },
 };
 
@@ -160,7 +164,7 @@ const KnowledgeList = ({ searchQuery, onSelectItem }: Props) => {
                   <div className="flex-1 min-w-0 flex items-center justify-between">
                     <h3 className="text-base font-semibold text-gray-900 line-clamp-2 leading-tight">
                       {item.title}
-                      <Badge variant="secondary" className={`ml-2 text-xs font-normal align-middle ${sourceInfo.color}`}>
+                      <Badge variant="outline" className={`ml-2 text-xs font-normal align-middle ${sourceInfo.badgeClassName}`}>
                         #{sourceInfo.label}
                       </Badge>
                     </h3>
