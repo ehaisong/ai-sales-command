@@ -1,30 +1,38 @@
 
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { Linkedin, Instagram, Twitter, Settings } from "lucide-react";
+import { Linkedin, Instagram, X, Facebook } from "lucide-react";
 
 type Props = {
   name: string;
-  logo: "linkedin" | "instagram" | "twitter" | "settings";
+  logo: "linkedin" | "instagram" | "x" | "meta";
   desc: string;
   isBound: boolean;
-  onBind?: () => void; // 新增，点击绑定的回调
+  onBind?: () => void;
 };
 
 const iconMap = {
   linkedin: Linkedin,
   instagram: Instagram,
-  twitter: Twitter,
-  settings: Settings,
+  x: X,
+  meta: Facebook,
+};
+
+const colorMap = {
+  linkedin: "text-[#0A66C2]",
+  instagram: "text-[#E4405F]",
+  x: "text-black",
+  meta: "text-[#1877F2]",
 };
 
 const SocialMediaAccountCard: React.FC<Props> = ({ name, logo, desc, isBound, onBind }) => {
   const Icon = iconMap[logo];
+  const color = colorMap[logo];
 
   return (
     <div className="flex items-center bg-gray-50 rounded-lg px-4 py-3 space-x-4 border border-gray-200">
       <div className="p-3 bg-white rounded-xl shadow-sm">
-        <Icon className="w-6 h-6 text-primary" />
+        <Icon className={`w-6 h-6 ${color}`} />
       </div>
       <div className="flex-1 space-y-1">
         <div className="flex items-center gap-2">
@@ -53,4 +61,3 @@ const SocialMediaAccountCard: React.FC<Props> = ({ name, logo, desc, isBound, on
 };
 
 export default SocialMediaAccountCard;
-

@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import SocialMediaAccountCard from "@/components/ui/SocialMediaAccountCard";
 import { Button } from "@/components/ui/button";
@@ -16,13 +15,13 @@ const platforms = [
   {
     name: "Meta",
     key: "meta",
-    logo: "settings",
+    logo: "meta",
     desc: "绑定Meta(Facebook)账号，与客户互动",
   },
   {
     name: "X",
     key: "twitter",
-    logo: "twitter",
+    logo: "x",
     desc: "绑定X(Twitter)账号，实时发布动态",
   },
   {
@@ -35,7 +34,7 @@ const platforms = [
 
 type PlatformType = (typeof platforms)[number];
 
-type PlatformLogoType = "linkedin" | "instagram" | "twitter" | "settings";
+type PlatformLogoType = "linkedin" | "instagram" | "x" | "meta";
 
 const SocialMediaAccounts: React.FC = () => {
   // 模拟绑定状态。实际应从后端获取并传递
@@ -104,4 +103,3 @@ const SocialMediaAccounts: React.FC = () => {
 };
 
 export default SocialMediaAccounts;
-
