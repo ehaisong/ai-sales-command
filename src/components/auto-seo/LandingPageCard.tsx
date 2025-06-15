@@ -1,20 +1,13 @@
 
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { 
-  ExternalLink, 
-  Eye, 
-  TrendingUp, 
   Clock, 
   Smartphone, 
-  Edit,
-  RefreshCw,
-  Trash2
+  TrendingUp
 } from "lucide-react";
 import { LandingPage } from "@/types/seo";
-import SEORankingBadge from "./SEORankingBadge";
 
 interface LandingPageCardProps {
   page: LandingPage;
@@ -87,13 +80,6 @@ const LandingPageCard: React.FC<LandingPageCardProps> = ({ page }) => {
           )}
         </div>
 
-        {/* 排名信息 */}
-        <div className="grid grid-cols-3 gap-2 mb-3">
-          <SEORankingBadge platform="Google" rank={page.rankings.google} />
-          <SEORankingBadge platform="百度" rank={page.rankings.baidu} />
-          <SEORankingBadge platform="Bing" rank={page.rankings.bing} />
-        </div>
-
         {/* 访问量统计 */}
         <div className="grid grid-cols-3 gap-2 mb-3 text-xs">
           <div className="text-center p-2 bg-gray-50 rounded">
@@ -111,7 +97,7 @@ const LandingPageCard: React.FC<LandingPageCardProps> = ({ page }) => {
         </div>
 
         {/* 技术指标 */}
-        <div className="flex items-center justify-between text-xs text-gray-500 mb-3">
+        <div className="flex items-center justify-between text-xs text-gray-500">
           <span className="flex items-center gap-1">
             <Clock className="w-3 h-3" />
             {page.loadSpeed}ms
@@ -124,23 +110,6 @@ const LandingPageCard: React.FC<LandingPageCardProps> = ({ page }) => {
             <TrendingUp className="w-3 h-3" />
             {page.analytics.bounceRate}% 跳出率
           </span>
-        </div>
-
-        {/* 操作按钮 */}
-        <div className="flex gap-2">
-          <Button size="sm" variant="outline" className="flex-1">
-            <Eye className="w-3 h-3 mr-1" />
-            预览
-          </Button>
-          <Button size="sm" variant="outline">
-            <Edit className="w-3 h-3" />
-          </Button>
-          <Button size="sm" variant="outline">
-            <RefreshCw className="w-3 h-3" />
-          </Button>
-          <Button size="sm" variant="outline">
-            <ExternalLink className="w-3 h-3" />
-          </Button>
         </div>
       </CardContent>
     </Card>
