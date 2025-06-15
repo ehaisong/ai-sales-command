@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
@@ -69,6 +70,10 @@ const menuItems = [
       {
         title: "品牌知识库",
         url: "/ai-agent/knowledge",
+      },
+      {
+        title: "设置",
+        url: "/ai-agent/settings",
       },
     ],
   },
