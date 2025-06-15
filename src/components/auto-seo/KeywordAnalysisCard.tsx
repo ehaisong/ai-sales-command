@@ -161,7 +161,7 @@ const KeywordAnalysisCard = () => {
               <span className="mr-2">{keyword.keyword}</span>
               <button
                 onClick={() => handleDeleteKeyword(keyword.id)}
-                className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:bg-red-500 hover:text-white rounded-full p-0.5"
+                className="opacity-50 group-hover:opacity-100 transition-opacity duration-200 hover:bg-red-500 hover:text-white rounded-full p-0.5"
               >
                 <X className="w-3 h-3" />
               </button>
