@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -87,19 +86,19 @@ const TrafficHeatingPage = () => {
     return Math.ceil(basePoints);
   };
 
-  const calculateTotalPoints = () => {
-    let dailyPoints = calculateDailyPoints(dailyTraffic);
-    let totalPoints = dailyPoints * durationDays;
+  const calculateTotalPoints = (traffic: number, duration: number) => {
+    let dailyPoints = calculateDailyPoints(traffic);
+    let totalPoints = dailyPoints * duration;
     
     // 时长优惠
-    if (durationDays >= 30) totalPoints *= 0.9;
-    else if (durationDays >= 7) totalPoints *= 0.95;
+    if (duration >= 30) totalPoints *= 0.9;
+    else if (duration >= 7) totalPoints *= 0.95;
     
     return Math.ceil(totalPoints);
   };
 
   const dailyPoints = calculateDailyPoints(dailyTraffic);
-  const totalPoints = calculateTotalPoints();
+  const totalPoints = calculateTotalPoints(dailyTraffic, durationDays);
   const isPointsSufficient = mockUserPoints >= totalPoints;
 
   const trafficOptions = [
@@ -196,6 +195,38 @@ const TrafficHeatingPage = () => {
     toast({
       title: "已停止流量加热",
       description: "流量加热服务已停止",
+    });
+  };
+
+  const handleRestart = (record: TrafficHeatingRecord) => {
+    const pointsForRestart = calculateTotalPoints(record.dailyTraffic, record.durationDays);
+
+    const newRecord: TrafficHeatingRecord = {
+      id: Date.now().toString(),
+      websiteUrl: record.websiteUrl,
+      websiteTitle: record.websiteTitle,
+      dailyTraffic: record.dailyTraffic,
+      durationDays: record.durationDays,
+      pointsDeducted: pointsForRestart,
+      startTime: new Date().toISOString(),
+      endTime: new Date(Date.now() + record.durationDays * 24 * 60 * 60 * 1000).toISOString(),
+      status: "running",
+      remainingDays: record.durationDays,
+      createdAt: new Date().toISOString()
+    };
+
+    setHistoryRecords(prev => [newRecord, ...prev]);
+    toast({
+      title: "任务已重新开始",
+      description: `已为 ${record.websiteUrl} 创建新的流量加热任务`,
+    });
+  };
+
+  const handleDelete = (id: string) => {
+    setHistoryRecords(prev => prev.filter(record => record.id !== id));
+    toast({
+        title: "记录已删除",
+        description: "流量加热记录已成功删除",
     });
   };
 
@@ -405,6 +436,8 @@ const TrafficHeatingPage = () => {
               onPause={handlePause}
               onResume={handleResume}
               onStop={handleStop}
+              onRestart={handleRestart}
+              onDelete={handleDelete}
             />
           </div>
         </div>
