@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -16,6 +15,7 @@ import AIKnowledgeBase from "@/pages/AIKnowledgeBase";
 import AISettings from "@/pages/AISettings";
 import SocialMediaManagement from "@/pages/SocialMediaManagement";
 import AutoSEOPage from "@/pages/AutoSEOPage";
+import TrafficHeatingPage from "@/pages/TrafficHeatingPage";
 
 const queryClient = new QueryClient();
 
@@ -48,7 +48,7 @@ const App = () => (
                   {/* 品牌建设 */}
                   <Route path="/brand/social-media" element={<SocialMediaManagement />} />
                   <Route path="/brand/seo" element={<AutoSEOPage />} />
-                  <Route path="/brand/traffic" element={<div className="p-6">流量加热页面开发中...</div>} />
+                  <Route path="/brand/traffic" element={<TrafficHeatingPage />} />
                   
                   {/* 营销工具 */}
                   <Route path="/tools/trends" element={<div className="p-6">爆款趋势页面开发中...</div>} />
