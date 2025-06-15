@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+
+import React, { useState, useRef, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -38,6 +39,16 @@ const AIChat = ({
   const [messages, setMessages] = useState(initialMessages);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages, isTyping]);
+  
   const handleSend = (message?: string) => {
     const messageText = message || input.trim();
     if (!messageText) return;
@@ -133,6 +144,7 @@ const AIChat = ({
                 </div>
               </div>
             </div>}
+            <div ref={messagesEndRef} />
         </div>
       </ScrollArea>
 

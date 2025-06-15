@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -127,16 +128,16 @@ const KnowledgeList = ({ searchQuery, onSelectItem }: Props) => {
           return (
             <Card
               key={item.id}
-              className={`p-6 hover:shadow-md transition-all cursor-pointer border-l-4 ${
+              className={`p-4 hover:shadow-md transition-all cursor-pointer border-l-4 ${
                 selectedItems.includes(item.id) 
                   ? 'border-l-primary bg-primary/5' 
                   : `border-l-transparent ${sourceInfo.bgColor}`
               }`}
               onClick={() => onSelectItem(item)}
             >
-              <div className="flex items-start gap-4">
+              <div className="flex items-center gap-4">
                 {/* 选择框 */}
-                <div className="flex items-center pt-1">
+                <div className="flex items-center">
                   <input
                     type="checkbox"
                     checked={selectedItems.includes(item.id)}
@@ -149,7 +150,7 @@ const KnowledgeList = ({ searchQuery, onSelectItem }: Props) => {
                 </div>
 
                 {/* 来源图标 */}
-                <div className="flex-shrink-0 mt-1">
+                <div className="flex-shrink-0">
                   <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${sourceInfo.color}`}>
                     <IconComponent className="w-5 h-5" />
                   </div>
@@ -158,7 +159,7 @@ const KnowledgeList = ({ searchQuery, onSelectItem }: Props) => {
                 {/* 主要内容 */}
                 <div className="flex-1 min-w-0">
                   <div className="flex items-start justify-between mb-2">
-                    <h3 className="text-lg font-semibold text-gray-900 line-clamp-2 leading-tight">
+                    <h3 className="text-base font-semibold text-gray-900 line-clamp-2 leading-tight">
                       {item.title}
                     </h3>
                     <DropdownMenu>
