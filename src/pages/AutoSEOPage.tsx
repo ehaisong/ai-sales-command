@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Card } from "@/components/ui/card";
 import KeywordAnalysisCard from "@/components/auto-seo/KeywordAnalysisCard";
@@ -16,18 +15,16 @@ const AutoSEOPage = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
           {/* 左侧：关键词分析和着陆页管理 */}
           <div className="lg:col-span-2 space-y-6">
             <KeywordAnalysisCard />
             <LandingPageGrid />
           </div>
           
-          {/* 右侧：AI SEO助手 - 固定位置 */}
-          <div className="lg:col-span-1">
-            <div className="sticky top-6">
-              <SEOAIAssistant />
-            </div>
+          {/* 右侧：AI SEO助手 */}
+          <div className="lg:col-span-1 h-full">
+            <SEOAIAssistant />
           </div>
         </div>
       </div>
