@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -135,30 +134,30 @@ const KnowledgeList = ({ searchQuery, onSelectItem }: Props) => {
               }`}
               onClick={() => onSelectItem(item)}
             >
-              <div className="flex items-center gap-4">
-                {/* 选择框 */}
-                <div className="flex items-center">
-                  <input
-                    type="checkbox"
-                    checked={selectedItems.includes(item.id)}
-                    onChange={(e) => {
-                      e.stopPropagation();
-                      handleSelectItem(item.id);
-                    }}
-                    className="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary"
-                  />
-                </div>
-
-                {/* 来源图标 */}
-                <div className="flex-shrink-0">
-                  <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${sourceInfo.color}`}>
-                    <IconComponent className="w-5 h-5" />
+              <div>
+                <div className="flex items-center gap-4">
+                  {/* 选择框 */}
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      checked={selectedItems.includes(item.id)}
+                      onChange={(e) => {
+                        e.stopPropagation();
+                        handleSelectItem(item.id);
+                      }}
+                      className="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary"
+                    />
                   </div>
-                </div>
 
-                {/* 主要内容 */}
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-start justify-between mb-2">
+                  {/* 来源图标 */}
+                  <div className="flex-shrink-0">
+                    <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${sourceInfo.color}`}>
+                      <IconComponent className="w-5 h-5" />
+                    </div>
+                  </div>
+
+                  {/* 主要内容 - 标题行 */}
+                  <div className="flex-1 min-w-0 flex items-center justify-between">
                     <h3 className="text-base font-semibold text-gray-900 line-clamp-2 leading-tight">
                       {item.title}
                     </h3>
@@ -189,13 +188,16 @@ const KnowledgeList = ({ searchQuery, onSelectItem }: Props) => {
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </div>
+                </div>
 
-                  <p className="text-gray-600 text-sm line-clamp-2 mb-3 leading-relaxed">
+                {/* 剩余内容 */}
+                <div className="pl-[5.5rem] mt-2 space-y-3">
+                  <p className="text-gray-600 text-sm line-clamp-2 leading-relaxed">
                     {item.summary}
                   </p>
 
                   {/* 标签 */}
-                  <div className="flex flex-wrap gap-2 mb-3">
+                  <div className="flex flex-wrap gap-2">
                     {item.tags.map((tag) => {
                       const { icon: Icon, color, iconColor } = getTagStyle(tag);
                       return (
