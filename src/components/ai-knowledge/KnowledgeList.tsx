@@ -123,6 +123,7 @@ const KnowledgeList = ({ searchQuery, onSelectItem }: Props) => {
         {filteredKnowledge.map((item) => {
           const sourceInfo = sourceConfig[item.source as keyof typeof sourceConfig];
           const IconComponent = sourceInfo.icon;
+          const allTags = [sourceInfo.label, ...item.tags];
           
           return (
             <Card
@@ -198,7 +199,7 @@ const KnowledgeList = ({ searchQuery, onSelectItem }: Props) => {
 
                   {/* 标签 */}
                   <div className="flex flex-wrap gap-2">
-                    {item.tags.map((tag) => {
+                    {allTags.map((tag) => {
                       const { icon: Icon, color, iconColor } = getTagStyle(tag);
                       return (
                         <Badge key={tag} variant="secondary" className={`text-xs font-medium ${color}`}>
@@ -220,9 +221,6 @@ const KnowledgeList = ({ searchQuery, onSelectItem }: Props) => {
                         <Eye className="w-3 h-3" />
                         <span>{item.viewCount} 次查看</span>
                       </div>
-                      <Badge variant="outline" className={`text-xs ${sourceInfo.color}`}>
-                        {sourceInfo.label}
-                      </Badge>
                     </div>
                     <div className="flex items-center gap-1">
                       <span>AI置信度: </span>
