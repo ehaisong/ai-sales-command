@@ -1,15 +1,15 @@
-
 import React, { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
-import { Linkedin, Instagram, Twitter, Plus, PauseCircle, PlayCircle } from "lucide-react";
+import { Linkedin, Instagram, Twitter, Plus, PauseCircle, PlayCircle, Unlink } from "lucide-react";
 import { mockPlatformAccounts } from "./mockSocialData";
 import { SocialPlatform, PlatformAccount } from "@/types/socialMedia";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 import ConnectAccountDialog from "./ConnectAccountDialog";
+import UnbindAccountDialog from "./UnbindAccountDialog";
 
 const platformIcons: Record<SocialPlatform, React.ElementType> = {
   linkedin: Linkedin,
@@ -39,6 +39,9 @@ const SocialMediaTabs: React.FC<SocialMediaTabsProps> = ({
 
   const [dialogOpen, setDialogOpen] = useState(false);
   const [platformToConnect, setPlatformToConnect] = useState<SocialPlatform | null>(null);
+
+  const [unbindDialogOpen, setUnbindDialogOpen] = useState(false);
+  const [accountToUnbind, setAccountToUnbind] = useState<PlatformAccount | null>(null);
 
   const allConnectedAccounts = accounts.filter(a => a.isConnected);
   const allAccountsActive = allConnectedAccounts.length > 0 && allConnectedAccounts.every(a => a.isActive);
@@ -87,6 +90,31 @@ const SocialMediaTabs: React.FC<SocialMediaTabsProps> = ({
       title: "账号已连接",
       description: `${accountToConnect.accountName} 已成功连接。`,
     });
+  };
+
+  const handleOpenUnbindDialog = (account: PlatformAccount) => {
+    setAccountToUnbind(account);
+    setUnbindDialogOpen(true);
+  };
+
+  const handleUnbindConfirm = () => {
+    if (!accountToUnbind) return;
+
+    setAccounts(prevAccounts =>
+      prevAccounts.map(acc =>
+        acc.accountId === accountToUnbind.accountId
+          ? { ...acc, isConnected: false, isActive: false }
+          : acc
+      )
+    );
+
+    toast({
+      title: "账号已解绑",
+      description: `${accountToUnbind.accountName} 已成功解绑。`,
+    });
+    
+    setUnbindDialogOpen(false);
+    setAccountToUnbind(null);
   };
 
   return (
@@ -172,7 +200,7 @@ const SocialMediaTabs: React.FC<SocialMediaTabsProps> = ({
                         </div>
                       </div>
                     </div>
-                    <div className="flex items-center space-x-3">
+                    <div className="flex items-center space-x-4">
                       <span className={`text-sm font-medium ${account.isActive ? 'text-primary' : 'text-gray-500'}`}>
                         {account.isActive ? '自动发文' : '已暂停'}
                       </span>
@@ -180,6 +208,10 @@ const SocialMediaTabs: React.FC<SocialMediaTabsProps> = ({
                         checked={account.isActive}
                         onCheckedChange={() => handleToggleAccount(account.accountId)}
                       />
+                      <Button variant="outline" size="sm" className="text-red-600 hover:text-red-700 border-red-200 hover:bg-red-50" onClick={() => handleOpenUnbindDialog(account)}>
+                        <Unlink className="w-4 h-4 mr-2" />
+                        解绑
+                      </Button>
                     </div>
                   </div>
                 </div>
@@ -194,6 +226,12 @@ const SocialMediaTabs: React.FC<SocialMediaTabsProps> = ({
         platform={platformToConnect}
         accounts={accounts.filter(a => a.platform === platformToConnect && !a.isConnected)}
         onConnect={handleConnectAccount}
+      />
+      <UnbindAccountDialog
+        open={unbindDialogOpen}
+        onOpenChange={setUnbindDialogOpen}
+        account={accountToUnbind}
+        onConfirm={handleUnbindConfirm}
       />
     </>
   );
