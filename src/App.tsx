@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -13,6 +14,7 @@ import CustomerManagement from "@/pages/CustomerManagement";
 import NotFound from "@/pages/NotFound";
 import AIKnowledgeBase from "@/pages/AIKnowledgeBase";
 import AISettings from "@/pages/AISettings";
+import SocialMediaManagement from "@/pages/SocialMediaManagement";
 
 const queryClient = new QueryClient();
 
@@ -43,7 +45,7 @@ const App = () => (
                   <Route path="/ai-agent/settings" element={<AISettings />} />
                   
                   {/* 品牌建设 */}
-                  <Route path="/brand/social" element={<div className="p-6">社交媒体页面开发中...</div>} />
+                  <Route path="/brand/social-media" element={<SocialMediaManagement />} />
                   <Route path="/brand/seo" element={<div className="p-6">SEO页面开发中...</div>} />
                   <Route path="/brand/traffic" element={<div className="p-6">流量加热页面开发中...</div>} />
                   
