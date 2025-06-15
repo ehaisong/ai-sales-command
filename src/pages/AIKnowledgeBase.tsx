@@ -64,7 +64,7 @@ const AIKnowledgeBase = () => {
           {/* 右侧AI聊天助手 */}
           <div className="lg:col-span-1">
             <div className="sticky top-6">
-              <div className="bg-white rounded-lg shadow-sm border h-[calc(100vh-8rem)]">
+              <div className="bg-white rounded-lg shadow-sm border">
                 <div className="p-4 border-b border-gray-200">
                   <h3 className="text-lg font-semibold flex items-center gap-2">
                     <div className="w-2 h-2 bg-green-500 rounded-full"></div>
@@ -72,11 +72,9 @@ const AIKnowledgeBase = () => {
                   </h3>
                   <p className="text-sm text-gray-500 mt-1">智能分析与知识管理</p>
                 </div>
-                <div className="h-[calc(100%-4rem)]">
-                  <AIChat onAddEntry={() => {
+                <AIChat onAddEntry={() => {
                   console.log("添加知识库条目");
                 }} />
-                </div>
               </div>
             </div>
           </div>

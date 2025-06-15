@@ -1,6 +1,4 @@
-
 import React, { useState, useRef, useEffect } from "react";
-import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -84,10 +82,7 @@ const AIChat = ({
     const responses = ["根据我们的知识库，我找到了相关信息。我们公司专注于智能家居领域，主要产品包括A100智能音箱和B200智能门锁系列。需要我提供更详细的产品信息吗？", "这是一个很好的问题！基于现有知识库内容，我建议我们可以从以下几个角度来完善这部分信息...", "我注意到您询问的内容在知识库中信息较少，建议您上传相关文档或提供更多细节，这样我可以为您提供更准确的答案。", "让我为您总结一下相关要点。根据最新的产品资料和市场反馈，我建议这样向客户介绍..."];
     return responses[Math.floor(Math.random() * responses.length)];
   };
-  return <Card className="h-[600px] flex flex-col">
-      {/* 聊天头部 */}
-      
-
+  return <div className="flex flex-col">
       {/* 快捷提问 */}
       <div className="p-3 border-b border-gray-50">
         <p className="text-xs text-gray-600 mb-2">快速提问:</p>
@@ -103,7 +98,7 @@ const AIChat = ({
       </div>
 
       {/* 聊天消息区域 */}
-      <ScrollArea className="flex-1 p-4">
+      <ScrollArea className="p-4">
         <div className="space-y-4">
           {messages.map(msg => <div key={msg.id} className={`flex ${msg.sender === "user" ? "justify-end" : "justify-start"}`}>
               <div className={`flex items-start gap-3 max-w-[85%] ${msg.sender === "user" ? "flex-row-reverse" : "flex-row"}`}>
@@ -166,6 +161,6 @@ const AIChat = ({
           AI助手正在学习中，回复仅供参考
         </p>
       </div>
-    </Card>;
+    </div>;
 };
 export default AIChat;
