@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -56,7 +57,7 @@ const App = () => (
                   <Route path="/tools/influencer" element={<div className="p-6">网红页面开发中...</div>} />
                   <Route path="/tools/ads" element={<div className="p-6">广告助手页面开发中...</div>} />
                   <Route path="/tools/competitor" element={<div className="p-6">竞品监控页面开发中...</div>} />
-                  <Route path="/tools/traffic-boost" element={<div className="p-6">流量加热页面开发中...</div>} />
+                  <Route path="/tools/traffic-boost" element={<TrafficHeatingPage />} />
                   
                   {/* 设置 */}
                   <Route path="/settings" element={<div className="p-6">设置页面开发中...</div>} />
