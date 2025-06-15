@@ -17,6 +17,8 @@ import {
 import { Linkedin, Instagram, Twitter, MoreHorizontal, Trash2, Edit, Calendar, Heart, MessageCircle, Share, Eye } from "lucide-react";
 import { mockSocialPosts } from "./mockSocialData";
 import { SocialPost, SocialPlatform } from "@/types/socialMedia";
+import DeletePostDialog from "./DeletePostDialog";
+import { useToast } from "@/hooks/use-toast";
 
 const platformIcons = {
   linkedin: Linkedin,
@@ -52,14 +54,28 @@ const SocialPostList: React.FC<SocialPostListProps> = ({ platform }) => {
   const [posts, setPosts] = useState<SocialPost[]>(mockSocialPosts);
   const [selectedPost, setSelectedPost] = useState<SocialPost | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+  const [postToDelete, setPostToDelete] = useState<SocialPost | null>(null);
+  const { toast } = useToast();
 
   const filteredPosts = platform === 'all' 
     ? posts 
     : posts.filter(post => post.platform === platform);
 
-  const handleDeletePost = (postId: string) => {
-    setPosts(prev => prev.filter(post => post.id !== postId));
-    console.log(`Deleted post ${postId}`);
+  const handleOpenDeleteDialog = (post: SocialPost) => {
+    setPostToDelete(post);
+    setIsDeleteDialogOpen(true);
+  };
+
+  const handleConfirmDelete = () => {
+    if (!postToDelete) return;
+    setPosts(prev => prev.filter(post => post.id !== postToDelete.id));
+    toast({
+      title: "帖子已删除",
+      description: "您选择的帖子已被成功删除。",
+    });
+    setIsDeleteDialogOpen(false);
+    setPostToDelete(null);
   };
 
   const handlePostClick = (post: SocialPost) => {
@@ -100,7 +116,7 @@ const SocialPostList: React.FC<SocialPostListProps> = ({ platform }) => {
           const Icon = platformIcons[post.platform];
           const color = platformColors[post.platform as keyof typeof platformColors];
           return (
-            <div key={post.id} className="border rounded-lg p-4 hover:shadow-sm transition-shadow">
+            <div key={post.id} className="border rounded-lg p-4 transition-all duration-200 hover:shadow-lg hover:bg-gray-50/80">
               <div className="flex items-start justify-between mb-3">
                 <div className="flex items-center space-x-3">
                   <div className="p-1.5 bg-primary/10 rounded">
@@ -143,7 +159,7 @@ const SocialPostList: React.FC<SocialPostListProps> = ({ platform }) => {
                     </DropdownMenuItem>
                     <DropdownMenuItem 
                       className="text-red-600"
-                      onClick={() => handleDeletePost(post.id)}
+                      onClick={() => handleOpenDeleteDialog(post)}
                     >
                       <Trash2 className="w-4 h-4 mr-2" />
                       删除
@@ -332,6 +348,14 @@ const SocialPostList: React.FC<SocialPostListProps> = ({ platform }) => {
           )}
         </DialogContent>
       </Dialog>
+
+      {/* Delete Post Confirmation Dialog */}
+      <DeletePostDialog
+        open={isDeleteDialogOpen}
+        onOpenChange={setIsDeleteDialogOpen}
+        post={postToDelete}
+        onConfirm={handleConfirmDelete}
+      />
     </>
   );
 };
