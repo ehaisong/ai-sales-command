@@ -70,10 +70,6 @@ const menuItems = [
         title: "品牌知识库",
         url: "/ai-agent/knowledge",
       },
-      {
-        title: "设置",
-        url: "/ai-agent/settings",
-      },
     ],
   },
   {
@@ -87,10 +83,6 @@ const menuItems = [
       {
         title: "自动建站霸屏",
         url: "/brand/seo",
-      },
-      {
-        title: "流量加热",
-        url: "/brand/traffic",
       },
     ],
   },
