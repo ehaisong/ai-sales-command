@@ -27,6 +27,7 @@ export interface SocialPost {
 }
 
 export interface PlatformAccount {
+  accountId: string;
   platform: SocialPlatform;
   accountName: string;
   isConnected: boolean;

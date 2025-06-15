@@ -1,8 +1,8 @@
-
 import { SocialPost, PlatformAccount } from '@/types/socialMedia';
 
 export const mockPlatformAccounts: PlatformAccount[] = [
   {
+    accountId: 'li-1',
     platform: 'linkedin',
     accountName: '思拓外贸助手',
     isConnected: true,
@@ -12,6 +12,7 @@ export const mockPlatformAccounts: PlatformAccount[] = [
     followerCount: 1280
   },
   {
+    accountId: 'ig-1',
     platform: 'instagram',
     accountName: '@situo_trade',
     isConnected: true,
@@ -21,6 +22,7 @@ export const mockPlatformAccounts: PlatformAccount[] = [
     followerCount: 2150
   },
   {
+    accountId: 'tw-1',
     platform: 'twitter',
     accountName: '@SituoTrade',
     isConnected: false,
@@ -28,6 +30,16 @@ export const mockPlatformAccounts: PlatformAccount[] = [
     lastPostAt: undefined,
     totalPosts: 0,
     followerCount: 0
+  },
+  {
+    accountId: 'tw-2',
+    platform: 'twitter',
+    accountName: '@SituoMarketing',
+    isConnected: false,
+    isActive: false,
+    lastPostAt: undefined,
+    totalPosts: 10,
+    followerCount: 500
   }
 ];
 
