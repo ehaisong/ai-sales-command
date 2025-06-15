@@ -35,7 +35,7 @@ const CustomerAnalytics: React.FC<CustomerAnalyticsProps> = ({ customers }) => {
         <CardContent className="flex items-center p-6">
           <div className="flex items-center space-x-4">
             <div className="p-2 bg-blue-100 rounded-full">
-              <Users className="h-9 w-9 text-blue-600" />
+              <Users className="h-9 w-9 text-blue-600" strokeWidth={1.5} />
             </div>
             <div>
               <p className="text-2xl font-bold font-din">{totalCustomers}</p>
@@ -49,7 +49,7 @@ const CustomerAnalytics: React.FC<CustomerAnalyticsProps> = ({ customers }) => {
         <CardContent className="flex items-center p-6">
           <div className="flex items-center space-x-4">
             <div className="p-2 bg-green-100 rounded-full">
-              <Building2 className="h-9 w-9 text-green-600" />
+              <Building2 className="h-9 w-9 text-green-600" strokeWidth={1.5} />
             </div>
             <div>
               <p className="text-2xl font-bold font-din">{companyCustomers}</p>
@@ -63,7 +63,7 @@ const CustomerAnalytics: React.FC<CustomerAnalyticsProps> = ({ customers }) => {
         <CardContent className="flex items-center p-6">
           <div className="flex items-center space-x-4">
             <div className="p-2 bg-purple-100 rounded-full">
-              <Target className="h-9 w-9 text-purple-600" />
+              <Target className="h-9 w-9 text-purple-600" strokeWidth={1.5} />
             </div>
             <div>
               <p className="text-2xl font-bold font-din">{individualCustomers}</p>
@@ -77,7 +77,7 @@ const CustomerAnalytics: React.FC<CustomerAnalyticsProps> = ({ customers }) => {
         <CardContent className="flex items-center p-6">
           <div className="flex items-center space-x-4">
             <div className="p-2 bg-orange-100 rounded-full">
-              <TrendingUp className="h-9 w-9 text-orange-600" />
+              <TrendingUp className="h-9 w-9 text-orange-600" strokeWidth={1.5} />
             </div>
             <div>
               <p className="text-2xl font-bold font-din">{avgScore}</p>
