@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -9,15 +8,12 @@ import AIChat from "@/components/ai-knowledge/AIChat";
 import KnowledgeDetailDialog from "@/components/ai-knowledge/KnowledgeDetailDialog";
 import FileUploadDialog from "@/components/ai-knowledge/FileUploadDialog";
 import SourceConfigDialog from "@/components/ai-knowledge/SourceConfigDialog";
-
 const AIKnowledgeBase = () => {
   const [selectedKnowledge, setSelectedKnowledge] = useState(null);
   const [showDetail, setShowDetail] = useState(false);
   const [showFileUpload, setShowFileUpload] = useState(false);
   const [showConfig, setShowConfig] = useState(false);
-
-  return (
-    <div className="min-h-screen bg-gray-50 p-6">
+  return <div className="min-h-screen bg-gray-50 p-6">
       <div className="max-w-full mx-auto">
         {/* 页面标题和描述 */}
         <div className="mb-6">
@@ -32,41 +28,20 @@ const AIKnowledgeBase = () => {
           {/* 左侧主要内容区域 */}
           <div className="lg:col-span-2 space-y-6">
             {/* 顶部工具栏 */}
-            <Card className="p-4">
-              <div className="flex gap-2 justify-end">
-                <Button variant="outline" size="sm">
-                  <RefreshCw className="w-4 h-4 mr-2" />
-                  刷新
-                </Button>
-                <Button variant="outline" size="sm">
-                  <Download className="w-4 h-4 mr-2" />
-                  导出
-                </Button>
-                <Button variant="outline" size="sm" className="text-red-600 hover:text-red-700">
-                  <Trash2 className="w-4 h-4 mr-2" />
-                  批量删除
-                </Button>
-              </div>
-            </Card>
+            
 
             {/* 数据源管理卡片 */}
             <div>
               <h2 className="text-lg font-semibold text-gray-900 mb-4">数据源管理</h2>
-              <DataSourceCards
-                onUploadFile={() => setShowFileUpload(true)}
-                onConfig={() => setShowConfig(true)}
-              />
+              <DataSourceCards onUploadFile={() => setShowFileUpload(true)} onConfig={() => setShowConfig(true)} />
             </div>
 
             {/* 知识库内容列表 */}
             <div>
-              <KnowledgeList
-                searchQuery=""
-                onSelectItem={(item) => {
-                  setSelectedKnowledge(item);
-                  setShowDetail(true);
-                }}
-              />
+              <KnowledgeList searchQuery="" onSelectItem={item => {
+              setSelectedKnowledge(item);
+              setShowDetail(true);
+            }} />
             </div>
           </div>
 
@@ -83,8 +58,8 @@ const AIKnowledgeBase = () => {
                 </div>
                 <div className="h-[calc(100%-4rem)]">
                   <AIChat onAddEntry={() => {
-                    console.log("添加知识库条目");
-                  }} />
+                  console.log("添加知识库条目");
+                }} />
                 </div>
               </div>
             </div>
@@ -93,21 +68,9 @@ const AIKnowledgeBase = () => {
       </div>
 
       {/* 弹窗组件 */}
-      <KnowledgeDetailDialog
-        open={showDetail}
-        knowledge={selectedKnowledge}
-        onClose={() => setShowDetail(false)}
-      />
-      <FileUploadDialog
-        open={showFileUpload}
-        onClose={() => setShowFileUpload(false)}
-      />
-      <SourceConfigDialog
-        open={showConfig}
-        onClose={() => setShowConfig(false)}
-      />
-    </div>
-  );
+      <KnowledgeDetailDialog open={showDetail} knowledge={selectedKnowledge} onClose={() => setShowDetail(false)} />
+      <FileUploadDialog open={showFileUpload} onClose={() => setShowFileUpload(false)} />
+      <SourceConfigDialog open={showConfig} onClose={() => setShowConfig(false)} />
+    </div>;
 };
-
 export default AIKnowledgeBase;
