@@ -160,6 +160,9 @@ const KnowledgeList = ({ searchQuery, onSelectItem }: Props) => {
                   <div className="flex-1 min-w-0 flex items-center justify-between">
                     <h3 className="text-base font-semibold text-gray-900 line-clamp-2 leading-tight">
                       {item.title}
+                      <Badge variant="secondary" className={`ml-2 text-xs font-normal align-middle ${sourceInfo.color}`}>
+                        #{sourceInfo.label}
+                      </Badge>
                     </h3>
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
@@ -220,9 +223,6 @@ const KnowledgeList = ({ searchQuery, onSelectItem }: Props) => {
                         <Eye className="w-3 h-3" />
                         <span>{item.viewCount} 次查看</span>
                       </div>
-                      <Badge variant="outline" className={`text-xs ${sourceInfo.color}`}>
-                        {sourceInfo.label}
-                      </Badge>
                     </div>
                     <div className="flex items-center gap-1">
                       <span>AI置信度: </span>
