@@ -24,6 +24,12 @@ const platformIcons = {
   twitter: Twitter,
 };
 
+const platformColors = {
+  linkedin: "text-[#0A66C2]",
+  instagram: "text-[#E4405F]",
+  twitter: "text-black",
+};
+
 const statusColors = {
   published: "bg-green-100 text-green-800",
   scheduled: "bg-blue-100 text-blue-800",
@@ -92,12 +98,13 @@ const SocialPostList: React.FC<SocialPostListProps> = ({ platform }) => {
       <div className="space-y-4">
         {filteredPosts.map((post) => {
           const Icon = platformIcons[post.platform];
+          const color = platformColors[post.platform as keyof typeof platformColors];
           return (
             <div key={post.id} className="border rounded-lg p-4 hover:shadow-sm transition-shadow">
               <div className="flex items-start justify-between mb-3">
                 <div className="flex items-center space-x-3">
                   <div className="p-1.5 bg-primary/10 rounded">
-                    <Icon className="w-4 h-4 text-primary" />
+                    <Icon className={`w-4 h-4 ${color}`} />
                   </div>
                   <div>
                     <Badge 
@@ -169,9 +176,17 @@ const SocialPostList: React.FC<SocialPostListProps> = ({ platform }) => {
                 <div className="mb-3">
                   <div className="flex flex-wrap gap-1">
                     {post.hashtags.map((tag, index) => (
-                      <span key={index} className="text-xs text-blue-600 bg-blue-50 px-2 py-1 rounded">
+                      <Button
+                        key={index}
+                        variant="ghost"
+                        className="h-auto rounded bg-blue-50 px-2 py-1 text-xs font-normal text-blue-600 hover:bg-blue-100 hover:text-blue-700"
+                        onClick={(e) => {
+                          e.stopPropagation(); // 防止触发父级的handlePostClick
+                          console.log(`Filtering by tag: ${tag}`);
+                        }}
+                      >
                         {tag}
-                      </span>
+                      </Button>
                     ))}
                   </div>
                 </div>
@@ -213,7 +228,7 @@ const SocialPostList: React.FC<SocialPostListProps> = ({ platform }) => {
                 <>
                   <div className="p-1.5 bg-primary/10 rounded">
                     {React.createElement(platformIcons[selectedPost.platform], { 
-                      className: "w-4 h-4 text-primary" 
+                      className: `w-4 h-4 ${platformColors[selectedPost.platform as keyof typeof platformColors]}` 
                     })}
                   </div>
                   <span>帖子详情</span>
@@ -270,9 +285,14 @@ const SocialPostList: React.FC<SocialPostListProps> = ({ platform }) => {
                   <h4 className="text-sm font-medium text-gray-700 mb-2">标签</h4>
                   <div className="flex flex-wrap gap-2">
                     {selectedPost.hashtags.map((tag, index) => (
-                      <span key={index} className="text-sm text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
+                       <Button
+                        key={index}
+                        variant="ghost"
+                        className="h-auto rounded-full bg-blue-50 px-3 py-1 text-sm font-normal text-blue-600 hover:bg-blue-100 hover:text-blue-700"
+                        onClick={() => console.log(`Filtering by tag: ${tag}`)}
+                      >
                         {tag}
-                      </span>
+                      </Button>
                     ))}
                   </div>
                 </div>

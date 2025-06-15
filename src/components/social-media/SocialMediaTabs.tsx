@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
@@ -12,6 +11,12 @@ const platformIcons = {
   linkedin: Linkedin,
   instagram: Instagram,
   twitter: Twitter,
+};
+
+const platformColors = {
+  linkedin: "text-[#0A66C2]",
+  instagram: "text-[#E4405F]",
+  twitter: "text-black",
 };
 
 interface SocialMediaTabsProps {
@@ -84,6 +89,7 @@ const SocialMediaTabs: React.FC<SocialMediaTabsProps> = ({
           {(() => {
             const account = mockPlatformAccounts.find(a => a.platform === platform);
             const Icon = platformIcons[platform as SocialPlatform];
+            const color = platformColors[platform as keyof typeof platformColors];
             
             if (!account?.isConnected) {
               return (
@@ -107,7 +113,7 @@ const SocialMediaTabs: React.FC<SocialMediaTabsProps> = ({
                 <div className="flex items-center justify-between p-4 border rounded-lg">
                   <div className="flex items-center space-x-4">
                     <div className="p-2 bg-primary/10 rounded-lg">
-                      <Icon className="w-5 h-5 text-primary" />
+                      <Icon className={`w-5 h-5 ${color}`} />
                     </div>
                     <div>
                       <div className="flex items-center gap-2">
