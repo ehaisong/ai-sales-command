@@ -104,7 +104,7 @@ const SocialPostList: React.FC<SocialPostListProps> = ({ platform }) => {
               <div className="flex items-start justify-between mb-3">
                 <div className="flex items-center space-x-3">
                   <div className="p-1.5 bg-primary/10 rounded">
-                    <Icon className={`w-4 h-4 ${color}`} />
+                    <Icon className={`w-6 h-6 ${color}`} />
                   </div>
                   <div>
                     <Badge 
