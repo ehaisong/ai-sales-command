@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
@@ -127,34 +128,70 @@ const SocialMediaTabs: React.FC<SocialMediaTabsProps> = ({
           <TabsTrigger value="twitter">X (Twitter)</TabsTrigger>
         </TabsList>
 
-        <TabsContent value="all" className="space-y-4 mt-4">
-          <div className="flex flex-col items-center justify-center py-8 space-y-4">
-            <div className="text-center">
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                统一管理所有平台
-              </h3>
-              <p className="text-gray-600 mb-6">
-                一键控制所有已连接社交媒体账号的发文状态
-              </p>
+        <TabsContent value="all" className="space-y-6 mt-4">
+          {allConnectedAccounts.length > 0 && (
+            <div className="p-6 border rounded-lg bg-white">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">已连接账号</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {allConnectedAccounts.map((account) => {
+                  const Icon = platformIcons[account.platform];
+                  const color = platformColors[account.platform as keyof typeof platformColors];
+                  return (
+                    <div 
+                      key={account.accountId} 
+                      className="flex items-center justify-between p-3 border rounded-lg transition-shadow hover:shadow-md cursor-pointer" 
+                      onClick={() => onPlatformChange(account.platform)}
+                    >
+                      <div className="flex items-center space-x-3">
+                        <div className="p-2 bg-gray-100 rounded-lg">
+                          <Icon className={`w-5 h-5 ${color}`} />
+                        </div>
+                        <div>
+                          <span className="font-medium text-sm">{account.accountName}</span>
+                          <div className="text-xs text-gray-500">
+                            {account.followerCount.toLocaleString()} 粉丝
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <div className={`w-2 h-2 rounded-full ${account.isActive ? 'bg-green-500' : 'bg-gray-400'}`}></div>
+                        <span className={`text-xs font-medium ${account.isActive ? 'text-green-600' : 'text-gray-500'}`}>
+                          {account.isActive ? '发文中' : '已暂停'}
+                        </span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
-            <Button
-              size="lg"
-              variant={allAccountsActive ? "destructive" : "default"}
-              onClick={handleToggleAllAccounts}
-              className="flex items-center space-x-2 px-8 py-3 text-base"
-              disabled={allConnectedAccounts.length === 0}
-            >
-              {allAccountsActive ? (
-                <><PauseCircle className="w-5 h-5" /><span>全部暂停</span></>
-              ) : (
-                <><PlayCircle className="w-5 h-5" /><span>全部启动</span></>
-              )}
-            </Button>
-            <div className="text-sm text-gray-500 mt-4">
-              {allConnectedAccounts.length > 0 
-                ? `当前状态: ${allAccountsActive ? "所有平台正在发文" : "所有平台已暂停发文"}`
-                : "没有已连接的平台"
-              }
+          )}
+
+          <div className="p-6 border rounded-lg bg-white">
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+              统一管理
+            </h3>
+            <p className="text-gray-600 mb-6 text-sm">
+              一键控制所有已连接社交媒体账号的发文状态。
+            </p>
+            <div className="flex items-center justify-between bg-gray-50 p-4 rounded-lg">
+              <div className="text-sm text-gray-700 font-medium">
+                {allConnectedAccounts.length > 0 
+                  ? `当前状态: ${allAccountsActive ? "所有平台正在发文" : "所有平台已暂停"}`
+                  : "没有已连接的平台"
+                }
+              </div>
+              <Button
+                variant={allAccountsActive ? "destructive" : "default"}
+                onClick={handleToggleAllAccounts}
+                className="flex items-center space-x-2"
+                disabled={allConnectedAccounts.length === 0}
+              >
+                {allAccountsActive ? (
+                  <><PauseCircle className="w-4 h-4" /><span>全部暂停</span></>
+                ) : (
+                  <><PlayCircle className="w-4 h-4" /><span>全部启动</span></>
+                )}
+              </Button>
             </div>
           </div>
         </TabsContent>
