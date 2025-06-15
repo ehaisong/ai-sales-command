@@ -15,6 +15,7 @@ import NotFound from "@/pages/NotFound";
 import AIKnowledgeBase from "@/pages/AIKnowledgeBase";
 import AISettings from "@/pages/AISettings";
 import SocialMediaManagement from "@/pages/SocialMediaManagement";
+import AutoSEOPage from "@/pages/AutoSEOPage";
 
 const queryClient = new QueryClient();
 
@@ -46,7 +47,7 @@ const App = () => (
                   
                   {/* 品牌建设 */}
                   <Route path="/brand/social-media" element={<SocialMediaManagement />} />
-                  <Route path="/brand/seo" element={<div className="p-6">SEO页面开发中...</div>} />
+                  <Route path="/brand/seo" element={<AutoSEOPage />} />
                   <Route path="/brand/traffic" element={<div className="p-6">流量加热页面开发中...</div>} />
                   
                   {/* 营销工具 */}
