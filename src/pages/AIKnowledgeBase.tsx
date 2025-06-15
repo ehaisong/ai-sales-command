@@ -32,7 +32,7 @@ const AIKnowledgeBase = () => {
 
             {/* 数据源管理卡片 */}
             <div>
-              <h2 className="text-lg font-semibold text-gray-900 mb-4">数据源管理</h2>
+              
               <DataSourceCards onUploadFile={() => setShowFileUpload(true)} onConfig={() => setShowConfig(true)} />
             </div>
 
