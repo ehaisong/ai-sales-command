@@ -29,7 +29,6 @@ import {
   Users, 
   User, 
   Share, 
-  Settings,
   CreditCard,
   ChevronRight,
   Wrench,
@@ -124,11 +123,6 @@ const menuItems = [
         url: "/tools/traffic-boost",
       },
     ],
-  },
-  {
-    title: "设置",
-    url: "/settings",
-    icon: Settings,
   },
 ];
 
