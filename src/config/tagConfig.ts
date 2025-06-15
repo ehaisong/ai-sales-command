@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Package, Cpu, Sparkles, Building, Tag, Newspaper, Globe, FileText } from 'lucide-react';
+import { Package, Cpu, Sparkles, Building, Tag } from 'lucide-react';
 
 export const tagCategories: { [key: string]: string } = {
   // Products
@@ -25,11 +25,6 @@ export const tagCategories: { [key: string]: string } = {
   '公司介绍': 'corporate',
   '发展历程': 'corporate',
   '企业文化': 'corporate',
-
-  // Sources
-  '新闻': 'news_source',
-  '官网': 'website_source',
-  '文件': 'file_source',
 };
 
 export const categoryStyles: {
@@ -58,21 +53,6 @@ export const categoryStyles: {
     icon: Building,
     color: 'border-orange-200 bg-orange-100 text-orange-800 hover:bg-orange-200',
     iconColor: 'text-orange-600',
-  },
-  news_source: {
-    icon: Newspaper,
-    color: 'border-green-200 bg-green-100 text-green-800 hover:bg-green-200',
-    iconColor: 'text-green-600',
-  },
-  website_source: {
-    icon: Globe,
-    color: 'border-blue-200 bg-blue-100 text-blue-800 hover:bg-blue-200',
-    iconColor: 'text-blue-600',
-  },
-  file_source: {
-    icon: FileText,
-    color: 'border-purple-200 bg-purple-100 text-purple-800 hover:bg-purple-200',
-    iconColor: 'text-purple-600',
   },
   default: {
     icon: Tag,
