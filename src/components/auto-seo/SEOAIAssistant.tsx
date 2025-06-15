@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+
+import React, { useState, useRef, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -32,6 +33,15 @@ const SEOAIAssistant = () => {
   ]);
   const [inputValue, setInputValue] = useState("");
   const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages, isAnalyzing]);
 
   const quickActions = [
     { icon: Link, label: "分析我的官网", action: "analyze_website" },
@@ -97,7 +107,7 @@ const SEOAIAssistant = () => {
   };
 
   return (
-    <Card className="h-full flex flex-col">
+    <Card className="h-[calc(100vh-8rem)] flex flex-col">
       <CardHeader className="pb-3">
         <CardTitle className="flex items-center gap-2 text-lg">
           <Bot className="w-5 h-5 text-blue-600" />
@@ -109,7 +119,7 @@ const SEOAIAssistant = () => {
         </div>
       </CardHeader>
 
-      <CardContent className="flex-1 flex flex-col p-4 pt-0">
+      <CardContent className="flex-1 flex flex-col p-4 pt-0 overflow-hidden">
         {/* 快速操作按钮 */}
         <div className="grid grid-cols-2 gap-2 mb-4">
           {quickActions.map((action) => (
@@ -118,7 +128,7 @@ const SEOAIAssistant = () => {
               variant="outline"
               size="sm"
               onClick={() => handleQuickAction(action.action)}
-              className="h-auto p-2 text-xs"
+              className="h-auto p-2 text-xs flex flex-col items-center"
             >
               <action.icon className="w-3 h-3 mb-1" />
               <span className="text-center">{action.label}</span>
@@ -127,7 +137,7 @@ const SEOAIAssistant = () => {
         </div>
 
         {/* 消息列表 */}
-        <div className="flex-1 overflow-y-auto space-y-3 mb-4">
+        <div className="flex-1 overflow-y-auto space-y-3 mb-4 pr-2">
           {messages.map((message) => (
             <div
               key={message.id}
@@ -153,6 +163,7 @@ const SEOAIAssistant = () => {
               </div>
             </div>
           )}
+          <div ref={messagesEndRef} />
         </div>
 
         {/* 输入框 */}
