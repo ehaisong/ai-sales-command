@@ -86,7 +86,7 @@ const menuItems = [
         url: "/brand/social-media",
       },
       {
-        title: "SEO",
+        title: "自动建站霸屏",
         url: "/brand/seo",
       },
       {
