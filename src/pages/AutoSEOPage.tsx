@@ -23,11 +23,9 @@ const AutoSEOPage = () => {
             <LandingPageGrid />
           </div>
           
-          {/* 右侧：AI SEO助手 - 固定位置 */}
+          {/* 右侧：AI SEO助手 */}
           <div className="lg:col-span-1">
-            <div className="sticky top-6">
-              <SEOAIAssistant />
-            </div>
+            <SEOAIAssistant />
           </div>
         </div>
       </div>
