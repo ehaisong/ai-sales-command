@@ -1,9 +1,9 @@
-
 import React, { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { TrendingUp, Hash, Filter, Plus } from "lucide-react";
+import { getTagStyle } from "@/config/tagConfig";
 
 // 模拟标签数据
 const tags = [
@@ -51,13 +51,6 @@ const TagCloud = () => {
     if (count >= 10) return "text-lg px-4 py-2";
     if (count >= 6) return "text-base px-3 py-2";
     return "text-sm px-3 py-1";
-  };
-
-  const getTagColor = (count: number, isSelected: boolean) => {
-    if (isSelected) return "bg-primary text-primary-foreground";
-    if (count >= 10) return "bg-blue-100 text-blue-800 hover:bg-blue-200";
-    if (count >= 6) return "bg-green-100 text-green-800 hover:bg-green-200";
-    return "bg-gray-100 text-gray-700 hover:bg-gray-200";
   };
 
   return (
@@ -109,13 +102,17 @@ const TagCloud = () => {
       <div className="flex flex-wrap gap-3 mb-4">
         {displayTags.map((tag) => {
           const isSelected = selectedTags.includes(tag.name);
+          const { icon: Icon, color: categoryColor } = getTagStyle(tag.name);
+          const finalColor = isSelected ? "bg-primary text-primary-foreground hover:bg-primary/80" : categoryColor;
+
           return (
             <Badge
               key={tag.name}
-              className={`cursor-pointer transition-all duration-200 ${getTagSize(tag.count)} ${getTagColor(tag.count, isSelected)}`}
+              className={`cursor-pointer transition-all duration-200 ${getTagSize(tag.count)} ${finalColor}`}
               onClick={() => handleTagClick(tag.name)}
             >
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-1.5">
+                <Icon className="w-4 h-4" />
                 <span>{tag.name}</span>
                 <span className="text-xs opacity-75">({tag.count})</span>
                 {getTrendIcon(tag.trend)}

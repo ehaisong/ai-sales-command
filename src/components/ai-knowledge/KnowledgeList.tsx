@@ -1,16 +1,16 @@
-
 import React, { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Avatar } from "@/components/ui/avatar";
-import { Trash, FileText, Globe, Newspaper, Eye, Edit, MoreHorizontal, Calendar, Tag } from "lucide-react";
+import { Trash, FileText, Globe, Newspaper, Eye, Edit, MoreHorizontal, Calendar } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { getTagStyle } from "@/config/tagConfig";
 
 // 模拟数据
 const mockKnowledge = [
@@ -195,12 +195,15 @@ const KnowledgeList = ({ searchQuery, onSelectItem }: Props) => {
 
                   {/* 标签 */}
                   <div className="flex flex-wrap gap-2 mb-3">
-                    {item.tags.map((tag) => (
-                      <Badge key={tag} variant="secondary" className="text-xs">
-                        <Tag className="w-3 h-3 mr-1" />
-                        {tag}
-                      </Badge>
-                    ))}
+                    {item.tags.map((tag) => {
+                      const { icon: Icon, color, iconColor } = getTagStyle(tag);
+                      return (
+                        <Badge key={tag} variant="secondary" className={`text-xs font-medium ${color}`}>
+                          <Icon className={`w-3 h-3 mr-1.5 ${iconColor}`} />
+                          {tag}
+                        </Badge>
+                      );
+                    })}
                   </div>
 
                   {/* 底部信息 */}
