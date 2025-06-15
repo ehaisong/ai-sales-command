@@ -12,6 +12,7 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { SidebarTrigger } from '@/components/ui/sidebar';
 import { Search, Bell, HelpCircle, Share, ChevronDown, User, Settings, CreditCard } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const TopNavbar = () => {
   return (
@@ -67,9 +68,11 @@ const TopNavbar = () => {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-56">
-            <DropdownMenuItem>
-              <User className="mr-2 h-4 w-4" />
-              <span>个人资料</span>
+            <DropdownMenuItem asChild>
+              <Link to="/profile" className="flex items-center w-full">
+                <User className="mr-2 h-4 w-4" />
+                <span>个人资料</span>
+              </Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
               <CreditCard className="mr-2 h-4 w-4" />
