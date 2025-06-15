@@ -1,11 +1,10 @@
-
 import React, { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { User, Bot, Send, Upload, Image, Video, FileText, Sparkles, TrendingUp, Users, Target } from "lucide-react";
+import { User, Bot, Send, Upload, Sparkles } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 const initialMessages = [
@@ -15,13 +14,6 @@ const initialMessages = [
     content: "👋 我是您的社交媒体AI助手！可以帮您：\n• 📝 创作优质内容\n• 📊 分析发文策略\n• 🎯 优化投放效果\n• 📈 制定内容日历\n\n请告诉我您需要什么帮助？",
     timestamp: "10:00"
   },
-];
-
-const quickActions = [
-  { text: "帮我写一条LinkedIn产品介绍", icon: FileText, category: "content" },
-  { text: "分析当前发文数据表现", icon: TrendingUp, category: "analytics" },
-  { text: "制定下周内容发布计划", icon: Target, category: "strategy" },
-  { text: "如何提高粉丝互动率？", icon: Users, category: "engagement" },
 ];
 
 const SocialMediaAIChat = () => {
@@ -94,28 +86,6 @@ const SocialMediaAIChat = () => {
             <Sparkles className="w-3 h-3 mr-1" />
             专业版
           </Badge>
-        </div>
-      </div>
-
-      {/* Quick Actions */}
-      <div className="p-3 border-b border-gray-50">
-        <p className="text-xs text-gray-600 mb-2">快速操作:</p>
-        <div className="grid grid-cols-1 gap-2">
-          {quickActions.map((action, index) => {
-            const IconComponent = action.icon;
-            return (
-              <Button
-                key={index}
-                variant="ghost"
-                size="sm"
-                className="justify-start text-xs h-auto py-2 px-2"
-                onClick={() => handleSend(action.text)}
-              >
-                <IconComponent className="w-3 h-3 mr-2 flex-shrink-0" />
-                <span className="text-left line-clamp-1">{action.text}</span>
-              </Button>
-            );
-          })}
         </div>
       </div>
 
