@@ -132,14 +132,14 @@ const SocialMediaTabs: React.FC<SocialMediaTabsProps> = ({
           {allConnectedAccounts.length > 0 && (
             <div className="p-6 border rounded-lg bg-white">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">已连接账号</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="flex flex-wrap gap-4">
                 {allConnectedAccounts.map((account) => {
                   const Icon = platformIcons[account.platform];
                   const color = platformColors[account.platform as keyof typeof platformColors];
                   return (
                     <div 
                       key={account.accountId} 
-                      className="flex items-center justify-between p-3 border rounded-lg transition-shadow hover:shadow-md cursor-pointer" 
+                      className="flex-1 min-w-[300px] flex items-center justify-between p-3 border rounded-lg transition-shadow hover:shadow-md cursor-pointer" 
                       onClick={() => onPlatformChange(account.platform)}
                     >
                       <div className="flex items-center space-x-3">
