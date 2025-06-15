@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -99,19 +98,17 @@ const BrandProfilePage = () => {
   return (
     <div className="container mx-auto p-6 max-w-6xl">
       <div className="mb-6">
-        <div className="flex items-center gap-3 mb-2">
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => navigate('/ai-agent/knowledge')}
-            className="flex items-center gap-2"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            返回
-          </Button>
-          <h1 className="text-3xl font-bold">品牌资料</h1>
-        </div>
-        <p className="text-muted-foreground">管理您的品牌基本信息、联系方式和产品列表</p>
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => navigate('/ai-agent/knowledge')}
+          className="flex items-center gap-2 mb-4"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          返回
+        </Button>
+        <h1 className="text-3xl font-bold">品牌资料</h1>
+        <p className="text-muted-foreground mt-1">管理您的品牌基本信息、联系方式和产品列表</p>
       </div>
 
       <div className="space-y-6">
