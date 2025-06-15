@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -98,7 +97,7 @@ const SEOAIAssistant = () => {
   };
 
   return (
-    <Card className="h-[calc(100vh-8rem)] flex flex-col">
+    <Card className="max-h-[calc(100vh-8rem)] flex flex-col">
       <CardHeader className="pb-3">
         <CardTitle className="flex items-center gap-2 text-lg">
           <Bot className="w-5 h-5 text-blue-600" />
