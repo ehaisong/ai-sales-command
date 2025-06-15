@@ -35,9 +35,11 @@ const SocialMediaManagement = () => {
             </Card>
           </div>
           
-          {/* 右侧：AI对话助手 */}
+          {/* 右侧：AI对话助手 - 固定位置 */}
           <div className="lg:col-span-1">
-            <SocialMediaAIChat />
+            <div className="sticky top-6">
+              <SocialMediaAIChat />
+            </div>
           </div>
         </div>
       </div>
