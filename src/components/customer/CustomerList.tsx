@@ -82,24 +82,35 @@ const CustomerList: React.FC<CustomerListProps> = ({
     return 'bg-red-500';
   };
 
-  const getStatusBadge = (status: string) => {
-    const variants: Record<string, 'default' | 'secondary' | 'destructive' | 'outline'> = {
-      client: 'default',
-      prospect: 'secondary',
-      active: 'outline',
-      inactive: 'destructive'
+  const getStatusBadgeStyle = (status: string) => {
+    const styles: Record<string, string> = {
+      client: 'bg-green-100 text-green-800 border-green-200',
+      prospect: 'bg-orange-100 text-orange-800 border-orange-200', 
+      active: 'bg-blue-100 text-blue-800 border-blue-200',
+      inactive: 'bg-gray-100 text-gray-800 border-gray-200'
     };
-    return variants[status] || 'outline';
+    return styles[status] || 'bg-gray-100 text-gray-800 border-gray-200';
   };
 
   const getStatusText = (status: string) => {
     const texts: Record<string, string> = {
-      client: '签约客户',
-      prospect: '潜在客户',
-      active: '活跃',
-      inactive: '不活跃'
+      client: '已签约客户',
+      prospect: '谈判中客户',
+      active: '意向客户',
+      inactive: '冷客户'
     };
     return texts[status] || status;
+  };
+
+  const getDataSourceStyle = (dataSource: string) => {
+    const styles: Record<string, string> = {
+      LinkedIn: 'bg-blue-600 text-white',
+      Google: 'bg-blue-500 text-white',
+      Meta: 'bg-blue-700 text-white',
+      Manual: 'bg-gray-600 text-white',
+      Import: 'bg-purple-600 text-white'
+    };
+    return styles[dataSource] || 'bg-gray-500 text-white';
   };
 
   // 点击表头排序
@@ -163,9 +174,9 @@ const CustomerList: React.FC<CustomerListProps> = ({
                   <div>
                     <div className="font-medium">{customer.name}</div>
                     {customer.company && <div className="text-sm text-muted-foreground">{customer.company}</div>}
-                    <Badge variant={getStatusBadge(customer.status)} className="text-xs mt-1">
+                    <div className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold mt-1 ${getStatusBadgeStyle(customer.status)}`}>
                       {getStatusText(customer.status)}
-                    </Badge>
+                    </div>
                   </div>
                 </div>
               </TableCell>
@@ -190,7 +201,9 @@ const CustomerList: React.FC<CustomerListProps> = ({
               </TableCell>
               {/* 数据来源 */}
               <TableCell>
-                <Badge variant="outline">{customer.dataSource}</Badge>
+                <div className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold ${getDataSourceStyle(customer.dataSource)}`}>
+                  {customer.dataSource}
+                </div>
               </TableCell>
               {/* 评分 */}
               <TableCell>
