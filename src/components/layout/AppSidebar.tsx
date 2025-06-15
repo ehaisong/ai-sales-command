@@ -83,7 +83,7 @@ const menuItems = [
     items: [
       {
         title: "社交媒体",
-        url: "/brand/social",
+        url: "/brand/social-media",
       },
       {
         title: "SEO",
