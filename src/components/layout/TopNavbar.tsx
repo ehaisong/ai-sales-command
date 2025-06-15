@@ -62,7 +62,7 @@ const TopNavbar = () => {
               </div>
               <div className="text-left hidden md:block">
                 <div className="text-sm font-medium">张三</div>
-                <div className="text-xs text-muted-foreground">剩余积分: 1,280</div>
+                <div className="text-xs text-gray-500 dark:text-gray-400">剩余积分: 1,280</div>
               </div>
               <ChevronDown className="h-4 w-4" />
             </Button>
