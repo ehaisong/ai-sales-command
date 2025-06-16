@@ -38,15 +38,14 @@ const AIChat = ({
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    messagesEndRef.current?.scrollIntoView({
+      behavior: "smooth"
+    });
   };
-
   useEffect(() => {
     scrollToBottom();
   }, [messages, isTyping]);
-  
   const handleSend = (message?: string) => {
     const messageText = message || input.trim();
     if (!messageText) return;
@@ -84,21 +83,10 @@ const AIChat = ({
   };
   return <div className="flex flex-col">
       {/* 快捷提问 */}
-      <div className="p-3 border-b border-gray-50">
-        <p className="text-xs text-gray-600 mb-2">快速提问:</p>
-        <div className="grid grid-cols-1 gap-2">
-          {quickQuestions.map((question, index) => {
-          const IconComponent = question.icon;
-          return <Button key={index} variant="ghost" size="sm" className="justify-start text-xs h-auto py-2 px-2" onClick={() => handleSend(question.text)}>
-                <IconComponent className="w-3 h-3 mr-2 flex-shrink-0" />
-                <span className="text-left line-clamp-1">{question.text}</span>
-              </Button>;
-        })}
-        </div>
-      </div>
+      
 
       {/* 聊天消息区域 */}
-      <ScrollArea className="p-4">
+      <ScrollArea className="p-4 py-[10px] px-[10px]">
         <div className="space-y-4">
           {messages.map(msg => <div key={msg.id} className={`flex ${msg.sender === "user" ? "justify-end" : "justify-start"}`}>
               <div className={`flex items-start gap-3 max-w-[85%] ${msg.sender === "user" ? "flex-row-reverse" : "flex-row"}`}>
