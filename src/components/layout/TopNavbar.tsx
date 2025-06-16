@@ -11,20 +11,10 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Badge } from '@/components/ui/badge';
 import { SidebarTrigger } from '@/components/ui/sidebar';
-import { Search, Bell, HelpCircle, Share, ChevronDown, User, Settings, CreditCard, Heart, MessageCircle, Share2, Eye } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
+import { Search, Bell, HelpCircle, Share, ChevronDown, User, Settings, CreditCard } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const TopNavbar = () => {
-  const location = useLocation();
-  const isSocialMediaPage = location.pathname === '/brand/social-media';
-
-  const formatNumber = (num: number) => {
-    if (num >= 1000) {
-      return (num / 1000).toFixed(1) + 'k';
-    }
-    return num.toString();
-  };
-
   return (
     <header className="h-16 bg-white border-b border-border px-6 flex items-center justify-between w-full">
       {/* 左侧抽屉控制 */}
@@ -45,28 +35,6 @@ const TopNavbar = () => {
 
       {/* 右侧快捷操作 */}
       <div className="flex items-center space-x-3">
-        {/* 社交媒体页面的互动数据展示 */}
-        {isSocialMediaPage && (
-          <div className="flex items-center space-x-4 text-sm text-gray-600 border-l pl-4 mr-2">
-            <div className="flex items-center space-x-1">
-              <Heart className="w-4 h-4 text-red-500" />
-              <span>{formatNumber(2540)}</span>
-            </div>
-            <div className="flex items-center space-x-1">
-              <MessageCircle className="w-4 h-4 text-blue-500" />
-              <span>{formatNumber(186)}</span>
-            </div>
-            <div className="flex items-center space-x-1">
-              <Share2 className="w-4 h-4 text-green-500" />
-              <span>{formatNumber(92)}</span>
-            </div>
-            <div className="flex items-center space-x-1">
-              <Eye className="w-4 h-4 text-purple-500" />
-              <span>{formatNumber(15600)}</span>
-            </div>
-          </div>
-        )}
-
         {/* 通知 */}
         <Button variant="ghost" size="icon" className="relative">
           <Bell className="h-5 w-5" />
