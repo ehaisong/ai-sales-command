@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
@@ -174,9 +173,6 @@ const CustomerList: React.FC<CustomerListProps> = ({
                   <div>
                     <div className="font-medium">{customer.name}</div>
                     {customer.company && <div className="text-sm text-muted-foreground">{customer.company}</div>}
-                    <div className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold mt-1 ${getStatusBadgeStyle(customer.status)}`}>
-                      {getStatusText(customer.status)}
-                    </div>
                   </div>
                 </div>
               </TableCell>
