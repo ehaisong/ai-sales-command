@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -197,7 +196,7 @@ const SocialPostList: React.FC<SocialPostListProps> = ({ platform }) => {
                         variant="ghost"
                         className="h-auto rounded bg-blue-50 px-2 py-1 text-xs font-normal text-blue-600 hover:bg-blue-100 hover:text-blue-700"
                         onClick={(e) => {
-                          e.stopPropagation(); // 防止触发父级的handlePostClick
+                          e.stopPropagation();
                           console.log(`Filtering by tag: ${tag}`);
                         }}
                       >
@@ -205,29 +204,6 @@ const SocialPostList: React.FC<SocialPostListProps> = ({ platform }) => {
                       </Button>
                     ))}
                   </div>
-                </div>
-              )}
-
-              {post.status === 'published' && (
-                <div className="flex items-center space-x-4 text-sm text-gray-500 pt-3 border-t">
-                  <div className="flex items-center space-x-1">
-                    <Heart className="w-4 h-4" />
-                    <span>{formatNumber(post.engagement.likes)}</span>
-                  </div>
-                  <div className="flex items-center space-x-1">
-                    <MessageCircle className="w-4 h-4" />
-                    <span>{formatNumber(post.engagement.comments)}</span>
-                  </div>
-                  <div className="flex items-center space-x-1">
-                    <Share className="w-4 h-4" />
-                    <span>{formatNumber(post.engagement.shares)}</span>
-                  </div>
-                  {post.engagement.views && (
-                    <div className="flex items-center space-x-1">
-                      <Eye className="w-4 h-4" />
-                      <span>{formatNumber(post.engagement.views)}</span>
-                    </div>
-                  )}
                 </div>
               )}
             </div>
