@@ -1,6 +1,5 @@
 
 import React from 'react';
-import { Package, Cpu, Sparkles, Building, Tag } from 'lucide-react';
 
 export const tagCategories: { [key: string]: string } = {
   // Products
@@ -29,35 +28,23 @@ export const tagCategories: { [key: string]: string } = {
 
 export const categoryStyles: {
   [key: string]: {
-    icon: React.ElementType;
     color: string;
-    iconColor: string;
   }
 } = {
   product: {
-    icon: Package,
     color: 'border-blue-200 bg-blue-100 text-blue-800 hover:bg-blue-200',
-    iconColor: 'text-blue-600',
   },
   technology: {
-    icon: Cpu,
     color: 'border-purple-200 bg-purple-100 text-purple-800 hover:bg-purple-200',
-    iconColor: 'text-purple-600',
   },
   feature: {
-    icon: Sparkles,
     color: 'border-green-200 bg-green-100 text-green-800 hover:bg-green-200',
-    iconColor: 'text-green-600',
   },
   corporate: {
-    icon: Building,
     color: 'border-orange-200 bg-orange-100 text-orange-800 hover:bg-orange-200',
-    iconColor: 'text-orange-600',
   },
   default: {
-    icon: Tag,
     color: 'border-gray-200 bg-gray-100 text-gray-700 hover:bg-gray-200',
-    iconColor: 'text-gray-500',
   },
 };
 

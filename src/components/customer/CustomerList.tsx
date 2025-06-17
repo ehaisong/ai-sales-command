@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
@@ -282,18 +281,16 @@ const CustomerList: React.FC<CustomerListProps> = ({
                         <div className="flex flex-wrap gap-1">
                           {customer.tags.map((tag, index) => {
                             const tagStyle = getTagStyle(tag);
-                            const IconComponent = tagStyle.icon;
                             
                             return (
                               <div 
                                 key={index}
-                                className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs border transition-all duration-200 ${
+                                className={`inline-flex items-center px-2 py-1 rounded-full text-xs border transition-all duration-200 ${
                                   tagStyle.color
                                 } ${
                                   !customer.isActive ? 'opacity-50' : ''
                                 }`}
                               >
-                                <IconComponent className={`h-3 w-3 ${tagStyle.iconColor}`} />
                                 <span>{tag}</span>
                               </div>
                             );
