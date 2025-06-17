@@ -102,7 +102,7 @@ const TagCloud = () => {
       <div className="flex flex-wrap gap-3 mb-4">
         {displayTags.map((tag) => {
           const isSelected = selectedTags.includes(tag.name);
-          const { icon: Icon, color: categoryColor } = getTagStyle(tag.name);
+          const { color: categoryColor } = getTagStyle(tag.name);
           const finalColor = isSelected ? "bg-primary text-primary-foreground hover:bg-primary/80" : categoryColor;
 
           return (
@@ -112,7 +112,6 @@ const TagCloud = () => {
               onClick={() => handleTagClick(tag.name)}
             >
               <div className="flex items-center gap-1.5">
-                <Icon className="w-4 h-4" />
                 <span>{tag.name}</span>
                 <span className="text-xs opacity-75">({tag.count})</span>
                 {getTrendIcon(tag.trend)}

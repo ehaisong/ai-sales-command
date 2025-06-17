@@ -38,10 +38,9 @@ const KnowledgeDetailDialog = ({
         </div>
         <div className="flex flex-wrap gap-2">
           {knowledge.tags.map((tag: string) => {
-            const { icon: Icon, color, iconColor } = getTagStyle(tag);
+            const { color } = getTagStyle(tag);
             return (
               <Badge key={tag} variant="secondary" className={`text-xs font-medium ${color}`}>
-                <Icon className={`w-3 h-3 mr-1.5 ${iconColor}`} />
                 {tag}
               </Badge>
             );

@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -206,10 +205,9 @@ const KnowledgeList = ({ searchQuery, onSelectItem }: Props) => {
                   {/* 标签 */}
                   <div className="flex flex-wrap gap-2">
                     {item.tags.map((tag) => {
-                      const { icon: Icon, color, iconColor } = getTagStyle(tag);
+                      const { color } = getTagStyle(tag);
                       return (
                         <Badge key={tag} variant="secondary" className={`text-xs font-medium ${color}`}>
-                          <Icon className={`w-3 h-3 mr-1.5 ${iconColor}`} />
                           {tag}
                         </Badge>
                       );
