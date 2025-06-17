@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
@@ -7,6 +6,7 @@ import { Switch } from '@/components/ui/switch';
 import { ArrowUp, ArrowDown, Trash2, Building2, User } from 'lucide-react';
 import { Customer } from '@/types/customer';
 import DeleteConfirmDialog from './DeleteConfirmDialog';
+import SwitchConfirmDialog from './SwitchConfirmDialog';
 import ImportExportButtons from './ImportExportButtons';
 
 interface CustomerListProps {
@@ -48,6 +48,11 @@ const CustomerList: React.FC<CustomerListProps> = ({
     isOpen: boolean;
     customer: Customer | null;
   }>({ isOpen: false, customer: null });
+  const [switchDialog, setSwitchDialog] = useState<{
+    isOpen: boolean;
+    customer: Customer | null;
+    isActivating: boolean;
+  }>({ isOpen: false, customer: null, isActivating: false });
 
   // Group customers by type
   const groupedCustomers = useMemo(() => {
@@ -121,7 +126,18 @@ const CustomerList: React.FC<CustomerListProps> = ({
   };
 
   const handleToggleActive = (customer: Customer) => {
-    console.log(`Toggle active status for customer ${customer.name}: ${!customer.isActive}`);
+    setSwitchDialog({
+      isOpen: true,
+      customer,
+      isActivating: !customer.isActive
+    });
+  };
+
+  const handleSwitchConfirm = () => {
+    if (switchDialog.customer) {
+      console.log(`Toggle active status for customer ${switchDialog.customer.name}: ${switchDialog.isActivating}`);
+      setSwitchDialog({ isOpen: false, customer: null, isActivating: false });
+    }
   };
 
   const handleDeleteClick = (customer: Customer) => {
@@ -132,6 +148,13 @@ const CustomerList: React.FC<CustomerListProps> = ({
     if (deleteDialog.customer) {
       console.log(`Delete customer: ${deleteDialog.customer.name}`);
       setDeleteDialog({ isOpen: false, customer: null });
+    }
+  };
+
+  const handleRowClick = (customer: Customer) => {
+    // Only allow selection if customer is active
+    if (customer.isActive) {
+      onSelectCustomer(customer);
     }
   };
 
@@ -188,30 +211,29 @@ const CustomerList: React.FC<CustomerListProps> = ({
                 {groupCustomers.map((customer) => (
                   <TableRow
                     key={customer.id}
-                    className={`cursor-pointer hover:bg-gray-50 transition-all duration-200 ${
-                      selectedCustomer?.id === customer.id ? 'bg-blue-50' : ''
+                    className={`transition-all duration-200 ${
+                      customer.isActive 
+                        ? 'cursor-pointer hover:bg-gray-50' 
+                        : 'cursor-not-allowed'
+                    } ${
+                      selectedCustomer?.id === customer.id && customer.isActive ? 'bg-blue-50' : ''
                     } ${
                       !customer.isActive ? 'opacity-50 bg-gray-50' : ''
                     }`}
-                    onClick={() => onSelectCustomer(customer)}
+                    onClick={() => handleRowClick(customer)}
                   >
-                    {/* Enhanced Status Switch */}
+                    {/* Status Switch (removed dot) */}
                     <TableCell>
-                      <div className="flex items-center">
-                        <Switch
-                          checked={customer.isActive}
-                          onCheckedChange={() => handleToggleActive(customer)}
-                          onClick={(e) => e.stopPropagation()}
-                          className={`transition-all duration-300 ${
-                            customer.isActive 
-                              ? 'data-[state=checked]:bg-green-500 shadow-green-200 shadow-md' 
-                              : 'data-[state=unchecked]:bg-red-200'
-                          }`}
-                        />
-                        <div className={`ml-2 w-2 h-2 rounded-full transition-colors duration-300 ${
-                          customer.isActive ? 'bg-green-500' : 'bg-red-400'
-                        }`} />
-                      </div>
+                      <Switch
+                        checked={customer.isActive}
+                        onCheckedChange={() => handleToggleActive(customer)}
+                        onClick={(e) => e.stopPropagation()}
+                        className={`transition-all duration-300 ${
+                          customer.isActive 
+                            ? 'data-[state=checked]:bg-green-500 shadow-green-200 shadow-md' 
+                            : 'data-[state=unchecked]:bg-red-200'
+                        }`}
+                      />
                     </TableCell>
                     
                     {/* Customer Name */}
@@ -315,8 +337,9 @@ const CustomerList: React.FC<CustomerListProps> = ({
                           e.stopPropagation();
                           handleDeleteClick(customer);
                         }}
+                        disabled={!customer.isActive}
                         className={`text-red-600 hover:text-red-700 hover:bg-red-50 transition-all duration-200 ${
-                          !customer.isActive ? 'opacity-50' : ''
+                          !customer.isActive ? 'opacity-30 cursor-not-allowed' : ''
                         }`}
                       >
                         <Trash2 className="h-4 w-4" />
@@ -330,11 +353,20 @@ const CustomerList: React.FC<CustomerListProps> = ({
         </Table>
       </div>
 
+      {/* Dialogs */}
       <DeleteConfirmDialog
         isOpen={deleteDialog.isOpen}
         onClose={() => setDeleteDialog({ isOpen: false, customer: null })}
         onConfirm={handleDeleteConfirm}
         customer={deleteDialog.customer}
+      />
+
+      <SwitchConfirmDialog
+        isOpen={switchDialog.isOpen}
+        onClose={() => setSwitchDialog({ isOpen: false, customer: null, isActivating: false })}
+        onConfirm={handleSwitchConfirm}
+        customer={switchDialog.customer}
+        isActivating={switchDialog.isActivating}
       />
     </div>
   );
