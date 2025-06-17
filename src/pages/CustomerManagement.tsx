@@ -1,7 +1,8 @@
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import CustomerList from '@/components/customer/CustomerList';
+import CustomerListTransition from '@/components/customer/CustomerListTransition';
 import CustomerSearchBar from '@/components/customer/CustomerSearchBar';
 import CustomerFilters from '@/components/customer/CustomerFilters';
 import CustomerAIAssistant from '@/components/customer/CustomerAIAssistant';
@@ -12,6 +13,8 @@ import { mockCustomers } from '@/components/customer/mockData';
 const CustomerManagement = () => {
   const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(null);
   const [activeTab, setActiveTab] = useState<'individual' | 'company'>('individual');
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [transitionDirection, setTransitionDirection] = useState<'left' | 'right'>('right');
   const [filters, setFilters] = useState<FilterType>({
     search: '',
     type: 'all',
@@ -46,6 +49,23 @@ const CustomerManagement = () => {
       return true;
     });
   }, [mockCustomers, filters, activeTab]);
+
+  const handleTabChange = useCallback((newTab: 'individual' | 'company') => {
+    if (newTab === activeTab) return;
+    
+    setIsTransitioning(true);
+    setTransitionDirection(newTab === 'company' ? 'right' : 'left');
+    
+    // Clear selected customer during transition
+    setSelectedCustomer(null);
+    
+    setTimeout(() => {
+      setActiveTab(newTab);
+      setTimeout(() => {
+        setIsTransitioning(false);
+      }, 100);
+    }, 250);
+  }, [activeTab]);
 
   return (
     <div className="p-6 space-y-6 transition-all duration-300 bg-monday-gray-50 min-h-screen">
@@ -82,25 +102,45 @@ const CustomerManagement = () => {
               </div>
               <Tabs 
                 value={activeTab} 
-                onValueChange={(value) => setActiveTab(value as 'individual' | 'company')}
+                onValueChange={handleTabChange}
                 className="transition-all duration-500"
               >
                 <TabsList className="grid w-full grid-cols-2 transition-all duration-500 bg-monday-gray-100">
-                  <TabsTrigger value="individual" className="transition-all duration-500 data-[state=active]:bg-white data-[state=active]:text-monday-orange data-[state=active]:shadow-monday/20">个人客户</TabsTrigger>
-                  <TabsTrigger value="company" className="transition-all duration-500 data-[state=active]:bg-white data-[state=active]:text-monday-orange data-[state=active]:shadow-monday/20">企业客户</TabsTrigger>
+                  <TabsTrigger 
+                    value="individual" 
+                    className={`transition-all duration-500 data-[state=active]:bg-white data-[state=active]:text-monday-blue data-[state=active]:shadow-monday/20 ${
+                      isTransitioning ? 'pointer-events-none opacity-70' : ''
+                    }`}
+                    disabled={isTransitioning}
+                  >
+                    个人客户
+                  </TabsTrigger>
+                  <TabsTrigger 
+                    value="company" 
+                    className={`transition-all duration-500 data-[state=active]:bg-white data-[state=active]:text-monday-blue data-[state=active]:shadow-monday/20 ${
+                      isTransitioning ? 'pointer-events-none opacity-70' : ''
+                    }`}
+                    disabled={isTransitioning}
+                  >
+                    企业客户
+                  </TabsTrigger>
                 </TabsList>
               </Tabs>
             </div>
           </div>
 
-          {/* Customer List with integrated toolbar */}
-          <div className="transition-all duration-500">
+          {/* Customer List with Transition */}
+          <CustomerListTransition
+            customers={filteredCustomers}
+            isTransitioning={isTransitioning}
+            transitionDirection={transitionDirection}
+          >
             <CustomerList 
               customers={filteredCustomers}
               onSelectCustomer={setSelectedCustomer}
               selectedCustomer={selectedCustomer}
             />
-          </div>
+          </CustomerListTransition>
         </div>
 
         {/* AI Assistant Panel */}

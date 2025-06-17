@@ -1,3 +1,4 @@
+
 import React, { useState, useMemo } from 'react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
@@ -180,12 +181,12 @@ const CustomerList: React.FC<CustomerListProps> = ({
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 animate-fade-in">
       {/* Toolbar with Import/Export */}
-      <div className="flex items-center justify-between bg-white border border-gray-200 rounded-lg p-4">
+      <div className="flex items-center justify-between bg-white border border-gray-200 rounded-lg p-4 transition-all duration-300 hover:shadow-md">
         <div className="flex items-center space-x-4">
           <h3 className="text-lg font-semibold text-gray-900">客户列表</h3>
-          <Badge variant="outline" className="text-sm">
+          <Badge variant="outline" className="text-sm transition-all duration-200 hover:bg-monday-blue/10">
             总计: {localCustomers.length} 位客户
           </Badge>
         </div>
@@ -193,7 +194,7 @@ const CustomerList: React.FC<CustomerListProps> = ({
       </div>
 
       {/* Customer Table */}
-      <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
+      <div className="bg-white border border-gray-200 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-md">
         <Table>
           <TableHeader>
             <TableRow className="bg-gray-50">
@@ -201,7 +202,7 @@ const CustomerList: React.FC<CustomerListProps> = ({
                 col.sortable ? (
                   <TableHead
                     key={col.label}
-                    className="cursor-pointer select-none font-medium text-gray-700"
+                    className="cursor-pointer select-none font-medium text-gray-700 transition-colors duration-200 hover:text-monday-blue"
                     onClick={() => handleSort(col.key as SortField)}
                   >
                     <span className="inline-flex items-center">
@@ -219,7 +220,7 @@ const CustomerList: React.FC<CustomerListProps> = ({
             {Object.entries(groupedCustomers).map(([groupName, groupCustomers]) => (
               <React.Fragment key={groupName}>
                 {/* Group Header */}
-                <TableRow className="bg-gray-100 hover:bg-gray-100">
+                <TableRow className="bg-gray-100 hover:bg-gray-100 animate-fade-in">
                   <TableCell colSpan={columns.length} className="font-semibold text-gray-800 py-3">
                     <div className="flex items-center space-x-2">
                       {groupName === '企业客户' ? <Building2 className="h-4 w-4" /> : <User className="h-4 w-4" />}
@@ -229,21 +230,22 @@ const CustomerList: React.FC<CustomerListProps> = ({
                 </TableRow>
                 
                 {/* Group Customers */}
-                {groupCustomers.map((customer) => {
+                {groupCustomers.map((customer, index) => {
                   const tagStyle = getTagStyle(customer.tags[0] || '');
                   
                   return (
                     <TableRow
                       key={customer.id}
-                      className={`transition-all duration-200 ${
+                      className={`transition-all duration-300 animate-fade-in ${
                         customer.isActive 
-                          ? 'cursor-pointer hover:bg-gray-50' 
+                          ? 'cursor-pointer hover:bg-monday-blue/5 hover:shadow-sm' 
                           : 'cursor-not-allowed'
                       } ${
-                        selectedCustomer?.id === customer.id && customer.isActive ? 'bg-blue-50' : ''
+                        selectedCustomer?.id === customer.id && customer.isActive ? 'bg-monday-blue/10 shadow-md' : ''
                       } ${
                         !customer.isActive ? 'opacity-50 bg-gray-50' : ''
                       }`}
+                      style={{ animationDelay: `${index * 50}ms` }}
                       onClick={() => handleRowClick(customer)}
                     >
                       {/* Status Switch */}
@@ -285,7 +287,7 @@ const CustomerList: React.FC<CustomerListProps> = ({
                             return (
                               <div 
                                 key={index}
-                                className={`inline-flex items-center px-2 py-1 rounded-full text-xs border transition-all duration-200 ${
+                                className={`inline-flex items-center px-2 py-1 rounded-full text-xs border transition-all duration-200 hover:scale-105 ${
                                   tagStyle.color
                                 } ${
                                   !customer.isActive ? 'opacity-50' : ''
@@ -325,7 +327,7 @@ const CustomerList: React.FC<CustomerListProps> = ({
                       
                       {/* Data Source */}
                       <TableCell>
-                        <div className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold transition-all duration-200 ${
+                        <div className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold transition-all duration-200 hover:scale-105 ${
                           getDataSourceStyle(customer.dataSource)
                         } ${
                           !customer.isActive ? 'opacity-60' : ''
@@ -367,7 +369,7 @@ const CustomerList: React.FC<CustomerListProps> = ({
                             handleDeleteClick(customer);
                           }}
                           disabled={!customer.isActive}
-                          className={`text-red-600 hover:text-red-700 hover:bg-red-50 transition-all duration-200 ${
+                          className={`text-red-600 hover:text-red-700 hover:bg-red-50 transition-all duration-200 hover:scale-105 ${
                             !customer.isActive ? 'opacity-30 cursor-not-allowed' : ''
                           }`}
                         >
