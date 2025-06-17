@@ -4,45 +4,40 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Plus } from 'lucide-react';
-import { Todo } from '@/types/todo';
+import { Plus, Loader2 } from 'lucide-react';
+import { useTodos } from '@/hooks/useTodos';
 import TodoItem from './TodoItem';
 
 const TodoList = () => {
-  const [todos, setTodos] = useState<Todo[]>([]);
   const [newTodo, setNewTodo] = useState('');
+  const { todos, loading, addTodo, toggleTodo, deleteTodo } = useTodos();
 
-  const addTodo = () => {
+  const handleAddTodo = async () => {
     if (newTodo.trim()) {
-      const todo: Todo = {
-        id: Date.now().toString(),
-        text: newTodo.trim(),
-        completed: false,
-        createdAt: new Date(),
-      };
-      setTodos([...todos, todo]);
+      await addTodo(newTodo.trim());
       setNewTodo('');
     }
   };
 
-  const toggleTodo = (id: string) => {
-    setTodos(todos.map(todo =>
-      todo.id === id ? { ...todo, completed: !todo.completed } : todo
-    ));
-  };
-
-  const deleteTodo = (id: string) => {
-    setTodos(todos.filter(todo => todo.id !== id));
-  };
-
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
-      addTodo();
+      handleAddTodo();
     }
   };
 
   const completedCount = todos.filter(todo => todo.completed).length;
   const totalCount = todos.length;
+
+  if (loading) {
+    return (
+      <Card className="w-full max-w-2xl mx-auto">
+        <CardContent className="flex items-center justify-center py-8">
+          <Loader2 className="h-8 w-8 animate-spin" />
+          <span className="ml-2">加载中...</span>
+        </CardContent>
+      </Card>
+    );
+  }
 
   return (
     <Card className="w-full max-w-2xl mx-auto">
@@ -69,7 +64,7 @@ const TodoList = () => {
               onKeyPress={handleKeyPress}
             />
           </div>
-          <Button onClick={addTodo} disabled={!newTodo.trim()}>
+          <Button onClick={handleAddTodo} disabled={!newTodo.trim()}>
             <Plus className="h-4 w-4" />
           </Button>
         </div>
