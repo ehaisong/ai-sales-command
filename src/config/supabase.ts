@@ -1,3 +1,3 @@
 
-export const SUPABASE_URL = 'YOUR_SUPABASE_PROJECT_URL';
-export const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+export const SUPABASE_URL = 'https://vgsykwmiifeisfjxhtlp.supabase.co';
+export const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZnc3lrd21paWZlaXNmanhodGxwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTAxMzAxNzMsImV4cCI6MjA2NTcwNjE3M30.Mhbsgh1qwM0xpHdCMgMFeOVJ0DWd9dHU1ve2s10yBSQ';
