@@ -3,7 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Monday.com inspired theme colors */
+/* Blue-purple inspired theme colors */
 
 @layer base {
   :root {
@@ -16,7 +16,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 220 15% 25%;
 
-    --primary: 23 100% 65%;  /* #FF6B47 Monday.com orange */
+    --primary: 240 100% 70%;  /* #6C6CFF Blue-purple */
     --primary-foreground: 0 0% 100%;
 
     --secondary: 220 15% 97%;  /* #F7F8FA Light gray background */
@@ -25,26 +25,26 @@
     --muted: 220 15% 97%;
     --muted-foreground: 220 10% 50%;
 
-    --accent: 14 100% 75%;  /* #FFB59A Lighter orange accent */
-    --accent-foreground: 220 15% 25%;
+    --accent: 245 83% 68%;  /* #7B68EE Medium slate blue accent */
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
     --border: 220 13% 91%;
     --input: 220 13% 91%;
-    --ring: 23 100% 65%;
+    --ring: 240 100% 70%;
 
     --radius: 0.5rem;
 
     --sidebar-background: 220 15% 97%;
     --sidebar-foreground: 220 15% 25%;
-    --sidebar-primary: 23 100% 65%;
+    --sidebar-primary: 240 100% 70%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 220 15% 97%;
     --sidebar-accent-foreground: 220 15% 25%;
     --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 23 100% 65%;
+    --sidebar-ring: 240 100% 70%;
   }
 
   .dark {
@@ -57,7 +57,7 @@
     --popover: 220 15% 10%;
     --popover-foreground: 220 15% 95%;
 
-    --primary: 23 100% 65%;
+    --primary: 240 100% 70%;
     --primary-foreground: 220 15% 7%;
 
     --secondary: 220 15% 12%;
@@ -66,7 +66,7 @@
     --muted: 220 15% 12%;
     --muted-foreground: 220 10% 65%;
 
-    --accent: 14 100% 75%;
+    --accent: 245 83% 68%;
     --accent-foreground: 220 15% 7%;
 
     --destructive: 0 62.8% 30.6%;
@@ -74,16 +74,16 @@
 
     --border: 220 15% 15%;
     --input: 220 15% 15%;
-    --ring: 23 100% 65%;
+    --ring: 240 100% 70%;
     
     --sidebar-background: 220 15% 5%;
     --sidebar-foreground: 220 15% 95%;
-    --sidebar-primary: 23 100% 65%;
+    --sidebar-primary: 240 100% 70%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 220 15% 12%;
     --sidebar-accent-foreground: 220 15% 95%;
     --sidebar-border: 220 15% 15%;
-    --sidebar-ring: 23 100% 65%;
+    --sidebar-ring: 240 100% 70%;
   }
 }
 
@@ -98,7 +98,7 @@
   }
 }
 
-/* Enhanced Monday.com style animations */
+/* Enhanced blue-purple style animations */
 @layer components {
   .card-hover {
     @apply transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 hover:shadow-primary/10;
@@ -127,16 +127,16 @@
     }
   }
   
-  @keyframes pulse-orange {
+  @keyframes pulse-blue {
     0%, 100% {
-      box-shadow: 0 0 0 0 rgba(255, 107, 71, 0.7);
+      box-shadow: 0 0 0 0 rgba(108, 108, 255, 0.7);
     }
     50% {
-      box-shadow: 0 0 0 10px rgba(255, 107, 71, 0);
+      box-shadow: 0 0 0 10px rgba(108, 108, 255, 0);
     }
   }
   
-  .pulse-orange {
-    animation: pulse-orange 2s infinite;
+  .pulse-blue {
+    animation: pulse-blue 2s infinite;
   }
 }

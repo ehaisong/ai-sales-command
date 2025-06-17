@@ -66,14 +66,14 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Monday.com specific colors
+				// Blue-purple specific colors
 				monday: {
-					orange: '#FF6B47',
-					'orange-light': '#FFB59A',
-					'orange-dark': '#E55A3B',
-					blue: '#0073EA',
-					'blue-light': '#4D9EFF',
-					'blue-dark': '#0056B3',
+					blue: '#6C6CFF',
+					'blue-light': '#8A8AFF',
+					'blue-dark': '#7B68EE',
+					purple: '#7B68EE',
+					'purple-light': '#9B8EF0',
+					'purple-dark': '#6A5ACD',
 					gray: {
 						50: '#F7F8FA',
 						100: '#F1F3F6',
@@ -140,12 +140,12 @@ export default {
 						'animation-timing-function': 'cubic-bezier(0, 0, 0.2, 1)'
 					}
 				},
-				'pulse-orange': {
+				'pulse-blue': {
 					'0%, 100%': {
-						'box-shadow': '0 0 0 0 rgba(255, 107, 71, 0.7)'
+						'box-shadow': '0 0 0 0 rgba(108, 108, 255, 0.7)'
 					},
 					'50%': {
-						'box-shadow': '0 0 0 10px rgba(255, 107, 71, 0)'
+						'box-shadow': '0 0 0 10px rgba(108, 108, 255, 0)'
 					}
 				}
 			},
@@ -155,11 +155,11 @@ export default {
 				'fade-in': 'fade-in 0.3s ease-out',
 				'scale-in': 'scale-in 0.2s ease-out',
 				'bounce-gentle': 'bounce-gentle 1s infinite',
-				'pulse-orange': 'pulse-orange 2s infinite'
+				'pulse-blue': 'pulse-blue 2s infinite'
 			},
 			boxShadow: {
-				'monday': '0 4px 20px rgba(255, 107, 71, 0.15)',
-				'monday-hover': '0 8px 25px rgba(255, 107, 71, 0.25)',
+				'monday': '0 4px 20px rgba(108, 108, 255, 0.15)',
+				'monday-hover': '0 8px 25px rgba(108, 108, 255, 0.25)',
 			}
 		}
 	},
