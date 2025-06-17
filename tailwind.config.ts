@@ -20,6 +20,7 @@ export default {
 		},
 		extend: {
 			fontFamily: {
+				'roboto': ['Roboto', 'sans-serif'],
 				'din': ['DIN Next', 'sans-serif'],
 			},
 			colors: {
@@ -65,6 +66,20 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// Monday.com 特色颜色
+				monday: {
+					orange: 'hsl(var(--monday-orange))',
+					blue: 'hsl(var(--monday-blue))',
+					green: 'hsl(var(--monday-green))',
+					purple: 'hsl(var(--monday-purple))',
+					gray: {
+						1: 'hsl(var(--monday-gray-1))',
+						2: 'hsl(var(--monday-gray-2))',
+						3: 'hsl(var(--monday-gray-3))',
+						4: 'hsl(var(--monday-gray-4))',
+						5: 'hsl(var(--monday-gray-5))',
+					}
 				}
 			},
 			borderRadius: {
@@ -108,13 +123,49 @@ export default {
 						transform: 'scale(1)',
 						opacity: '1'
 					}
+				},
+				'slide-in-from-left': {
+					'0%': {
+						transform: 'translateX(-100%)',
+						opacity: '0'
+					},
+					'100%': {
+						transform: 'translateX(0)',
+						opacity: '1'
+					}
+				},
+				'bounce-in': {
+					'0%': {
+						transform: 'scale(0.3)',
+						opacity: '0'
+					},
+					'50%': {
+						transform: 'scale(1.05)',
+						opacity: '0.8'
+					},
+					'70%': {
+						transform: 'scale(0.9)',
+						opacity: '0.9'
+					},
+					'100%': {
+						transform: 'scale(1)',
+						opacity: '1'
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'fade-in': 'fade-in 0.3s ease-out',
-				'scale-in': 'scale-in 0.2s ease-out'
+				'scale-in': 'scale-in 0.2s ease-out',
+				'slide-in-from-left': 'slide-in-from-left 0.3s ease-out',
+				'bounce-in': 'bounce-in 0.6s ease-out'
+			},
+			boxShadow: {
+				'monday': '0 2px 8px rgba(0, 0, 0, 0.08)',
+				'monday-hover': '0 4px 16px rgba(0, 0, 0, 0.12)',
+				'monday-orange': '0 4px 12px rgba(255, 107, 53, 0.25)',
+				'monday-blue': '0 4px 12px rgba(0, 115, 234, 0.25)',
 			}
 		}
 	},

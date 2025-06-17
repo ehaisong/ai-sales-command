@@ -48,18 +48,18 @@ const CustomerManagement = () => {
   }, [mockCustomers, filters, activeTab]);
 
   return (
-    <div className="p-6 space-y-6 transition-all duration-300">
-      {/* Header */}
+    <div className="p-6 space-y-6 bg-monday-gray-1 min-h-screen">
+      {/* Header with Monday.com styling */}
       <div className="flex justify-between items-center animate-fade-in">
         <div>
-          <h1 className="text-3xl font-bold">客户管理</h1>
-          <p className="text-muted-foreground">
+          <h1 className="text-3xl font-bold text-monday-gray-5">客户管理</h1>
+          <p className="text-monday-gray-3 mt-1">
             通过智能过滤器和预算洞察跨平台寻找和跟踪客户
           </p>
         </div>
       </div>
 
-      {/* Analytics Overview */}
+      {/* Analytics Overview with Monday.com card style */}
       <div className="animate-fade-in" style={{ animationDelay: '0.1s' }}>
         <CustomerAnalytics customers={mockCustomers} />
       </div>
@@ -67,8 +67,8 @@ const CustomerManagement = () => {
       <div className="grid grid-cols-12 gap-6 animate-fade-in" style={{ animationDelay: '0.2s' }}>
         {/* Main Content */}
         <div className="col-span-8">
-          {/* Toolbar */}
-          <div className="bg-white border border-gray-200 rounded-lg mb-4 p-4 transition-all duration-200 hover:shadow-md">
+          {/* Toolbar with Monday.com styling */}
+          <div className="monday-card mb-4 p-4 bg-white border-monday-gray-2">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-4">
                 <CustomerSearchBar 
@@ -83,18 +83,28 @@ const CustomerManagement = () => {
               <Tabs 
                 value={activeTab} 
                 onValueChange={(value) => setActiveTab(value as 'individual' | 'company')}
-                className="transition-all duration-500"
+                className="transition-all duration-300"
               >
-                <TabsList className="grid w-full grid-cols-2 transition-all duration-500">
-                  <TabsTrigger value="individual" className="transition-all duration-500">个人客户</TabsTrigger>
-                  <TabsTrigger value="company" className="transition-all duration-500">企业客户</TabsTrigger>
+                <TabsList className="grid w-full grid-cols-2 bg-monday-gray-1 border border-monday-gray-2">
+                  <TabsTrigger 
+                    value="individual" 
+                    className="data-[state=active]:bg-monday-orange data-[state=active]:text-white hover:bg-monday-orange/10 hover:text-monday-orange transition-all duration-300"
+                  >
+                    个人客户
+                  </TabsTrigger>
+                  <TabsTrigger 
+                    value="company" 
+                    className="data-[state=active]:bg-monday-orange data-[state=active]:text-white hover:bg-monday-orange/10 hover:text-monday-orange transition-all duration-300"
+                  >
+                    企业客户
+                  </TabsTrigger>
                 </TabsList>
               </Tabs>
             </div>
           </div>
 
-          {/* Customer List with integrated toolbar */}
-          <div className="transition-all duration-500">
+          {/* Customer List with Monday.com styling */}
+          <div className="transition-all duration-300">
             <CustomerList 
               customers={filteredCustomers}
               onSelectCustomer={setSelectedCustomer}
@@ -103,8 +113,8 @@ const CustomerManagement = () => {
           </div>
         </div>
 
-        {/* AI Assistant Panel */}
-        <div className="col-span-4 transition-all duration-300">
+        {/* AI Assistant Panel with Monday.com styling */}
+        <div className="col-span-4">
           <CustomerAIAssistant customer={selectedCustomer} />
         </div>
       </div>
