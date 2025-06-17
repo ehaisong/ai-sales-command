@@ -93,10 +93,10 @@ const KnowledgeTable = ({ data, selectedItems, onSelectItem, onSelectAll, onItem
   const someSelected = selectedItems.length > 0 && selectedItems.length < data.length;
 
   return (
-    <div className="rounded-md border">
+    <div className="bg-white rounded-lg border shadow-sm">
       <Table>
         <TableHeader>
-          <TableRow>
+          <TableRow className="hover:bg-gray-50/50">
             <TableHead className="w-12">
               <input
                 type="checkbox"
@@ -114,7 +114,7 @@ const KnowledgeTable = ({ data, selectedItems, onSelectItem, onSelectAll, onItem
                 variant="ghost"
                 size="sm"
                 onClick={() => handleSort('title')}
-                className="h-auto p-0 font-medium text-left justify-start"
+                className="h-auto p-0 font-medium text-left justify-start hover:bg-primary/10 hover:text-primary transition-colors duration-200"
               >
                 标题
                 {getSortIcon('title')}
@@ -126,7 +126,7 @@ const KnowledgeTable = ({ data, selectedItems, onSelectItem, onSelectAll, onItem
                 variant="ghost"
                 size="sm"
                 onClick={() => handleSort('updatedAt')}
-                className="h-auto p-0 font-medium text-left justify-start"
+                className="h-auto p-0 font-medium text-left justify-start hover:bg-primary/10 hover:text-primary transition-colors duration-200"
               >
                 更新时间
                 {getSortIcon('updatedAt')}
@@ -137,7 +137,7 @@ const KnowledgeTable = ({ data, selectedItems, onSelectItem, onSelectAll, onItem
                 variant="ghost"
                 size="sm"
                 onClick={() => handleSort('viewCount')}
-                className="h-auto p-0 font-medium text-left justify-start"
+                className="h-auto p-0 font-medium text-left justify-start hover:bg-primary/10 hover:text-primary transition-colors duration-200"
               >
                 查看次数
                 {getSortIcon('viewCount')}
@@ -148,7 +148,7 @@ const KnowledgeTable = ({ data, selectedItems, onSelectItem, onSelectAll, onItem
                 variant="ghost"
                 size="sm"
                 onClick={() => handleSort('confidence')}
-                className="h-auto p-0 font-medium text-left justify-start"
+                className="h-auto p-0 font-medium text-left justify-start hover:bg-primary/10 hover:text-primary transition-colors duration-200"
               >
                 置信度
                 {getSortIcon('confidence')}

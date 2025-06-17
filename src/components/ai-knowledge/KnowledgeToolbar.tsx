@@ -35,81 +35,83 @@ const KnowledgeToolbar = ({
   onDeleteSelected
 }: Props) => {
   return (
-    <div className="flex flex-col sm:flex-row gap-4 mb-6">
-      {/* 左侧搜索和统计 */}
-      <div className="flex-1 space-y-3 sm:space-y-0">
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-          <Input
-            placeholder="搜索知识库内容..."
-            value={searchQuery}
-            onChange={(e) => onSearchChange(e.target.value)}
-            className="pl-10"
-          />
+    <div className="bg-white rounded-lg p-4 shadow-sm border mb-6">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+        {/* 左侧搜索和统计 */}
+        <div className="flex-1 space-y-3 sm:space-y-0 w-full sm:w-auto">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+            <Input
+              placeholder="搜索知识库内容..."
+              value={searchQuery}
+              onChange={(e) => onSearchChange(e.target.value)}
+              className="pl-10"
+            />
+          </div>
+          <div className="flex items-center gap-2 text-sm text-gray-600">
+            <span>共 {totalCount} 条记录</span>
+            {activeTab !== 'all' && <Badge variant="outline" className="text-xs">#{activeTab}</Badge>}
+            {searchQuery && <Badge variant="outline" className="text-xs">搜索: "{searchQuery}"</Badge>}
+            {selectedCount > 0 && (
+              <Badge variant="secondary" className="text-xs">
+                已选择 {selectedCount} 项
+              </Badge>
+            )}
+          </div>
         </div>
-        <div className="flex items-center gap-2 text-sm text-gray-600">
-          <span>共 {totalCount} 条记录</span>
-          {activeTab !== 'all' && <Badge variant="outline" className="text-xs">#{activeTab}</Badge>}
-          {searchQuery && <Badge variant="outline" className="text-xs">搜索: "{searchQuery}"</Badge>}
+
+        {/* 右侧操作按钮 */}
+        <div className="flex items-center gap-2 flex-shrink-0">
+          {/* 视图切换 */}
+          <div className="flex items-center border rounded-lg">
+            <Button
+              variant={viewMode === 'table' ? 'default' : 'ghost'}
+              size="sm"
+              onClick={() => onViewModeChange('table')}
+              className="rounded-r-none border-r"
+            >
+              <List className="w-4 h-4" />
+            </Button>
+            <Button
+              variant={viewMode === 'card' ? 'default' : 'ghost'}
+              size="sm"
+              onClick={() => onViewModeChange('card')}
+              className="rounded-l-none"
+            >
+              <Grid className="w-4 h-4" />
+            </Button>
+          </div>
+
+          {/* 批量操作 */}
           {selectedCount > 0 && (
-            <Badge variant="secondary" className="text-xs">
-              已选择 {selectedCount} 项
-            </Badge>
-          )}
-        </div>
-      </div>
-
-      {/* 右侧操作按钮 */}
-      <div className="flex items-center gap-2">
-        {/* 视图切换 */}
-        <div className="flex items-center border rounded-lg">
-          <Button
-            variant={viewMode === 'table' ? 'default' : 'ghost'}
-            size="sm"
-            onClick={() => onViewModeChange('table')}
-            className="rounded-r-none border-r"
-          >
-            <List className="w-4 h-4" />
-          </Button>
-          <Button
-            variant={viewMode === 'card' ? 'default' : 'ghost'}
-            size="sm"
-            onClick={() => onViewModeChange('card')}
-            className="rounded-l-none"
-          >
-            <Grid className="w-4 h-4" />
-          </Button>
-        </div>
-
-        {/* 批量操作 */}
-        {selectedCount > 0 && (
-          <Button
-            size="sm"
-            variant="destructive"
-            onClick={onDeleteSelected}
-          >
-            <Trash className="w-4 h-4 mr-2" />
-            删除 ({selectedCount})
-          </Button>
-        )}
-
-        {/* 工具按钮 */}
-        <div className="flex items-center gap-1">
-          {onRefresh && (
-            <Button variant="outline" size="sm" onClick={onRefresh}>
-              <RefreshCw className="w-4 h-4" />
+            <Button
+              size="sm"
+              variant="destructive"
+              onClick={onDeleteSelected}
+            >
+              <Trash className="w-4 h-4 mr-2" />
+              删除 ({selectedCount})
             </Button>
           )}
-          {onExport && (
-            <Button variant="outline" size="sm" onClick={onExport}>
-              <Download className="w-4 h-4" />
-            </Button>
-          )}
-          {onImport && (
-            <Button variant="outline" size="sm" onClick={onImport}>
-              <Upload className="w-4 h-4" />
-            </Button>
-          )}
+
+          {/* 工具按钮 */}
+          <div className="flex items-center gap-1">
+            {onRefresh && (
+              <Button variant="outline" size="sm" onClick={onRefresh}>
+                <RefreshCw className="w-4 h-4" />
+              </Button>
+            )}
+            {onExport && (
+              <Button variant="outline" size="sm" onClick={onExport}>
+                <Download className="w-4 h-4" />
+              </Button>
+            )}
+            {onImport && (
+              <Button variant="outline" size="sm" onClick={onImport}>
+                <Upload className="w-4 h-4" />
+              </Button>
+            )}
+          </div>
         </div>
       </div>
     </div>

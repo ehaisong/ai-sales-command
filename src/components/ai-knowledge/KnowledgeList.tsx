@@ -2,7 +2,7 @@
 import React, { useState, useMemo } from "react";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { FileText } from "lucide-react";
+import { FileText, Newspaper, Globe, LayoutGrid } from "lucide-react";
 import KnowledgeTable from "./KnowledgeTable";
 import KnowledgeCardView from "./KnowledgeCardView";
 import KnowledgeToolbar from "./KnowledgeToolbar";
@@ -119,7 +119,7 @@ const KnowledgeList = ({ searchQuery, onSelectItem }: Props) => {
   const tabCounts = getTabCounts();
 
   return (
-    <div>
+    <div className="bg-gray-50 rounded-lg p-6">
       <div className="flex justify-between items-center mb-4">
         <div>
           <h2 className="text-lg font-semibold text-gray-900">知识库内容</h2>
@@ -132,24 +132,28 @@ const KnowledgeList = ({ searchQuery, onSelectItem }: Props) => {
       <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4">
         <TabsList className="w-full justify-start">
           <TabsTrigger value="all" className="flex items-center gap-2">
+            <LayoutGrid className="w-4 h-4" />
             全部
             <span className="text-xs bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded">
               {tabCounts.all}
             </span>
           </TabsTrigger>
           <TabsTrigger value="news" className="flex items-center gap-2">
+            <Newspaper className="w-4 h-4" />
             新闻资讯
             <span className="text-xs bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded">
               {tabCounts.news}
             </span>
           </TabsTrigger>
           <TabsTrigger value="website" className="flex items-center gap-2">
+            <Globe className="w-4 h-4" />
             官网内容
             <span className="text-xs bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded">
               {tabCounts.website}
             </span>
           </TabsTrigger>
           <TabsTrigger value="file" className="flex items-center gap-2">
+            <FileText className="w-4 h-4" />
             文档文件
             <span className="text-xs bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded">
               {tabCounts.file}
