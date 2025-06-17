@@ -19,6 +19,7 @@ import AutoSEOPage from "@/pages/AutoSEOPage";
 import TrafficHeatingPage from "@/pages/TrafficHeatingPage";
 import ProfilePage from "@/pages/ProfilePage";
 import BrandProfilePage from "@/pages/BrandProfilePage";
+import TestPage from "@/pages/TestPage";
 
 const queryClient = new QueryClient();
 
@@ -66,7 +67,7 @@ const App = () => (
                   <Route path="/profile" element={<ProfilePage />} />
                   
                   {/* 测试模块 */}
-                  <Route path="/test" element={<div className="p-6">测试模块页面开发中...</div>} />
+                  <Route path="/test" element={<TestPage />} />
                   
                   {/* 设置 */}
                   <Route path="/settings" element={<div className="p-6">设置页面开发中...</div>} />
