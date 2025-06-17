@@ -48,9 +48,9 @@ const CustomerManagement = () => {
   }, [mockCustomers, filters, activeTab]);
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-6 space-y-6 transition-all duration-300">
       {/* Header */}
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center animate-fade-in">
         <div>
           <h1 className="text-3xl font-bold">客户管理</h1>
           <p className="text-muted-foreground">
@@ -60,13 +60,15 @@ const CustomerManagement = () => {
       </div>
 
       {/* Analytics Overview */}
-      <CustomerAnalytics customers={mockCustomers} />
+      <div className="animate-fade-in" style={{ animationDelay: '0.1s' }}>
+        <CustomerAnalytics customers={mockCustomers} />
+      </div>
 
-      <div className="grid grid-cols-12 gap-6">
+      <div className="grid grid-cols-12 gap-6 animate-fade-in" style={{ animationDelay: '0.2s' }}>
         {/* Main Content */}
         <div className="col-span-8">
           {/* Toolbar */}
-          <div className="bg-white border border-gray-200 rounded-lg mb-4 p-4">
+          <div className="bg-white border border-gray-200 rounded-lg mb-4 p-4 transition-all duration-200 hover:shadow-md">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-4">
                 <CustomerSearchBar 
@@ -88,15 +90,17 @@ const CustomerManagement = () => {
           </div>
 
           {/* Customer List with integrated toolbar */}
-          <CustomerList 
-            customers={filteredCustomers}
-            onSelectCustomer={setSelectedCustomer}
-            selectedCustomer={selectedCustomer}
-          />
+          <div className="transition-all duration-300">
+            <CustomerList 
+              customers={filteredCustomers}
+              onSelectCustomer={setSelectedCustomer}
+              selectedCustomer={selectedCustomer}
+            />
+          </div>
         </div>
 
         {/* AI Assistant Panel */}
-        <div className="col-span-4">
+        <div className="col-span-4 transition-all duration-300">
           <CustomerAIAssistant customer={selectedCustomer} />
         </div>
       </div>
