@@ -80,17 +80,21 @@ const CustomerManagement = () => {
                   onFiltersChange={setFilters}
                 />
               </div>
-              <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as 'individual' | 'company')}>
-                <TabsList className="grid w-full grid-cols-2">
-                  <TabsTrigger value="individual">个人客户</TabsTrigger>
-                  <TabsTrigger value="company">企业客户</TabsTrigger>
+              <Tabs 
+                value={activeTab} 
+                onValueChange={(value) => setActiveTab(value as 'individual' | 'company')}
+                className="transition-all duration-500"
+              >
+                <TabsList className="grid w-full grid-cols-2 transition-all duration-500">
+                  <TabsTrigger value="individual" className="transition-all duration-500">个人客户</TabsTrigger>
+                  <TabsTrigger value="company" className="transition-all duration-500">企业客户</TabsTrigger>
                 </TabsList>
               </Tabs>
             </div>
           </div>
 
           {/* Customer List with integrated toolbar */}
-          <div className="transition-all duration-300">
+          <div className="transition-all duration-500">
             <CustomerList 
               customers={filteredCustomers}
               onSelectCustomer={setSelectedCustomer}
