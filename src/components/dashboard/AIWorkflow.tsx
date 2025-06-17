@@ -1,8 +1,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
-import { ChevronDown, ChevronRight, Clock, Linkedin, Mail, Instagram, TrendingUp, Search, BarChart3, CheckCircle2, Loader2 } from 'lucide-react';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { Clock, Linkedin, Mail, Instagram, CheckCircle2, Loader2 } from 'lucide-react';
 
 interface WorkflowSubstep {
   text: string;
@@ -15,7 +15,7 @@ interface WorkflowStep {
   text: string;
   color: string;
   category: string;
-  icon: React.ComponentType<{ className?: string }>;
+  icon: React.ComponentType<{ className?: string; color?: string }>;
   timestamp: Date;
   status: 'completed' | 'in-progress' | 'pending';
   substeps: WorkflowSubstep[];
@@ -100,7 +100,6 @@ const workflowSteps: WorkflowStep[] = [
 const AIWorkflow = () => {
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [visibleSteps, setVisibleSteps] = useState<WorkflowStep[]>([]);
-  const [expandedSteps, setExpandedSteps] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -128,18 +127,6 @@ const AIWorkflow = () => {
     }
   };
 
-  const toggleExpanded = (stepId: string) => {
-    setExpandedSteps(prev => {
-      const newSet = new Set(prev);
-      if (newSet.has(stepId)) {
-        newSet.delete(stepId);
-      } else {
-        newSet.add(stepId);
-      }
-      return newSet;
-    });
-  };
-
   const getStatusIcon = (status: 'completed' | 'in-progress' | 'pending') => {
     switch (status) {
       case 'completed':
@@ -160,84 +147,72 @@ const AIWorkflow = () => {
         </CardTitle>
       </CardHeader>
       <CardContent className="flex-1 overflow-y-auto p-4">
-        <div className="space-y-3">
+        <Accordion type="single" collapsible className="space-y-3">
           {visibleSteps.map((step, index) => {
             const Icon = step.icon;
-            const isExpanded = expandedSteps.has(step.id);
             
             return (
-              <Collapsible key={`${step.id}-${index}`} open={isExpanded} onOpenChange={() => toggleExpanded(step.id)}>
-                <div
-                  className={`transition-all duration-500 ${
-                    index === 0 ? 'opacity-100' : 'opacity-80'
-                  }`}
-                >
-                  <CollapsibleTrigger asChild>
-                    <div className="p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-3 flex-1">
-                          <div className="flex items-center space-x-2">
-                            <div 
-                              className="w-3 h-3 rounded-full flex-shrink-0" 
-                              style={{ backgroundColor: step.color }}
-                            />
-                            <Icon className="h-4 w-4 flex-shrink-0" style={{ color: step.color }} />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center space-x-2">
-                              <span className="text-sm font-medium truncate">{step.text}</span>
-                              {step.status === 'in-progress' && (
-                                <Loader2 className="h-3 w-3 text-blue-500 animate-spin flex-shrink-0" />
-                              )}
-                              {step.status === 'completed' && (
-                                <CheckCircle2 className="h-3 w-3 text-green-500 flex-shrink-0" />
-                              )}
-                            </div>
-                            <div className="flex items-center space-x-1 mt-1">
-                              <Clock className="h-3 w-3 text-gray-400" />
-                              <span className="text-xs text-gray-500">{formatTime(step.timestamp)}</span>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <span className="text-xs text-gray-500 bg-gray-200 px-2 py-1 rounded-full">
-                            {step.substeps.filter(s => s.status === 'completed').length}/{step.substeps.length}
+              <AccordionItem 
+                key={`${step.id}-${index}`} 
+                value={`${step.id}-${index}`}
+                className={`transition-all duration-500 border-none ${
+                  index === 0 ? 'opacity-100' : 'opacity-80'
+                }`}
+              >
+                <AccordionTrigger className="p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors hover:no-underline">
+                  <div className="flex items-center space-x-3 flex-1">
+                    <div className="flex items-center space-x-2">
+                      <div 
+                        className="w-3 h-3 rounded-full flex-shrink-0" 
+                        style={{ backgroundColor: step.color }}
+                      />
+                      <Icon className="h-4 w-4 flex-shrink-0" color={step.color} />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center space-x-2">
+                        <span className="text-sm font-medium truncate">{step.text}</span>
+                        {step.status === 'in-progress' && (
+                          <Loader2 className="h-3 w-3 text-blue-500 animate-spin flex-shrink-0" />
+                        )}
+                        {step.status === 'completed' && (
+                          <CheckCircle2 className="h-3 w-3 text-green-500 flex-shrink-0" />
+                        )}
+                      </div>
+                      <div className="flex items-center space-x-1 mt-1">
+                        <Clock className="h-3 w-3 text-gray-400" />
+                        <span className="text-xs text-gray-500">{formatTime(step.timestamp)}</span>
+                      </div>
+                    </div>
+                    <span className="text-xs text-gray-500 bg-gray-200 px-2 py-1 rounded-full">
+                      {step.substeps.filter(s => s.status === 'completed').length}/{step.substeps.length}
+                    </span>
+                  </div>
+                </AccordionTrigger>
+                
+                <AccordionContent>
+                  <div className="mt-2 ml-6 space-y-2">
+                    {step.substeps.map((substep, substepIndex) => (
+                      <div key={substepIndex} className="flex items-center space-x-3 p-2 bg-white rounded border-l-2 border-gray-200">
+                        {getStatusIcon(substep.status)}
+                        <div className="flex-1">
+                          <span className={`text-sm ${substep.status === 'completed' ? 'text-gray-600' : 'text-gray-800'}`}>
+                            {substep.text}
                           </span>
-                          {isExpanded ? (
-                            <ChevronDown className="h-4 w-4 text-gray-400" />
-                          ) : (
-                            <ChevronRight className="h-4 w-4 text-gray-400" />
+                          {substep.timestamp && (
+                            <div className="flex items-center space-x-1 mt-1">
+                              <Clock className="h-2.5 w-2.5 text-gray-400" />
+                              <span className="text-xs text-gray-400">{formatTime(substep.timestamp)}</span>
+                            </div>
                           )}
                         </div>
                       </div>
-                    </div>
-                  </CollapsibleTrigger>
-                  
-                  <CollapsibleContent>
-                    <div className="mt-2 ml-6 space-y-2">
-                      {step.substeps.map((substep, substepIndex) => (
-                        <div key={substepIndex} className="flex items-center space-x-3 p-2 bg-white rounded border-l-2 border-gray-200">
-                          {getStatusIcon(substep.status)}
-                          <div className="flex-1">
-                            <span className={`text-sm ${substep.status === 'completed' ? 'text-gray-600' : 'text-gray-800'}`}>
-                              {substep.text}
-                            </span>
-                            {substep.timestamp && (
-                              <div className="flex items-center space-x-1 mt-1">
-                                <Clock className="h-2.5 w-2.5 text-gray-400" />
-                                <span className="text-xs text-gray-400">{formatTime(substep.timestamp)}</span>
-                              </div>
-                            )}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </CollapsibleContent>
-                </div>
-              </Collapsible>
+                    ))}
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
             );
           })}
-        </div>
+        </Accordion>
       </CardContent>
     </Card>
   );
