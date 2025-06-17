@@ -7,6 +7,7 @@ import { Switch } from '@/components/ui/switch';
 import { ArrowUp, ArrowDown, Trash2, Building2, User } from 'lucide-react';
 import { Customer } from '@/types/customer';
 import DeleteConfirmDialog from './DeleteConfirmDialog';
+import ImportExportButtons from './ImportExportButtons';
 
 interface CustomerListProps {
   customers: Customer[];
@@ -136,122 +137,198 @@ const CustomerList: React.FC<CustomerListProps> = ({
 
   return (
     <div className="space-y-4">
-      <Table>
-        <TableHeader>
-          <TableRow className="bg-gray-50">
-            {columns.map((col, idx) =>
-              col.sortable ? (
-                <TableHead
-                  key={col.label}
-                  className="cursor-pointer select-none font-medium text-gray-700"
-                  onClick={() => handleSort(col.key as SortField)}
-                >
-                  <span className="inline-flex items-center">
-                    {col.label}
-                    {renderSortIcon(col.key as SortField)}
-                  </span>
-                </TableHead>
-              ) : (
-                <TableHead key={col.label} className="font-medium text-gray-700">{col.label}</TableHead>
-              )
-            )}
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {Object.entries(groupedCustomers).map(([groupName, groupCustomers]) => (
-            <React.Fragment key={groupName}>
-              {/* Group Header */}
-              <TableRow className="bg-gray-100 hover:bg-gray-100">
-                <TableCell colSpan={columns.length} className="font-semibold text-gray-800 py-3">
-                  <div className="flex items-center space-x-2">
-                    {groupName === '企业客户' ? <Building2 className="h-4 w-4" /> : <User className="h-4 w-4" />}
-                    <span>{groupName} ({groupCustomers.length})</span>
-                  </div>
-                </TableCell>
-              </TableRow>
-              
-              {/* Group Customers */}
-              {groupCustomers.map((customer) => (
-                <TableRow
-                  key={customer.id}
-                  className={`cursor-pointer hover:bg-gray-50 ${selectedCustomer?.id === customer.id ? 'bg-blue-50' : ''}`}
-                  onClick={() => onSelectCustomer(customer)}
-                >
-                  {/* Status Switch */}
-                  <TableCell>
-                    <Switch
-                      checked={customer.isActive}
-                      onCheckedChange={() => handleToggleActive(customer)}
-                      onClick={(e) => e.stopPropagation()}
-                    />
-                  </TableCell>
-                  
-                  {/* Customer Name */}
-                  <TableCell>
-                    <div className="font-medium">{customer.name}</div>
-                    {customer.company && <div className="text-sm text-gray-500">{customer.company}</div>}
-                  </TableCell>
-                  
-                  {/* Tags */}
-                  <TableCell>
-                    <div className="flex flex-wrap gap-1">
-                      {customer.tags.map((tag, index) => (
-                        <Badge key={index} variant="outline" className="text-xs">
-                          {tag}
-                        </Badge>
-                      ))}
-                    </div>
-                  </TableCell>
-                  
-                  {/* Contact Person */}
-                  <TableCell>{customer.contactPerson}</TableCell>
-                  
-                  {/* Contact Information */}
-                  <TableCell>
-                    <div className="text-sm">
-                      <div>{customer.email}</div>
-                      {customer.phone && <div className="text-gray-500">{customer.phone}</div>}
-                    </div>
-                  </TableCell>
-                  
-                  {/* Data Source */}
-                  <TableCell>
-                    <div className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold ${getDataSourceStyle(customer.dataSource)}`}>
-                      {customer.dataSource}
-                    </div>
-                  </TableCell>
-                  
-                  {/* Score */}
-                  <TableCell>
+      {/* Toolbar with Import/Export */}
+      <div className="flex items-center justify-between bg-white border border-gray-200 rounded-lg p-4">
+        <div className="flex items-center space-x-4">
+          <h3 className="text-lg font-semibold text-gray-900">客户列表</h3>
+          <Badge variant="outline" className="text-sm">
+            总计: {customers.length} 位客户
+          </Badge>
+        </div>
+        <ImportExportButtons />
+      </div>
+
+      {/* Customer Table */}
+      <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
+        <Table>
+          <TableHeader>
+            <TableRow className="bg-gray-50">
+              {columns.map((col, idx) =>
+                col.sortable ? (
+                  <TableHead
+                    key={col.label}
+                    className="cursor-pointer select-none font-medium text-gray-700"
+                    onClick={() => handleSort(col.key as SortField)}
+                  >
+                    <span className="inline-flex items-center">
+                      {col.label}
+                      {renderSortIcon(col.key as SortField)}
+                    </span>
+                  </TableHead>
+                ) : (
+                  <TableHead key={col.label} className="font-medium text-gray-700">{col.label}</TableHead>
+                )
+              )}
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {Object.entries(groupedCustomers).map(([groupName, groupCustomers]) => (
+              <React.Fragment key={groupName}>
+                {/* Group Header */}
+                <TableRow className="bg-gray-100 hover:bg-gray-100">
+                  <TableCell colSpan={columns.length} className="font-semibold text-gray-800 py-3">
                     <div className="flex items-center space-x-2">
-                      <div className={`w-2 h-2 rounded-full ${getScoreColor(customer.customerScore)}`} />
-                      <span className="font-medium">{customer.customerScore}</span>
+                      {groupName === '企业客户' ? <Building2 className="h-4 w-4" /> : <User className="h-4 w-4" />}
+                      <span>{groupName} ({groupCustomers.length})</span>
                     </div>
-                  </TableCell>
-                  
-                  {/* Updated Date */}
-                  <TableCell>{customer.updatedDate}</TableCell>
-                  
-                  {/* Actions */}
-                  <TableCell>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleDeleteClick(customer);
-                      }}
-                      className="text-red-600 hover:text-red-700 hover:bg-red-50"
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </Button>
                   </TableCell>
                 </TableRow>
-              ))}
-            </React.Fragment>
-          ))}
-        </TableBody>
-      </Table>
+                
+                {/* Group Customers */}
+                {groupCustomers.map((customer) => (
+                  <TableRow
+                    key={customer.id}
+                    className={`cursor-pointer hover:bg-gray-50 transition-all duration-200 ${
+                      selectedCustomer?.id === customer.id ? 'bg-blue-50' : ''
+                    } ${
+                      !customer.isActive ? 'opacity-50 bg-gray-50' : ''
+                    }`}
+                    onClick={() => onSelectCustomer(customer)}
+                  >
+                    {/* Enhanced Status Switch */}
+                    <TableCell>
+                      <div className="flex items-center">
+                        <Switch
+                          checked={customer.isActive}
+                          onCheckedChange={() => handleToggleActive(customer)}
+                          onClick={(e) => e.stopPropagation()}
+                          className={`transition-all duration-300 ${
+                            customer.isActive 
+                              ? 'data-[state=checked]:bg-green-500 shadow-green-200 shadow-md' 
+                              : 'data-[state=unchecked]:bg-red-200'
+                          }`}
+                        />
+                        <div className={`ml-2 w-2 h-2 rounded-full transition-colors duration-300 ${
+                          customer.isActive ? 'bg-green-500' : 'bg-red-400'
+                        }`} />
+                      </div>
+                    </TableCell>
+                    
+                    {/* Customer Name */}
+                    <TableCell>
+                      <div className={`font-medium transition-colors duration-200 ${
+                        !customer.isActive ? 'text-gray-400' : 'text-gray-900'
+                      }`}>
+                        {customer.name}
+                      </div>
+                      {customer.company && (
+                        <div className={`text-sm transition-colors duration-200 ${
+                          !customer.isActive ? 'text-gray-300' : 'text-gray-500'
+                        }`}>
+                          {customer.company}
+                        </div>
+                      )}
+                    </TableCell>
+                    
+                    {/* Tags */}
+                    <TableCell>
+                      <div className="flex flex-wrap gap-1">
+                        {customer.tags.map((tag, index) => (
+                          <Badge 
+                            key={index} 
+                            variant="outline" 
+                            className={`text-xs transition-all duration-200 ${
+                              !customer.isActive ? 'opacity-50 border-gray-200 text-gray-400' : ''
+                            }`}
+                          >
+                            {tag}
+                          </Badge>
+                        ))}
+                      </div>
+                    </TableCell>
+                    
+                    {/* Contact Person */}
+                    <TableCell className={`transition-colors duration-200 ${
+                      !customer.isActive ? 'text-gray-400' : 'text-gray-900'
+                    }`}>
+                      {customer.contactPerson}
+                    </TableCell>
+                    
+                    {/* Contact Information */}
+                    <TableCell>
+                      <div className="text-sm">
+                        <div className={`transition-colors duration-200 ${
+                          !customer.isActive ? 'text-gray-400' : 'text-gray-900'
+                        }`}>
+                          {customer.email}
+                        </div>
+                        {customer.phone && (
+                          <div className={`transition-colors duration-200 ${
+                            !customer.isActive ? 'text-gray-300' : 'text-gray-500'
+                          }`}>
+                            {customer.phone}
+                          </div>
+                        )}
+                      </div>
+                    </TableCell>
+                    
+                    {/* Data Source */}
+                    <TableCell>
+                      <div className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold transition-all duration-200 ${
+                        getDataSourceStyle(customer.dataSource)
+                      } ${
+                        !customer.isActive ? 'opacity-60' : ''
+                      }`}>
+                        {customer.dataSource}
+                      </div>
+                    </TableCell>
+                    
+                    {/* Score */}
+                    <TableCell>
+                      <div className="flex items-center space-x-2">
+                        <div className={`w-2 h-2 rounded-full transition-all duration-200 ${
+                          getScoreColor(customer.customerScore)
+                        } ${
+                          !customer.isActive ? 'opacity-50' : ''
+                        }`} />
+                        <span className={`font-medium transition-colors duration-200 ${
+                          !customer.isActive ? 'text-gray-400' : 'text-gray-900'
+                        }`}>
+                          {customer.customerScore}
+                        </span>
+                      </div>
+                    </TableCell>
+                    
+                    {/* Updated Date */}
+                    <TableCell className={`transition-colors duration-200 ${
+                      !customer.isActive ? 'text-gray-400' : 'text-gray-900'
+                    }`}>
+                      {customer.updatedDate}
+                    </TableCell>
+                    
+                    {/* Actions */}
+                    <TableCell>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDeleteClick(customer);
+                        }}
+                        className={`text-red-600 hover:text-red-700 hover:bg-red-50 transition-all duration-200 ${
+                          !customer.isActive ? 'opacity-50' : ''
+                        }`}
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </React.Fragment>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
 
       <DeleteConfirmDialog
         isOpen={deleteDialog.isOpen}

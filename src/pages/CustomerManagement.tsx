@@ -6,7 +6,6 @@ import CustomerSearchBar from '@/components/customer/CustomerSearchBar';
 import CustomerFilters from '@/components/customer/CustomerFilters';
 import CustomerAIAssistant from '@/components/customer/CustomerAIAssistant';
 import CustomerAnalytics from '@/components/customer/CustomerAnalytics';
-import ImportExportButtons from '@/components/customer/ImportExportButtons';
 import { Customer, CustomerFilters as FilterType } from '@/types/customer';
 import { mockCustomers } from '@/components/customer/mockData';
 
@@ -58,7 +57,6 @@ const CustomerManagement = () => {
             通过智能过滤器和预算洞察跨平台寻找和跟踪客户
           </p>
         </div>
-        <ImportExportButtons />
       </div>
 
       {/* Analytics Overview */}
@@ -89,14 +87,12 @@ const CustomerManagement = () => {
             </div>
           </div>
 
-          {/* Customer List */}
-          <div className="bg-white border border-gray-200 rounded-lg">
-            <CustomerList 
-              customers={filteredCustomers}
-              onSelectCustomer={setSelectedCustomer}
-              selectedCustomer={selectedCustomer}
-            />
-          </div>
+          {/* Customer List with integrated toolbar */}
+          <CustomerList 
+            customers={filteredCustomers}
+            onSelectCustomer={setSelectedCustomer}
+            selectedCustomer={selectedCustomer}
+          />
         </div>
 
         {/* AI Assistant Panel */}
