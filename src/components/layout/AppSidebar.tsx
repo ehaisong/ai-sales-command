@@ -33,7 +33,8 @@ import {
   ChevronRight,
   Wrench,
   ChevronDown,
-  Zap
+  Zap,
+  TestTube
 } from 'lucide-react';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 
@@ -119,6 +120,11 @@ const menuItems = [
         url: "/tools/traffic-boost",
       },
     ],
+  },
+  {
+    title: "测试模块",
+    url: "/test",
+    icon: TestTube,
   },
 ];
 
