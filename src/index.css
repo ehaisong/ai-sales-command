@@ -3,87 +3,87 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 思拓智能外贸助手主题色彩 */
+/* Monday.com inspired theme colors */
 
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 220 15% 25%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 220 15% 25%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 220 15% 25%;
 
-    --primary: 225 100% 47%;  /* #1D4ED8 海军蓝 */
-    --primary-foreground: 210 40% 98%;
+    --primary: 23 100% 65%;  /* #FF6B47 Monday.com orange */
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 225 100% 97%;  /* #EFF4FF 浅色背景 */
-    --secondary-foreground: 225 100% 37%;  /* #1A43BF 悬停状态 */
+    --secondary: 220 15% 97%;  /* #F7F8FA Light gray background */
+    --secondary-foreground: 220 15% 25%;
 
-    --muted: 225 100% 97%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 220 15% 97%;
+    --muted-foreground: 220 10% 50%;
 
-    --accent: 225 94% 65%;  /* #4B7EFE 功能按钮 */
-    --accent-foreground: 0 0% 100%;
+    --accent: 14 100% 75%;  /* #FFB59A Lighter orange accent */
+    --accent-foreground: 220 15% 25%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 100%;
 
     --border: 220 13% 91%;
     --input: 220 13% 91%;
-    --ring: 225 100% 47%;
+    --ring: 23 100% 65%;
 
     --radius: 0.5rem;
 
-    --sidebar-background: 225 100% 97%;
-    --sidebar-foreground: 220 9% 19%;  /* #1F2937 文字 */
-    --sidebar-primary: 225 100% 47%;
+    --sidebar-background: 220 15% 97%;
+    --sidebar-foreground: 220 15% 25%;
+    --sidebar-primary: 23 100% 65%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 225 100% 97%;
-    --sidebar-accent-foreground: 225 100% 37%;
+    --sidebar-accent: 220 15% 97%;
+    --sidebar-accent-foreground: 220 15% 25%;
     --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 225 100% 47%;
+    --sidebar-ring: 23 100% 65%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 220 15% 7%;
+    --foreground: 220 15% 95%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 220 15% 10%;
+    --card-foreground: 220 15% 95%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 220 15% 10%;
+    --popover-foreground: 220 15% 95%;
 
-    --primary: 225 94% 75%;  /* #60A5FA 深色模式主色 */
-    --primary-foreground: 225 100% 10%;
+    --primary: 23 100% 65%;
+    --primary-foreground: 220 15% 7%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 220 15% 12%;
+    --secondary-foreground: 220 15% 95%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 220 15% 12%;
+    --muted-foreground: 220 10% 65%;
 
-    --accent: 225 94% 65%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 14 100% 75%;
+    --accent-foreground: 220 15% 7%;
 
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 220 15% 95%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 225 94% 75%;
+    --border: 220 15% 15%;
+    --input: 220 15% 15%;
+    --ring: 23 100% 65%;
     
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 225 94% 75%;
+    --sidebar-background: 220 15% 5%;
+    --sidebar-foreground: 220 15% 95%;
+    --sidebar-primary: 23 100% 65%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 225 94% 75%;
+    --sidebar-accent: 220 15% 12%;
+    --sidebar-accent-foreground: 220 15% 95%;
+    --sidebar-border: 220 15% 15%;
+    --sidebar-ring: 23 100% 65%;
   }
 }
 
@@ -98,14 +98,22 @@
   }
 }
 
-/* 卡片动效 */
+/* Enhanced Monday.com style animations */
 @layer components {
   .card-hover {
-    @apply transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5;
+    @apply transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 hover:shadow-primary/10;
   }
   
   .fade-in {
-    animation: fadeInUp 0.1s ease-out;
+    animation: fadeInUp 0.3s ease-out;
+  }
+  
+  .monday-button {
+    @apply transition-all duration-200 hover:scale-105 hover:shadow-lg active:scale-95;
+  }
+  
+  .monday-card {
+    @apply bg-white rounded-lg border border-border shadow-sm hover:shadow-md transition-all duration-200;
   }
   
   @keyframes fadeInUp {
@@ -117,5 +125,18 @@
       opacity: 1;
       transform: translateY(0);
     }
+  }
+  
+  @keyframes pulse-orange {
+    0%, 100% {
+      box-shadow: 0 0 0 0 rgba(255, 107, 71, 0.7);
+    }
+    50% {
+      box-shadow: 0 0 0 10px rgba(255, 107, 71, 0);
+    }
+  }
+  
+  .pulse-orange {
+    animation: pulse-orange 2s infinite;
   }
 }

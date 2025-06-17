@@ -14,34 +14,34 @@ const AIAgentCard = () => {
   ];
 
   return (
-    <Card className="card-hover">
-      <CardContent className="p-3 space-y-2">
+    <Card className="monday-card hover:shadow-monday transition-all duration-300">
+      <CardContent className="p-4 space-y-3">
         {/* AI头像和信息 */}
-        <div className="flex items-center space-x-2">
-          <div className="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center">
-            <User className="h-5 w-5 text-white" />
+        <div className="flex items-center space-x-3">
+          <div className="w-12 h-12 bg-gradient-to-br from-monday-orange to-monday-orange-light rounded-full flex items-center justify-center shadow-monday/30 shadow-md">
+            <User className="h-6 w-6 text-white" />
           </div>
           <div>
-            <h3 className="font-semibold text-sm">小思</h3>
-            <p className="text-xs text-muted-foreground">专业外贸营销助手</p>
+            <h3 className="font-semibold text-monday-gray-900">小思</h3>
+            <p className="text-xs text-monday-gray-600">专业外贸营销助手</p>
           </div>
         </div>
 
         {/* 个人简介 */}
-        <p className="text-xs text-muted-foreground leading-tight">
+        <p className="text-xs text-monday-gray-600 leading-relaxed bg-monday-gray-50 p-2 rounded-md">
           我是您的专属AI业务员，精通多平台营销，擅长客户开发和品牌推广。
         </p>
 
         {/* 绑定的社交媒体 - 只显示图标，单行排列 */}
         <div>
-          <p className="text-xs font-medium mb-1">已绑定平台</p>
-          <div className="flex space-x-3">
+          <p className="text-xs font-medium mb-2 text-monday-gray-700">已绑定平台</p>
+          <div className="flex space-x-2">
             {socialPlatforms.map((platform) => {
               const IconComponent = platform.icon;
               return (
                 <div 
                   key={platform.name} 
-                  className="p-1.5 bg-gray-50 rounded-md"
+                  className="p-2 bg-white rounded-lg shadow-sm border border-monday-gray-200 hover:shadow-md transition-all duration-200 hover:scale-105"
                 >
                   <IconComponent 
                     className="h-4 w-4" 
@@ -54,14 +54,14 @@ const AIAgentCard = () => {
         </div>
 
         {/* 操作按钮 */}
-        <div className="flex space-x-2">
-          <Button asChild size="sm" variant="outline" className="flex-1 text-xs h-7">
+        <div className="flex space-x-2 pt-2">
+          <Button asChild size="sm" variant="outline" className="flex-1 text-xs h-8 border-monday-gray-300 hover:border-monday-orange/50">
             <Link to="/ai-agent/settings">
               <Settings className="mr-1 h-3 w-3" />
               设置
             </Link>
           </Button>
-          <Button asChild size="sm" className="flex-1 text-xs h-7">
+          <Button asChild size="sm" className="flex-1 text-xs h-8 bg-monday-orange hover:bg-monday-orange-dark shadow-monday/40">
             <Link to="/ai-agent/knowledge">
               <Brain className="mr-1 h-3 w-3" />
               知识大脑

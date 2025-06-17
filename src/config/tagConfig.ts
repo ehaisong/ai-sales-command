@@ -47,51 +47,51 @@ export const categoryStyles: {
   }
 } = {
   product: {
-    color: 'border-blue-200 bg-blue-100 text-blue-800 hover:bg-blue-200',
+    color: 'border-monday-blue/30 bg-monday-blue/10 text-monday-blue hover:bg-monday-blue/20 shadow-sm',
   },
   technology: {
-    color: 'border-purple-200 bg-purple-100 text-purple-800 hover:bg-purple-200',
+    color: 'border-purple-300/50 bg-purple-100/70 text-purple-700 hover:bg-purple-200/70 shadow-sm',
   },
   feature: {
-    color: 'border-green-200 bg-green-100 text-green-800 hover:bg-green-200',
+    color: 'border-emerald-300/50 bg-emerald-100/70 text-emerald-700 hover:bg-emerald-200/70 shadow-sm',
   },
   corporate: {
-    color: 'border-orange-200 bg-orange-100 text-orange-800 hover:bg-orange-200',
+    color: 'border-monday-orange/30 bg-monday-orange/10 text-monday-orange-dark hover:bg-monday-orange/20 shadow-sm',
   },
-  // Customer Status Categories
+  // Customer Status Categories - Monday.com style
   client: {
-    color: 'border-emerald-300 bg-emerald-200 text-emerald-900 hover:bg-emerald-300 shadow-emerald-100 shadow-sm',
+    color: 'border-emerald-400/40 bg-emerald-200/60 text-emerald-800 hover:bg-emerald-300/60 shadow-emerald-100/50 shadow-md font-medium',
   },
   negotiating: {
-    color: 'border-amber-300 bg-amber-200 text-amber-900 hover:bg-amber-300 shadow-amber-100 shadow-sm',
+    color: 'border-monday-orange/40 bg-monday-orange/20 text-monday-orange-dark hover:bg-monday-orange/30 shadow-monday/30 shadow-md font-medium',
   },
   prospect: {
-    color: 'border-cyan-300 bg-cyan-200 text-cyan-900 hover:bg-cyan-300 shadow-cyan-100 shadow-sm',
+    color: 'border-monday-blue/40 bg-monday-blue/20 text-monday-blue hover:bg-monday-blue/30 shadow-blue-100/50 shadow-md font-medium',
   },
   cold: {
-    color: 'border-slate-300 bg-slate-200 text-slate-700 hover:bg-slate-300 shadow-slate-100 shadow-sm',
+    color: 'border-monday-gray-300/60 bg-monday-gray-100/80 text-monday-gray-700 hover:bg-monday-gray-200/80 shadow-monday-gray-100/50 shadow-md',
   },
-  // Customer Value Categories
+  // Customer Value Categories - Monday.com style
   'high-value': {
-    color: 'border-rose-300 bg-rose-200 text-rose-900 hover:bg-rose-300 shadow-rose-100 shadow-sm font-semibold',
+    color: 'border-rose-400/50 bg-rose-200/70 text-rose-800 hover:bg-rose-300/70 shadow-rose-100/60 shadow-md font-semibold',
   },
   'new-customer': {
-    color: 'border-lime-300 bg-lime-200 text-lime-900 hover:bg-lime-300 shadow-lime-100 shadow-sm',
+    color: 'border-lime-400/50 bg-lime-200/70 text-lime-800 hover:bg-lime-300/70 shadow-lime-100/60 shadow-md font-medium',
   },
   potential: {
-    color: 'border-indigo-300 bg-indigo-200 text-indigo-900 hover:bg-indigo-300 shadow-indigo-100 shadow-sm',
+    color: 'border-indigo-400/50 bg-indigo-200/70 text-indigo-800 hover:bg-indigo-300/70 shadow-indigo-100/60 shadow-md font-medium',
   },
   lost: {
-    color: 'border-red-300 bg-red-200 text-red-800 hover:bg-red-300 shadow-red-100 shadow-sm',
+    color: 'border-red-400/50 bg-red-200/70 text-red-800 hover:bg-red-300/70 shadow-red-100/60 shadow-md',
   },
   educated: {
-    color: 'border-violet-300 bg-violet-200 text-violet-900 hover:bg-violet-300 shadow-violet-100 shadow-sm',
+    color: 'border-violet-400/50 bg-violet-200/70 text-violet-800 hover:bg-violet-300/70 shadow-violet-100/60 shadow-md font-medium',
   },
   'major-client': {
-    color: 'border-pink-300 bg-pink-200 text-pink-900 hover:bg-pink-300 shadow-pink-100 shadow-sm font-semibold',
+    color: 'border-pink-400/50 bg-pink-200/70 text-pink-800 hover:bg-pink-300/70 shadow-pink-100/60 shadow-md font-semibold',
   },
   default: {
-    color: 'border-gray-200 bg-gray-100 text-gray-700 hover:bg-gray-200',
+    color: 'border-monday-gray-300/50 bg-monday-gray-100/70 text-monday-gray-700 hover:bg-monday-gray-200/70 shadow-sm',
   },
 };
 

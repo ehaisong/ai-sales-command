@@ -48,12 +48,12 @@ const CustomerManagement = () => {
   }, [mockCustomers, filters, activeTab]);
 
   return (
-    <div className="p-6 space-y-6 transition-all duration-300">
+    <div className="p-6 space-y-6 transition-all duration-300 bg-monday-gray-50 min-h-screen">
       {/* Header */}
       <div className="flex justify-between items-center animate-fade-in">
         <div>
-          <h1 className="text-3xl font-bold">客户管理</h1>
-          <p className="text-muted-foreground">
+          <h1 className="text-3xl font-bold text-monday-gray-900">客户管理</h1>
+          <p className="text-monday-gray-600 mt-1">
             通过智能过滤器和预算洞察跨平台寻找和跟踪客户
           </p>
         </div>
@@ -68,7 +68,7 @@ const CustomerManagement = () => {
         {/* Main Content */}
         <div className="col-span-8">
           {/* Toolbar */}
-          <div className="bg-white border border-gray-200 rounded-lg mb-4 p-4 transition-all duration-200 hover:shadow-md">
+          <div className="monday-card mb-4 p-4 transition-all duration-200 hover:shadow-monday">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-4">
                 <CustomerSearchBar 
@@ -85,9 +85,9 @@ const CustomerManagement = () => {
                 onValueChange={(value) => setActiveTab(value as 'individual' | 'company')}
                 className="transition-all duration-500"
               >
-                <TabsList className="grid w-full grid-cols-2 transition-all duration-500">
-                  <TabsTrigger value="individual" className="transition-all duration-500">个人客户</TabsTrigger>
-                  <TabsTrigger value="company" className="transition-all duration-500">企业客户</TabsTrigger>
+                <TabsList className="grid w-full grid-cols-2 transition-all duration-500 bg-monday-gray-100">
+                  <TabsTrigger value="individual" className="transition-all duration-500 data-[state=active]:bg-white data-[state=active]:text-monday-orange data-[state=active]:shadow-monday/20">个人客户</TabsTrigger>
+                  <TabsTrigger value="company" className="transition-all duration-500 data-[state=active]:bg-white data-[state=active]:text-monday-orange data-[state=active]:shadow-monday/20">企业客户</TabsTrigger>
                 </TabsList>
               </Tabs>
             </div>

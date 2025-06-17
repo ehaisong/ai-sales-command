@@ -65,6 +65,27 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// Monday.com specific colors
+				monday: {
+					orange: '#FF6B47',
+					'orange-light': '#FFB59A',
+					'orange-dark': '#E55A3B',
+					blue: '#0073EA',
+					'blue-light': '#4D9EFF',
+					'blue-dark': '#0056B3',
+					gray: {
+						50: '#F7F8FA',
+						100: '#F1F3F6',
+						200: '#E6E9ED',
+						300: '#D0D5DD',
+						400: '#98A2B3',
+						500: '#667085',
+						600: '#475467',
+						700: '#344054',
+						800: '#1D2939',
+						900: '#101828'
+					}
 				}
 			},
 			borderRadius: {
@@ -108,13 +129,37 @@ export default {
 						transform: 'scale(1)',
 						opacity: '1'
 					}
+				},
+				'bounce-gentle': {
+					'0%, 100%': {
+						transform: 'translateY(-2%)',
+						'animation-timing-function': 'cubic-bezier(0.8, 0, 1, 1)'
+					},
+					'50%': {
+						transform: 'translateY(0)',
+						'animation-timing-function': 'cubic-bezier(0, 0, 0.2, 1)'
+					}
+				},
+				'pulse-orange': {
+					'0%, 100%': {
+						'box-shadow': '0 0 0 0 rgba(255, 107, 71, 0.7)'
+					},
+					'50%': {
+						'box-shadow': '0 0 0 10px rgba(255, 107, 71, 0)'
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'fade-in': 'fade-in 0.3s ease-out',
-				'scale-in': 'scale-in 0.2s ease-out'
+				'scale-in': 'scale-in 0.2s ease-out',
+				'bounce-gentle': 'bounce-gentle 1s infinite',
+				'pulse-orange': 'pulse-orange 2s infinite'
+			},
+			boxShadow: {
+				'monday': '0 4px 20px rgba(255, 107, 71, 0.15)',
+				'monday-hover': '0 8px 25px rgba(255, 107, 71, 0.25)',
 			}
 		}
 	},
