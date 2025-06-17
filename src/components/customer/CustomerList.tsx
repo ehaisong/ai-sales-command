@@ -1,3 +1,4 @@
+
 import React, { useState, useMemo } from 'react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
@@ -8,6 +9,7 @@ import { Customer } from '@/types/customer';
 import DeleteConfirmDialog from './DeleteConfirmDialog';
 import SwitchConfirmDialog from './SwitchConfirmDialog';
 import ImportExportButtons from './ImportExportButtons';
+import { getTagStyle } from '@/config/tagConfig';
 
 interface CustomerListProps {
   customers: Customer[];
@@ -42,6 +44,7 @@ const CustomerList: React.FC<CustomerListProps> = ({
   onSelectCustomer,
   selectedCustomer,
 }) => {
+  const [localCustomers, setLocalCustomers] = useState<Customer[]>(customers);
   const [sortField, setSortField] = useState<SortField>('updatedDate');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
   const [deleteDialog, setDeleteDialog] = useState<{
@@ -54,9 +57,14 @@ const CustomerList: React.FC<CustomerListProps> = ({
     isActivating: boolean;
   }>({ isOpen: false, customer: null, isActivating: false });
 
+  // Update local customers when prop changes
+  React.useEffect(() => {
+    setLocalCustomers(customers);
+  }, [customers]);
+
   // Group customers by type
   const groupedCustomers = useMemo(() => {
-    const sorted = [...customers].sort((a, b) => {
+    const sorted = [...localCustomers].sort((a, b) => {
       const field = sortField;
       let aValue: any = a[field];
       let bValue: any = b[field];
@@ -88,7 +96,7 @@ const CustomerList: React.FC<CustomerListProps> = ({
     }, {} as Record<string, Customer[]>);
 
     return groups;
-  }, [customers, sortField, sortOrder]);
+  }, [localCustomers, sortField, sortOrder]);
 
   const getScoreColor = (score: number) => {
     if (score >= 80) return 'bg-green-500';
@@ -135,6 +143,15 @@ const CustomerList: React.FC<CustomerListProps> = ({
 
   const handleSwitchConfirm = () => {
     if (switchDialog.customer) {
+      // Update the local customer list
+      setLocalCustomers(prevCustomers => 
+        prevCustomers.map(customer => 
+          customer.id === switchDialog.customer!.id 
+            ? { ...customer, isActive: switchDialog.isActivating }
+            : customer
+        )
+      );
+      
       console.log(`Toggle active status for customer ${switchDialog.customer.name}: ${switchDialog.isActivating}`);
       setSwitchDialog({ isOpen: false, customer: null, isActivating: false });
     }
@@ -146,6 +163,11 @@ const CustomerList: React.FC<CustomerListProps> = ({
 
   const handleDeleteConfirm = () => {
     if (deleteDialog.customer) {
+      // Remove customer from local list
+      setLocalCustomers(prevCustomers => 
+        prevCustomers.filter(customer => customer.id !== deleteDialog.customer!.id)
+      );
+      
       console.log(`Delete customer: ${deleteDialog.customer.name}`);
       setDeleteDialog({ isOpen: false, customer: null });
     }
@@ -165,7 +187,7 @@ const CustomerList: React.FC<CustomerListProps> = ({
         <div className="flex items-center space-x-4">
           <h3 className="text-lg font-semibold text-gray-900">客户列表</h3>
           <Badge variant="outline" className="text-sm">
-            总计: {customers.length} 位客户
+            总计: {localCustomers.length} 位客户
           </Badge>
         </div>
         <ImportExportButtons />
@@ -208,145 +230,156 @@ const CustomerList: React.FC<CustomerListProps> = ({
                 </TableRow>
                 
                 {/* Group Customers */}
-                {groupCustomers.map((customer) => (
-                  <TableRow
-                    key={customer.id}
-                    className={`transition-all duration-200 ${
-                      customer.isActive 
-                        ? 'cursor-pointer hover:bg-gray-50' 
-                        : 'cursor-not-allowed'
-                    } ${
-                      selectedCustomer?.id === customer.id && customer.isActive ? 'bg-blue-50' : ''
-                    } ${
-                      !customer.isActive ? 'opacity-50 bg-gray-50' : ''
-                    }`}
-                    onClick={() => handleRowClick(customer)}
-                  >
-                    {/* Status Switch (removed dot) */}
-                    <TableCell>
-                      <Switch
-                        checked={customer.isActive}
-                        onCheckedChange={() => handleToggleActive(customer)}
-                        onClick={(e) => e.stopPropagation()}
-                        className={`transition-all duration-300 ${
-                          customer.isActive 
-                            ? 'data-[state=checked]:bg-green-500 shadow-green-200 shadow-md' 
-                            : 'data-[state=unchecked]:bg-red-200'
-                        }`}
-                      />
-                    </TableCell>
-                    
-                    {/* Customer Name */}
-                    <TableCell>
-                      <div className={`font-medium transition-colors duration-200 ${
-                        !customer.isActive ? 'text-gray-400' : 'text-gray-900'
-                      }`}>
-                        {customer.name}
-                      </div>
-                      {customer.company && (
-                        <div className={`text-sm transition-colors duration-200 ${
-                          !customer.isActive ? 'text-gray-300' : 'text-gray-500'
-                        }`}>
-                          {customer.company}
-                        </div>
-                      )}
-                    </TableCell>
-                    
-                    {/* Tags */}
-                    <TableCell>
-                      <div className="flex flex-wrap gap-1">
-                        {customer.tags.map((tag, index) => (
-                          <Badge 
-                            key={index} 
-                            variant="outline" 
-                            className={`text-xs transition-all duration-200 ${
-                              !customer.isActive ? 'opacity-50 border-gray-200 text-gray-400' : ''
-                            }`}
-                          >
-                            {tag}
-                          </Badge>
-                        ))}
-                      </div>
-                    </TableCell>
-                    
-                    {/* Contact Person */}
-                    <TableCell className={`transition-colors duration-200 ${
-                      !customer.isActive ? 'text-gray-400' : 'text-gray-900'
-                    }`}>
-                      {customer.contactPerson}
-                    </TableCell>
-                    
-                    {/* Contact Information */}
-                    <TableCell>
-                      <div className="text-sm">
-                        <div className={`transition-colors duration-200 ${
+                {groupCustomers.map((customer) => {
+                  const tagStyle = getTagStyle(customer.tags[0] || '');
+                  
+                  return (
+                    <TableRow
+                      key={customer.id}
+                      className={`transition-all duration-200 ${
+                        customer.isActive 
+                          ? 'cursor-pointer hover:bg-gray-50' 
+                          : 'cursor-not-allowed'
+                      } ${
+                        selectedCustomer?.id === customer.id && customer.isActive ? 'bg-blue-50' : ''
+                      } ${
+                        !customer.isActive ? 'opacity-50 bg-gray-50' : ''
+                      }`}
+                      onClick={() => handleRowClick(customer)}
+                    >
+                      {/* Status Switch */}
+                      <TableCell>
+                        <Switch
+                          checked={customer.isActive}
+                          onCheckedChange={() => handleToggleActive(customer)}
+                          onClick={(e) => e.stopPropagation()}
+                          className={`transition-all duration-300 ${
+                            customer.isActive 
+                              ? 'data-[state=checked]:bg-green-500 shadow-green-200 shadow-md' 
+                              : 'data-[state=unchecked]:bg-red-200'
+                          }`}
+                        />
+                      </TableCell>
+                      
+                      {/* Customer Name */}
+                      <TableCell>
+                        <div className={`font-medium transition-colors duration-200 ${
                           !customer.isActive ? 'text-gray-400' : 'text-gray-900'
                         }`}>
-                          {customer.email}
+                          {customer.name}
                         </div>
-                        {customer.phone && (
-                          <div className={`transition-colors duration-200 ${
+                        {customer.company && (
+                          <div className={`text-sm transition-colors duration-200 ${
                             !customer.isActive ? 'text-gray-300' : 'text-gray-500'
                           }`}>
-                            {customer.phone}
+                            {customer.company}
                           </div>
                         )}
-                      </div>
-                    </TableCell>
-                    
-                    {/* Data Source */}
-                    <TableCell>
-                      <div className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold transition-all duration-200 ${
-                        getDataSourceStyle(customer.dataSource)
-                      } ${
-                        !customer.isActive ? 'opacity-60' : ''
+                      </TableCell>
+                      
+                      {/* Tags */}
+                      <TableCell>
+                        <div className="flex flex-wrap gap-1">
+                          {customer.tags.map((tag, index) => {
+                            const tagStyle = getTagStyle(tag);
+                            const IconComponent = tagStyle.icon;
+                            
+                            return (
+                              <div 
+                                key={index}
+                                className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs border transition-all duration-200 ${
+                                  tagStyle.color
+                                } ${
+                                  !customer.isActive ? 'opacity-50' : ''
+                                }`}
+                              >
+                                <IconComponent className={`h-3 w-3 ${tagStyle.iconColor}`} />
+                                <span>{tag}</span>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </TableCell>
+                      
+                      {/* Contact Person */}
+                      <TableCell className={`transition-colors duration-200 ${
+                        !customer.isActive ? 'text-gray-400' : 'text-gray-900'
                       }`}>
-                        {customer.dataSource}
-                      </div>
-                    </TableCell>
-                    
-                    {/* Score */}
-                    <TableCell>
-                      <div className="flex items-center space-x-2">
-                        <div className={`w-2 h-2 rounded-full transition-all duration-200 ${
-                          getScoreColor(customer.customerScore)
+                        {customer.contactPerson}
+                      </TableCell>
+                      
+                      {/* Contact Information */}
+                      <TableCell>
+                        <div className="text-sm">
+                          <div className={`transition-colors duration-200 ${
+                            !customer.isActive ? 'text-gray-400' : 'text-gray-900'
+                          }`}>
+                            {customer.email}
+                          </div>
+                          {customer.phone && (
+                            <div className={`transition-colors duration-200 ${
+                              !customer.isActive ? 'text-gray-300' : 'text-gray-500'
+                            }`}>
+                              {customer.phone}
+                            </div>
+                          )}
+                        </div>
+                      </TableCell>
+                      
+                      {/* Data Source */}
+                      <TableCell>
+                        <div className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold transition-all duration-200 ${
+                          getDataSourceStyle(customer.dataSource)
                         } ${
-                          !customer.isActive ? 'opacity-50' : ''
-                        }`} />
-                        <span className={`font-medium transition-colors duration-200 ${
-                          !customer.isActive ? 'text-gray-400' : 'text-gray-900'
+                          !customer.isActive ? 'opacity-60' : ''
                         }`}>
-                          {customer.customerScore}
-                        </span>
-                      </div>
-                    </TableCell>
-                    
-                    {/* Updated Date */}
-                    <TableCell className={`transition-colors duration-200 ${
-                      !customer.isActive ? 'text-gray-400' : 'text-gray-900'
-                    }`}>
-                      {customer.updatedDate}
-                    </TableCell>
-                    
-                    {/* Actions */}
-                    <TableCell>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleDeleteClick(customer);
-                        }}
-                        disabled={!customer.isActive}
-                        className={`text-red-600 hover:text-red-700 hover:bg-red-50 transition-all duration-200 ${
-                          !customer.isActive ? 'opacity-30 cursor-not-allowed' : ''
-                        }`}
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                ))}
+                          {customer.dataSource}
+                        </div>
+                      </TableCell>
+                      
+                      {/* Score */}
+                      <TableCell>
+                        <div className="flex items-center space-x-2">
+                          <div className={`w-2 h-2 rounded-full transition-all duration-200 ${
+                            getScoreColor(customer.customerScore)
+                          } ${
+                            !customer.isActive ? 'opacity-50' : ''
+                          }`} />
+                          <span className={`font-medium transition-colors duration-200 ${
+                            !customer.isActive ? 'text-gray-400' : 'text-gray-900'
+                          }`}>
+                            {customer.customerScore}
+                          </span>
+                        </div>
+                      </TableCell>
+                      
+                      {/* Updated Date */}
+                      <TableCell className={`transition-colors duration-200 ${
+                        !customer.isActive ? 'text-gray-400' : 'text-gray-900'
+                      }`}>
+                        {customer.updatedDate}
+                      </TableCell>
+                      
+                      {/* Actions */}
+                      <TableCell>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleDeleteClick(customer);
+                          }}
+                          disabled={!customer.isActive}
+                          className={`text-red-600 hover:text-red-700 hover:bg-red-50 transition-all duration-200 ${
+                            !customer.isActive ? 'opacity-30 cursor-not-allowed' : ''
+                          }`}
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
               </React.Fragment>
             ))}
           </TableBody>
