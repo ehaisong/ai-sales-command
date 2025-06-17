@@ -53,7 +53,7 @@ const AIAssistantChat: React.FC = () => {
     <Card>
       <CardHeader>
         <CardTitle className="text-lg flex items-center">
-          <Bot className="h-5 w-5 mr-2 text-blue-600" />
+          <Bot className="h-5 w-5 mr-2 text-monday-blue" />
           AI写作助手
         </CardTitle>
       </CardHeader>
@@ -67,7 +67,7 @@ const AIAssistantChat: React.FC = () => {
             >
               <div className="flex items-start space-x-2 max-w-[80%]">
                 {!message.isUser && (
-                  <Avatar className="h-6 w-6 bg-blue-600 flex items-center justify-center">
+                  <Avatar className="h-6 w-6 bg-monday-blue flex items-center justify-center">
                     <Bot className="h-3 w-3 text-white" />
                   </Avatar>
                 )}

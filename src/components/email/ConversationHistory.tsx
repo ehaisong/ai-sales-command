@@ -51,7 +51,7 @@ const ConversationHistory: React.FC<ConversationHistoryProps> = ({ originalEmail
           {conversations.map((conv) => (
             <div key={conv.id} className="flex space-x-3">
               <Avatar className={`h-8 w-8 flex items-center justify-center text-white text-xs font-medium ${
-                conv.isAI ? 'bg-blue-600' : 'bg-gradient-to-br from-primary to-accent'
+                conv.isAI ? 'bg-monday-blue' : 'bg-gradient-to-br from-primary to-accent'
               }`}>
                 {conv.isAI ? <Bot className="h-4 w-4" /> : getInitials(conv.from)}
               </Avatar>
@@ -68,7 +68,7 @@ const ConversationHistory: React.FC<ConversationHistoryProps> = ({ originalEmail
                   </span>
                 </div>
                 <div className={`text-sm p-3 rounded-lg ${
-                  conv.isAI ? 'bg-blue-50 border-l-2 border-l-blue-400' : 'bg-gray-50'
+                  conv.isAI ? 'bg-monday-blue/10 border-l-2 border-l-monday-blue' : 'bg-gray-50'
                 }`}>
                   {conv.content}
                 </div>

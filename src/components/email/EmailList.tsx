@@ -35,7 +35,7 @@ const EmailList: React.FC<EmailListProps> = ({ emails, selectedEmailId, onEmailS
           <Card 
             key={email.id}
             className={`cursor-pointer transition-colors ${
-              !email.isRead ? 'border-l-4 border-l-primary' : ''
+              !email.isRead ? 'border-l-4 border-l-monday-blue' : ''
             }`}
             style={{
               backgroundColor: isSelected ? '#E9EEF5' : undefined
@@ -79,7 +79,7 @@ const EmailList: React.FC<EmailListProps> = ({ emails, selectedEmailId, onEmailS
                       {email.isRead ? (
                         <MailOpen className="h-3 w-3 text-muted-foreground" />
                       ) : (
-                        <Mail className="h-3 w-3 text-primary" />
+                        <Mail className="h-3 w-3 text-monday-blue" />
                       )}
                     </div>
                   </div>
@@ -102,7 +102,7 @@ const EmailList: React.FC<EmailListProps> = ({ emails, selectedEmailId, onEmailS
                       })}
                     </span>
                     {!email.isRead && (
-                      <div className="w-2 h-2 bg-primary rounded-full"></div>
+                      <div className="w-2 h-2 bg-monday-blue rounded-full"></div>
                     )}
                   </div>
                 </div>

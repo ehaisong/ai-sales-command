@@ -124,10 +124,10 @@ const AIEmailDetail: React.FC<AIEmailDetailProps> = ({ email }) => {
               </div>
             </div>
             
-            <div className="bg-blue-50 p-4 rounded-lg">
+            <div className="bg-monday-blue/5 border-l-2 border-l-monday-blue p-4 rounded-lg">
               <div className="flex items-center space-x-2 mb-2">
-                <Bot className="h-4 w-4 text-blue-600" />
-                <span className="text-sm font-medium text-blue-600">AI业务员回复</span>
+                <Bot className="h-4 w-4 text-monday-blue" />
+                <span className="text-sm font-medium text-monday-blue">AI业务员回复</span>
                 <span className="text-xs text-muted-foreground">
                   {formatDistanceToNow(email.timestamp, { 
                     addSuffix: true, 
@@ -146,7 +146,7 @@ const AIEmailDetail: React.FC<AIEmailDetailProps> = ({ email }) => {
         <div className="border-t bg-gray-50/50">
           <div className="p-4">
             <div className="flex items-center space-x-2 mb-3">
-              <Avatar className="h-8 w-8 bg-blue-600 flex items-center justify-center">
+              <Avatar className="h-8 w-8 bg-monday-blue flex items-center justify-center">
                 <Bot className="h-4 w-4 text-white" />
               </Avatar>
               <span className="text-sm font-medium">AI业务员小思</span>
