@@ -16,6 +16,7 @@ export interface Customer {
   notes?: string;
   status: 'active' | 'inactive' | 'prospect' | 'client';
   lastContact?: string;
+  isActive: boolean;
   conversationHistory?: Array<{
     date: string;
     type: 'email' | 'call' | 'meeting';

@@ -16,6 +16,7 @@ export const mockCustomers: Customer[] = [
     email: 'zhangming@email.com',
     phone: '+86 138 0000 1234',
     status: 'client',
+    isActive: true,
     lastContact: '2024-01-10',
     conversationHistory: [
       {
@@ -38,6 +39,7 @@ export const mockCustomers: Customer[] = [
     email: 'wangli@email.com',
     phone: '+86 139 0000 5678',
     status: 'active',
+    isActive: true,
     lastContact: '2024-01-08',
     conversationHistory: [
       {
@@ -60,6 +62,7 @@ export const mockCustomers: Customer[] = [
     email: 'liuqiang@email.com',
     phone: '+86 136 0000 9999',
     status: 'prospect',
+    isActive: true,
     lastContact: '2024-01-11',
     conversationHistory: [
       {
@@ -82,6 +85,7 @@ export const mockCustomers: Customer[] = [
     email: 'chenhua@email.com',
     phone: '+86 135 0000 1111',
     status: 'inactive',
+    isActive: false,
     lastContact: '2023-12-20',
     conversationHistory: [
       {
@@ -106,6 +110,7 @@ export const mockCustomers: Customer[] = [
     email: 'lijingli@tech.com',
     phone: '+86 400 888 9999',
     status: 'client',
+    isActive: true,
     lastContact: '2024-01-12',
     conversationHistory: [
       {
@@ -129,6 +134,7 @@ export const mockCustomers: Customer[] = [
     email: 'chen@innovation.com',
     phone: '+86 021 6666 8888',
     status: 'prospect',
+    isActive: true,
     lastContact: '2024-01-09',
     conversationHistory: [
       {
@@ -152,6 +158,7 @@ export const mockCustomers: Customer[] = [
     email: 'zhang@aitech.com',
     phone: '+86 010 8888 6666',
     status: 'active',
+    isActive: true,
     lastContact: '2024-01-07',
     conversationHistory: [
       {
@@ -175,6 +182,7 @@ export const mockCustomers: Customer[] = [
     email: 'wang@trade.com',
     phone: '+86 027 5555 3333',
     status: 'inactive',
+    isActive: false,
     lastContact: '2023-11-15',
     conversationHistory: [
       {

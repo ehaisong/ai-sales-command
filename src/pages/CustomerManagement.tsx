@@ -1,6 +1,5 @@
 
 import React, { useState, useMemo } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import CustomerList from '@/components/customer/CustomerList';
 import CustomerSearchBar from '@/components/customer/CustomerSearchBar';
@@ -51,6 +50,7 @@ const CustomerManagement = () => {
 
   return (
     <div className="p-6 space-y-6">
+      {/* Header */}
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-3xl font-bold">客户管理</h1>
@@ -67,45 +67,36 @@ const CustomerManagement = () => {
       <div className="grid grid-cols-12 gap-6">
         {/* Main Content */}
         <div className="col-span-8">
-          <Card>
-            <CardHeader>
-              <div className="flex items-center justify-between">
-                <CardTitle>客户列表</CardTitle>
-                <div className="flex items-center space-x-4">
-                  <CustomerSearchBar 
-                    value={filters.search}
-                    onChange={(search) => setFilters({ ...filters, search })}
-                  />
-                  <CustomerFilters 
-                    filters={filters}
-                    onFiltersChange={setFilters}
-                  />
-                </div>
+          {/* Toolbar */}
+          <div className="bg-white border border-gray-200 rounded-lg mb-4 p-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-4">
+                <CustomerSearchBar 
+                  value={filters.search}
+                  onChange={(search) => setFilters({ ...filters, search })}
+                />
+                <CustomerFilters 
+                  filters={filters}
+                  onFiltersChange={setFilters}
+                />
               </div>
-            </CardHeader>
-            <CardContent>
               <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as 'individual' | 'company')}>
                 <TabsList className="grid w-full grid-cols-2">
                   <TabsTrigger value="individual">个人客户</TabsTrigger>
                   <TabsTrigger value="company">企业客户</TabsTrigger>
                 </TabsList>
-                <TabsContent value="individual" className="mt-4">
-                  <CustomerList 
-                    customers={filteredCustomers}
-                    onSelectCustomer={setSelectedCustomer}
-                    selectedCustomer={selectedCustomer}
-                  />
-                </TabsContent>
-                <TabsContent value="company" className="mt-4">
-                  <CustomerList 
-                    customers={filteredCustomers}
-                    onSelectCustomer={setSelectedCustomer}
-                    selectedCustomer={selectedCustomer}
-                  />
-                </TabsContent>
               </Tabs>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
+
+          {/* Customer List */}
+          <div className="bg-white border border-gray-200 rounded-lg">
+            <CustomerList 
+              customers={filteredCustomers}
+              onSelectCustomer={setSelectedCustomer}
+              selectedCustomer={selectedCustomer}
+            />
+          </div>
         </div>
 
         {/* AI Assistant Panel */}
