@@ -9,7 +9,7 @@ import { Customer } from '@/types/customer';
 import DeleteConfirmDialog from './DeleteConfirmDialog';
 import SwitchConfirmDialog from './SwitchConfirmDialog';
 import ImportExportButtons from './ImportExportButtons';
-import { getTagStyle } from '@/config/tagConfig';
+import { getTagStyle, tagCategories } from '@/config/tagConfig';
 
 interface CustomerListProps {
   customers: Customer[];
@@ -39,6 +39,9 @@ const columns: { key: SortField | null; label: string, sortable?: boolean }[] = 
   { key: null, label: '操作' },
 ];
 
+// Status tag categories for identification
+const statusTagCategories = ['client', 'negotiating', 'prospect', 'cold'];
+
 const CustomerList: React.FC<CustomerListProps> = ({
   customers,
   onSelectCustomer,
@@ -61,6 +64,21 @@ const CustomerList: React.FC<CustomerListProps> = ({
   React.useEffect(() => {
     setLocalCustomers(customers);
   }, [customers]);
+
+  // Helper functions to separate status tags from other tags
+  const getStatusTags = (tags: string[]) => {
+    return tags.filter(tag => {
+      const category = tagCategories[tag];
+      return statusTagCategories.includes(category);
+    });
+  };
+
+  const getNonStatusTags = (tags: string[]) => {
+    return tags.filter(tag => {
+      const category = tagCategories[tag];
+      return !statusTagCategories.includes(category);
+    });
+  };
 
   // Group customers by type
   const groupedCustomers = useMemo(() => {
@@ -231,7 +249,8 @@ const CustomerList: React.FC<CustomerListProps> = ({
                 
                 {/* Group Customers */}
                 {groupCustomers.map((customer, index) => {
-                  const tagStyle = getTagStyle(customer.tags[0] || '');
+                  const statusTags = getStatusTags(customer.tags);
+                  const nonStatusTags = getNonStatusTags(customer.tags);
                   
                   return (
                     <TableRow
@@ -262,26 +281,49 @@ const CustomerList: React.FC<CustomerListProps> = ({
                         />
                       </TableCell>
                       
-                      {/* Customer Name */}
+                      {/* Customer Name with Status Tags */}
                       <TableCell>
-                        <div className={`font-medium transition-colors duration-200 ${
-                          !customer.isActive ? 'text-gray-400' : 'text-gray-900'
-                        }`}>
-                          {customer.name}
-                        </div>
-                        {customer.company && (
-                          <div className={`text-sm transition-colors duration-200 ${
-                            !customer.isActive ? 'text-gray-300' : 'text-gray-500'
+                        <div className="space-y-2">
+                          <div className={`font-medium transition-colors duration-200 ${
+                            !customer.isActive ? 'text-gray-400' : 'text-gray-900'
                           }`}>
-                            {customer.company}
+                            {customer.name}
                           </div>
-                        )}
+                          {customer.company && (
+                            <div className={`text-sm transition-colors duration-200 ${
+                              !customer.isActive ? 'text-gray-300' : 'text-gray-500'
+                            }`}>
+                              {customer.company}
+                            </div>
+                          )}
+                          {/* Status Tags in Customer Column */}
+                          {statusTags.length > 0 && (
+                            <div className="flex flex-wrap gap-1">
+                              {statusTags.map((tag, tagIndex) => {
+                                const tagStyle = getTagStyle(tag);
+                                
+                                return (
+                                  <div 
+                                    key={tagIndex}
+                                    className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs border transition-all duration-200 hover:scale-105 ${
+                                      tagStyle.color
+                                    } ${
+                                      !customer.isActive ? 'opacity-50' : ''
+                                    }`}
+                                  >
+                                    <span>{tag}</span>
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          )}
+                        </div>
                       </TableCell>
                       
-                      {/* Tags */}
+                      {/* Non-Status Tags Only */}
                       <TableCell>
                         <div className="flex flex-wrap gap-1">
-                          {customer.tags.map((tag, index) => {
+                          {nonStatusTags.map((tag, index) => {
                             const tagStyle = getTagStyle(tag);
                             
                             return (
