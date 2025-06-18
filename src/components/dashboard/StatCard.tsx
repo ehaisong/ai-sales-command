@@ -14,20 +14,25 @@ interface StatCardProps {
 
 const StatCard: React.FC<StatCardProps> = ({ title, value, icon: Icon, trend, trendUp, iconColor = '#6b7280' }) => {
   return (
-    <Card className="card-hover">
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-sm font-medium text-muted-foreground">
-          {title}
-        </CardTitle>
-        <Icon className="h-4 w-4" style={{ color: iconColor }} />
-      </CardHeader>
-      <CardContent>
-        <div className="text-2xl font-din font-bold">{value}</div>
-        {trend && (
-          <p className={`text-xs ${trendUp ? 'text-green-600' : 'text-red-600'} mt-1`}>
-            {trend}
-          </p>
-        )}
+    <Card className="card-hover transition-all duration-200 hover:shadow-lg border-l-4" style={{ borderLeftColor: iconColor }}>
+      <CardContent className="p-4">
+        <div className="flex items-center justify-between mb-2">
+          <div className="p-2 rounded-lg" style={{ backgroundColor: `${iconColor}20` }}>
+            <Icon className="h-5 w-5" style={{ color: iconColor }} />
+          </div>
+          <div className="text-right">
+            <div className="text-2xl font-din font-bold text-gray-900">{value}</div>
+          </div>
+        </div>
+        <div className="space-y-1">
+          <h3 className="text-sm font-medium text-gray-600">{title}</h3>
+          {trend && (
+            <p className={`text-xs ${trendUp ? 'text-green-600' : 'text-red-600'} flex items-center`}>
+              <span className={`inline-block w-2 h-2 rounded-full mr-1 ${trendUp ? 'bg-green-500' : 'bg-red-500'}`}></span>
+              {trend}
+            </p>
+          )}
+        </div>
       </CardContent>
     </Card>
   );
