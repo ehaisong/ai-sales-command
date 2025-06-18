@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
@@ -184,7 +183,7 @@ const WorkflowHistoryDialog: React.FC<WorkflowHistoryDialogProps> = ({ open, onO
           
           {/* 筛选标签区域 */}
           <div className="space-y-3">
-            {/* 类型筛选 - 蓝色系 */}
+            {/* 类型筛选 - 蓝色系，增强悬停效果 */}
             <div>
               <div className="flex items-center space-x-2 mb-2">
                 <Filter className="h-4 w-4 text-blue-600" />
@@ -199,10 +198,10 @@ const WorkflowHistoryDialog: React.FC<WorkflowHistoryDialogProps> = ({ open, onO
                       variant={selectedCategory === category.value ? 'default' : 'outline'}
                       size="sm"
                       onClick={() => setSelectedCategory(category.value)}
-                      className={`text-xs h-8 ${
+                      className={`text-xs h-8 transition-all duration-200 ${
                         selectedCategory === category.value
-                          ? 'bg-blue-600 hover:bg-blue-700 text-white border-blue-600'
-                          : 'border-blue-200 text-blue-700 hover:bg-blue-50 hover:border-blue-300'
+                          ? 'bg-blue-600 hover:bg-blue-700 text-white border-blue-600 transform hover:scale-105'
+                          : 'border-blue-200 text-blue-700 hover:bg-blue-100 hover:border-blue-400 hover:text-blue-800 transform hover:scale-105 hover:shadow-md'
                       }`}
                     >
                       <IconComponent className="h-3 w-3 mr-1" />
@@ -213,7 +212,7 @@ const WorkflowHistoryDialog: React.FC<WorkflowHistoryDialogProps> = ({ open, onO
               </div>
             </div>
             
-            {/* 状态筛选 - 绿色系 */}
+            {/* 状态筛选 - 绿色系，增强悬停效果 */}
             <div>
               <div className="flex items-center space-x-2 mb-2">
                 <CheckCircle2 className="h-4 w-4 text-green-600" />
@@ -228,10 +227,10 @@ const WorkflowHistoryDialog: React.FC<WorkflowHistoryDialogProps> = ({ open, onO
                       variant={selectedStatus === status.value ? 'default' : 'outline'}
                       size="sm"
                       onClick={() => setSelectedStatus(status.value)}
-                      className={`text-xs h-8 ${
+                      className={`text-xs h-8 transition-all duration-200 ${
                         selectedStatus === status.value
-                          ? 'bg-green-600 hover:bg-green-700 text-white border-green-600'
-                          : 'border-green-200 text-green-700 hover:bg-green-50 hover:border-green-300'
+                          ? 'bg-green-600 hover:bg-green-700 text-white border-green-600 transform hover:scale-105'
+                          : 'border-green-200 text-green-700 hover:bg-green-100 hover:border-green-400 hover:text-green-800 transform hover:scale-105 hover:shadow-md'
                       }`}
                     >
                       <IconComponent className="h-3 w-3 mr-1" />

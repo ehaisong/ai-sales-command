@@ -49,8 +49,8 @@ const ChatBox = () => {
   };
 
   return (
-    <Card className="h-[calc(100vh-480px)] flex flex-col bg-white shadow-sm">
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3 px-4 py-3 border-b border-gray-100">
+    <Card className="h-full flex flex-col bg-white shadow-sm">
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3 px-4 py-3 border-b border-gray-100 flex-shrink-0">
         <CardTitle className="text-base flex items-center space-x-2">
           <div className="w-8 h-8 bg-gradient-to-br from-primary to-purple-600 rounded-full flex items-center justify-center">
             <MessageSquare className="h-4 w-4 text-white" />
@@ -70,38 +70,40 @@ const ChatBox = () => {
         </div>
       </CardHeader>
       
-      <CardContent className="flex-1 flex flex-col space-y-3 px-4 pb-4 pt-4">
-        {/* 聊天内容区域 */}
-        <div className="flex-1 space-y-3 overflow-y-auto pr-1">
-          {messages.map((message) => (
-            <div
-              key={message.id}
-              className={`flex ${message.isUser ? 'justify-end' : 'justify-start'}`}
-            >
+      <CardContent className="flex-1 flex flex-col px-4 pb-4 pt-4 min-h-0">
+        {/* 聊天内容区域 - 增加min-h-0确保正确收缩 */}
+        <div className="flex-1 min-h-0 overflow-hidden">
+          <div className="h-full overflow-y-auto space-y-3 pr-1">
+            {messages.map((message) => (
               <div
-                className={`max-w-[85%] p-3 rounded-lg text-sm leading-relaxed ${
-                  message.isUser
-                    ? 'bg-primary text-white rounded-br-sm'
-                    : 'bg-gray-100 text-gray-800 rounded-bl-sm'
-                }`}
+                key={message.id}
+                className={`flex ${message.isUser ? 'justify-end' : 'justify-start'}`}
               >
-                <p>{message.content}</p>
-                <p className={`text-xs mt-1 ${
-                  message.isUser ? 'text-blue-100' : 'text-gray-500'
-                }`}>
-                  {message.timestamp.toLocaleTimeString('zh-CN', { 
-                    hour: '2-digit', 
-                    minute: '2-digit' 
-                  })}
-                </p>
+                <div
+                  className={`max-w-[85%] p-3 rounded-lg text-sm leading-relaxed break-words ${
+                    message.isUser
+                      ? 'bg-primary text-white rounded-br-sm'
+                      : 'bg-gray-100 text-gray-800 rounded-bl-sm'
+                  }`}
+                >
+                  <p className="break-words">{message.content}</p>
+                  <p className={`text-xs mt-1 ${
+                    message.isUser ? 'text-blue-100' : 'text-gray-500'
+                  }`}>
+                    {message.timestamp.toLocaleTimeString('zh-CN', { 
+                      hour: '2-digit', 
+                      minute: '2-digit' 
+                    })}
+                  </p>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
-        {/* 输入区域 */}
-        <div className="flex space-x-2 pt-2 border-t border-gray-100">
-          <Button variant="outline" size="sm" className="h-9 w-9 p-0 border-gray-300 hover:border-primary/50">
+        {/* 输入区域 - 固定在底部 */}
+        <div className="flex space-x-2 pt-3 mt-auto border-t border-gray-100 flex-shrink-0">
+          <Button variant="outline" size="sm" className="h-9 w-9 p-0 border-gray-300 hover:border-primary/50 flex-shrink-0">
             <Upload className="h-4 w-4" />
           </Button>
           <Input
@@ -109,12 +111,12 @@ const ChatBox = () => {
             onChange={(e) => setInputValue(e.target.value)}
             placeholder="输入消息..."
             onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-            className="flex-1 h-9 text-sm border-gray-300 focus:border-primary"
+            className="flex-1 h-9 text-sm border-gray-300 focus:border-primary min-w-0"
           />
           <Button 
             onClick={handleSendMessage} 
             size="sm" 
-            className="h-9 px-4 bg-primary hover:bg-primary/90"
+            className="h-9 px-4 bg-primary hover:bg-primary/90 flex-shrink-0"
             disabled={!inputValue.trim()}
           >
             <Send className="h-4 w-4" />
