@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { 
@@ -21,7 +22,7 @@ const AppSidebarHeader = ({ isCollapsed }: SidebarHeaderProps) => {
         {!isCollapsed ? (
           <>
             <img 
-              src="/lovable-uploads/0c4b0e2b-73dc-424b-9a7b-90b7fc90e3ab.png" 
+              src="/lovable-uploads/a6b20fef-de43-4809-b7fc-a1d7b088160d.png" 
               alt="思拓外贸助手" 
               className="h-8 w-auto object-contain"
             />

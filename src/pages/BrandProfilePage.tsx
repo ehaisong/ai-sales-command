@@ -22,8 +22,8 @@ const BrandProfilePage = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   
-  // 基本信息 - updated default logo
-  const [logo, setLogo] = useState<string | null>('/lovable-uploads/0c4b0e2b-73dc-424b-9a7b-90b7fc90e3ab.png');
+  // 基本信息 - updated to use new logo
+  const [logo, setLogo] = useState<string | null>('/lovable-uploads/a6b20fef-de43-4809-b7fc-a1d7b088160d.png');
   const [brandName, setBrandName] = useState('我的品牌');
   const [companyName, setCompanyName] = useState('');
   const [contactPerson, setContactPerson] = useState('');
