@@ -15,16 +15,16 @@ interface StatCardProps {
 const StatCard: React.FC<StatCardProps> = ({ title, value, icon: Icon, trend, trendUp, iconColor = '#6b7280' }) => {
   return (
     <Card className="card-hover">
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-sm font-medium text-muted-foreground">
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1 px-3 pt-3">
+        <CardTitle className="text-xs font-medium text-muted-foreground truncate">
           {title}
         </CardTitle>
-        <Icon className="h-4 w-4" style={{ color: iconColor }} />
+        <Icon className="h-3 w-3 flex-shrink-0" style={{ color: iconColor }} />
       </CardHeader>
-      <CardContent>
-        <div className="text-2xl font-din font-bold">{value}</div>
+      <CardContent className="px-3 pb-3">
+        <div className="text-lg font-din font-bold">{value}</div>
         {trend && (
-          <p className={`text-xs ${trendUp ? 'text-green-600' : 'text-red-600'} mt-1`}>
+          <p className={`text-xs ${trendUp ? 'text-green-600' : 'text-red-600'} mt-0.5 truncate`}>
             {trend}
           </p>
         )}

@@ -13,8 +13,8 @@ const Dashboard = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 h-full">
         {/* 左列：统计卡片 + AI工作流 - 占8/12宽度 */}
         <div className="lg:col-span-8 flex flex-col space-y-6">
-          {/* 统计卡片区域 - 2x2网格 */}
-          <div className="grid grid-cols-2 gap-4">
+          {/* 统计卡片区域 - 单行4列网格 */}
+          <div className="grid grid-cols-4 gap-3">
             <StatCard 
               title="待处理信息" 
               value={12} 
