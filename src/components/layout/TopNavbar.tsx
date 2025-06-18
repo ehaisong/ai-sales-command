@@ -1,22 +1,13 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { 
-  DropdownMenu, 
-  DropdownMenuContent, 
-  DropdownMenuItem, 
-  DropdownMenuTrigger,
-  DropdownMenuSeparator 
-} from '@/components/ui/dropdown-menu';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
 import { Badge } from '@/components/ui/badge';
 import { SidebarTrigger } from '@/components/ui/sidebar';
 import { Search, Bell, HelpCircle, Share, ChevronDown, User, Settings, CreditCard } from 'lucide-react';
 import { Link } from 'react-router-dom';
-
 const TopNavbar = () => {
-  return (
-    <header className="h-16 bg-white border-b border-border px-6 flex items-center justify-between w-full">
+  return <header className="h-16 bg-white border-b border-border px-6 flex items-center justify-between w-full py-[36px]">
       {/* 左侧抽屉控制 */}
       <div className="flex items-center space-x-4">
         <SidebarTrigger />
@@ -26,10 +17,7 @@ const TopNavbar = () => {
       <div className="flex-1 max-w-xl mx-8">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-          <Input 
-            placeholder="搜索客户、产品或功能..."
-            className="pl-10 bg-secondary/50"
-          />
+          <Input placeholder="搜索客户、产品或功能..." className="pl-10 bg-secondary/50" />
         </div>
       </div>
 
@@ -85,8 +73,6 @@ const TopNavbar = () => {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-    </header>
-  );
+    </header>;
 };
-
 export default TopNavbar;
