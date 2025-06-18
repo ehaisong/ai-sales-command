@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { Calendar, Search, Filter, Clock, CheckCircle2, Loader2, AlertCircle, Linkedin, Mail, Instagram, Database } from 'lucide-react';
+import { Calendar, Search, Filter, Clock, CheckCircle2, Loader2, AlertCircle, Linkedin, Mail, Instagram, Database, Grid3x3 } from 'lucide-react';
 
 interface HistoryItem {
   id: string;
@@ -86,18 +86,18 @@ const WorkflowHistoryDialog: React.FC<WorkflowHistoryDialogProps> = ({ open, onO
   const [selectedStatus, setSelectedStatus] = useState<string>('all');
 
   const categories = [
-    { value: 'all', label: '全部类型' },
-    { value: 'linkedin', label: 'LinkedIn' },
-    { value: 'email', label: '邮件营销' },
-    { value: 'instagram', label: 'Instagram' },
-    { value: 'data', label: '数据分析' }
+    { value: 'all', label: '全部类型', icon: Grid3x3 },
+    { value: 'linkedin', label: 'LinkedIn', icon: Linkedin },
+    { value: 'email', label: '邮件营销', icon: Mail },
+    { value: 'instagram', label: 'Instagram', icon: Instagram },
+    { value: 'data', label: '数据分析', icon: Database }
   ];
 
   const statuses = [
-    { value: 'all', label: '全部状态' },
-    { value: 'completed', label: '已完成' },
-    { value: 'in-progress', label: '进行中' },
-    { value: 'failed', label: '失败' }
+    { value: 'all', label: '全部状态', icon: Filter },
+    { value: 'completed', label: '已完成', icon: CheckCircle2 },
+    { value: 'in-progress', label: '进行中', icon: Loader2 },
+    { value: 'failed', label: '失败', icon: AlertCircle }
   ];
 
   const filteredHistory = historyData.filter(item => {
@@ -171,51 +171,74 @@ const WorkflowHistoryDialog: React.FC<WorkflowHistoryDialogProps> = ({ open, onO
 
         {/* 搜索和筛选区域 */}
         <div className="flex flex-col space-y-4 pb-4 border-b">
-          <div className="flex items-center space-x-2">
-            <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-              <Input
-                placeholder="搜索工作流任务..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10"
-              />
-            </div>
-            <Filter className="h-4 w-4 text-gray-400" />
+          {/* 搜索框 */}
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+            <Input
+              placeholder="搜索工作流任务..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="pl-10"
+            />
           </div>
           
-          <div className="flex items-center space-x-2">
-            <div className="flex items-center space-x-2">
-              <span className="text-sm font-medium text-gray-700">类型:</span>
-              <div className="flex space-x-1">
-                {categories.map(category => (
-                  <Button
-                    key={category.value}
-                    variant={selectedCategory === category.value ? 'default' : 'outline'}
-                    size="sm"
-                    onClick={() => setSelectedCategory(category.value)}
-                    className="text-xs h-7"
-                  >
-                    {category.label}
-                  </Button>
-                ))}
+          {/* 筛选标签区域 */}
+          <div className="space-y-3">
+            {/* 类型筛选 - 蓝色系 */}
+            <div>
+              <div className="flex items-center space-x-2 mb-2">
+                <Filter className="h-4 w-4 text-blue-600" />
+                <span className="text-sm font-medium text-gray-700">任务类型</span>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {categories.map(category => {
+                  const IconComponent = category.icon;
+                  return (
+                    <Button
+                      key={category.value}
+                      variant={selectedCategory === category.value ? 'default' : 'outline'}
+                      size="sm"
+                      onClick={() => setSelectedCategory(category.value)}
+                      className={`text-xs h-8 ${
+                        selectedCategory === category.value
+                          ? 'bg-blue-600 hover:bg-blue-700 text-white border-blue-600'
+                          : 'border-blue-200 text-blue-700 hover:bg-blue-50 hover:border-blue-300'
+                      }`}
+                    >
+                      <IconComponent className="h-3 w-3 mr-1" />
+                      {category.label}
+                    </Button>
+                  );
+                })}
               </div>
             </div>
             
-            <div className="flex items-center space-x-2">
-              <span className="text-sm font-medium text-gray-700">状态:</span>
-              <div className="flex space-x-1">
-                {statuses.map(status => (
-                  <Button
-                    key={status.value}
-                    variant={selectedStatus === status.value ? 'default' : 'outline'}
-                    size="sm"
-                    onClick={() => setSelectedStatus(status.value)}
-                    className="text-xs h-7"
-                  >
-                    {status.label}
-                  </Button>
-                ))}
+            {/* 状态筛选 - 绿色系 */}
+            <div>
+              <div className="flex items-center space-x-2 mb-2">
+                <CheckCircle2 className="h-4 w-4 text-green-600" />
+                <span className="text-sm font-medium text-gray-700">执行状态</span>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {statuses.map(status => {
+                  const IconComponent = status.icon;
+                  return (
+                    <Button
+                      key={status.value}
+                      variant={selectedStatus === status.value ? 'default' : 'outline'}
+                      size="sm"
+                      onClick={() => setSelectedStatus(status.value)}
+                      className={`text-xs h-8 ${
+                        selectedStatus === status.value
+                          ? 'bg-green-600 hover:bg-green-700 text-white border-green-600'
+                          : 'border-green-200 text-green-700 hover:bg-green-50 hover:border-green-300'
+                      }`}
+                    >
+                      <IconComponent className="h-3 w-3 mr-1" />
+                      {status.label}
+                    </Button>
+                  );
+                })}
               </div>
             </div>
           </div>
