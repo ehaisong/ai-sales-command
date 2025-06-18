@@ -4,7 +4,7 @@ import StatCard from '@/components/dashboard/StatCard';
 import AIWorkflow from '@/components/dashboard/AIWorkflow';
 import AIAgentCard from '@/components/dashboard/AIAgentCard';
 import ChatBox from '@/components/dashboard/ChatBox';
-import { Mail, Users, Send, Globe } from 'lucide-react';
+import { Mail, Users, Send, MailOpen } from 'lucide-react';
 
 const Dashboard = () => {
   return (
@@ -25,7 +25,7 @@ const Dashboard = () => {
             />
             <StatCard 
               title="今日客户" 
-              value={48} 
+              value={321} 
               icon={Users} 
               trend="+12% 较昨日" 
               trendUp={true} 
@@ -33,16 +33,16 @@ const Dashboard = () => {
             />
             <StatCard 
               title="今日发信" 
-              value={156} 
+              value={185} 
               icon={Send} 
               trend="+8% 较昨日" 
               trendUp={true} 
               iconColor="#0EA5E9" 
             />
             <StatCard 
-              title="官网访问量" 
-              value="2,341" 
-              icon={Globe} 
+              title="今日收信" 
+              value={15} 
+              icon={MailOpen} 
               trend="+23% 较昨日" 
               trendUp={true} 
               iconColor="#10B981" 

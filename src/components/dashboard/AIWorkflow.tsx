@@ -1,8 +1,9 @@
 
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Clock, Linkedin, Mail, Instagram, CheckCircle2, Loader2 } from 'lucide-react';
+import { Clock, Linkedin, Mail, Instagram, CheckCircle2, Loader2, Play, Pause, History } from 'lucide-react';
 
 interface WorkflowSubstep {
   text: string;
@@ -100,8 +101,11 @@ const workflowSteps: WorkflowStep[] = [
 const AIWorkflow = () => {
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [visibleSteps, setVisibleSteps] = useState<WorkflowStep[]>([]);
+  const [isRunning, setIsRunning] = useState(true);
 
   useEffect(() => {
+    if (!isRunning) return;
+    
     const interval = setInterval(() => {
       const step = workflowSteps[currentStepIndex % workflowSteps.length];
       setVisibleSteps(prev => {
@@ -112,7 +116,7 @@ const AIWorkflow = () => {
     }, 4000);
 
     return () => clearInterval(interval);
-  }, [currentStepIndex]);
+  }, [currentStepIndex, isRunning]);
 
   const formatTime = (timestamp: Date) => {
     const now = new Date();
@@ -138,15 +142,48 @@ const AIWorkflow = () => {
     }
   };
 
+  const toggleWorkflow = () => {
+    setIsRunning(!isRunning);
+  };
+
   return (
     <Card className="h-full flex flex-col bg-white">
-      <CardHeader className="flex-shrink-0">
-        <CardTitle className="flex items-center space-x-2">
-          <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-          <span>AI业务员工作流</span>
-        </CardTitle>
+      <CardHeader className="flex-shrink-0 pb-4">
+        <div className="flex items-center justify-between">
+          <CardTitle className="flex items-center space-x-2">
+            <div className={`w-3 h-3 rounded-full ${isRunning ? 'bg-green-500 animate-pulse' : 'bg-gray-400'}`}></div>
+            <span>AI业务员工作流</span>
+          </CardTitle>
+          <div className="flex items-center space-x-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={toggleWorkflow}
+              className="text-xs h-7"
+            >
+              {isRunning ? (
+                <>
+                  <Pause className="h-3 w-3 mr-1" />
+                  暂停
+                </>
+              ) : (
+                <>
+                  <Play className="h-3 w-3 mr-1" />
+                  开始
+                </>
+              )}
+            </Button>
+            <Button variant="ghost" size="sm" className="text-xs h-7">
+              <History className="h-3 w-3 mr-1" />
+              查看工作历史
+            </Button>
+          </div>
+        </div>
+        <p className="text-sm text-gray-600 mt-2">
+          AI业务员正在自动执行营销任务，实时监控多平台客户开发和内容发布
+        </p>
       </CardHeader>
-      <CardContent className="flex-1 overflow-y-auto p-4">
+      <CardContent className="flex-1 overflow-y-auto p-4 pt-0">
         <Accordion type="single" collapsible className="space-y-3">
           {visibleSteps.map((step, index) => {
             const Icon = step.icon;
