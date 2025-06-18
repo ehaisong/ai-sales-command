@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Clock, Linkedin, Mail, Instagram, CheckCircle2, Loader2, Play, Pause, History } from 'lucide-react';
+import WorkflowHistoryDialog from './WorkflowHistoryDialog';
 
 interface WorkflowSubstep {
   text: string;
@@ -102,6 +103,7 @@ const AIWorkflow = () => {
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [visibleSteps, setVisibleSteps] = useState<WorkflowStep[]>([]);
   const [isRunning, setIsRunning] = useState(true);
+  const [showHistoryDialog, setShowHistoryDialog] = useState(false);
 
   useEffect(() => {
     if (!isRunning) return;
@@ -147,111 +149,127 @@ const AIWorkflow = () => {
   };
 
   return (
-    <Card className="h-full flex flex-col bg-white">
-      <CardHeader className="flex-shrink-0 pb-4">
-        <div className="flex items-center justify-between">
-          <CardTitle className="flex items-center space-x-2">
-            <div className={`w-3 h-3 rounded-full ${isRunning ? 'bg-green-500 animate-pulse' : 'bg-gray-400'}`}></div>
-            <span>AI业务员工作流</span>
-          </CardTitle>
-          <div className="flex items-center space-x-2">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={toggleWorkflow}
-              className="text-xs h-7"
-            >
-              {isRunning ? (
-                <>
-                  <Pause className="h-3 w-3 mr-1" />
-                  暂停
-                </>
-              ) : (
-                <>
-                  <Play className="h-3 w-3 mr-1" />
-                  开始
-                </>
-              )}
-            </Button>
-            <Button variant="ghost" size="sm" className="text-xs h-7">
-              <History className="h-3 w-3 mr-1" />
-              查看工作历史
-            </Button>
-          </div>
-        </div>
-        <p className="text-sm text-gray-600 mt-2">
-          AI业务员正在自动执行营销任务，实时监控多平台客户开发和内容发布
-        </p>
-      </CardHeader>
-      <CardContent className="flex-1 overflow-y-auto p-4 pt-0">
-        <Accordion type="single" collapsible className="space-y-3">
-          {visibleSteps.map((step, index) => {
-            const Icon = step.icon;
-            
-            return (
-              <AccordionItem 
-                key={`${step.id}-${index}`} 
-                value={`${step.id}-${index}`}
-                className={`transition-all duration-500 border-none ${
-                  index === 0 ? 'opacity-100' : 'opacity-80'
+    <>
+      <Card className="h-full flex flex-col bg-white">
+        <CardHeader className="flex-shrink-0 pb-4">
+          <div className="flex items-center justify-between">
+            <CardTitle className="flex items-center space-x-2">
+              <div className={`w-3 h-3 rounded-full ${isRunning ? 'bg-green-500 animate-pulse' : 'bg-gray-400'}`}></div>
+              <span>AI业务员工作流</span>
+            </CardTitle>
+            <div className="flex items-center space-x-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={toggleWorkflow}
+                className={`text-xs h-8 px-3 font-medium transition-all duration-200 ${
+                  isRunning 
+                    ? 'border-red-300 text-red-600 hover:border-red-400 hover:bg-red-50 hover:text-red-700' 
+                    : 'border-green-300 text-green-600 hover:border-green-400 hover:bg-green-50 hover:text-green-700'
                 }`}
               >
-                <AccordionTrigger className="p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors hover:no-underline">
-                  <div className="flex items-center space-x-3 flex-1">
-                    <div className="flex items-center space-x-2">
-                      <div 
-                        className="w-3 h-3 rounded-full flex-shrink-0" 
-                        style={{ backgroundColor: step.color }}
-                      />
-                      <Icon className="h-4 w-4 flex-shrink-0" color={step.color} />
-                    </div>
-                    <div className="flex-1 min-w-0">
+                {isRunning ? (
+                  <>
+                    <Pause className="h-3 w-3 mr-1" />
+                    暂停
+                  </>
+                ) : (
+                  <>
+                    <Play className="h-3 w-3 mr-1" />
+                    开始
+                  </>
+                )}
+              </Button>
+              <Button 
+                variant="outline" 
+                size="sm" 
+                onClick={() => setShowHistoryDialog(true)}
+                className="text-xs h-8 px-3 font-medium border-blue-300 text-blue-600 hover:border-blue-400 hover:bg-blue-50 hover:text-blue-700 transition-all duration-200"
+              >
+                <History className="h-3 w-3 mr-1" />
+                工作历史
+              </Button>
+            </div>
+          </div>
+          <p className="text-sm text-gray-600 mt-2">
+            AI业务员正在自动执行营销任务，实时监控多平台客户开发和内容发布
+          </p>
+        </CardHeader>
+        <CardContent className="flex-1 overflow-y-auto p-4 pt-0">
+          <Accordion type="single" collapsible className="space-y-3">
+            {visibleSteps.map((step, index) => {
+              const Icon = step.icon;
+              
+              return (
+                <AccordionItem 
+                  key={`${step.id}-${index}`} 
+                  value={`${step.id}-${index}`}
+                  className={`transition-all duration-500 border-none ${
+                    index === 0 ? 'opacity-100' : 'opacity-80'
+                  }`}
+                >
+                  <AccordionTrigger className="p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors hover:no-underline">
+                    <div className="flex items-center space-x-3 flex-1">
                       <div className="flex items-center space-x-2">
-                        <span className="text-sm font-medium truncate">{step.text}</span>
-                        {step.status === 'in-progress' && (
-                          <Loader2 className="h-3 w-3 text-blue-500 animate-spin flex-shrink-0" />
-                        )}
-                        {step.status === 'completed' && (
-                          <CheckCircle2 className="h-3 w-3 text-green-500 flex-shrink-0" />
-                        )}
+                        <div 
+                          className="w-3 h-3 rounded-full flex-shrink-0" 
+                          style={{ backgroundColor: step.color }}
+                        />
+                        <Icon className="h-4 w-4 flex-shrink-0" color={step.color} />
                       </div>
-                      <div className="flex items-center space-x-1 mt-1">
-                        <Clock className="h-3 w-3 text-gray-400" />
-                        <span className="text-xs text-gray-500">{formatTime(step.timestamp)}</span>
-                      </div>
-                    </div>
-                    <span className="text-xs text-gray-500 bg-gray-200 px-2 py-1 rounded-full">
-                      {step.substeps.filter(s => s.status === 'completed').length}/{step.substeps.length}
-                    </span>
-                  </div>
-                </AccordionTrigger>
-                
-                <AccordionContent>
-                  <div className="mt-2 ml-6 space-y-2">
-                    {step.substeps.map((substep, substepIndex) => (
-                      <div key={substepIndex} className="flex items-center space-x-3 p-2 bg-white rounded border-l-2 border-gray-200">
-                        {getStatusIcon(substep.status)}
-                        <div className="flex-1">
-                          <span className={`text-sm ${substep.status === 'completed' ? 'text-gray-600' : 'text-gray-800'}`}>
-                            {substep.text}
-                          </span>
-                          {substep.timestamp && (
-                            <div className="flex items-center space-x-1 mt-1">
-                              <Clock className="h-2.5 w-2.5 text-gray-400" />
-                              <span className="text-xs text-gray-400">{formatTime(substep.timestamp)}</span>
-                            </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center space-x-2">
+                          <span className="text-sm font-medium truncate">{step.text}</span>
+                          {step.status === 'in-progress' && (
+                            <Loader2 className="h-3 w-3 text-blue-500 animate-spin flex-shrink-0" />
+                          )}
+                          {step.status === 'completed' && (
+                            <CheckCircle2 className="h-3 w-3 text-green-500 flex-shrink-0" />
                           )}
                         </div>
+                        <div className="flex items-center space-x-1 mt-1">
+                          <Clock className="h-3 w-3 text-gray-400" />
+                          <span className="text-xs text-gray-500">{formatTime(step.timestamp)}</span>
+                        </div>
                       </div>
-                    ))}
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
-            );
-          })}
-        </Accordion>
-      </CardContent>
-    </Card>
+                      <span className="text-xs text-gray-500 bg-gray-200 px-2 py-1 rounded-full">
+                        {step.substeps.filter(s => s.status === 'completed').length}/{step.substeps.length}
+                      </span>
+                    </div>
+                  </AccordionTrigger>
+                  
+                  <AccordionContent>
+                    <div className="mt-2 ml-6 space-y-2">
+                      {step.substeps.map((substep, substepIndex) => (
+                        <div key={substepIndex} className="flex items-center space-x-3 p-2 bg-white rounded border-l-2 border-gray-200">
+                          {getStatusIcon(substep.status)}
+                          <div className="flex-1">
+                            <span className={`text-sm ${substep.status === 'completed' ? 'text-gray-600' : 'text-gray-800'}`}>
+                              {substep.text}
+                            </span>
+                            {substep.timestamp && (
+                              <div className="flex items-center space-x-1 mt-1">
+                                <Clock className="h-2.5 w-2.5 text-gray-400" />
+                                <span className="text-xs text-gray-400">{formatTime(substep.timestamp)}</span>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+              );
+            })}
+          </Accordion>
+        </CardContent>
+      </Card>
+
+      <WorkflowHistoryDialog 
+        open={showHistoryDialog}
+        onOpenChange={setShowHistoryDialog}
+      />
+    </>
   );
 };
 
