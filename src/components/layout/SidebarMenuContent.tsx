@@ -51,9 +51,12 @@ const SidebarMenuContent = ({ isCollapsed }: SidebarMenuContentProps) => {
                               <SidebarMenuSubButton 
                                 asChild
                                 isActive={location.pathname === subItem.url}
-                                className="text-left justify-start pl-11 py-2 hover:bg-gray-50 transition-colors"
+                                className="text-left justify-start pl-8 py-2 hover:bg-gray-50 transition-colors flex items-center"
                               >
-                                <Link to={subItem.url}>
+                                <Link to={subItem.url} className="flex items-center">
+                                  {subItem.icon && (
+                                    <subItem.icon className="mr-3 h-4 w-4 flex-shrink-0" />
+                                  )}
                                   <span className="text-left">{subItem.title}</span>
                                 </Link>
                               </SidebarMenuSubButton>
