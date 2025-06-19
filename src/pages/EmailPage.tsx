@@ -1,10 +1,10 @@
-
 import React, { useState, useMemo } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardHeader, CardTitle }  from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
+import { useToast } from '@/hooks/use-toast';
 import { 
   Mail, 
   Search, 
@@ -21,6 +21,7 @@ const EmailPage = () => {
   const [selectedEmail, setSelectedEmail] = useState<Email | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [activeTab, setActiveTab] = useState('manual');
+  const { toast } = useToast();
 
   // 模拟邮件数据
   const mockEmails: Email[] = [
@@ -110,6 +111,14 @@ const EmailPage = () => {
     // 标记为已读的逻辑在这里实现
   };
 
+  const handleManualTakeover = (email: Email) => {
+    console.log('转人工处理邮件:', email.id);
+    toast({
+      title: "转人工处理",
+      description: `邮件 "${email.subject}" 已转为人工处理模式`,
+    });
+  };
+
   const handleReply = (email: Email) => {
     console.log('回复邮件:', email.id);
     // 实现回复逻辑
@@ -192,6 +201,7 @@ const EmailPage = () => {
                 emails={filteredEmails}
                 selectedEmailId={selectedEmail?.id || null}
                 onEmailSelect={handleEmailSelect}
+                onManualTakeover={handleManualTakeover}
               />
             </CardContent>
           </Card>

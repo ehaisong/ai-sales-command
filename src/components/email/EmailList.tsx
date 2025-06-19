@@ -2,19 +2,26 @@
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { Avatar } from '@/components/ui/avatar';
 import { formatDistanceToNow } from 'date-fns';
 import { zhCN } from 'date-fns/locale';
-import { Mail, MailOpen, Paperclip, AlertCircle } from 'lucide-react';
+import { Mail, MailOpen, Paperclip, AlertCircle, UserCheck } from 'lucide-react';
 import { Email } from '@/types/email';
 
 interface EmailListProps {
   emails: Email[];
   selectedEmailId: string | null;
   onEmailSelect: (email: Email) => void;
+  onManualTakeover?: (email: Email) => void;
 }
 
-const EmailList: React.FC<EmailListProps> = ({ emails, selectedEmailId, onEmailSelect }) => {
+const EmailList: React.FC<EmailListProps> = ({ 
+  emails, 
+  selectedEmailId, 
+  onEmailSelect,
+  onManualTakeover 
+}) => {
   const getPriorityColor = (priority: string, isSelected: boolean) => {
     switch (priority) {
       case 'high': return 'text-red-500';
@@ -25,6 +32,13 @@ const EmailList: React.FC<EmailListProps> = ({ emails, selectedEmailId, onEmailS
 
   const getInitials = (email: string) => {
     return email.split('@')[0].substring(0, 2).toUpperCase();
+  };
+
+  const handleManualTakeoverClick = (e: React.MouseEvent, email: Email) => {
+    e.stopPropagation();
+    if (onManualTakeover) {
+      onManualTakeover(email);
+    }
   };
 
   return (
@@ -95,12 +109,26 @@ const EmailList: React.FC<EmailListProps> = ({ emails, selectedEmailId, onEmailS
                   </p>
                   
                   <div className="flex items-center justify-between">
-                    <span className="text-xs text-muted-foreground">
-                      {formatDistanceToNow(email.timestamp, { 
-                        addSuffix: true, 
-                        locale: zhCN 
-                      })}
-                    </span>
+                    <div className="flex items-center space-x-3">
+                      <span className="text-xs text-muted-foreground">
+                        {formatDistanceToNow(email.timestamp, { 
+                          addSuffix: true, 
+                          locale: zhCN 
+                        })}
+                      </span>
+                      {/* AI邮件的转人工处理按钮 */}
+                      {email.isAIGenerated && (
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="h-6 px-2 text-xs text-orange-600 border-orange-200 hover:bg-orange-50 hover:border-orange-300 transition-all duration-200"
+                          onClick={(e) => handleManualTakeoverClick(e, email)}
+                        >
+                          <UserCheck className="h-3 w-3 mr-1" />
+                          转人工处理
+                        </Button>
+                      )}
+                    </div>
                     {!email.isRead && (
                       <div className="w-2 h-2 bg-monday-blue rounded-full"></div>
                     )}
