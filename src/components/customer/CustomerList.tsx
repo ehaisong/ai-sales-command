@@ -281,7 +281,7 @@ const CustomerList: React.FC<CustomerListProps> = ({
                         />
                       </TableCell>
                       
-                      {/* Customer Name with Status Tags */}
+                      {/* Customer Name without Status Tags */}
                       <TableCell>
                         <div className="space-y-2">
                           <div className={`font-medium transition-colors duration-200 ${
@@ -296,34 +296,13 @@ const CustomerList: React.FC<CustomerListProps> = ({
                               {customer.company}
                             </div>
                           )}
-                          {/* Status Tags in Customer Column */}
-                          {statusTags.length > 0 && (
-                            <div className="flex flex-wrap gap-1">
-                              {statusTags.map((tag, tagIndex) => {
-                                const tagStyle = getTagStyle(tag);
-                                
-                                return (
-                                  <div 
-                                    key={tagIndex}
-                                    className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs border transition-all duration-200 hover:scale-105 ${
-                                      tagStyle.color
-                                    } ${
-                                      !customer.isActive ? 'opacity-50' : ''
-                                    }`}
-                                  >
-                                    <span>{tag}</span>
-                                  </div>
-                                );
-                              })}
-                            </div>
-                          )}
                         </div>
                       </TableCell>
                       
-                      {/* Non-Status Tags Only */}
+                      {/* All Tags (both status and non-status) */}
                       <TableCell>
                         <div className="flex flex-wrap gap-1">
-                          {nonStatusTags.map((tag, index) => {
+                          {customer.tags.map((tag, index) => {
                             const tagStyle = getTagStyle(tag);
                             
                             return (
