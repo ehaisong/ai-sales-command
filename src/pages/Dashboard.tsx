@@ -22,6 +22,7 @@ const Dashboard = () => {
               trend="+2 新消息" 
               trendUp={true} 
               iconColor="#4f46e5" 
+              animationDelay="0s"
             />
             <StatCard 
               title="今日客户" 
@@ -30,6 +31,7 @@ const Dashboard = () => {
               trend="+12% 较昨日" 
               trendUp={true} 
               iconColor="#FF5724" 
+              animationDelay="0.2s"
             />
             <StatCard 
               title="今日发信" 
@@ -38,6 +40,7 @@ const Dashboard = () => {
               trend="+8% 较昨日" 
               trendUp={true} 
               iconColor="#0EA5E9" 
+              animationDelay="0.4s"
             />
             <StatCard 
               title="今日收信" 
@@ -46,6 +49,7 @@ const Dashboard = () => {
               trend="+23% 较昨日" 
               trendUp={true} 
               iconColor="#10B981" 
+              animationDelay="0.6s"
             />
           </div>
 

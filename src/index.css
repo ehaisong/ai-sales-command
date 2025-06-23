@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -114,6 +113,16 @@
   
   .monday-card {
     @apply bg-white rounded-lg border border-border shadow-sm hover:shadow-md transition-all duration-200;
+  }
+
+  /* Floating animation enhancement */
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+    will-change: transform;
+  }
+  
+  .animate-float:hover {
+    animation-play-state: paused;
   }
   
   @keyframes fadeInUp {

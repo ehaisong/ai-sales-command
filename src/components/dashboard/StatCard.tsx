@@ -10,11 +10,26 @@ interface StatCardProps {
   trend?: string;
   trendUp?: boolean;
   iconColor?: string;
+  animationDelay?: string;
 }
 
-const StatCard: React.FC<StatCardProps> = ({ title, value, icon: Icon, trend, trendUp, iconColor = '#6b7280' }) => {
+const StatCard: React.FC<StatCardProps> = ({ 
+  title, 
+  value, 
+  icon: Icon, 
+  trend, 
+  trendUp, 
+  iconColor = '#6b7280',
+  animationDelay = '0s'
+}) => {
   return (
-    <Card className="card-hover">
+    <Card 
+      className="card-hover animate-float"
+      style={{ 
+        animationDelay,
+        animationFillMode: 'both'
+      }}
+    >
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1 px-3 pt-3">
         <CardTitle className="text-xs font-medium text-muted-foreground truncate">
           {title}
