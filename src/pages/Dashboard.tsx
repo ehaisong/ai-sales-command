@@ -14,7 +14,7 @@ const Dashboard = () => {
         {/* 左列：统计卡片 + AI工作流 - 占8/12宽度 */}
         <div className="lg:col-span-8 flex flex-col space-y-6">
           {/* 统计卡片区域 - 单行4列网格 */}
-          <div className="grid grid-cols-4 gap-3">
+          <div className="grid grid-cols-4 gap-4">
             <StatCard 
               title="待处理信息" 
               value={12} 
@@ -22,7 +22,6 @@ const Dashboard = () => {
               trend="+2 新消息" 
               trendUp={true} 
               iconColor="#4f46e5" 
-              animationDelay="0s"
             />
             <StatCard 
               title="今日客户" 
@@ -31,7 +30,6 @@ const Dashboard = () => {
               trend="+12% 较昨日" 
               trendUp={true} 
               iconColor="#FF5724" 
-              animationDelay="0.2s"
             />
             <StatCard 
               title="今日发信" 
@@ -40,7 +38,6 @@ const Dashboard = () => {
               trend="+8% 较昨日" 
               trendUp={true} 
               iconColor="#0EA5E9" 
-              animationDelay="0.4s"
             />
             <StatCard 
               title="今日收信" 
@@ -49,7 +46,6 @@ const Dashboard = () => {
               trend="+23% 较昨日" 
               trendUp={true} 
               iconColor="#10B981" 
-              animationDelay="0.6s"
             />
           </div>
 
