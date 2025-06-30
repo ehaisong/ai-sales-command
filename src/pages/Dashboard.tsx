@@ -4,11 +4,23 @@ import StatCard from '@/components/dashboard/StatCard';
 import AIWorkflow from '@/components/dashboard/AIWorkflow';
 import AIAgentCard from '@/components/dashboard/AIAgentCard';
 import ChatBox from '@/components/dashboard/ChatBox';
-import { Mail, Users, Send, MailOpen } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Mail, Users, Send, MailOpen, Rocket } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
   return (
     <div className="p-6 h-full">
+      {/* Enterprise CRM Access Button */}
+      <div className="mb-4">
+        <Button asChild className="bg-gradient-to-r from-monday-blue to-monday-purple hover:from-monday-blue-dark hover:to-monday-purple-dark">
+          <Link to="/enterprise-crm">
+            <Rocket className="h-4 w-4 mr-2" />
+            企业级CRM系统
+          </Link>
+        </Button>
+      </div>
+
       {/* 主要内容区域 - 改为8:4比例布局 */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 h-full">
         {/* 左列：统计卡片 + AI工作流 - 占8/12宽度 */}

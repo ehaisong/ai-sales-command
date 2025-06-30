@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -20,6 +19,7 @@ import TrafficHeatingPage from "@/pages/TrafficHeatingPage";
 import ProfilePage from "@/pages/ProfilePage";
 import BrandProfilePage from "@/pages/BrandProfilePage";
 import TestPage from "@/pages/TestPage";
+import EnterpriseCRM from "@/pages/EnterpriseCRM";
 
 const queryClient = new QueryClient();
 
@@ -44,6 +44,9 @@ const App = () => (
                   
                   {/* 客户管理 */}
                   <Route path="/customers" element={<CustomerManagement />} />
+                  
+                  {/* Enterprise CRM */}
+                  <Route path="/enterprise-crm" element={<EnterpriseCRM />} />
                   
                   {/* AI业务员 */}
                   <Route path="/ai-agent/knowledge" element={<AIKnowledgeBase />} />
