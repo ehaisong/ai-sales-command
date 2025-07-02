@@ -6,7 +6,6 @@ import {
   User,
   Share,
   Wrench,
-  TestTube,
   Mail,
   MessageCircle,
   Database,
@@ -125,10 +124,5 @@ export const menuItems: MenuItem[] = [
         icon: Zap,
       },
     ],
-  },
-  {
-    title: "测试模块",
-    url: "/test",
-    icon: TestTube,
   },
 ];
