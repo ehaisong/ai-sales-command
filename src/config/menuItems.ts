@@ -16,7 +16,8 @@ import {
   FileText,
   Eye,
   TrendingUp,
-  Zap
+  Zap,
+  BarChart3
 } from 'lucide-react';
 
 export interface MenuItem {
@@ -122,6 +123,11 @@ export const menuItems: MenuItem[] = [
         title: "流量加热",
         url: "/tools/traffic-boost",
         icon: Zap,
+      },
+      {
+        title: "海关数据分析",
+        url: "/tools/customs-analysis",
+        icon: BarChart3,
       },
     ],
   },

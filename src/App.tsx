@@ -65,6 +65,7 @@ const App = () => (
                   <Route path="/tools/ads" element={<div className="p-6">广告助手页面开发中...</div>} />
                   <Route path="/tools/competitor" element={<div className="p-6">竞品监控页面开发中...</div>} />
                   <Route path="/tools/traffic-boost" element={<TrafficHeatingPage />} />
+                  <Route path="/tools/customs-analysis" element={<div className="p-6">海关数据分析页面开发中...</div>} />
                   
                   {/* 个人资料 */}
                   <Route path="/profile" element={<ProfilePage />} />
