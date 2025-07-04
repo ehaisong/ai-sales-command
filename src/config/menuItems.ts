@@ -39,24 +39,8 @@ export const menuItems: MenuItem[] = [
   },
   {
     title: "营销对话",
+    url: "/marketing/conversations",
     icon: MessageSquare,
-    items: [
-      {
-        title: "统一对话",
-        url: "/marketing/conversations",
-        icon: MessageSquare,
-      },
-      {
-        title: "电子邮件",
-        url: "/marketing/email",
-        icon: Mail,
-      },
-      {
-        title: "WhatsApp",
-        url: "/marketing/whatsapp",
-        icon: MessageCircle,
-      },
-    ],
   },
   {
     title: "客户管理",

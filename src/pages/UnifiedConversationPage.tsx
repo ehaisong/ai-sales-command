@@ -3,158 +3,185 @@ import React, { useState, useMemo } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
 import { 
   MessageSquare, 
   Search, 
   Filter,
-  Mail,
-  Phone,
   Plus,
-  Settings
+  Users,
+  Bot
 } from 'lucide-react';
-import ConversationSidebar from '@/components/conversation/ConversationSidebar';
+import CustomerConversationsList from '@/components/conversation/CustomerConversationsList';
 import ChatArea from '@/components/conversation/ChatArea';
-import CustomerInfoPanel from '@/components/conversation/CustomerInfoPanel';
-import { UnifiedConversation, UnifiedMessage, ConversationFilter } from '@/types/conversation';
+import AISettingsPanel from '@/components/conversation/AISettingsPanel';
+import ManualTakeoverDialog from '@/components/customer/ManualTakeoverDialog';
+import { UnifiedConversation, CustomerConversationSummary, ConversationFilter } from '@/types/conversation';
 
 const UnifiedConversationPage = () => {
+  const [selectedCustomer, setSelectedCustomer] = useState<CustomerConversationSummary | null>(null);
   const [selectedConversation, setSelectedConversation] = useState<UnifiedConversation | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [filter, setFilter] = useState<ConversationFilter>({
     channel: 'all',
     status: 'all',
     priority: 'all',
-    aiGenerated: 'all'
+    aiManaged: 'all'
   });
+  const [takeoverDialog, setTakeoverDialog] = useState<{
+    open: boolean;
+    customer: CustomerConversationSummary | null;
+  }>({ open: false, customer: null });
+  
   const { toast } = useToast();
 
-  // Mock conversation data - in real app this would come from API
-  const mockConversations: UnifiedConversation[] = [
+  // Mock customer conversation data
+  const mockCustomers: CustomerConversationSummary[] = [
     {
       id: '1',
-      customerId: 'customer-1',
-      customerName: 'John Smith',
-      customerEmail: 'john.smith@example.com',
-      customerPhone: '+1-555-0123',
-      customerAvatar: undefined,
-      lastMessage: {
-        id: 'msg-1',
-        conversationId: '1',
-        type: 'email',
-        direction: 'inbound',
-        content: '您好，我对贵公司的产品很感兴趣，希望能获取详细的价格清单和技术规格。',
-        subject: '关于产品询价的问题',
-        timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000),
-        isRead: false,
-        isAIGenerated: false,
-        sender: {
-          name: 'John Smith',
-          email: 'john.smith@example.com'
-        },
-        recipient: {
-          name: 'AI Assistant',
-          email: 'ai@company.com'
-        },
-        status: 'delivered',
-        attachments: ['产品规格.pdf']
-      },
-      unreadCount: 1,
-      totalMessages: 3,
-      channels: ['email'],
-      tags: ['重要客户', '产品询价'],
+      name: 'John Smith',
+      company: 'ABC Manufacturing',
+      email: 'john.smith@example.com',
+      phone: '+1-555-0123',
+      lastContactDate: new Date(Date.now() - 2 * 60 * 60 * 1000),
+      unreadCount: 2,
+      totalConversations: 5,
+      isAIManaged: true,
       priority: 'high',
-      status: 'active',
-      createdAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000),
-      updatedAt: new Date(Date.now() - 2 * 60 * 60 * 1000)
+      tags: ['重要客户', '产品询价'],
+      channels: ['email', 'whatsapp'],
+      status: 'active'
     },
     {
       id: '2',
-      customerId: 'customer-2',
-      customerName: 'Sarah Wilson',
-      customerEmail: 'sarah.wilson@partner.com',
-      customerPhone: '+1-555-0456',
-      lastMessage: {
-        id: 'msg-2',
-        conversationId: '2',
-        type: 'whatsapp',
-        direction: 'outbound',
-        content: '感谢您的询问！我们的AI助手已为您准备了详细的合作方案，请查收。',
-        timestamp: new Date(Date.now() - 1 * 60 * 60 * 1000),
-        isRead: true,
-        isAIGenerated: true,
-        sender: {
-          name: 'AI Assistant',
-          phone: '+1-555-0999'
-        },
-        recipient: {
-          name: 'Sarah Wilson',
-          phone: '+1-555-0456'
-        },
-        status: 'read'
-      },
+      name: 'Sarah Wilson',
+      company: 'Tech Solutions Inc',
+      email: 'sarah.wilson@techsol.com',
+      phone: '+1-555-0456',
+      lastContactDate: new Date(Date.now() - 1 * 60 * 60 * 1000),
       unreadCount: 0,
-      totalMessages: 8,
-      channels: ['whatsapp', 'email'],
-      tags: ['合作伙伴', 'VIP客户'],
+      totalConversations: 8,
+      isAIManaged: false,
       priority: 'medium',
-      status: 'active',
-      createdAt: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000),
-      updatedAt: new Date(Date.now() - 1 * 60 * 60 * 1000)
+      tags: ['合作伙伴', 'VIP客户'],
+      channels: ['email'],
+      status: 'active'
+    },
+    {
+      id: '3',
+      name: 'Mike Chen',
+      company: '陈氏贸易公司',
+      email: 'mike@chentrading.com',
+      phone: '+86-138-0000-1234',
+      lastContactDate: new Date(Date.now() - 6 * 60 * 60 * 1000),
+      unreadCount: 1,
+      totalConversations: 3,
+      isAIManaged: true,
+      priority: 'medium',
+      tags: ['新客户', '批发商'],
+      channels: ['whatsapp'],
+      status: 'active'
     }
   ];
 
-  // Filter conversations based on search and filters
-  const filteredConversations = useMemo(() => {
-    let conversations = mockConversations;
+  // Mock conversation for selected customer
+  const mockConversation: UnifiedConversation = selectedCustomer ? {
+    id: `conv-${selectedCustomer.id}`,
+    customerId: selectedCustomer.id,
+    customerName: selectedCustomer.name,
+    customerEmail: selectedCustomer.email,
+    customerPhone: selectedCustomer.phone,
+    lastMessage: {
+      id: 'msg-last',
+      conversationId: `conv-${selectedCustomer.id}`,
+      type: 'email',
+      direction: 'inbound',
+      content: '您好，我对贵公司的产品很感兴趣，希望能获取详细的价格清单。',
+      subject: '产品询价',
+      timestamp: selectedCustomer.lastContactDate,
+      isRead: false,
+      isAIGenerated: false,
+      sender: {
+        name: selectedCustomer.name,
+        email: selectedCustomer.email
+      },
+      recipient: {
+        name: 'AI Assistant',
+        email: 'ai@company.com'
+      },
+      status: 'delivered'
+    },
+    unreadCount: selectedCustomer.unreadCount,
+    totalMessages: selectedCustomer.totalConversations * 3,
+    channels: selectedCustomer.channels,
+    tags: selectedCustomer.tags,
+    priority: selectedCustomer.priority,
+    status: selectedCustomer.status === 'active' ? 'active' : 'closed',
+    isAIManaged: selectedCustomer.isAIManaged,
+    createdAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000),
+    updatedAt: selectedCustomer.lastContactDate
+  } : null;
+
+  // Filter customers based on search and filters
+  const filteredCustomers = useMemo(() => {
+    let customers = mockCustomers;
     
-    // Apply search filter
     if (searchQuery) {
-      conversations = conversations.filter(conv => 
-        conv.customerName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        conv.customerEmail?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        conv.lastMessage.content.toLowerCase().includes(searchQuery.toLowerCase())
+      customers = customers.filter(customer => 
+        customer.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        customer.company?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        customer.email?.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
     
-    // Apply channel filter
-    if (filter.channel && filter.channel !== 'all') {
-      conversations = conversations.filter(conv => 
-        conv.channels.includes(filter.channel as 'email' | 'whatsapp')
+    if (filter.aiManaged && filter.aiManaged !== 'all') {
+      customers = customers.filter(customer => 
+        filter.aiManaged === 'ai' ? customer.isAIManaged : !customer.isAIManaged
       );
     }
     
-    // Apply status filter
-    if (filter.status && filter.status !== 'all') {
-      conversations = conversations.filter(conv => conv.status === filter.status);
-    }
-    
-    // Apply priority filter
     if (filter.priority && filter.priority !== 'all') {
-      conversations = conversations.filter(conv => conv.priority === filter.priority);
+      customers = customers.filter(customer => customer.priority === filter.priority);
     }
     
-    return conversations.sort((a, b) => b.updatedAt.getTime() - a.updatedAt.getTime());
+    return customers.sort((a, b) => b.lastContactDate.getTime() - a.lastContactDate.getTime());
   }, [searchQuery, filter]);
 
-  const handleConversationSelect = (conversation: UnifiedConversation) => {
-    setSelectedConversation(conversation);
+  const handleCustomerSelect = (customer: CustomerConversationSummary) => {
+    setSelectedCustomer(customer);
+    setSelectedConversation(mockConversation);
+  };
+
+  const handleManualTakeover = (customer: CustomerConversationSummary) => {
+    setTakeoverDialog({ open: true, customer });
+  };
+
+  const handleTakeoverConfirm = () => {
+    if (takeoverDialog.customer) {
+      // Update customer AI status
+      const updatedCustomer = { ...takeoverDialog.customer, isAIManaged: false };
+      setSelectedCustomer(updatedCustomer);
+      
+      toast({
+        title: "手动接管成功",
+        description: `已成功接管客户 ${takeoverDialog.customer.name} 的对话管理`,
+      });
+    }
+    setTakeoverDialog({ open: false, customer: null });
   };
 
   const handleSendMessage = (content: string, type: 'email' | 'whatsapp') => {
-    console.log('发送消息:', { content, type, conversationId: selectedConversation?.id });
+    console.log('发送消息:', { content, type, customerId: selectedCustomer?.id });
     toast({
       title: "消息已发送",
       description: `${type === 'email' ? '邮件' : 'WhatsApp消息'}已成功发送`,
     });
   };
 
-  const handleNewConversation = () => {
-    console.log('创建新对话');
+  const handleStartAIChat = () => {
     toast({
-      title: "创建新对话",
-      description: "新对话功能开发中...",
+      title: "AI助手",
+      description: "AI对话助手功能开发中...",
     });
   };
 
@@ -164,42 +191,96 @@ const UnifiedConversationPage = () => {
       <div className="mb-6">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center space-x-3">
-            <MessageSquare className="h-6 w-6 text-primary" />
-            <h1 className="text-2xl font-bold text-gray-900">营销对话</h1>
+            <MessageSquare className="h-6 w-6 text-blue-600" />
+            <h1 className="text-2xl font-bold text-gray-900">营销对话中心</h1>
           </div>
           
           <div className="flex items-center space-x-3">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
               <Input
-                placeholder="搜索对话、客户或消息内容..."
+                placeholder="搜索客户..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 w-80 bg-white"
+                className="pl-10 w-80 bg-white border-gray-200"
               />
             </div>
-            <Button variant="outline" size="sm">
+            <Button variant="outline" size="sm" className="border-gray-200">
               <Filter className="mr-2 h-4 w-4" />
               筛选
             </Button>
-            <Button onClick={handleNewConversation} className="bg-primary hover:bg-primary/90">
-              <Plus className="mr-2 h-4 w-4" />
-              新对话
-            </Button>
           </div>
+        </div>
+
+        {/* Stats Cards */}
+        <div className="grid grid-cols-4 gap-4 mb-4">
+          <Card className="bg-white border-gray-200">
+            <CardContent className="p-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm text-gray-600">活跃对话</p>
+                  <p className="text-2xl font-bold text-gray-900">{filteredCustomers.length}</p>
+                </div>
+                <Users className="h-8 w-8 text-blue-500" />
+              </div>
+            </CardContent>
+          </Card>
+          
+          <Card className="bg-white border-gray-200">
+            <CardContent className="p-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm text-gray-600">AI管理</p>
+                  <p className="text-2xl font-bold text-green-600">
+                    {filteredCustomers.filter(c => c.isAIManaged).length}
+                  </p>
+                </div>
+                <Bot className="h-8 w-8 text-green-500" />
+              </div>
+            </CardContent>
+          </Card>
+          
+          <Card className="bg-white border-gray-200">
+            <CardContent className="p-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm text-gray-600">待回复</p>
+                  <p className="text-2xl font-bold text-orange-600">
+                    {filteredCustomers.reduce((sum, c) => sum + c.unreadCount, 0)}
+                  </p>
+                </div>
+                <MessageSquare className="h-8 w-8 text-orange-500" />
+              </div>
+            </CardContent>
+          </Card>
+          
+          <Card className="bg-white border-gray-200">
+            <CardContent className="p-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm text-gray-600">高优先级</p>
+                  <p className="text-2xl font-bold text-red-600">
+                    {filteredCustomers.filter(c => c.priority === 'high').length}
+                  </p>
+                </div>
+                <div className="h-8 w-8 bg-red-100 rounded-full flex items-center justify-center">
+                  <div className="h-4 w-4 bg-red-500 rounded-full"></div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="grid grid-cols-12 gap-6 h-[calc(100vh-200px)]">
-        {/* Left Sidebar - Conversations */}
+      <div className="grid grid-cols-12 gap-6 h-[calc(100vh-280px)]">
+        {/* Left Sidebar - Customer List */}
         <div className="col-span-3">
-          <ConversationSidebar
-            conversations={filteredConversations}
-            selectedConversationId={selectedConversation?.id || null}
-            onConversationSelect={handleConversationSelect}
-            filter={filter}
-            onFilterChange={setFilter}
+          <CustomerConversationsList
+            customers={filteredCustomers}
+            selectedCustomerId={selectedCustomer?.id || null}
+            onCustomerSelect={handleCustomerSelect}
+            onManualTakeover={handleManualTakeover}
           />
         </div>
 
@@ -211,13 +292,25 @@ const UnifiedConversationPage = () => {
           />
         </div>
 
-        {/* Right Sidebar - Customer Info & Tools */}
+        {/* Right Sidebar - AI Settings & Tools */}
         <div className="col-span-3">
-          <CustomerInfoPanel
-            conversation={selectedConversation}
+          <AISettingsPanel
+            selectedCustomer={selectedCustomer}
+            onStartAIChat={handleStartAIChat}
+            onManualTakeover={() => selectedCustomer && handleManualTakeover(selectedCustomer)}
           />
         </div>
       </div>
+
+      {/* Manual Takeover Dialog */}
+      {takeoverDialog.customer && (
+        <ManualTakeoverDialog
+          open={takeoverDialog.open}
+          onOpenChange={(open) => setTakeoverDialog({ open, customer: takeoverDialog.customer })}
+          customer={takeoverDialog.customer}
+          onConfirm={handleTakeoverConfirm}
+        />
+      )}
     </div>
   );
 };

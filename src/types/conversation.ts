@@ -43,6 +43,9 @@ export interface UnifiedConversation {
   tags: string[];
   priority: 'high' | 'medium' | 'low';
   status: 'active' | 'closed' | 'pending';
+  isAIManaged: boolean;
+  manualTakeoverAt?: Date;
+  manualTakeoverBy?: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -52,5 +55,22 @@ export interface ConversationFilter {
   status?: 'all' | 'active' | 'closed' | 'pending';
   priority?: 'all' | 'high' | 'medium' | 'low';
   isRead?: boolean;
-  aiGenerated?: 'all' | 'manual' | 'ai';
+  aiManaged?: 'all' | 'ai' | 'manual';
+}
+
+export interface CustomerConversationSummary {
+  id: string;
+  name: string;
+  company?: string;
+  email?: string;
+  phone?: string;
+  avatar?: string;
+  lastContactDate: Date;
+  unreadCount: number;
+  totalConversations: number;
+  isAIManaged: boolean;
+  priority: 'high' | 'medium' | 'low';
+  tags: string[];
+  channels: ('email' | 'whatsapp')[];
+  status: 'active' | 'inactive';
 }
