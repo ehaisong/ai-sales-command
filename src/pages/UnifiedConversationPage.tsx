@@ -8,13 +8,15 @@ import {
   MessageSquare, 
   Search, 
   Filter,
-  Plus,
   Users,
-  Bot
+  Bot,
+  TrendingUp,
+  AlertTriangle
 } from 'lucide-react';
 import CustomerConversationsList from '@/components/conversation/CustomerConversationsList';
 import ChatArea from '@/components/conversation/ChatArea';
 import AISettingsPanel from '@/components/conversation/AISettingsPanel';
+import CustomerInfoPanel from '@/components/conversation/CustomerInfoPanel';
 import ManualTakeoverDialog from '@/components/customer/ManualTakeoverDialog';
 import { UnifiedConversation, CustomerConversationSummary, ConversationFilter } from '@/types/conversation';
 
@@ -32,6 +34,7 @@ const UnifiedConversationPage = () => {
     open: boolean;
     customer: CustomerConversationSummary | null;
   }>({ open: false, customer: null });
+  const [activeTab, setActiveTab] = useState<'info' | 'ai'>('ai');
   
   const { toast } = useToast();
 
@@ -41,14 +44,15 @@ const UnifiedConversationPage = () => {
       id: '1',
       name: 'John Smith',
       company: 'ABC Manufacturing',
-      email: 'john.smith@example.com',
+      email: 'john.smith@abcmfg.com',
       phone: '+1-555-0123',
+      avatar: undefined,
       lastContactDate: new Date(Date.now() - 2 * 60 * 60 * 1000),
-      unreadCount: 2,
-      totalConversations: 5,
+      unreadCount: 3,
+      totalConversations: 12,
       isAIManaged: true,
       priority: 'high',
-      tags: ['重要客户', '产品询价'],
+      tags: ['VIP客户', '制造业', '长期合作'],
       channels: ['email', 'whatsapp'],
       status: 'active'
     },
@@ -58,12 +62,13 @@ const UnifiedConversationPage = () => {
       company: 'Tech Solutions Inc',
       email: 'sarah.wilson@techsol.com',
       phone: '+1-555-0456',
+      avatar: undefined,
       lastContactDate: new Date(Date.now() - 1 * 60 * 60 * 1000),
       unreadCount: 0,
-      totalConversations: 8,
+      totalConversations: 25,
       isAIManaged: false,
       priority: 'medium',
-      tags: ['合作伙伴', 'VIP客户'],
+      tags: ['技术合作', '系统集成'],
       channels: ['email'],
       status: 'active'
     },
@@ -73,37 +78,56 @@ const UnifiedConversationPage = () => {
       company: '陈氏贸易公司',
       email: 'mike@chentrading.com',
       phone: '+86-138-0000-1234',
+      avatar: undefined,
       lastContactDate: new Date(Date.now() - 6 * 60 * 60 * 1000),
       unreadCount: 1,
-      totalConversations: 3,
+      totalConversations: 8,
       isAIManaged: true,
       priority: 'medium',
       tags: ['新客户', '批发商'],
       channels: ['whatsapp'],
       status: 'active'
+    },
+    {
+      id: '4',
+      name: 'Emma Rodriguez',
+      company: 'Global Imports Ltd',
+      email: 'emma@globalimports.com',
+      phone: '+44-20-7946-0958',
+      avatar: undefined,
+      lastContactDate: new Date(Date.now() - 12 * 60 * 60 * 1000),
+      unreadCount: 2,
+      totalConversations: 15,
+      isAIManaged: true,
+      priority: 'high',
+      tags: ['国际贸易', '重要客户'],
+      channels: ['email', 'whatsapp'],
+      status: 'active'
     }
   ];
 
-  // Mock conversation for selected customer
-  const mockConversation: UnifiedConversation = selectedCustomer ? {
+  // Generate mock conversation for selected customer
+  const mockConversation: UnifiedConversation | null = selectedCustomer ? {
     id: `conv-${selectedCustomer.id}`,
     customerId: selectedCustomer.id,
     customerName: selectedCustomer.name,
     customerEmail: selectedCustomer.email,
     customerPhone: selectedCustomer.phone,
+    customerAvatar: selectedCustomer.avatar,
     lastMessage: {
       id: 'msg-last',
       conversationId: `conv-${selectedCustomer.id}`,
       type: 'email',
       direction: 'inbound',
-      content: '您好，我对贵公司的产品很感兴趣，希望能获取详细的价格清单。',
-      subject: '产品询价',
+      content: '您好，我对贵公司的最新产品很感兴趣，希望能了解详细的技术规格和价格信息。我们公司正在寻找长期合作伙伴。',
+      subject: '产品咨询 - 技术规格和报价需求',
       timestamp: selectedCustomer.lastContactDate,
-      isRead: false,
+      isRead: selectedCustomer.unreadCount === 0,
       isAIGenerated: false,
       sender: {
         name: selectedCustomer.name,
-        email: selectedCustomer.email
+        email: selectedCustomer.email,
+        phone: selectedCustomer.phone
       },
       recipient: {
         name: 'AI Assistant',
@@ -112,13 +136,13 @@ const UnifiedConversationPage = () => {
       status: 'delivered'
     },
     unreadCount: selectedCustomer.unreadCount,
-    totalMessages: selectedCustomer.totalConversations * 3,
+    totalMessages: selectedCustomer.totalConversations * 4,
     channels: selectedCustomer.channels,
     tags: selectedCustomer.tags,
     priority: selectedCustomer.priority,
     status: selectedCustomer.status === 'active' ? 'active' : 'closed',
     isAIManaged: selectedCustomer.isAIManaged,
-    createdAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000),
+    createdAt: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000),
     updatedAt: selectedCustomer.lastContactDate
   } : null;
 
@@ -174,15 +198,26 @@ const UnifiedConversationPage = () => {
     console.log('发送消息:', { content, type, customerId: selectedCustomer?.id });
     toast({
       title: "消息已发送",
-      description: `${type === 'email' ? '邮件' : 'WhatsApp消息'}已成功发送`,
+      description: `${type === 'email' ? '邮件' : 'WhatsApp消息'}已成功发送给 ${selectedCustomer?.name}`,
     });
   };
 
   const handleStartAIChat = () => {
     toast({
-      title: "AI助手",
-      description: "AI对话助手功能开发中...",
+      title: "AI助手已启动",
+      description: "正在为您分析客户信息并生成建议...",
     });
+  };
+
+  const handleRestoreAIManagement = () => {
+    if (selectedCustomer) {
+      const updatedCustomer = { ...selectedCustomer, isAIManaged: true };
+      setSelectedCustomer(updatedCustomer);
+      toast({
+        title: "AI管理已恢复",
+        description: `客户 ${selectedCustomer.name} 已重新启用AI自动管理`,
+      });
+    }
   };
 
   return (
@@ -191,7 +226,7 @@ const UnifiedConversationPage = () => {
       <div className="mb-6">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center space-x-3">
-            <MessageSquare className="h-6 w-6 text-blue-600" />
+            <MessageSquare className="h-6 w-6 text-emerald-600" />
             <h1 className="text-2xl font-bold text-gray-900">营销对话中心</h1>
           </div>
           
@@ -199,62 +234,65 @@ const UnifiedConversationPage = () => {
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
               <Input
-                placeholder="搜索客户..."
+                placeholder="搜索客户、公司或邮箱..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 w-80 bg-white border-gray-200"
+                className="pl-10 w-80 bg-white border-gray-200 focus:border-emerald-500 focus:ring-emerald-500"
               />
             </div>
-            <Button variant="outline" size="sm" className="border-gray-200">
+            <Button variant="outline" size="sm" className="border-gray-200 hover:border-emerald-500">
               <Filter className="mr-2 h-4 w-4" />
               筛选
             </Button>
           </div>
         </div>
 
-        {/* Stats Cards */}
+        {/* Enhanced Stats Cards */}
         <div className="grid grid-cols-4 gap-4 mb-4">
-          <Card className="bg-white border-gray-200">
+          <Card className="bg-white border-gray-200 hover:shadow-md transition-shadow">
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-gray-600">活跃对话</p>
                   <p className="text-2xl font-bold text-gray-900">{filteredCustomers.length}</p>
+                  <p className="text-xs text-green-600 mt-1">↗ +12% 本周</p>
                 </div>
                 <Users className="h-8 w-8 text-blue-500" />
               </div>
             </CardContent>
           </Card>
           
-          <Card className="bg-white border-gray-200">
+          <Card className="bg-white border-gray-200 hover:shadow-md transition-shadow">
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600">AI管理</p>
-                  <p className="text-2xl font-bold text-green-600">
+                  <p className="text-sm text-gray-600">AI自动管理</p>
+                  <p className="text-2xl font-bold text-emerald-600">
                     {filteredCustomers.filter(c => c.isAIManaged).length}
                   </p>
+                  <p className="text-xs text-emerald-600 mt-1">效率提升 85%</p>
                 </div>
-                <Bot className="h-8 w-8 text-green-500" />
+                <Bot className="h-8 w-8 text-emerald-500" />
               </div>
             </CardContent>
           </Card>
           
-          <Card className="bg-white border-gray-200">
+          <Card className="bg-white border-gray-200 hover:shadow-md transition-shadow">
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600">待回复</p>
+                  <p className="text-sm text-gray-600">待处理消息</p>
                   <p className="text-2xl font-bold text-orange-600">
                     {filteredCustomers.reduce((sum, c) => sum + c.unreadCount, 0)}
                   </p>
+                  <p className="text-xs text-orange-600 mt-1">需要关注</p>
                 </div>
                 <MessageSquare className="h-8 w-8 text-orange-500" />
               </div>
             </CardContent>
           </Card>
           
-          <Card className="bg-white border-gray-200">
+          <Card className="bg-white border-gray-200 hover:shadow-md transition-shadow">
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
@@ -262,10 +300,9 @@ const UnifiedConversationPage = () => {
                   <p className="text-2xl font-bold text-red-600">
                     {filteredCustomers.filter(c => c.priority === 'high').length}
                   </p>
+                  <p className="text-xs text-red-600 mt-1">重点跟进</p>
                 </div>
-                <div className="h-8 w-8 bg-red-100 rounded-full flex items-center justify-center">
-                  <div className="h-4 w-4 bg-red-500 rounded-full"></div>
-                </div>
+                <AlertTriangle className="h-8 w-8 text-red-500" />
               </div>
             </CardContent>
           </Card>
@@ -292,13 +329,46 @@ const UnifiedConversationPage = () => {
           />
         </div>
 
-        {/* Right Sidebar - AI Settings & Tools */}
-        <div className="col-span-3">
-          <AISettingsPanel
-            selectedCustomer={selectedCustomer}
-            onStartAIChat={handleStartAIChat}
-            onManualTakeover={() => selectedCustomer && handleManualTakeover(selectedCustomer)}
-          />
+        {/* Right Sidebar - AI Settings & Customer Info */}
+        <div className="col-span-3 space-y-4">
+          {/* Tab Navigation */}
+          <div className="flex space-x-1 bg-gray-100 p-1 rounded-lg">
+            <button
+              onClick={() => setActiveTab('ai')}
+              className={`flex-1 py-2 px-3 rounded-md text-sm font-medium transition-colors ${
+                activeTab === 'ai'
+                  ? 'bg-white text-emerald-600 shadow-sm'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              <Bot className="inline h-4 w-4 mr-1" />
+              AI助手
+            </button>
+            <button
+              onClick={() => setActiveTab('info')}
+              className={`flex-1 py-2 px-3 rounded-md text-sm font-medium transition-colors ${
+                activeTab === 'info'
+                  ? 'bg-white text-emerald-600 shadow-sm'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              <TrendingUp className="inline h-4 w-4 mr-1" />
+              客户信息
+            </button>
+          </div>
+
+          {/* Tab Content */}
+          {activeTab === 'ai' ? (
+            <AISettingsPanel
+              selectedCustomer={selectedCustomer}
+              onStartAIChat={handleStartAIChat}
+              onManualTakeover={() => selectedCustomer && handleManualTakeover(selectedCustomer)}
+            />
+          ) : (
+            <CustomerInfoPanel
+              conversation={selectedConversation}
+            />
+          )}
         </div>
       </div>
 

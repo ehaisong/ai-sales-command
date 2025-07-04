@@ -6,8 +6,6 @@ import {
   User,
   Share,
   Wrench,
-  Mail,
-  MessageCircle,
   Database,
   Settings,
   Facebook,
@@ -57,7 +55,7 @@ export const menuItems: MenuItem[] = [
         icon: Database,
       },
       {
-        title: "设置",
+        title: "AI设置",
         url: "/ai-agent/settings",
         icon: Settings,
       },

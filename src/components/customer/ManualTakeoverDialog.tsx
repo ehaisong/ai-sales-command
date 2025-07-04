@@ -10,12 +10,12 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
-import { Customer } from '@/types/customer';
+import { CustomerConversationSummary } from '@/types/conversation';
 
 interface ManualTakeoverDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  customer: Customer;
+  customer: CustomerConversationSummary;
   onConfirm: () => void;
 }
 
