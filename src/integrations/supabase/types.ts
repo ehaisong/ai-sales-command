@@ -45,54 +45,6 @@ export type Database = {
         }
         Relationships: []
       }
-      ai_conversations: {
-        Row: {
-          ai_model: string | null
-          brand_id: number
-          context_data: Json | null
-          conversation_type: string | null
-          created_at: string | null
-          customer_id: number | null
-          id: string
-          messages: Json
-          status: string | null
-          title: string | null
-          total_tokens: number | null
-          updated_at: string | null
-          user_id: number
-        }
-        Insert: {
-          ai_model?: string | null
-          brand_id: number
-          context_data?: Json | null
-          conversation_type?: string | null
-          created_at?: string | null
-          customer_id?: number | null
-          id?: string
-          messages?: Json
-          status?: string | null
-          title?: string | null
-          total_tokens?: number | null
-          updated_at?: string | null
-          user_id: number
-        }
-        Update: {
-          ai_model?: string | null
-          brand_id?: number
-          context_data?: Json | null
-          conversation_type?: string | null
-          created_at?: string | null
-          customer_id?: number | null
-          id?: string
-          messages?: Json
-          status?: string | null
-          title?: string | null
-          total_tokens?: number | null
-          updated_at?: string | null
-          user_id?: number
-        }
-        Relationships: []
-      }
       apikeys: {
         Row: {
           api_key: string
@@ -246,71 +198,6 @@ export type Database = {
         }
         Relationships: []
       }
-      customer_interactions: {
-        Row: {
-          brand_id: number
-          channel: string | null
-          content: string | null
-          created_at: string | null
-          customer_id: number
-          direction: string | null
-          duration_minutes: number | null
-          id: string
-          interaction_type: string
-          metadata: Json | null
-          next_follow_up_date: string | null
-          outcome: string | null
-          status: string | null
-          subject: string | null
-          updated_at: string | null
-          user_id: number
-        }
-        Insert: {
-          brand_id: number
-          channel?: string | null
-          content?: string | null
-          created_at?: string | null
-          customer_id: number
-          direction?: string | null
-          duration_minutes?: number | null
-          id?: string
-          interaction_type: string
-          metadata?: Json | null
-          next_follow_up_date?: string | null
-          outcome?: string | null
-          status?: string | null
-          subject?: string | null
-          updated_at?: string | null
-          user_id: number
-        }
-        Update: {
-          brand_id?: number
-          channel?: string | null
-          content?: string | null
-          created_at?: string | null
-          customer_id?: number
-          direction?: string | null
-          duration_minutes?: number | null
-          id?: string
-          interaction_type?: string
-          metadata?: Json | null
-          next_follow_up_date?: string | null
-          outcome?: string | null
-          status?: string | null
-          subject?: string | null
-          updated_at?: string | null
-          user_id?: number
-        }
-        Relationships: [
-          {
-            foreignKeyName: "customer_interactions_customer_id_fkey"
-            columns: ["customer_id"]
-            isOneToOne: false
-            referencedRelation: "customers"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       customer_seo_keywords: {
         Row: {
           brand_id: number
@@ -401,135 +288,48 @@ export type Database = {
         }
         Relationships: []
       }
-      customer_tags: {
-        Row: {
-          assigned_at: string | null
-          assigned_by: number
-          customer_id: number
-          id: string
-          tag_id: number
-        }
-        Insert: {
-          assigned_at?: string | null
-          assigned_by: number
-          customer_id: number
-          id?: string
-          tag_id: number
-        }
-        Update: {
-          assigned_at?: string | null
-          assigned_by?: number
-          customer_id?: number
-          id?: string
-          tag_id?: number
-        }
-        Relationships: [
-          {
-            foreignKeyName: "customer_tags_customer_id_fkey"
-            columns: ["customer_id"]
-            isOneToOne: false
-            referencedRelation: "customers"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "customer_tags_tag_id_fkey"
-            columns: ["tag_id"]
-            isOneToOne: false
-            referencedRelation: "system_tags"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       customers: {
         Row: {
-          acquisition_cost: number | null
-          annual_revenue: number | null
           brand_id: number
-          company_size: string | null
           contact_method: string | null
           contact_person: string | null
-          country: string | null
           created_at: string | null
-          custom_fields: Json | null
           customer_name: string
           customer_source: string | null
           customer_tags: string | null
           customer_type: string | null
-          email: string | null
-          employee_count: number | null
           id: number
-          industry: string | null
-          last_activity_at: string | null
-          lead_score: number | null
-          lifecycle_stage: string | null
-          lifetime_value: number | null
           phone_number: string | null
-          preferred_language: string | null
-          social_profiles: Json | null
-          time_zone: string | null
           updated_at: string | null
           user_id: number
-          website: string | null
         }
         Insert: {
-          acquisition_cost?: number | null
-          annual_revenue?: number | null
           brand_id: number
-          company_size?: string | null
           contact_method?: string | null
           contact_person?: string | null
-          country?: string | null
           created_at?: string | null
-          custom_fields?: Json | null
           customer_name: string
           customer_source?: string | null
           customer_tags?: string | null
           customer_type?: string | null
-          email?: string | null
-          employee_count?: number | null
           id?: number
-          industry?: string | null
-          last_activity_at?: string | null
-          lead_score?: number | null
-          lifecycle_stage?: string | null
-          lifetime_value?: number | null
           phone_number?: string | null
-          preferred_language?: string | null
-          social_profiles?: Json | null
-          time_zone?: string | null
           updated_at?: string | null
           user_id: number
-          website?: string | null
         }
         Update: {
-          acquisition_cost?: number | null
-          annual_revenue?: number | null
           brand_id?: number
-          company_size?: string | null
           contact_method?: string | null
           contact_person?: string | null
-          country?: string | null
           created_at?: string | null
-          custom_fields?: Json | null
           customer_name?: string
           customer_source?: string | null
           customer_tags?: string | null
           customer_type?: string | null
-          email?: string | null
-          employee_count?: number | null
           id?: number
-          industry?: string | null
-          last_activity_at?: string | null
-          lead_score?: number | null
-          lifecycle_stage?: string | null
-          lifetime_value?: number | null
           phone_number?: string | null
-          preferred_language?: string | null
-          social_profiles?: Json | null
-          time_zone?: string | null
           updated_at?: string | null
           user_id?: number
-          website?: string | null
         }
         Relationships: []
       }
@@ -561,238 +361,6 @@ export type Database = {
           email_type?: string
           id?: number
           send_history?: Json
-          updated_at?: string | null
-          user_id?: number
-        }
-        Relationships: []
-      }
-      email_templates: {
-        Row: {
-          brand_id: number
-          category: string | null
-          created_at: string | null
-          html_content: string | null
-          id: string
-          is_ai_generated: boolean | null
-          name: string
-          performance_score: number | null
-          subject_template: string
-          tags: string[] | null
-          text_content: string | null
-          updated_at: string | null
-          usage_count: number | null
-          user_id: number
-          variables: Json | null
-        }
-        Insert: {
-          brand_id: number
-          category?: string | null
-          created_at?: string | null
-          html_content?: string | null
-          id?: string
-          is_ai_generated?: boolean | null
-          name: string
-          performance_score?: number | null
-          subject_template: string
-          tags?: string[] | null
-          text_content?: string | null
-          updated_at?: string | null
-          usage_count?: number | null
-          user_id: number
-          variables?: Json | null
-        }
-        Update: {
-          brand_id?: number
-          category?: string | null
-          created_at?: string | null
-          html_content?: string | null
-          id?: string
-          is_ai_generated?: boolean | null
-          name?: string
-          performance_score?: number | null
-          subject_template?: string
-          tags?: string[] | null
-          text_content?: string | null
-          updated_at?: string | null
-          usage_count?: number | null
-          user_id?: number
-          variables?: Json | null
-        }
-        Relationships: []
-      }
-      email_tracking_events: {
-        Row: {
-          created_at: string | null
-          email_id: string
-          event_data: Json | null
-          event_type: string
-          id: string
-          ip_address: string | null
-          location_data: Json | null
-          user_agent: string | null
-        }
-        Insert: {
-          created_at?: string | null
-          email_id: string
-          event_data?: Json | null
-          event_type: string
-          id?: string
-          ip_address?: string | null
-          location_data?: Json | null
-          user_agent?: string | null
-        }
-        Update: {
-          created_at?: string | null
-          email_id?: string
-          event_data?: Json | null
-          event_type?: string
-          id?: string
-          ip_address?: string | null
-          location_data?: Json | null
-          user_agent?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "email_tracking_events_email_id_fkey"
-            columns: ["email_id"]
-            isOneToOne: false
-            referencedRelation: "emails"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      emails: {
-        Row: {
-          ai_insights: Json | null
-          attachments: Json | null
-          brand_id: number
-          content: string | null
-          created_at: string | null
-          customer_id: number | null
-          email_type: string | null
-          from_email: string
-          id: string
-          is_read: boolean | null
-          opened_at: string | null
-          priority: string | null
-          replied_at: string | null
-          reply_to_id: string | null
-          scheduled_at: string | null
-          sent_at: string | null
-          status: string | null
-          subject: string
-          tags: string[] | null
-          thread_id: string | null
-          to_email: string
-          tracking_data: Json | null
-          updated_at: string | null
-          user_id: number
-        }
-        Insert: {
-          ai_insights?: Json | null
-          attachments?: Json | null
-          brand_id: number
-          content?: string | null
-          created_at?: string | null
-          customer_id?: number | null
-          email_type?: string | null
-          from_email: string
-          id?: string
-          is_read?: boolean | null
-          opened_at?: string | null
-          priority?: string | null
-          replied_at?: string | null
-          reply_to_id?: string | null
-          scheduled_at?: string | null
-          sent_at?: string | null
-          status?: string | null
-          subject: string
-          tags?: string[] | null
-          thread_id?: string | null
-          to_email: string
-          tracking_data?: Json | null
-          updated_at?: string | null
-          user_id: number
-        }
-        Update: {
-          ai_insights?: Json | null
-          attachments?: Json | null
-          brand_id?: number
-          content?: string | null
-          created_at?: string | null
-          customer_id?: number | null
-          email_type?: string | null
-          from_email?: string
-          id?: string
-          is_read?: boolean | null
-          opened_at?: string | null
-          priority?: string | null
-          replied_at?: string | null
-          reply_to_id?: string | null
-          scheduled_at?: string | null
-          sent_at?: string | null
-          status?: string | null
-          subject?: string
-          tags?: string[] | null
-          thread_id?: string | null
-          to_email?: string
-          tracking_data?: Json | null
-          updated_at?: string | null
-          user_id?: number
-        }
-        Relationships: [
-          {
-            foreignKeyName: "emails_reply_to_id_fkey"
-            columns: ["reply_to_id"]
-            isOneToOne: false
-            referencedRelation: "emails"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      marketing_campaigns: {
-        Row: {
-          a_b_test_config: Json | null
-          brand_id: number
-          campaign_type: string
-          created_at: string | null
-          email_template_id: string | null
-          id: string
-          name: string
-          performance_metrics: Json | null
-          schedule_config: Json | null
-          status: string | null
-          target_audience: Json | null
-          updated_at: string | null
-          user_id: number
-        }
-        Insert: {
-          a_b_test_config?: Json | null
-          brand_id: number
-          campaign_type: string
-          created_at?: string | null
-          email_template_id?: string | null
-          id?: string
-          name: string
-          performance_metrics?: Json | null
-          schedule_config?: Json | null
-          status?: string | null
-          target_audience?: Json | null
-          updated_at?: string | null
-          user_id: number
-        }
-        Update: {
-          a_b_test_config?: Json | null
-          brand_id?: number
-          campaign_type?: string
-          created_at?: string | null
-          email_template_id?: string | null
-          id?: string
-          name?: string
-          performance_metrics?: Json | null
-          schedule_config?: Json | null
-          status?: string | null
-          target_audience?: Json | null
           updated_at?: string | null
           user_id?: number
         }
