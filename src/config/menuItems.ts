@@ -42,6 +42,11 @@ export const menuItems: MenuItem[] = [
     icon: MessageSquare,
     items: [
       {
+        title: "统一对话",
+        url: "/marketing/conversations",
+        icon: MessageSquare,
+      },
+      {
         title: "电子邮件",
         url: "/marketing/email",
         icon: Mail,

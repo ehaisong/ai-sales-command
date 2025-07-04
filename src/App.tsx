@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -8,6 +9,7 @@ import AppSidebar from "@/components/layout/AppSidebar";
 import TopNavbar from "@/components/layout/TopNavbar";
 import Dashboard from "@/pages/Dashboard";
 import EmailPage from "@/pages/EmailPage";
+import UnifiedConversationPage from "@/pages/UnifiedConversationPage";
 import EmailComposePage from "@/pages/EmailComposePage";
 import CustomerManagement from "@/pages/CustomerManagement";
 import NotFound from "@/pages/NotFound";
@@ -38,6 +40,7 @@ const App = () => (
                 <Routes>
                   <Route path="/" element={<Dashboard />} />
                   {/* 营销对话 */}
+                  <Route path="/marketing/conversations" element={<UnifiedConversationPage />} />
                   <Route path="/marketing/email" element={<EmailPage />} />
                   <Route path="/marketing/email/compose" element={<EmailComposePage />} />
                   <Route path="/marketing/whatsapp" element={<div className="p-6">WhatsApp页面开发中...</div>} />
