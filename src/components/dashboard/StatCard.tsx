@@ -10,6 +10,7 @@ interface StatCardProps {
   trend?: string;
   trendUp?: boolean;
   iconColor?: string;
+  bgColor?: string;
 }
 
 const StatCard: React.FC<StatCardProps> = ({ 
@@ -18,10 +19,11 @@ const StatCard: React.FC<StatCardProps> = ({
   icon: Icon, 
   trend, 
   trendUp, 
-  iconColor = '#6b7280'
+  iconColor = '#6b7280',
+  bgColor
 }) => {
   return (
-    <Card className="card-hover">
+    <Card className={`card-hover ${bgColor}`}>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 px-4 pt-4">
         <CardTitle className="text-sm font-medium text-muted-foreground">
           {title}

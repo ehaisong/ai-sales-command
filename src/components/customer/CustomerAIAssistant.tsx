@@ -278,7 +278,20 @@ const CustomerAIAssistant: React.FC<CustomerAIAssistantProps> = ({ customer }) =
       <ManualTakeoverDialog
         open={manualTakeoverOpen}
         onOpenChange={setManualTakeoverOpen}
-        customer={customer}
+        customer={{
+          id: customer.id,
+          name: customer.name,
+          email: customer.email,
+          phone: customer.phone,
+          lastContactDate: new Date(),
+          unreadCount: 0,
+          totalConversations: 1,
+          isAIManaged: true,
+          priority: 'medium',
+          tags: customer.tags,
+          channels: ['email'],
+          status: 'active'
+        }}
         onConfirm={handleManualTakeover}
       />
     </div>
