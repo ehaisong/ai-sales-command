@@ -2,7 +2,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { SidebarFooter } from '@/components/ui/sidebar';
-import { User, CreditCard } from 'lucide-react';
+import { User, Settings } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface SidebarFooterProps {
@@ -24,8 +24,8 @@ const AppSidebarFooter = ({ isCollapsed }: SidebarFooterProps) => {
             </div>
           </Link>
           <Button size="sm" className="w-full">
-            <CreditCard className="mr-2 h-4 w-4" />
-            充值积分
+            <Settings className="mr-2 h-4 w-4" />
+            设置
           </Button>
         </>
       ) : (
