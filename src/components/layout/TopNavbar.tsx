@@ -4,13 +4,17 @@ import { Input } from '@/components/ui/input';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
 import { Badge } from '@/components/ui/badge';
 import { SidebarTrigger } from '@/components/ui/sidebar';
-import { Search, Bell, HelpCircle, Share, ChevronDown, User, Settings, CreditCard } from 'lucide-react';
+import { Search, Bell, HelpCircle, Share, ChevronDown, User, Settings, CreditCard, Monitor } from 'lucide-react';
 import { Link } from 'react-router-dom';
 const TopNavbar = () => {
   return <header className="h-16 bg-white border-b border-border px-6 flex items-center justify-between w-full py-[34px]">
-      {/* 左侧抽屉控制 */}
+      {/* 左侧抽屉控制和DEMO标识 */}
       <div className="flex items-center space-x-4">
         <SidebarTrigger />
+        <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
+          <Monitor className="h-3 w-3 mr-1" />
+          DEMO 演示版
+        </Badge>
       </div>
 
       {/* 中间搜索栏 */}

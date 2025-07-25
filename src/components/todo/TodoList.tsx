@@ -4,13 +4,13 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Plus, Loader2 } from 'lucide-react';
+import { Plus, Loader2, RotateCcw } from 'lucide-react';
 import { useTodos } from '@/hooks/useTodos';
 import TodoItem from './TodoItem';
 
 const TodoList = () => {
   const [newTodo, setNewTodo] = useState('');
-  const { todos, loading, addTodo, toggleTodo, deleteTodo } = useTodos();
+  const { todos, loading, addTodo, toggleTodo, deleteTodo, resetTodos } = useTodos();
 
   const handleAddTodo = async () => {
     if (newTodo.trim()) {
@@ -42,11 +42,22 @@ const TodoList = () => {
   return (
     <Card className="w-full max-w-2xl mx-auto">
       <CardHeader>
-        <CardTitle className="flex items-center space-x-2">
-          <span>待办事项</span>
-          <span className="text-sm text-gray-500">
-            ({completedCount}/{totalCount})
-          </span>
+        <CardTitle className="flex items-center justify-between">
+          <div className="flex items-center space-x-2">
+            <span>待办事项</span>
+            <span className="text-sm text-gray-500">
+              ({completedCount}/{totalCount})
+            </span>
+          </div>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={resetTodos}
+            className="text-xs"
+          >
+            <RotateCcw className="h-3 w-3 mr-1" />
+            重置演示数据
+          </Button>
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
