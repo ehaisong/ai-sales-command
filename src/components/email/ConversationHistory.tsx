@@ -58,7 +58,7 @@ const ConversationHistory: React.FC<ConversationHistoryProps> = ({ originalEmail
               <div className="flex-1">
                 <div className="flex items-center space-x-2 mb-1">
                   <span className="text-sm font-medium">
-                    {conv.isAI ? 'AI业务员' : conv.from}
+                    {conv.isAI ? 'AI助手' : conv.from}
                   </span>
                   <span className="text-xs text-muted-foreground">
                     {formatDistanceToNow(conv.timestamp, { 

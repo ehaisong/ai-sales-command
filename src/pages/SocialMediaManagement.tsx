@@ -14,7 +14,7 @@ const SocialMediaManagement = () => {
         <div className="mb-6">
           <h1 className="text-2xl font-bold text-gray-900 mb-2">社交媒体管理</h1>
           <p className="text-gray-600">
-            管理AI业务员的社交媒体发文历史，指导内容创作策略
+            管理AI助手的社交媒体发文历史，指导内容创作策略
           </p>
         </div>
         

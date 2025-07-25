@@ -71,7 +71,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* 右列：AI业务员信息和聊天框 - 占4/12宽度 */}
+        {/* 右列：AI助手信息和聊天框 - 占4/12宽度 */}
         <div className="lg:col-span-4 space-y-6 h-full">
           <AIAgentCard />
           <div className="flex-1">

@@ -23,7 +23,7 @@ const PersonaSettings: React.FC = () => {
       <div className="flex items-center gap-6">
         <ImageUpload value={avatar} onChange={setAvatar} />
         <div>
-          <div className="font-medium text-gray-900 mb-1">AI业务员头像</div>
+          <div className="font-medium text-gray-900 mb-1">AI助手头像</div>
           <div className="text-xs text-gray-500 mb-2">建议1:1比例，支持JPG/PNG，最大2MB</div>
         </div>
       </div>
@@ -39,7 +39,7 @@ const PersonaSettings: React.FC = () => {
       </div>
       <div>
         <label className="block text-sm font-medium mb-1">简介</label>
-        <Textarea placeholder="请输入AI业务员简介，200字以内" maxLength={200} value={desc} onChange={e => setDesc(e.target.value)} />
+        <Textarea placeholder="请输入AI助手简介，200字以内" maxLength={200} value={desc} onChange={e => setDesc(e.target.value)} />
       </div>
       <div>
         <Button type="submit" className="w-full sm:w-auto">保存信息</Button>

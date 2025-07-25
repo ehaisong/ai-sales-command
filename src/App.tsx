@@ -47,7 +47,7 @@ const App = () => (
                   {/* Enterprise CRM */}
                   <Route path="/enterprise-crm" element={<EnterpriseCRM />} />
                   
-                  {/* AI业务员 */}
+                  {/* AI助手 */}
                   <Route path="/ai-agent/knowledge" element={<AIKnowledgeBase />} />
                   <Route path="/ai-agent/settings" element={<AISettings />} />
                   

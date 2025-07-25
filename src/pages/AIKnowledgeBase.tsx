@@ -68,7 +68,7 @@ const AIKnowledgeBase = () => {
                 <div className="p-4 border-b border-gray-200">
                   <h3 className="text-lg font-semibold flex items-center gap-2">
                     <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                    AI业务员助手
+                    AI助手
                   </h3>
                   <p className="text-sm text-gray-500 mt-1">智能分析与知识管理</p>
                 </div>

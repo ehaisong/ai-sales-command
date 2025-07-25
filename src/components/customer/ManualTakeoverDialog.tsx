@@ -41,7 +41,7 @@ const ManualTakeoverDialog: React.FC<ManualTakeoverDialogProps> = ({
             您确定要手动接管客户 <span className="font-medium text-foreground">{customer.name}</span> 的对话吗？
             <br />
             <br />
-            接管后，AI业务员将暂停自动回复，所有对话将由您手动处理。您可以随时重新启用AI自动模式。
+            接管后，AI助手将暂停自动回复，所有对话将由您手动处理。您可以随时重新启用AI自动模式。
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>

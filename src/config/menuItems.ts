@@ -103,7 +103,7 @@ export const menuItems: MenuItem[] = [
     ],
   },
   {
-    title: "AI业务员",
+    title: "AI助手",
     icon: User,
     items: [
       {

@@ -9,9 +9,9 @@ const AISettings = () => {
     <div className="min-h-screen bg-gray-50 p-6">
       <div className="max-w-3xl mx-auto space-y-8">
         <div className="mb-4">
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">AI业务员设置</h1>
+          <h1 className="text-2xl font-bold text-gray-900 mb-2">AI助手设置</h1>
           <p className="text-gray-600">
-            打造专属数字形象，绑定社交媒体账号，开启AI业务员社交智能。
+            打造专属数字形象，绑定社交媒体账号，开启AI助手社交智能。
           </p>
         </div>
         <Card className="p-6">

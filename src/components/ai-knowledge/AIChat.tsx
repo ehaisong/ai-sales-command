@@ -10,7 +10,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 const initialMessages = [{
   id: 1,
   sender: "bot",
-  content: "👋 您好！我是AI业务员助手，可以帮您管理品牌知识库。您可以：\n• 询问产品相关问题\n• 添加新的知识内容\n• 优化现有信息\n• 分析客户需求",
+  content: "👋 您好！我是AI助手，可以帮您管理品牌知识库。您可以：\n• 询问产品相关问题\n• 添加新的知识内容\n• 优化现有信息\n• 分析客户需求",
   timestamp: "10:00"
 }];
 

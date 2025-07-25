@@ -16,7 +16,7 @@ const ChatBox = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      content: '您好！我是小思，您的AI业务员。有什么可以帮助您的吗？',
+      content: '您好！我是小思，您的AI助手。有什么可以帮助您的吗？',
       isUser: false,
       timestamp: new Date(),
     },

@@ -155,7 +155,7 @@ const AIWorkflow = () => {
           <div className="flex items-center justify-between">
             <CardTitle className="flex items-center space-x-2">
               <div className={`w-3 h-3 rounded-full ${isRunning ? 'bg-green-500 animate-pulse' : 'bg-gray-400'}`}></div>
-              <span>AI业务员工作流</span>
+              <span>AI助手工作流</span>
             </CardTitle>
             <div className="flex items-center space-x-2">
               <Button
@@ -192,7 +192,7 @@ const AIWorkflow = () => {
             </div>
           </div>
           <p className="text-sm text-gray-600 mt-2">
-            AI业务员正在自动执行营销任务，实时监控多平台客户开发和内容发布
+            AI助手正在自动执行营销任务，实时监控多平台客户开发和内容发布
           </p>
         </CardHeader>
         <CardContent className="flex-1 overflow-y-auto p-4 pt-0">

@@ -29,7 +29,7 @@ const AIAgentCard = () => {
 
         {/* 个人简介 */}
         <p className="text-xs text-monday-gray-600 leading-relaxed bg-monday-gray-50 p-2 rounded-md">
-          我是您的专属AI业务员，精通多平台营销，擅长客户开发和品牌推广。
+          我是您的专属AI助手，精通多平台营销，擅长客户开发和品牌推广。
         </p>
 
         {/* 绑定的社交媒体 - 只显示图标，单行排列 */}

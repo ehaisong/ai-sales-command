@@ -137,7 +137,7 @@ const CustomerAIAssistant: React.FC<CustomerAIAssistantProps> = ({ customer }) =
     // 如果是手动模式，不自动回复
     if (isManualMode) return;
 
-    // 模拟AI业务员回复
+    // 模拟AI助手回复
     setTimeout(() => {
       const aiResponse: ChatMessage = {
         id: (Date.now() + 1).toString(),
@@ -162,7 +162,7 @@ const CustomerAIAssistant: React.FC<CustomerAIAssistantProps> = ({ customer }) =
     toast({
       title: isManualMode ? "AI模式已启用" : "手动模式已启用",
       description: isManualMode 
-        ? "AI业务员将自动处理客户对话。" 
+        ? "AI助手将自动处理客户对话。" 
         : "您现在手动处理客户对话，AI自动回复已暂停。",
     });
   };
@@ -383,7 +383,7 @@ const CustomerAIAssistant: React.FC<CustomerAIAssistantProps> = ({ customer }) =
         <CustomerInsightsPanel customer={customer} />
       </div>
 
-      {/* AI业务员对话框 */}
+      {/* AI助手对话框 */}
       <Card className="h-[360px] flex flex-col mt-3 transition-all duration-200 hover:shadow-md">
         <CardHeader className="p-4 pb-2">
           <CardTitle className="text-base flex items-center space-x-2">
@@ -401,7 +401,7 @@ const CustomerAIAssistant: React.FC<CustomerAIAssistantProps> = ({ customer }) =
           <div className="flex-1 space-y-2 overflow-y-auto">
             {messages.length === 0 && (
               <div className="text-center py-4 text-muted-foreground text-sm">
-                向AI业务员咨询关于 {customer.name} 的信息
+                向AI助手咨询关于 {customer.name} 的信息
                 {isManualMode && (
                   <div className="text-xs text-orange-600 mt-1">
                     当前为手动模式，AI不会自动回复

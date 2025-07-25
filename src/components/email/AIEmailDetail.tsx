@@ -30,7 +30,7 @@ const AIEmailDetail: React.FC<AIEmailDetailProps> = ({ email }) => {
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>([
     {
       id: '1',
-      content: '您好！我是您的AI业务员小思，刚刚已经回复了客户的询价邮件。有什么需要我协助的吗？',
+      content: '您好！我是您的AI助手小思，刚刚已经回复了客户的询价邮件。有什么需要我协助的吗？',
       isUser: false,
       timestamp: new Date(),
     },
@@ -127,7 +127,7 @@ const AIEmailDetail: React.FC<AIEmailDetailProps> = ({ email }) => {
             <div className="bg-monday-blue/5 border-l-2 border-l-monday-blue p-4 rounded-lg">
               <div className="flex items-center space-x-2 mb-2">
                 <Bot className="h-4 w-4 text-monday-blue" />
-                <span className="text-sm font-medium text-monday-blue">AI业务员回复</span>
+                <span className="text-sm font-medium text-monday-blue">AI助手回复</span>
                 <span className="text-xs text-muted-foreground">
                   {formatDistanceToNow(email.timestamp, { 
                     addSuffix: true, 
@@ -149,7 +149,7 @@ const AIEmailDetail: React.FC<AIEmailDetailProps> = ({ email }) => {
               <Avatar className="h-8 w-8 bg-monday-blue flex items-center justify-center">
                 <Bot className="h-4 w-4 text-white" />
               </Avatar>
-              <span className="text-sm font-medium">AI业务员小思</span>
+              <span className="text-sm font-medium">AI助手小思</span>
             </div>
             
             {/* 聊天消息区域 */}
@@ -177,7 +177,7 @@ const AIEmailDetail: React.FC<AIEmailDetailProps> = ({ email }) => {
               <Input
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
-                placeholder="向AI业务员咨询或给出指导..."
+                placeholder="向AI助手咨询或给出指导..."
                 onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
                 className="flex-1 h-8 text-sm"
               />
