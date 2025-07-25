@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
 import { Badge } from '@/components/ui/badge';
 import { SidebarTrigger } from '@/components/ui/sidebar';
-import { Search, Bell, HelpCircle, Share, ChevronDown, User, Settings, CreditCard, Monitor } from 'lucide-react';
+import { Search, Bell, HelpCircle, ChevronDown, User, Settings, CreditCard, Monitor } from 'lucide-react';
 import { Link } from 'react-router-dom';
 const TopNavbar = () => {
   return <header className="h-16 bg-white border-b border-border px-6 flex items-center justify-between w-full py-[34px]">
@@ -40,10 +40,6 @@ const TopNavbar = () => {
           <HelpCircle className="h-5 w-5" />
         </Button>
 
-        {/* 分享邀请 */}
-        <Button variant="ghost" size="icon">
-          <Share className="h-5 w-5" />
-        </Button>
 
         {/* 用户菜单 */}
         <DropdownMenu>
