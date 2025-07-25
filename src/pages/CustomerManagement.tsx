@@ -10,7 +10,7 @@ import CustomerAnalytics from '@/components/customer/CustomerAnalytics';
 import { Customer, CustomerFilters as FilterType } from '@/types/customer';
 import { mockCustomers } from '@/components/customer/mockData';
 
-const CustomerManagement = () => {
+const CustomerManagement: React.FC = () => {
   const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(null);
   const [activeTab, setActiveTab] = useState<'individual' | 'company'>('individual');
   const [isTransitioning, setIsTransitioning] = useState(false);
