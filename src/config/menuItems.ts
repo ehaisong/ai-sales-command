@@ -46,17 +46,6 @@ export const menuItems: MenuItem[] = [
     icon: Users,
   },
   {
-    title: "AI业务员",
-    icon: User,
-    items: [
-      {
-        title: "AI设置",
-        url: "/ai-agent/settings",
-        icon: Settings,
-      },
-    ],
-  },
-  {
     title: "品牌建设",
     icon: Share,
     items: [
@@ -110,6 +99,17 @@ export const menuItems: MenuItem[] = [
         title: "海关数据分析",
         url: "/tools/customs-analysis",
         icon: BarChart3,
+      },
+    ],
+  },
+  {
+    title: "AI业务员",
+    icon: User,
+    items: [
+      {
+        title: "AI设置",
+        url: "/ai-agent/settings",
+        icon: Settings,
       },
     ],
   },
