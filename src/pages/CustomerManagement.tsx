@@ -1,10 +1,10 @@
 
 import React, { useState, useMemo, useCallback } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Button } from '@/components/ui/button';
+import { Play, Pause } from 'lucide-react';
 import CustomerList from '@/components/customer/CustomerList';
 import CustomerListTransition from '@/components/customer/CustomerListTransition';
-import CustomerSearchBar from '@/components/customer/CustomerSearchBar';
-import CustomerFilters from '@/components/customer/CustomerFilters';
 import CustomerAIAssistant from '@/components/customer/CustomerAIAssistant';
 import CustomerAnalytics from '@/components/customer/CustomerAnalytics';
 import { Customer, CustomerFilters as FilterType } from '@/types/customer';
@@ -15,6 +15,7 @@ const CustomerManagement = () => {
   const [activeTab, setActiveTab] = useState<'individual' | 'company'>('individual');
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [transitionDirection, setTransitionDirection] = useState<'left' | 'right'>('right');
+  const [isSearching, setIsSearching] = useState(false);
   const [filters, setFilters] = useState<FilterType>({
     search: '',
     type: 'all',
@@ -67,6 +68,10 @@ const CustomerManagement = () => {
     }, 250);
   }, [activeTab]);
 
+  const handleSearchToggle = useCallback(() => {
+    setIsSearching(!isSearching);
+  }, [isSearching]);
+
   return (
     <div className="p-6 space-y-6 transition-all duration-300 bg-monday-gray-50 min-h-screen">
       {/* Header */}
@@ -91,14 +96,28 @@ const CustomerManagement = () => {
           <div className="monday-card mb-4 p-4 transition-all duration-200 hover:shadow-monday">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-4">
-                <CustomerSearchBar 
-                  value={filters.search}
-                  onChange={(search) => setFilters({ ...filters, search })}
-                />
-                <CustomerFilters 
-                  filters={filters}
-                  onFiltersChange={setFilters}
-                />
+                <Button
+                  onClick={handleSearchToggle}
+                  variant={isSearching ? "destructive" : "default"}
+                  size="lg"
+                  className={`transition-all duration-300 ${
+                    isSearching 
+                      ? "bg-red-500 hover:bg-red-600 text-white" 
+                      : "bg-blue-500 hover:bg-blue-600 text-white"
+                  }`}
+                >
+                  {isSearching ? (
+                    <>
+                      <Pause className="h-4 w-4 mr-2" />
+                      暂停客户搜索
+                    </>
+                  ) : (
+                    <>
+                      <Play className="h-4 w-4 mr-2" />
+                      启动客户搜索
+                    </>
+                  )}
+                </Button>
               </div>
               <Tabs 
                 value={activeTab} 
