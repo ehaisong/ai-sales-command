@@ -16,7 +16,7 @@ const Dashboard = () => {
         <Button asChild className="bg-gradient-to-r from-monday-blue to-monday-purple hover:from-monday-blue-dark hover:to-monday-purple-dark">
           <Link to="/enterprise-crm">
             <Rocket className="h-4 w-4 mr-2" />
-            企业级CRM系统
+            L3级AI自动化营销系统
           </Link>
         </Button>
       </div>
