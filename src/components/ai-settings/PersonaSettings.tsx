@@ -7,10 +7,10 @@ import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
 
 const PersonaSettings: React.FC = () => {
-  const [avatar, setAvatar] = useState<string | null>(null);
-  const [name, setName] = useState("");
-  const [role, setRole] = useState("");
-  const [desc, setDesc] = useState("");
+  const [avatar, setAvatar] = useState<string | null>("https://images.unsplash.com/photo-1649972904349-6e44c42644a7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80");
+  const [name, setName] = useState("小思");
+  const [role, setRole] = useState("AI营销助理");
+  const [desc, setDesc] = useState("我是您的专属AI营销助理，擅长社交媒体管理、客户服务和内容创作。致力于为您提供智能化的营销解决方案，提升品牌影响力和客户满意度。");
 
   const handleSave = () => {
     // 使用 toast 显示保存成功提示
