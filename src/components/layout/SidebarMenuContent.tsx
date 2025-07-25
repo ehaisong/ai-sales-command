@@ -24,7 +24,7 @@ const SidebarMenuContent = ({ isCollapsed }: SidebarMenuContentProps) => {
   const location = useLocation();
 
   return (
-    <SidebarContent className="bg-white">
+    <SidebarContent className="bg-white py-4">
       <SidebarGroup>
         <SidebarGroupContent>
           <SidebarMenu>
@@ -33,11 +33,11 @@ const SidebarMenuContent = ({ isCollapsed }: SidebarMenuContentProps) => {
                 {item.items ? (
                   <Collapsible className="group/collapsible">
                     <CollapsibleTrigger asChild>
-                      <SidebarMenuButton className="flex w-full items-center justify-start text-left p-2 hover:bg-gray-50 transition-colors">
-                        <item.icon className="ml-4 mr-3 h-4 w-4 flex-shrink-0" />
+                      <SidebarMenuButton className="flex w-full items-center justify-start text-left py-3 px-4 hover:bg-gray-50 transition-colors text-base font-medium min-h-[44px]">
+                        <item.icon className="ml-4 mr-4 h-5 w-5 flex-shrink-0" />
                         {!isCollapsed && (
                           <>
-                            <span className="flex-1 text-left">{item.title}</span>
+                            <span className="flex-1 text-left text-base font-medium">{item.title}</span>
                             <ChevronRight className="h-4 w-4 transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
                           </>
                         )}
@@ -51,13 +51,13 @@ const SidebarMenuContent = ({ isCollapsed }: SidebarMenuContentProps) => {
                               <SidebarMenuSubButton 
                                 asChild
                                 isActive={location.pathname === subItem.url}
-                                className="text-left justify-start pl-8 py-2 hover:bg-gray-50 transition-colors flex items-center"
+                                className="text-left justify-start pl-12 py-2.5 hover:bg-gray-50 transition-colors flex items-center text-sm font-medium min-h-[40px]"
                               >
                                 <Link to={subItem.url} className="flex items-center">
                                   {subItem.icon && (
-                                    <subItem.icon className="mr-3 h-4 w-4 flex-shrink-0" />
+                                    <subItem.icon className="mr-3 h-4 w-4 flex-shrink-0 opacity-70" />
                                   )}
-                                  <span className="text-left">{subItem.title}</span>
+                                  <span className="text-left text-sm">{subItem.title}</span>
                                 </Link>
                               </SidebarMenuSubButton>
                             </SidebarMenuSubItem>
@@ -70,11 +70,11 @@ const SidebarMenuContent = ({ isCollapsed }: SidebarMenuContentProps) => {
                   <SidebarMenuButton 
                     asChild 
                     isActive={location.pathname === item.url}
-                    className="flex w-full items-center justify-start text-left p-2 hover:bg-gray-50 transition-colors"
+                    className="flex w-full items-center justify-start text-left py-3 px-4 hover:bg-gray-50 transition-colors text-base font-medium min-h-[44px]"
                   >
                     <Link to={item.url!}>
-                      <item.icon className="ml-4 mr-3 h-4 w-4 flex-shrink-0" />
-                      {!isCollapsed && <span className="text-left">{item.title}</span>}
+                      <item.icon className="ml-4 mr-4 h-5 w-5 flex-shrink-0" />
+                      {!isCollapsed && <span className="text-left text-base font-medium">{item.title}</span>}
                     </Link>
                   </SidebarMenuButton>
                 )}
