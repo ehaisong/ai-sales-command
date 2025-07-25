@@ -20,7 +20,7 @@ const AppSidebarFooter = ({ isCollapsed }: SidebarFooterProps) => {
             </div>
             <div className="flex-1">
               <div className="text-sm font-medium">张三</div>
-              <div className="text-xs text-muted-foreground">剩余积分: 1,280</div>
+              <div className="text-xs text-muted-foreground">科技有限公司</div>
             </div>
           </Link>
           <Button size="sm" className="w-full">
