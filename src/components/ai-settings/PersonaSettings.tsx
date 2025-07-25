@@ -34,7 +34,7 @@ const PersonaSettings: React.FC = () => {
         </div>
         <div>
           <label className="block text-sm font-medium mb-1">角色/职位</label>
-          <Input placeholder="如：品牌营销助理" value={role} onChange={e => setRole(e.target.value)} />
+          <Input placeholder="如：CMO" value={role} onChange={e => setRole(e.target.value)} />
         </div>
       </div>
       <div>
