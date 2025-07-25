@@ -50,11 +50,6 @@ export const menuItems: MenuItem[] = [
     icon: User,
     items: [
       {
-        title: "品牌知识库",
-        url: "/ai-agent/knowledge",
-        icon: Database,
-      },
-      {
         title: "AI设置",
         url: "/ai-agent/settings",
         icon: Settings,
@@ -65,6 +60,11 @@ export const menuItems: MenuItem[] = [
     title: "品牌建设",
     icon: Share,
     items: [
+      {
+        title: "品牌知识库",
+        url: "/ai-agent/knowledge",
+        icon: Database,
+      },
       {
         title: "社交媒体",
         url: "/brand/social-media",
