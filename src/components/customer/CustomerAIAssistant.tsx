@@ -5,7 +5,8 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { Building2, User, MessageSquare, Phone, Mail, Calendar, TrendingUp, Send, Book, UserCheck, Search, Users, Clock } from 'lucide-react';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Building2, User, MessageSquare, Phone, Mail, Calendar, TrendingUp, Send, Book, UserCheck, Search, Users, Clock, Database, Check } from 'lucide-react';
 import { Customer } from '@/types/customer';
 import CustomerInsightsPanel from "./CustomerInsightsPanel";
 import CustomerKnowledgeDialog from "./CustomerKnowledgeDialog";
@@ -45,7 +46,27 @@ const CustomerAIAssistant: React.FC<CustomerAIAssistantProps> = ({ customer }) =
   const [isManualMode, setIsManualMode] = useState(false);
   const [knowledgeEntries, setKnowledgeEntries] = useState<string[]>([]);
   const [searchHistory, setSearchHistory] = useState<SearchHistoryItem[]>([]);
+  const [selectedDataSources, setSelectedDataSources] = useState<string[]>(['LinkedIn', 'Google Maps']);
   const { toast } = useToast();
+
+  const dataSources = [
+    { id: 'linkedin', name: 'LinkedIn', icon: '💼' },
+    { id: 'google-maps', name: 'Google Maps', icon: '🗺️' },
+    { id: 'tiktok', name: 'TikTok', icon: '🎵' },
+    { id: 'x', name: 'X.com', icon: '✕' },
+    { id: 'meta', name: 'Meta', icon: '📘' },
+    { id: 'wechat', name: '微信', icon: '💬' },
+    { id: 'qichacha', name: '企查查', icon: '🏢' },
+    { id: 'xiaohongshu', name: '小红书', icon: '📔' }
+  ];
+
+  const handleDataSourceToggle = (sourceName: string) => {
+    setSelectedDataSources(prev => 
+      prev.includes(sourceName) 
+        ? prev.filter(s => s !== sourceName)
+        : [...prev, sourceName]
+    );
+  };
 
   // 模拟搜索历史数据和实时更新
   useEffect(() => {
@@ -160,9 +181,46 @@ const CustomerAIAssistant: React.FC<CustomerAIAssistantProps> = ({ customer }) =
     return (
       <Card className="h-fit transition-all duration-200 hover:shadow-md">
         <CardHeader>
-          <CardTitle className="flex items-center space-x-2">
-            <Search className="h-5 w-5" />
-            <span>客户搜索历史</span>
+          <CardTitle className="flex items-center justify-between">
+            <div className="flex items-center space-x-2">
+              <Search className="h-5 w-5" />
+              <span>客户搜索历史</span>
+            </div>
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button variant="outline" size="sm" className="h-8 px-3 text-xs">
+                  <Database className="h-4 w-4 mr-1" />
+                  数据源 ({selectedDataSources.length})
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-80">
+                <div className="space-y-3">
+                  <div className="font-medium">选择搜索数据源</div>
+                  <div className="grid grid-cols-2 gap-2">
+                    {dataSources.map((source) => (
+                      <div
+                        key={source.id}
+                        className={`flex items-center space-x-2 p-2 rounded-lg border cursor-pointer transition-all hover:bg-accent ${
+                          selectedDataSources.includes(source.name) 
+                            ? 'border-primary bg-primary/5' 
+                            : 'border-border'
+                        }`}
+                        onClick={() => handleDataSourceToggle(source.name)}
+                      >
+                        <span className="text-lg">{source.icon}</span>
+                        <span className="text-sm font-medium flex-1">{source.name}</span>
+                        {selectedDataSources.includes(source.name) && (
+                          <Check className="h-4 w-4 text-primary" />
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                  <div className="text-xs text-muted-foreground">
+                    已选择 {selectedDataSources.length} 个数据源
+                  </div>
+                </div>
+              </PopoverContent>
+            </Popover>
           </CardTitle>
         </CardHeader>
         <CardContent>
