@@ -54,7 +54,7 @@ const TopNavbar = () => {
               </div>
               <div className="text-left hidden md:block">
                 <div className="text-sm font-medium">张三</div>
-                <div className="text-xs text-gray-500 dark:text-gray-400">剩余积分: 1,280</div>
+                <div className="text-xs text-gray-500 dark:text-gray-400">科技有限公司</div>
               </div>
               <ChevronDown className="h-4 w-4" />
             </Button>
@@ -67,12 +67,8 @@ const TopNavbar = () => {
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <CreditCard className="mr-2 h-4 w-4" />
-              <span>积分流水</span>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
               <Settings className="mr-2 h-4 w-4" />
-              <span>充值积分</span>
+              <span>设置</span>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
