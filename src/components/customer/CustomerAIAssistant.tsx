@@ -1,11 +1,11 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { Building2, User, MessageSquare, Phone, Mail, Calendar, TrendingUp, Send, Book, UserCheck } from 'lucide-react';
+import { Building2, User, MessageSquare, Phone, Mail, Calendar, TrendingUp, Send, Book, UserCheck, Search, Users, Clock } from 'lucide-react';
 import { Customer } from '@/types/customer';
 import CustomerInsightsPanel from "./CustomerInsightsPanel";
 import CustomerKnowledgeDialog from "./CustomerKnowledgeDialog";
@@ -27,6 +27,15 @@ interface ChatMessage {
   timestamp: Date;
 }
 
+interface SearchHistoryItem {
+  id: string;
+  action: string;
+  platform: string;
+  results: number;
+  timestamp: Date;
+  status: 'completed' | 'processing' | 'failed';
+}
+
 const CustomerAIAssistant: React.FC<CustomerAIAssistantProps> = ({ customer }) => {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputValue, setInputValue] = useState('');
@@ -35,7 +44,61 @@ const CustomerAIAssistant: React.FC<CustomerAIAssistantProps> = ({ customer }) =
   const [manualTakeoverOpen, setManualTakeoverOpen] = useState(false);
   const [isManualMode, setIsManualMode] = useState(false);
   const [knowledgeEntries, setKnowledgeEntries] = useState<string[]>([]);
+  const [searchHistory, setSearchHistory] = useState<SearchHistoryItem[]>([]);
   const { toast } = useToast();
+
+  // 模拟搜索历史数据和实时更新
+  useEffect(() => {
+    // 初始化搜索历史
+    const initialHistory: SearchHistoryItem[] = [
+      {
+        id: '1',
+        action: '搜索LinkedIn',
+        platform: 'LinkedIn',
+        results: 5,
+        timestamp: new Date(Date.now() - 5 * 60000),
+        status: 'completed'
+      },
+      {
+        id: '2', 
+        action: '搜索微信群',
+        platform: '微信',
+        results: 8,
+        timestamp: new Date(Date.now() - 12 * 60000),
+        status: 'completed'
+      },
+      {
+        id: '3',
+        action: '搜索企查查',
+        platform: '企查查',
+        results: 3,
+        timestamp: new Date(Date.now() - 18 * 60000),
+        status: 'completed'
+      }
+    ];
+    setSearchHistory(initialHistory);
+
+    // 模拟实时更新
+    const interval = setInterval(() => {
+      const platforms = ['LinkedIn', '微信', '企查查', '钉钉', '脉脉', '小红书'];
+      const actions = ['搜索', '扫描', '挖掘', '分析'];
+      const randomPlatform = platforms[Math.floor(Math.random() * platforms.length)];
+      const randomAction = actions[Math.floor(Math.random() * actions.length)];
+      
+      const newItem: SearchHistoryItem = {
+        id: Date.now().toString(),
+        action: `${randomAction}${randomPlatform}`,
+        platform: randomPlatform,
+        results: Math.floor(Math.random() * 10) + 1,
+        timestamp: new Date(),
+        status: Math.random() > 0.1 ? 'completed' : 'processing'
+      };
+
+      setSearchHistory(prev => [newItem, ...prev.slice(0, 9)]); // 保持最新10条记录
+    }, 8000); // 每8秒更新一次
+
+    return () => clearInterval(interval);
+  }, []);
 
   const handleSendMessage = () => {
     if (!inputValue.trim() || !customer) return;
@@ -83,18 +146,66 @@ const CustomerAIAssistant: React.FC<CustomerAIAssistantProps> = ({ customer }) =
     });
   };
 
+  const formatTimeAgo = (timestamp: Date) => {
+    const now = new Date();
+    const diffInSeconds = Math.floor((now.getTime() - timestamp.getTime()) / 1000);
+    
+    if (diffInSeconds < 60) return `${diffInSeconds}秒前`;
+    if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)}分钟前`;
+    if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)}小时前`;
+    return `${Math.floor(diffInSeconds / 86400)}天前`;
+  };
+
   if (!customer) {
     return (
       <Card className="h-fit transition-all duration-200 hover:shadow-md">
         <CardHeader>
           <CardTitle className="flex items-center space-x-2">
-            <MessageSquare className="h-5 w-5" />
-            <span>AI 业务员</span>
+            <Search className="h-5 w-5" />
+            <span>客户搜索历史</span>
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="text-center py-8 text-muted-foreground">
-            点击左侧客户列表中的客户，开始与AI业务员对话
+          <div className="space-y-3 max-h-[500px] overflow-y-auto">
+            {searchHistory.map((item) => (
+              <div key={item.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                <div className="flex items-center space-x-3">
+                  <div className={`p-2 rounded-full ${
+                    item.status === 'completed' ? 'bg-green-100' : 
+                    item.status === 'processing' ? 'bg-yellow-100' : 'bg-red-100'
+                  }`}>
+                    {item.status === 'completed' ? (
+                      <Users className="h-4 w-4 text-green-600" />
+                    ) : item.status === 'processing' ? (
+                      <Search className="h-4 w-4 text-yellow-600 animate-spin" />
+                    ) : (
+                      <Users className="h-4 w-4 text-red-600" />
+                    )}
+                  </div>
+                  <div>
+                    <div className="font-medium text-sm">
+                      {item.action}，获取{item.results}位潜在客户
+                    </div>
+                    <div className="text-xs text-muted-foreground flex items-center space-x-1">
+                      <Clock className="h-3 w-3" />
+                      <span>{formatTimeAgo(item.timestamp)}</span>
+                    </div>
+                  </div>
+                </div>
+                <Badge 
+                  variant={item.status === 'completed' ? 'secondary' : item.status === 'processing' ? 'outline' : 'destructive'}
+                  className="text-xs"
+                >
+                  {item.status === 'completed' ? '已完成' : 
+                   item.status === 'processing' ? '进行中' : '失败'}
+                </Badge>
+              </div>
+            ))}
+            {searchHistory.length === 0 && (
+              <div className="text-center py-8 text-muted-foreground">
+                暂无搜索历史记录
+              </div>
+            )}
           </div>
         </CardContent>
       </Card>
