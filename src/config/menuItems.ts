@@ -22,11 +22,7 @@ export interface MenuItem {
   title: string;
   url?: string;
   icon: any;
-  items?: {
-    title: string;
-    url: string;
-    icon?: any;
-  }[];
+  items?: MenuItem[];
 }
 
 export const menuItems: MenuItem[] = [
@@ -46,25 +42,14 @@ export const menuItems: MenuItem[] = [
     icon: MessageSquare,
   },
   {
-    title: "AI业务员",
-    icon: User,
+    title: "品牌建设",
+    icon: Share,
     items: [
       {
         title: "品牌知识库",
         url: "/ai-agent/knowledge",
         icon: Database,
       },
-      {
-        title: "AI设置",
-        url: "/ai-agent/settings",
-        icon: Settings,
-      },
-    ],
-  },
-  {
-    title: "品牌建设",
-    icon: Share,
-    items: [
       {
         title: "社交媒体",
         url: "/brand/social-media",
@@ -110,6 +95,17 @@ export const menuItems: MenuItem[] = [
         title: "海关数据分析",
         url: "/tools/customs-analysis",
         icon: BarChart3,
+      },
+      {
+        title: "AI业务员",
+        icon: User,
+        items: [
+          {
+            title: "AI设置",
+            url: "/ai-agent/settings",
+            icon: Settings,
+          },
+        ],
       },
     ],
   },
