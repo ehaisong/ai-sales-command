@@ -36,14 +36,14 @@ export const menuItems: MenuItem[] = [
     icon: Home,
   },
   {
-    title: "客户管理",
-    url: "/customers",
-    icon: Users,
-  },
-  {
     title: "营销对话",
     url: "/marketing/conversations",
     icon: MessageSquare,
+  },
+  {
+    title: "客户管理",
+    url: "/customers",
+    icon: Users,
   },
   {
     title: "AI业务员",
