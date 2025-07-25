@@ -87,11 +87,6 @@ export const menuItems: MenuItem[] = [
         icon: TrendingUp,
       },
       {
-        title: "落地页",
-        url: "/tools/landing",
-        icon: FileText,
-      },
-      {
         title: "网红",
         url: "/tools/influencer",
         icon: UserCheck,
