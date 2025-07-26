@@ -17,6 +17,7 @@ import AISettings from "@/pages/AISettings";
 import SocialMediaManagement from "@/pages/SocialMediaManagement";
 import AutoSEOPage from "@/pages/AutoSEOPage";
 import TrafficHeatingPage from "@/pages/TrafficHeatingPage";
+import TrendAnalysisPage from "@/pages/TrendAnalysisPage";
 import ProfilePage from "@/pages/ProfilePage";
 import BrandProfilePage from "@/pages/BrandProfilePage";
 
@@ -58,7 +59,7 @@ const App = () => (
                   <Route path="/brand/profile" element={<BrandProfilePage />} />
                   
                   {/* 营销工具 */}
-                  <Route path="/tools/trends" element={<div className="p-6">爆款趋势页面开发中...</div>} />
+                  <Route path="/tools/trends" element={<TrendAnalysisPage />} />
                   <Route path="/tools/landing" element={<div className="p-6">落地页页面开发中...</div>} />
                   <Route path="/tools/influencer" element={<div className="p-6">网红页面开发中...</div>} />
                   <Route path="/tools/ads" element={<div className="p-6">广告助手页面开发中...</div>} />
