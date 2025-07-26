@@ -242,54 +242,6 @@ const CompetitorMonitoringPage = () => {
         </CardContent>
       </Card>
 
-      {/* 统计卡片 */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <Card>
-          <CardContent className="p-6">
-            <div className="flex items-center gap-4">
-              <div className="p-2 bg-blue-100 rounded-lg dark:bg-blue-900">
-                <Globe className="h-6 w-6 text-blue-600 dark:text-blue-400" />
-              </div>
-              <div>
-                <p className="text-2xl font-bold">{competitors.length}</p>
-                <p className="text-sm text-muted-foreground">监控竞品</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        
-        <Card>
-          <CardContent className="p-6">
-            <div className="flex items-center gap-4">
-              <div className="p-2 bg-orange-100 rounded-lg dark:bg-orange-900">
-                <AlertTriangle className="h-6 w-6 text-orange-600 dark:text-orange-400" />
-              </div>
-              <div>
-                <p className="text-2xl font-bold">
-                  {competitors.filter(c => c.hasNewChanges).length}
-                </p>
-                <p className="text-sm text-muted-foreground">有新变化</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        
-        <Card>
-          <CardContent className="p-6">
-            <div className="flex items-center gap-4">
-              <div className="p-2 bg-green-100 rounded-lg dark:bg-green-900">
-                <RefreshCw className="h-6 w-6 text-green-600 dark:text-green-400" />
-              </div>
-              <div>
-                <p className="text-2xl font-bold">
-                  {competitors.filter(c => c.status === 'active').length}
-                </p>
-                <p className="text-sm text-muted-foreground">监控正常</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
 
       {/* 竞品列表 */}
       <div className="space-y-4">
