@@ -76,7 +76,7 @@ export const menuItems: MenuItem[] = [
         icon: TrendingUp,
       },
       {
-        title: "网红",
+        title: "网红合作",
         url: "/tools/influencer",
         icon: UserCheck,
       },
