@@ -120,11 +120,23 @@ const TrendAnalysisPage = () => {
         </Card>
 
         <Tabs defaultValue="keywords" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="keywords">关键词趋势</TabsTrigger>
-            <TabsTrigger value="markets">市场分析</TabsTrigger>
-            <TabsTrigger value="platforms">平台数据</TabsTrigger>
-            <TabsTrigger value="reports">分析报告</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-4 h-16 p-2 bg-gradient-to-r from-background to-muted/50 border border-border/50 shadow-sm">
+            <TabsTrigger value="keywords" className="flex items-center gap-2 h-12 text-sm font-medium">
+              <TrendingUp className="w-4 h-4" />
+              关键词趋势
+            </TabsTrigger>
+            <TabsTrigger value="markets" className="flex items-center gap-2 h-12 text-sm font-medium">
+              <BarChart3 className="w-4 h-4" />
+              市场分析
+            </TabsTrigger>
+            <TabsTrigger value="platforms" className="flex items-center gap-2 h-12 text-sm font-medium">
+              <Globe className="w-4 h-4" />
+              平台数据
+            </TabsTrigger>
+            <TabsTrigger value="reports" className="flex items-center gap-2 h-12 text-sm font-medium">
+              <Activity className="w-4 h-4" />
+              分析报告
+            </TabsTrigger>
           </TabsList>
 
           {/* Keywords Tab */}
