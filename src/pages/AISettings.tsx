@@ -3,6 +3,7 @@ import React from "react";
 import { Card } from "@/components/ui/card";
 import PersonaSettings from "@/components/ai-settings/PersonaSettings";
 import SocialMediaAccounts from "@/components/ai-settings/SocialMediaAccounts";
+import PhotoLibrary from "@/components/ai-settings/PhotoLibrary";
 
 const AISettings = () => {
   return (
@@ -21,6 +22,10 @@ const AISettings = () => {
         <Card className="p-6">
           <h2 className="text-lg font-semibold mb-4">社交媒体账号绑定</h2>
           <SocialMediaAccounts />
+        </Card>
+        <Card className="p-6">
+          <h2 className="text-lg font-semibold mb-4">照片库</h2>
+          <PhotoLibrary />
         </Card>
       </div>
     </div>
