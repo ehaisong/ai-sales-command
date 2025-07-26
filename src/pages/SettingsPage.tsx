@@ -77,7 +77,7 @@ const SettingsPage = () => {
               className="flex items-center gap-3 px-4 py-3 text-base font-semibold data-[state=active]:bg-green-500 data-[state=active]:text-white data-[state=active]:shadow-lg transition-all duration-200 hover:bg-green-50"
             >
               <Database className="h-5 w-5" />
-              数据库
+              EDM/WhatsApp
             </TabsTrigger>
             <TabsTrigger 
               value="security" 
@@ -304,36 +304,128 @@ const SettingsPage = () => {
             </div>
           </TabsContent>
 
-          {/* 数据库设置 */}
+          {/* EDM/WhatsApp设置 */}
           <TabsContent value="database" className="space-y-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* 邮件发送平台 */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>邮件发送平台 (EDM)</CardTitle>
+                  <CardDescription>配置邮件营销服务</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div>
+                    <Label htmlFor="smtp-host">SMTP服务器</Label>
+                    <Input 
+                      id="smtp-host" 
+                      placeholder="smtp.gmail.com"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="smtp-port">端口</Label>
+                    <Input 
+                      id="smtp-port" 
+                      type="number"
+                      placeholder="587"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="smtp-user">用户名</Label>
+                    <Input 
+                      id="smtp-user" 
+                      type="email"
+                      placeholder="your-email@gmail.com"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="smtp-pass">密码</Label>
+                    <Input 
+                      id="smtp-pass" 
+                      type="password"
+                      placeholder="app-password"
+                    />
+                  </div>
+                  <div className="flex gap-2">
+                    <Button className="flex-1">保存配置</Button>
+                    <Button variant="outline">测试连接</Button>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* WhatsApp配置 */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>WhatsApp Business</CardTitle>
+                  <CardDescription>配置WhatsApp营销服务</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div>
+                    <Label htmlFor="whatsapp-token">Access Token</Label>
+                    <Input 
+                      id="whatsapp-token" 
+                      type="password"
+                      placeholder="WhatsApp Business API Token"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="whatsapp-phone">电话号码ID</Label>
+                    <Input 
+                      id="whatsapp-phone" 
+                      placeholder="Phone Number ID"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="whatsapp-webhook">Webhook URL</Label>
+                    <Input 
+                      id="whatsapp-webhook" 
+                      placeholder="https://your-app.com/webhook"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="whatsapp-verify">验证令牌</Label>
+                    <Input 
+                      id="whatsapp-verify" 
+                      type="password"
+                      placeholder="Webhook验证令牌"
+                    />
+                  </div>
+                  <div className="flex gap-2">
+                    <Button className="flex-1">保存配置</Button>
+                    <Button variant="outline">测试连接</Button>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* 营销设置 */}
             <Card>
               <CardHeader>
-                <CardTitle>数据库配置</CardTitle>
-                <CardDescription>管理数据同步和备份设置</CardDescription>
+                <CardTitle>营销设置</CardTitle>
+                <CardDescription>配置自动化营销功能</CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h4 className="font-medium">自动备份</h4>
-                    <p className="text-sm text-muted-foreground">每日自动备份数据库</p>
+                    <h4 className="font-medium">自动跟进</h4>
+                    <p className="text-sm text-muted-foreground">根据客户行为自动发送跟进消息</p>
                   </div>
                   <Switch defaultChecked />
                 </div>
                 <Separator />
                 <div className="flex items-center justify-between">
                   <div>
-                    <h4 className="font-medium">数据同步</h4>
-                    <p className="text-sm text-muted-foreground">实时同步客户和产品数据</p>
+                    <h4 className="font-medium">批量营销</h4>
+                    <p className="text-sm text-muted-foreground">启用批量邮件和WhatsApp营销</p>
                   </div>
                   <Switch defaultChecked />
                 </div>
                 <Separator />
                 <div>
-                  <Label htmlFor="backup-retention">备份保留天数</Label>
+                  <Label htmlFor="daily-limit">每日发送限制</Label>
                   <Input 
-                    id="backup-retention" 
+                    id="daily-limit" 
                     type="number" 
-                    defaultValue="30" 
+                    defaultValue="1000" 
                     className="mt-2"
                   />
                 </div>
