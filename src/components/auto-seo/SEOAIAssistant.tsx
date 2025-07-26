@@ -38,7 +38,7 @@ const SEOAIAssistant = () => {
     { icon: Link, label: "分析我的官网", action: "analyze_website" },
     { icon: Search, label: "关键词研究", action: "keyword_research" },
     { icon: BarChart3, label: "竞争对手分析", action: "competitor_analysis" },
-    { icon: AlertTriangle, label: "技术SEO检查", action: "technical_seo" }
+    { icon: AlertTriangle, label: "设置", action: "technical_seo" }
   ];
 
   const handleSendMessage = () => {
