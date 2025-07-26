@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
 
 const PersonaSettings: React.FC = () => {
-  const [avatar, setAvatar] = useState<string | null>("/lovable-uploads/863076f0-5e79-4bb1-a8e5-587a8c9ce88c.png");
+  const [avatar, setAvatar] = useState<string | null>("/lovable-uploads/be55e235-0b1c-45c0-b936-f0587eb24b04.png");
   const [name, setName] = useState("小思");
   const [role, setRole] = useState("AI营销助理");
   const [desc, setDesc] = useState("我是您的专属AI营销助理，擅长社交媒体管理、客户服务和内容创作。致力于为您提供智能化的营销解决方案，提升品牌影响力和客户满意度。");
