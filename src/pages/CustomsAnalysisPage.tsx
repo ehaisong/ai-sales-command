@@ -179,11 +179,35 @@ const CustomsAnalysisPage = () => {
       </div>
 
       <Tabs defaultValue="analysis" className="space-y-6">
-        <TabsList className="grid w-full grid-cols-4">
-          <TabsTrigger value="analysis">数据分析</TabsTrigger>
-          <TabsTrigger value="customers">潜在客户</TabsTrigger>
-          <TabsTrigger value="reports">分析报告</TabsTrigger>
-          <TabsTrigger value="settings">监控设置</TabsTrigger>
+        <TabsList className="grid w-full grid-cols-4 h-16 bg-white border shadow-sm rounded-xl p-2">
+          <TabsTrigger 
+            value="analysis" 
+            className="flex items-center gap-3 px-6 py-3 text-base font-semibold data-[state=active]:bg-blue-500 data-[state=active]:text-white data-[state=active]:shadow-lg transition-all duration-200 hover:bg-blue-50"
+          >
+            <BarChart3 className="h-5 w-5" />
+            数据分析
+          </TabsTrigger>
+          <TabsTrigger 
+            value="customers" 
+            className="flex items-center gap-3 px-6 py-3 text-base font-semibold data-[state=active]:bg-green-500 data-[state=active]:text-white data-[state=active]:shadow-lg transition-all duration-200 hover:bg-green-50"
+          >
+            <Users className="h-5 w-5" />
+            潜在客户
+          </TabsTrigger>
+          <TabsTrigger 
+            value="reports" 
+            className="flex items-center gap-3 px-6 py-3 text-base font-semibold data-[state=active]:bg-purple-500 data-[state=active]:text-white data-[state=active]:shadow-lg transition-all duration-200 hover:bg-purple-50"
+          >
+            <Download className="h-5 w-5" />
+            分析报告
+          </TabsTrigger>
+          <TabsTrigger 
+            value="settings" 
+            className="flex items-center gap-3 px-6 py-3 text-base font-semibold data-[state=active]:bg-orange-500 data-[state=active]:text-white data-[state=active]:shadow-lg transition-all duration-200 hover:bg-orange-50"
+          >
+            <Settings className="h-5 w-5" />
+            监控设置
+          </TabsTrigger>
         </TabsList>
 
         {/* 数据分析标签页 */}
