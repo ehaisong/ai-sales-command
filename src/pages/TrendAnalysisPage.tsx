@@ -249,61 +249,6 @@ const TrendAnalysisPage = () => {
           </CardContent>
         </Card>
 
-        {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-          <Card>
-            <CardContent className="flex items-center p-6">
-              <div className="flex items-center gap-4">
-                <div className="p-2 bg-primary/10 rounded-lg">
-                  <TrendingUp className="w-6 h-6 text-primary" />
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-muted-foreground">爆款商品</p>
-                  <p className="text-2xl font-bold">24</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="flex items-center p-6">
-              <div className="flex items-center gap-4">
-                <div className="p-2 bg-green-100 rounded-lg">
-                  <ShoppingCart className="w-6 h-6 text-green-600" />
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-muted-foreground">总销量</p>
-                  <p className="text-2xl font-bold">45.6K</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="flex items-center p-6">
-              <div className="flex items-center gap-4">
-                <div className="p-2 bg-blue-100 rounded-lg">
-                  <Activity className="w-6 h-6 text-blue-600" />
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-muted-foreground">平均增长率</p>
-                  <p className="text-2xl font-bold">+178%</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="flex items-center p-6">
-              <div className="flex items-center gap-4">
-                <div className="p-2 bg-purple-100 rounded-lg">
-                  <Star className="w-6 h-6 text-purple-600" />
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-muted-foreground">平均评分</p>
-                  <p className="text-2xl font-bold">4.7</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Trending Products List */}
