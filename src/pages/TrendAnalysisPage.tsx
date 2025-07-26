@@ -20,14 +20,14 @@ import {
   RefreshCw
 } from "lucide-react";
 
-// Mock data for trends
+// Mock data for trends - 多个关键词对比
 const trendData = [
-  { date: "2024-01", value: 45, keyword: "无线耳机" },
-  { date: "2024-02", value: 52, keyword: "无线耳机" },
-  { date: "2024-03", value: 38, keyword: "无线耳机" },
-  { date: "2024-04", value: 65, keyword: "无线耳机" },
-  { date: "2024-05", value: 78, keyword: "无线耳机" },
-  { date: "2024-06", value: 85, keyword: "无线耳机" },
+  { date: "2024-01", "无线耳机": 45, "智能手表": 32, "蓝牙音箱": 28, "充电宝": 35 },
+  { date: "2024-02", "无线耳机": 52, "智能手表": 38, "蓝牙音箱": 31, "充电宝": 42 },
+  { date: "2024-03", "无线耳机": 38, "智能手表": 45, "蓝牙音箱": 35, "充电宝": 38 },
+  { date: "2024-04", "无线耳机": 65, "智能手表": 52, "蓝牙音箱": 48, "充电宝": 55 },
+  { date: "2024-05", "无线耳机": 78, "智能手表": 68, "蓝牙音箱": 52, "充电宝": 62 },
+  { date: "2024-06", "无线耳机": 85, "智能手表": 75, "蓝牙音箱": 65, "充电宝": 70 },
 ];
 
 const keywordTrends = [
@@ -138,28 +138,74 @@ const TrendAnalysisPage = () => {
                     搜索趋势
                   </CardTitle>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="p-4">
                   <ChartContainer
                     config={{
-                      value: {
-                        label: "搜索指数",
+                      "无线耳机": {
+                        label: "无线耳机",
                         color: "hsl(var(--primary))",
                       },
+                      "智能手表": {
+                        label: "智能手表", 
+                        color: "hsl(142, 76%, 36%)",
+                      },
+                      "蓝牙音箱": {
+                        label: "蓝牙音箱",
+                        color: "hsl(346, 87%, 43%)",
+                      },
+                      "充电宝": {
+                        label: "充电宝",
+                        color: "hsl(262, 83%, 58%)",
+                      },
                     }}
-                    className="h-[300px]"
+                    className="h-[280px] w-full"
                   >
                     <ResponsiveContainer width="100%" height="100%">
-                      <LineChart data={trendData}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="date" />
-                        <YAxis />
+                      <LineChart data={trendData} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+                        <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
+                        <XAxis 
+                          dataKey="date" 
+                          axisLine={false}
+                          tickLine={false}
+                          tick={{ fontSize: 12 }}
+                        />
+                        <YAxis 
+                          axisLine={false}
+                          tickLine={false}
+                          tick={{ fontSize: 12 }}
+                        />
                         <ChartTooltip content={<ChartTooltipContent />} />
                         <Line 
                           type="monotone" 
-                          dataKey="value" 
+                          dataKey="无线耳机" 
                           stroke="hsl(var(--primary))" 
                           strokeWidth={2}
-                          dot={{ fill: "hsl(var(--primary))" }}
+                          dot={{ fill: "hsl(var(--primary))", r: 4 }}
+                          activeDot={{ r: 6 }}
+                        />
+                        <Line 
+                          type="monotone" 
+                          dataKey="智能手表" 
+                          stroke="hsl(142, 76%, 36%)" 
+                          strokeWidth={2}
+                          dot={{ fill: "hsl(142, 76%, 36%)", r: 4 }}
+                          activeDot={{ r: 6 }}
+                        />
+                        <Line 
+                          type="monotone" 
+                          dataKey="蓝牙音箱" 
+                          stroke="hsl(346, 87%, 43%)" 
+                          strokeWidth={2}
+                          dot={{ fill: "hsl(346, 87%, 43%)", r: 4 }}
+                          activeDot={{ r: 6 }}
+                        />
+                        <Line 
+                          type="monotone" 
+                          dataKey="充电宝" 
+                          stroke="hsl(262, 83%, 58%)" 
+                          strokeWidth={2}
+                          dot={{ fill: "hsl(262, 83%, 58%)", r: 4 }}
+                          activeDot={{ r: 6 }}
                         />
                       </LineChart>
                     </ResponsiveContainer>
