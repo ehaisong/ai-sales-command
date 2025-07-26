@@ -54,10 +54,7 @@ const CustomerAIAssistant: React.FC<CustomerAIAssistantProps> = ({ customer }) =
     { id: 'google-maps', name: 'Google Maps', icon: '🗺️' },
     { id: 'tiktok', name: 'TikTok', icon: '🎵' },
     { id: 'x', name: 'X.com', icon: '✕' },
-    { id: 'meta', name: 'Meta', icon: '📘' },
-    { id: 'wechat', name: '微信', icon: '💬' },
-    { id: 'qichacha', name: '企查查', icon: '🏢' },
-    { id: 'xiaohongshu', name: '小红书', icon: '📔' }
+    { id: 'meta', name: 'Meta', icon: '📘' }
   ];
 
   const handleDataSourceToggle = (sourceName: string) => {
@@ -82,16 +79,16 @@ const CustomerAIAssistant: React.FC<CustomerAIAssistantProps> = ({ customer }) =
       },
       {
         id: '2', 
-        action: '搜索微信群',
-        platform: '微信',
+        action: '搜索TikTok',
+        platform: 'TikTok',
         results: 8,
         timestamp: new Date(Date.now() - 12 * 60000),
         status: 'completed'
       },
       {
         id: '3',
-        action: '搜索企查查',
-        platform: '企查查',
+        action: '搜索LinkedIn',
+        platform: 'LinkedIn',
         results: 3,
         timestamp: new Date(Date.now() - 18 * 60000),
         status: 'completed'
@@ -101,7 +98,7 @@ const CustomerAIAssistant: React.FC<CustomerAIAssistantProps> = ({ customer }) =
 
     // 模拟实时更新
     const interval = setInterval(() => {
-      const platforms = ['LinkedIn', '微信', '企查查', '钉钉', '脉脉', '小红书'];
+      const platforms = ['LinkedIn', 'TikTok', 'X.com', 'Meta', 'Google Maps'];
       const actions = ['搜索', '扫描', '挖掘', '分析'];
       const randomPlatform = platforms[Math.floor(Math.random() * platforms.length)];
       const randomAction = actions[Math.floor(Math.random() * actions.length)];
