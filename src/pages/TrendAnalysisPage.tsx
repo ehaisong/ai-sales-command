@@ -3,72 +3,139 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, BarChart, Bar } from "recharts";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { 
   TrendingUp, 
   Search, 
   Activity, 
   Eye, 
   BarChart3, 
-  Zap, 
-  Globe,
   Calendar,
   Filter,
   Download,
-  RefreshCw
+  RefreshCw,
+  Star,
+  ShoppingCart,
+  TrendingDown
 } from "lucide-react";
+import type { TrendingProduct, MarketAnalysisReport } from "@/types/trendAnalysis";
 
-// Mock data for trends - 多个关键词对比
-const trendData = [
-  { date: "2024-01", "无线耳机": 45, "智能手表": 32, "蓝牙音箱": 28, "充电宝": 35 },
-  { date: "2024-02", "无线耳机": 52, "智能手表": 38, "蓝牙音箱": 31, "充电宝": 42 },
-  { date: "2024-03", "无线耳机": 38, "智能手表": 45, "蓝牙音箱": 35, "充电宝": 38 },
-  { date: "2024-04", "无线耳机": 65, "智能手表": 52, "蓝牙音箱": 48, "充电宝": 55 },
-  { date: "2024-05", "无线耳机": 78, "智能手表": 68, "蓝牙音箱": 52, "充电宝": 62 },
-  { date: "2024-06", "无线耳机": 85, "智能手表": 75, "蓝牙音箱": 65, "充电宝": 70 },
-];
-
-const keywordTrends = [
-  { keyword: "AI智能音箱", growth: "+245%", volume: "2.3M", competition: "high", trend: "up" },
-  { keyword: "无线充电器", growth: "+156%", volume: "1.8M", competition: "medium", trend: "up" },
-  { keyword: "智能手表", growth: "+89%", volume: "3.2M", competition: "high", trend: "up" },
-  { keyword: "蓝牙耳机", growth: "+67%", volume: "4.1M", competition: "high", trend: "stable" },
-  { keyword: "便携电源", growth: "+234%", volume: "890K", competition: "low", trend: "up" },
-];
-
-const marketAnalysis = [
+// Mock data for trending products
+const mockTrendingProducts: TrendingProduct[] = [
   {
-    platform: "Amazon",
+    id: "1",
+    name: "AI智能蓝牙耳机 Pro",
+    image: "/lovable-uploads/515beaa6-06a7-4d91-85dd-09233ccbf7d0.png",
+    price: 299,
+    originalPrice: 499,
+    sales: 15678,
+    salesGrowth: "+245%",
     category: "电子产品",
-    trending: "AI智能设备",
-    growth: "+189%",
-    opportunity: "high"
+    brand: "TechBrand",
+    platform: "Amazon",
+    trendScore: 95,
+    predictedDemand: "high",
+    lastUpdated: "2024-01-15",
+    tags: ["AI", "蓝牙", "降噪"]
   },
   {
+    id: "2", 
+    name: "智能运动手表 X5",
+    image: "/lovable-uploads/863076f0-5e79-4bb1-a8e5-587a8c9ce88c.png",
+    price: 899,
+    originalPrice: 1299,
+    sales: 12340,
+    salesGrowth: "+189%",
+    category: "可穿戴设备",
+    brand: "SmartFit",
     platform: "Shopify",
-    category: "家居用品", 
-    trending: "智能家居",
-    growth: "+145%",
-    opportunity: "medium"
+    trendScore: 92,
+    predictedDemand: "high",
+    lastUpdated: "2024-01-14",
+    tags: ["运动", "健康", "GPS"]
   },
   {
+    id: "3",
+    name: "无线快充充电宝 20000mAh",
+    image: "/lovable-uploads/a6b20fef-de43-4809-b7fc-a1d7b088160d.png",
+    price: 159,
+    originalPrice: 239,
+    sales: 8970,
+    salesGrowth: "+156%",
+    category: "电子配件",
+    brand: "PowerMax",
     platform: "eBay",
-    category: "时尚配饰",
-    trending: "可穿戴设备",
-    growth: "+98%",
-    opportunity: "high"
+    trendScore: 88,
+    predictedDemand: "medium",
+    lastUpdated: "2024-01-13",
+    tags: ["快充", "便携", "大容量"]
   },
+  {
+    id: "4",
+    name: "智能家居音箱 Mini",
+    image: "/lovable-uploads/be55e235-0b1c-45c0-b936-f0587eb24b04.png",
+    price: 199,
+    originalPrice: 299,
+    sales: 6789,
+    salesGrowth: "+134%",
+    category: "智能家居",
+    brand: "HomeSmart",
+    platform: "Amazon",
+    trendScore: 85,
+    predictedDemand: "medium",
+    lastUpdated: "2024-01-12",
+    tags: ["语音控制", "智能家居", "音质"]
+  }
+];
+
+const mockReports: MarketAnalysisReport[] = [
+  {
+    id: "1",
+    title: "AI智能设备市场突破性增长报告",
+    summary: "AI智能耳机和智能音箱在过去30天内表现出色，预计未来3个月将继续保持强劲增长势头。",
+    date: "2024-01-15",
+    category: "电子产品",
+    insights: [
+      "AI功能成为消费者首选特性",
+      "降噪技术需求大幅提升",
+      "价格敏感度下降，用户更注重功能"
+    ],
+    recommendations: [
+      "加大AI功能宣传力度",
+      "优化降噪算法",
+      "建立高端产品线"
+    ],
+    confidenceLevel: 95
+  },
+  {
+    id: "2",
+    title: "可穿戴设备健康监测趋势分析",
+    summary: "健康监测功能成为智能手表购买决策的关键因素，相关产品销量持续攀升。",
+    date: "2024-01-14", 
+    category: "可穿戴设备",
+    insights: [
+      "血氧检测成为标配需求",
+      "运动模式多样化趋势明显",
+      "续航能力仍是用户痛点"
+    ],
+    recommendations: [
+      "增加专业健康功能",
+      "扩展运动模式种类",
+      "提升电池续航技术"
+    ],
+    confidenceLevel: 90
+  }
 ];
 
 const TrendAnalysisPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [selectedDateRange, setSelectedDateRange] = useState("7days");
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedPlatform, setSelectedPlatform] = useState("all");
 
   const handleAnalyze = () => {
     setIsAnalyzing(true);
-    // Simulate analysis
     setTimeout(() => setIsAnalyzing(false), 2000);
   };
 
@@ -77,292 +144,322 @@ const TrendAnalysisPage = () => {
     handleAnalyze();
   };
 
+  const getDemandBadgeColor = (demand: string) => {
+    switch (demand) {
+      case 'high': return 'destructive';
+      case 'medium': return 'default';
+      case 'low': return 'secondary';
+      default: return 'secondary';
+    }
+  };
+
+  const getDemandText = (demand: string) => {
+    switch (demand) {
+      case 'high': return '高需求';
+      case 'medium': return '中需求';
+      case 'low': return '低需求';
+      default: return '未知';
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
+    <div className="min-h-screen bg-background p-6">
       <div className="w-full max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-6">
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">爆款趋势分析</h1>
-          <p className="text-gray-600">
-            基于AI分析品牌知识库，结合多平台数据源，跟踪市场爆款商品趋势
+          <h1 className="text-3xl font-bold text-foreground mb-2">爆款商品趋势分析</h1>
+          <p className="text-muted-foreground">
+            基于AI分析品牌知识库，发现最新爆款商品机会，实时跟踪市场趋势
           </p>
         </div>
 
-        {/* Search Section */}
+        {/* Filters Section */}
         <Card className="mb-6">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Search className="w-5 h-5" />
-              趋势搜索
+              <Filter className="w-5 h-5" />
+              筛选条件
             </CardTitle>
             <CardDescription>
-              输入关键词或产品类别，获取实时趋势分析报告
+              根据时间、类别和平台筛选爆款商品
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleSearch} className="flex gap-3">
-              <Input
-                placeholder="输入关键词，如：智能手表、无线耳机..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="flex-1"
-              />
-              <Button type="submit" disabled={isAnalyzing}>
-                {isAnalyzing ? (
-                  <RefreshCw className="w-4 h-4 mr-2 animate-spin" />
-                ) : (
-                  <Search className="w-4 h-4 mr-2" />
-                )}
-                {isAnalyzing ? "分析中..." : "分析趋势"}
-              </Button>
-            </form>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              <div className="space-y-2">
+                <label className="text-sm font-medium">时间范围</label>
+                <Select value={selectedDateRange} onValueChange={setSelectedDateRange}>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="7days">近7天</SelectItem>
+                    <SelectItem value="30days">近30天</SelectItem>
+                    <SelectItem value="90days">近90天</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-2">
+                <label className="text-sm font-medium">商品类别</label>
+                <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">全部类别</SelectItem>
+                    <SelectItem value="electronics">电子产品</SelectItem>
+                    <SelectItem value="wearable">可穿戴设备</SelectItem>
+                    <SelectItem value="home">智能家居</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-2">
+                <label className="text-sm font-medium">销售平台</label>
+                <Select value={selectedPlatform} onValueChange={setSelectedPlatform}>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">全部平台</SelectItem>
+                    <SelectItem value="amazon">Amazon</SelectItem>
+                    <SelectItem value="shopify">Shopify</SelectItem>
+                    <SelectItem value="ebay">eBay</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-2">
+                <label className="text-sm font-medium">搜索商品</label>
+                <form onSubmit={handleSearch} className="flex gap-2">
+                  <Input
+                    placeholder="输入商品名称..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="flex-1"
+                  />
+                  <Button type="submit" size="sm" disabled={isAnalyzing}>
+                    {isAnalyzing ? (
+                      <RefreshCw className="w-4 h-4 animate-spin" />
+                    ) : (
+                      <Search className="w-4 h-4" />
+                    )}
+                  </Button>
+                </form>
+              </div>
+            </div>
           </CardContent>
         </Card>
 
-        <Tabs defaultValue="keywords" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-4 h-16 p-2 bg-gradient-to-r from-background to-muted/50 border border-border/50 shadow-sm">
-            <TabsTrigger value="keywords" className="flex items-center gap-2 h-12 text-sm font-medium">
-              <TrendingUp className="w-4 h-4" />
-              关键词趋势
-            </TabsTrigger>
-            <TabsTrigger value="markets" className="flex items-center gap-2 h-12 text-sm font-medium">
-              <BarChart3 className="w-4 h-4" />
-              市场分析
-            </TabsTrigger>
-            <TabsTrigger value="platforms" className="flex items-center gap-2 h-12 text-sm font-medium">
-              <Globe className="w-4 h-4" />
-              平台数据
-            </TabsTrigger>
-            <TabsTrigger value="reports" className="flex items-center gap-2 h-12 text-sm font-medium">
-              <Activity className="w-4 h-4" />
-              分析报告
-            </TabsTrigger>
-          </TabsList>
+        {/* Stats Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+          <Card>
+            <CardContent className="flex items-center p-6">
+              <div className="flex items-center gap-4">
+                <div className="p-2 bg-primary/10 rounded-lg">
+                  <TrendingUp className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-muted-foreground">爆款商品</p>
+                  <p className="text-2xl font-bold">24</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardContent className="flex items-center p-6">
+              <div className="flex items-center gap-4">
+                <div className="p-2 bg-green-100 rounded-lg">
+                  <ShoppingCart className="w-6 h-6 text-green-600" />
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-muted-foreground">总销量</p>
+                  <p className="text-2xl font-bold">45.6K</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardContent className="flex items-center p-6">
+              <div className="flex items-center gap-4">
+                <div className="p-2 bg-blue-100 rounded-lg">
+                  <Activity className="w-6 h-6 text-blue-600" />
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-muted-foreground">平均增长率</p>
+                  <p className="text-2xl font-bold">+178%</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardContent className="flex items-center p-6">
+              <div className="flex items-center gap-4">
+                <div className="p-2 bg-purple-100 rounded-lg">
+                  <Star className="w-6 h-6 text-purple-600" />
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-muted-foreground">平均评分</p>
+                  <p className="text-2xl font-bold">4.7</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
 
-          {/* Keywords Tab */}
-          <TabsContent value="keywords" className="space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {/* Trend Chart */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <TrendingUp className="w-5 h-5" />
-                    搜索趋势
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="p-4">
-                  <ChartContainer
-                    config={{
-                      "无线耳机": {
-                        label: "无线耳机",
-                        color: "hsl(var(--primary))",
-                      },
-                      "智能手表": {
-                        label: "智能手表", 
-                        color: "hsl(142, 76%, 36%)",
-                      },
-                      "蓝牙音箱": {
-                        label: "蓝牙音箱",
-                        color: "hsl(346, 87%, 43%)",
-                      },
-                      "充电宝": {
-                        label: "充电宝",
-                        color: "hsl(262, 83%, 58%)",
-                      },
-                    }}
-                    className="h-[280px] w-full"
-                  >
-                    <ResponsiveContainer width="100%" height="100%">
-                      <LineChart data={trendData} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-                        <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
-                        <XAxis 
-                          dataKey="date" 
-                          axisLine={false}
-                          tickLine={false}
-                          tick={{ fontSize: 12 }}
-                        />
-                        <YAxis 
-                          axisLine={false}
-                          tickLine={false}
-                          tick={{ fontSize: 12 }}
-                        />
-                        <ChartTooltip content={<ChartTooltipContent />} />
-                        <Line 
-                          type="monotone" 
-                          dataKey="无线耳机" 
-                          stroke="hsl(var(--primary))" 
-                          strokeWidth={2}
-                          dot={{ fill: "hsl(var(--primary))", r: 4 }}
-                          activeDot={{ r: 6 }}
-                        />
-                        <Line 
-                          type="monotone" 
-                          dataKey="智能手表" 
-                          stroke="hsl(142, 76%, 36%)" 
-                          strokeWidth={2}
-                          dot={{ fill: "hsl(142, 76%, 36%)", r: 4 }}
-                          activeDot={{ r: 6 }}
-                        />
-                        <Line 
-                          type="monotone" 
-                          dataKey="蓝牙音箱" 
-                          stroke="hsl(346, 87%, 43%)" 
-                          strokeWidth={2}
-                          dot={{ fill: "hsl(346, 87%, 43%)", r: 4 }}
-                          activeDot={{ r: 6 }}
-                        />
-                        <Line 
-                          type="monotone" 
-                          dataKey="充电宝" 
-                          stroke="hsl(262, 83%, 58%)" 
-                          strokeWidth={2}
-                          dot={{ fill: "hsl(262, 83%, 58%)", r: 4 }}
-                          activeDot={{ r: 6 }}
-                        />
-                      </LineChart>
-                    </ResponsiveContainer>
-                  </ChartContainer>
-                </CardContent>
-              </Card>
-
-              {/* Hot Keywords */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Zap className="w-5 h-5" />
-                    品牌相关关键词
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    {keywordTrends.map((item, index) => (
-                      <div key={index} className="flex items-center justify-between p-3 border rounded-lg">
-                        <div className="flex-1">
-                          <div className="font-medium">{item.keyword}</div>
-                          <div className="text-sm text-gray-500">搜索量: {item.volume}</div>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <Badge variant={item.competition === 'high' ? 'destructive' : item.competition === 'medium' ? 'default' : 'secondary'}>
-                            {item.competition === 'high' ? '高竞争' : item.competition === 'medium' ? '中竞争' : '低竞争'}
-                          </Badge>
-                          <span className="text-green-600 font-medium">{item.growth}</span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </TabsContent>
-
-          {/* Markets Tab */}
-          <TabsContent value="markets" className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {marketAnalysis.map((market, index) => (
-                <Card key={index}>
-                  <CardHeader>
-                    <CardTitle className="flex items-center justify-between">
-                      <span>{market.platform}</span>
-                      <Badge variant={market.opportunity === 'high' ? 'default' : 'secondary'}>
-                        {market.opportunity === 'high' ? '高机会' : '中机会'}
-                      </Badge>
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-3">
-                      <div>
-                        <div className="text-sm text-gray-500">热门类别</div>
-                        <div className="font-medium">{market.category}</div>
-                      </div>
-                      <div>
-                        <div className="text-sm text-gray-500">趋势产品</div>
-                        <div className="font-medium">{market.trending}</div>
-                      </div>
-                      <div>
-                        <div className="text-sm text-gray-500">增长率</div>
-                        <div className="font-medium text-green-600">{market.growth}</div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </TabsContent>
-
-          {/* Platforms Tab */}
-          <TabsContent value="platforms" className="space-y-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Trending Products List */}
+          <div className="lg:col-span-2 space-y-6">
             <Card>
               <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Globe className="w-5 h-5" />
-                  数据源监控
+                <CardTitle className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <TrendingUp className="w-5 h-5" />
+                    爆款商品列表
+                  </div>
+                  <Button variant="outline" size="sm">
+                    <Download className="w-4 h-4 mr-2" />
+                    导出数据
+                  </Button>
                 </CardTitle>
                 <CardDescription>
-                  实时监控各大平台的数据采集状态
+                  根据销量增长和市场趋势分析的潜在爆款商品
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  {["Google Trends", "Amazon", "eBay", "Shopify", "Reddit", "X (Twitter)", "Alibaba", "Perplexity.ai"].map((platform) => (
-                    <div key={platform} className="flex items-center justify-between p-3 border rounded-lg">
-                      <span className="font-medium">{platform}</span>
-                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                <div className="space-y-4">
+                  {mockTrendingProducts.map((product) => (
+                    <div key={product.id} className="border border-border rounded-lg p-4 hover:shadow-md transition-shadow">
+                      <div className="flex gap-4">
+                        <img 
+                          src={product.image} 
+                          alt={product.name}
+                          className="w-20 h-20 object-cover rounded-lg bg-gray-100"
+                        />
+                        <div className="flex-1">
+                          <div className="flex justify-between items-start mb-2">
+                            <h3 className="font-semibold text-lg">{product.name}</h3>
+                            <div className="flex items-center gap-2">
+                              <Badge variant={getDemandBadgeColor(product.predictedDemand)}>
+                                {getDemandText(product.predictedDemand)}
+                              </Badge>
+                              <div className="text-right">
+                                <div className="text-sm text-muted-foreground">趋势评分</div>
+                                <div className="font-bold text-lg">{product.trendScore}</div>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-3">
+                            <div>
+                              <div className="text-sm text-muted-foreground">当前价格</div>
+                              <div className="font-semibold">¥{product.price}</div>
+                              {product.originalPrice && (
+                                <div className="text-sm text-muted-foreground line-through">¥{product.originalPrice}</div>
+                              )}
+                            </div>
+                            <div>
+                              <div className="text-sm text-muted-foreground">销量</div>
+                              <div className="font-semibold">{product.sales.toLocaleString()}</div>
+                            </div>
+                            <div>
+                              <div className="text-sm text-muted-foreground">增长率</div>
+                              <div className="font-semibold text-green-600">{product.salesGrowth}</div>
+                            </div>
+                            <div>
+                              <div className="text-sm text-muted-foreground">平台</div>
+                              <div className="font-semibold">{product.platform}</div>
+                            </div>
+                          </div>
+                          
+                          <div className="flex justify-between items-center">
+                            <div className="flex gap-1">
+                              {product.tags.map((tag, index) => (
+                                <Badge key={index} variant="outline" className="text-xs">
+                                  {tag}
+                                </Badge>
+                              ))}
+                            </div>
+                            <div className="text-sm text-muted-foreground">
+                              更新时间: {product.lastUpdated}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   ))}
                 </div>
               </CardContent>
             </Card>
-          </TabsContent>
+          </div>
 
-          {/* Reports Tab */}
-          <TabsContent value="reports" className="space-y-6">
+          {/* Market Analysis Reports */}
+          <div className="space-y-6">
             <Card>
               <CardHeader>
-                <CardTitle className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <BarChart3 className="w-5 h-5" />
-                    分析报告
-                  </div>
-                  <Button variant="outline" size="sm">
-                    <Download className="w-4 h-4 mr-2" />
-                    导出报告
-                  </Button>
+                <CardTitle className="flex items-center gap-2">
+                  <BarChart3 className="w-5 h-5" />
+                  最新市场分析报告
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  <div className="p-4 border rounded-lg">
-                    <div className="flex items-center justify-between mb-2">
-                      <h3 className="font-medium">电子产品趋势报告</h3>
-                      <Badge>今日</Badge>
+                  {mockReports.map((report) => (
+                    <div key={report.id} className="border border-border rounded-lg p-4">
+                      <div className="flex justify-between items-start mb-2">
+                        <h4 className="font-medium text-sm">{report.title}</h4>
+                        <Badge variant="secondary" className="text-xs">
+                          {report.date}
+                        </Badge>
+                      </div>
+                      <p className="text-sm text-muted-foreground mb-3">
+                        {report.summary}
+                      </p>
+                      <div className="space-y-2">
+                        <div>
+                          <div className="text-xs font-medium text-muted-foreground mb-1">关键洞察</div>
+                          <ul className="text-xs space-y-1">
+                            {report.insights.slice(0, 2).map((insight, index) => (
+                              <li key={index} className="text-muted-foreground">• {insight}</li>
+                            ))}
+                          </ul>
+                        </div>
+                        <div className="flex justify-between items-center">
+                          <div className="flex items-center gap-2">
+                            <div className="text-xs text-muted-foreground">可信度</div>
+                            <div className="text-xs font-semibold">{report.confidenceLevel}%</div>
+                          </div>
+                          <Button variant="ghost" size="sm" className="text-xs">
+                            查看详情
+                          </Button>
+                        </div>
+                      </div>
                     </div>
-                    <p className="text-sm text-gray-600">
-                      基于过去30天的数据分析，AI智能设备类产品呈现强劲增长趋势，预计未来3个月将继续保持上升态势...
-                    </p>
-                  </div>
-                  <div className="p-4 border rounded-lg">
-                    <div className="flex items-center justify-between mb-2">
-                      <h3 className="font-medium">家居用品市场分析</h3>
-                      <Badge variant="secondary">昨日</Badge>
-                    </div>
-                    <p className="text-sm text-gray-600">
-                      智能家居产品在各大电商平台表现活跃，其中智能音箱、智能插座等品类增长显著...
-                    </p>
-                  </div>
-                  <div className="p-4 border rounded-lg">
-                    <div className="flex items-center justify-between mb-2">
-                      <h3 className="font-medium">竞品监控周报</h3>
-                      <Badge variant="outline">本周</Badge>
-                    </div>
-                    <p className="text-sm text-gray-600">
-                      主要竞争对手在智能穿戴设备领域推出新品，建议关注市场动态并调整产品策略...
-                    </p>
-                  </div>
+                  ))}
                 </div>
               </CardContent>
             </Card>
-          </TabsContent>
-        </Tabs>
+
+            {/* Quick Actions */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-base">快速操作</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <Button className="w-full" variant="outline">
+                  <Calendar className="w-4 h-4 mr-2" />
+                  设置趋势提醒
+                </Button>
+                <Button className="w-full" variant="outline">
+                  <Download className="w-4 h-4 mr-2" />
+                  导出完整报告
+                </Button>
+                <Button className="w-full" variant="outline">
+                  <Eye className="w-4 h-4 mr-2" />
+                  竞品对比分析
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
       </div>
     </div>
   );
