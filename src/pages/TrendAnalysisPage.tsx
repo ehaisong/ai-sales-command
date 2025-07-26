@@ -172,7 +172,7 @@ const TrendAnalysisPage = () => {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Zap className="w-5 h-5" />
-                    热门关键词
+                    品牌相关关键词
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
