@@ -107,7 +107,7 @@ export const menuItems: MenuItem[] = [
     icon: User,
     items: [
       {
-        title: "AI设置",
+        title: "资料设定",
         url: "/ai-agent/settings",
         icon: Settings,
       },
