@@ -301,7 +301,7 @@ const InfluencerPage = () => {
               </p>
               <Button variant="outline" className="flex items-center gap-2">
                 <Download className="w-4 h-4" />
-                下载报告
+                数据来源
               </Button>
             </div>
           </CardContent>
