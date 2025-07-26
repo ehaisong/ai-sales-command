@@ -62,9 +62,11 @@ const TopNavbar = () => {
                 <span>个人资料</span>
               </Link>
             </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Settings className="mr-2 h-4 w-4" />
-              <span>设置</span>
+            <DropdownMenuItem asChild>
+              <Link to="/settings" className="flex items-center w-full">
+                <Settings className="mr-2 h-4 w-4" />
+                <span>设置</span>
+              </Link>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

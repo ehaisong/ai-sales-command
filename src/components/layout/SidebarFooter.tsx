@@ -23,10 +23,12 @@ const AppSidebarFooter = ({ isCollapsed }: SidebarFooterProps) => {
               <div className="text-xs text-muted-foreground">科技有限公司</div>
             </div>
           </Link>
-          <Button size="sm" className="w-full">
-            <Settings className="mr-2 h-4 w-4" />
-            设置
-          </Button>
+          <Link to="/settings">
+            <Button size="sm" className="w-full">
+              <Settings className="mr-2 h-4 w-4" />
+              设置
+            </Button>
+          </Link>
         </>
       ) : (
         <Link to="/profile" className="flex justify-center">

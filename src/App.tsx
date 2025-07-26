@@ -19,6 +19,7 @@ import AutoSEOPage from "@/pages/AutoSEOPage";
 import TrafficHeatingPage from "@/pages/TrafficHeatingPage";
 import TrendAnalysisPage from "@/pages/TrendAnalysisPage";
 import ProfilePage from "@/pages/ProfilePage";
+import SettingsPage from "@/pages/SettingsPage";
 import BrandProfilePage from "@/pages/BrandProfilePage";
 import InfluencerPage from "@/pages/InfluencerPage";
 import AdsAssistantPage from "@/pages/AdsAssistantPage";
@@ -76,7 +77,7 @@ const App = () => (
                   
                   
                   {/* 设置 */}
-                  <Route path="/settings" element={<div className="p-6">设置页面开发中...</div>} />
+                  <Route path="/settings" element={<SettingsPage />} />
                   
                   {/* 404页面 */}
                   <Route path="*" element={<NotFound />} />
