@@ -20,6 +20,7 @@ import TrafficHeatingPage from "@/pages/TrafficHeatingPage";
 import TrendAnalysisPage from "@/pages/TrendAnalysisPage";
 import ProfilePage from "@/pages/ProfilePage";
 import BrandProfilePage from "@/pages/BrandProfilePage";
+import InfluencerPage from "@/pages/InfluencerPage";
 
 import EnterpriseCRM from "@/pages/EnterpriseCRM";
 
@@ -61,7 +62,7 @@ const App = () => (
                   {/* 营销工具 */}
                   <Route path="/tools/trends" element={<TrendAnalysisPage />} />
                   <Route path="/tools/landing" element={<div className="p-6">落地页页面开发中...</div>} />
-                  <Route path="/tools/influencer" element={<div className="p-6">网红页面开发中...</div>} />
+                  <Route path="/tools/influencer" element={<InfluencerPage />} />
                   <Route path="/tools/ads" element={<div className="p-6">广告助手页面开发中...</div>} />
                   <Route path="/tools/competitor" element={<div className="p-6">竞品监控页面开发中...</div>} />
                   <Route path="/tools/traffic-boost" element={<TrafficHeatingPage />} />
