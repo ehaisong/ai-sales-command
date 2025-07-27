@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { 
   TrendingUp, 
@@ -16,9 +17,14 @@ import {
   RefreshCw,
   Star,
   ShoppingCart,
-  TrendingDown
+  TrendingDown,
+  CheckSquare,
+  Square
 } from "lucide-react";
 import type { TrendingProduct, MarketAnalysisReport } from "@/types/trendAnalysis";
+import TrendAlertDialog from "@/components/trend-analysis/TrendAlertDialog";
+import ExportReportDialog from "@/components/trend-analysis/ExportReportDialog";
+import CompetitorAnalysisDialog from "@/components/trend-analysis/CompetitorAnalysisDialog";
 
 // Mock data for trending products
 const mockTrendingProducts: TrendingProduct[] = [
@@ -133,6 +139,14 @@ const TrendAnalysisPage = () => {
   const [selectedDateRange, setSelectedDateRange] = useState("7days");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedPlatform, setSelectedPlatform] = useState("all");
+  
+  // Selection functionality
+  const [selectedProducts, setSelectedProducts] = useState<string[]>([]);
+  
+  // Dialog states
+  const [trendAlertOpen, setTrendAlertOpen] = useState(false);
+  const [exportReportOpen, setExportReportOpen] = useState(false);
+  const [competitorAnalysisOpen, setCompetitorAnalysisOpen] = useState(false);
 
   const handleAnalyze = () => {
     setIsAnalyzing(true);
@@ -142,6 +156,39 @@ const TrendAnalysisPage = () => {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     handleAnalyze();
+  };
+
+  // Selection handlers
+  const toggleProductSelection = (productId: string) => {
+    setSelectedProducts(prev =>
+      prev.includes(productId)
+        ? prev.filter(id => id !== productId)
+        : [...prev, productId]
+    );
+  };
+
+  const selectAllProducts = () => {
+    if (selectedProducts.length === mockTrendingProducts.length) {
+      setSelectedProducts([]);
+    } else {
+      setSelectedProducts(mockTrendingProducts.map(p => p.id));
+    }
+  };
+
+  // Quick action handlers
+  const handleTrendAlert = () => {
+    if (selectedProducts.length === 0) return;
+    setTrendAlertOpen(true);
+  };
+
+  const handleExportReport = () => {
+    if (selectedProducts.length === 0) return;
+    setExportReportOpen(true);
+  };
+
+  const handleCompetitorAnalysis = () => {
+    if (selectedProducts.length === 0) return;
+    setCompetitorAnalysisOpen(true);
   };
 
   const getDemandBadgeColor = (demand: string) => {
@@ -260,33 +307,60 @@ const TrendAnalysisPage = () => {
                     <TrendingUp className="w-5 h-5" />
                     爆款商品列表
                   </div>
-                  <Button variant="outline" size="sm">
-                    <Download className="w-4 h-4 mr-2" />
-                    导出数据
-                  </Button>
+                  <div className="flex items-center gap-2">
+                    {selectedProducts.length > 0 && (
+                      <Badge variant="secondary" className="px-2 py-1">
+                        已选择 {selectedProducts.length} 个商品
+                      </Badge>
+                    )}
+                    <Button variant="outline" size="sm">
+                      <Download className="w-4 h-4 mr-2" />
+                      导出数据
+                    </Button>
+                  </div>
                 </CardTitle>
-                <CardDescription>
-                  根据销量增长和市场趋势分析的潜在爆款商品
+                <CardDescription className="flex items-center justify-between">
+                  <span>根据销量增长和市场趋势分析的潜在爆款商品</span>
+                  <div className="flex items-center gap-2">
+                    <Checkbox
+                      checked={selectedProducts.length === mockTrendingProducts.length}
+                      onCheckedChange={selectAllProducts}
+                    />
+                    <span className="text-sm">全选</span>
+                  </div>
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
                   {mockTrendingProducts.map((product) => (
-                    <div key={product.id} className="border border-border rounded-lg p-4 hover:shadow-md transition-shadow">
+                    <div 
+                      key={product.id} 
+                      className={`border border-border rounded-lg p-4 hover:shadow-md transition-all cursor-pointer ${
+                        selectedProducts.includes(product.id) ? 'bg-primary/5 border-primary/20' : ''
+                      }`}
+                      onClick={() => toggleProductSelection(product.id)}
+                    >
                       <div className="flex gap-4">
-                        <img 
-                          src={product.image} 
-                          alt={product.name}
-                          className="w-20 h-20 object-cover rounded-lg bg-gray-100"
-                        />
+                        <div className="flex items-start gap-3">
+                          <Checkbox
+                            checked={selectedProducts.includes(product.id)}
+                            onCheckedChange={() => toggleProductSelection(product.id)}
+                            onClick={(e) => e.stopPropagation()}
+                          />
+                          <img 
+                            src={product.image} 
+                            alt={product.name}
+                            className="w-20 h-20 object-cover rounded-lg bg-gray-100"
+                          />
+                        </div>
                         <div className="flex-1">
                           <div className="flex justify-between items-start mb-2">
                             <h3 className="font-semibold text-lg">{product.name}</h3>
-                            <div className="flex items-center gap-2">
-                              <Badge variant={getDemandBadgeColor(product.predictedDemand)}>
+                            <div className="flex items-center gap-2 flex-shrink-0">
+                              <Badge variant={getDemandBadgeColor(product.predictedDemand)} className="whitespace-nowrap">
                                 {getDemandText(product.predictedDemand)}
                               </Badge>
-                              <div className="text-right">
+                              <div className="text-right flex-shrink-0">
                                 <div className="text-sm text-muted-foreground">趋势评分</div>
                                 <div className="font-bold text-lg">{product.trendScore}</div>
                               </div>
@@ -316,14 +390,14 @@ const TrendAnalysisPage = () => {
                           </div>
                           
                           <div className="flex justify-between items-center">
-                            <div className="flex gap-1">
+                            <div className="flex gap-1 flex-wrap">
                               {product.tags.map((tag, index) => (
-                                <Badge key={index} variant="outline" className="text-xs">
+                                <Badge key={index} variant="outline" className="text-xs whitespace-nowrap">
                                   {tag}
                                 </Badge>
                               ))}
                             </div>
-                            <div className="text-sm text-muted-foreground">
+                            <div className="text-sm text-muted-foreground flex-shrink-0 ml-2">
                               更新时间: {product.lastUpdated}
                             </div>
                           </div>
@@ -387,17 +461,38 @@ const TrendAnalysisPage = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="text-base">快速操作</CardTitle>
+                <CardDescription className="text-sm">
+                  {selectedProducts.length === 0 
+                    ? "请先选择商品以启用快速操作" 
+                    : `对 ${selectedProducts.length} 个选中商品执行操作`
+                  }
+                </CardDescription>
               </CardHeader>
               <CardContent className="space-y-3">
-                <Button className="w-full" variant="outline">
+                <Button 
+                  className="w-full" 
+                  variant="outline"
+                  onClick={handleTrendAlert}
+                  disabled={selectedProducts.length === 0}
+                >
                   <Calendar className="w-4 h-4 mr-2" />
                   设置趋势提醒
                 </Button>
-                <Button className="w-full" variant="outline">
+                <Button 
+                  className="w-full" 
+                  variant="outline"
+                  onClick={handleExportReport}
+                  disabled={selectedProducts.length === 0}
+                >
                   <Download className="w-4 h-4 mr-2" />
                   导出完整报告
                 </Button>
-                <Button className="w-full" variant="outline">
+                <Button 
+                  className="w-full" 
+                  variant="outline"
+                  onClick={handleCompetitorAnalysis}
+                  disabled={selectedProducts.length === 0}
+                >
                   <Eye className="w-4 h-4 mr-2" />
                   竞品对比分析
                 </Button>
@@ -406,6 +501,23 @@ const TrendAnalysisPage = () => {
           </div>
         </div>
       </div>
+
+      {/* Dialog Components */}
+      <TrendAlertDialog
+        open={trendAlertOpen}
+        onOpenChange={setTrendAlertOpen}
+        selectedProducts={selectedProducts}
+      />
+      <ExportReportDialog
+        open={exportReportOpen}
+        onOpenChange={setExportReportOpen}
+        selectedProducts={selectedProducts}
+      />
+      <CompetitorAnalysisDialog
+        open={competitorAnalysisOpen}
+        onOpenChange={setCompetitorAnalysisOpen}
+        selectedProducts={selectedProducts}
+      />
     </div>
   );
 };
