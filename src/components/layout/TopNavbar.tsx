@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
 import { Badge } from '@/components/ui/badge';
 import { SidebarTrigger } from '@/components/ui/sidebar';
-import { Search, Bell, HelpCircle, ChevronDown, User, Settings, CreditCard, Monitor } from 'lucide-react';
+import { Search, Bell, HelpCircle, ChevronDown, User, Settings, CreditCard, Monitor, Building2, Plus } from 'lucide-react';
 import { Link } from 'react-router-dom';
 const TopNavbar = () => {
   return <header className="h-14 bg-card border-b border-border px-4 flex items-center justify-between w-full">
@@ -40,6 +40,46 @@ const TopNavbar = () => {
           <HelpCircle className="h-5 w-5" />
         </Button>
 
+        {/* 品牌切换 */}
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="flex items-center space-x-2 px-3">
+              <Building2 className="h-4 w-4" />
+              <span className="hidden md:inline text-sm">科技有限公司</span>
+              <ChevronDown className="h-3 w-3" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="w-56">
+            <DropdownMenuItem className="flex items-center">
+              <Building2 className="mr-2 h-4 w-4" />
+              <div className="flex flex-col">
+                <span className="font-medium">科技有限公司</span>
+                <span className="text-xs text-muted-foreground">当前品牌</span>
+              </div>
+            </DropdownMenuItem>
+            <DropdownMenuItem className="flex items-center">
+              <Building2 className="mr-2 h-4 w-4" />
+              <div className="flex flex-col">
+                <span>贸易公司</span>
+                <span className="text-xs text-muted-foreground">副品牌</span>
+              </div>
+            </DropdownMenuItem>
+            <DropdownMenuItem className="flex items-center">
+              <Building2 className="mr-2 h-4 w-4" />
+              <div className="flex flex-col">
+                <span>电商品牌</span>
+                <span className="text-xs text-muted-foreground">电商业务</span>
+              </div>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem asChild>
+              <Link to="/brand-management" className="flex items-center w-full">
+                <Plus className="mr-2 h-4 w-4" />
+                <span>添加品牌</span>
+              </Link>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
 
         {/* 用户菜单 */}
         <DropdownMenu>
