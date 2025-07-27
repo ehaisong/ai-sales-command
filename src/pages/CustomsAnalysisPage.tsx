@@ -100,7 +100,7 @@ const CustomsAnalysisPage = () => {
   ];
 
   return (
-    <div className="p-6 space-y-6 bg-gray-50 min-h-screen">
+    <div className="p-4 space-y-4 bg-gray-50 min-h-screen max-w-none">
       {/* 页面标题 */}
       <div className="flex justify-between items-center">
         <div>
@@ -120,7 +120,7 @@ const CustomsAnalysisPage = () => {
       </div>
 
       {/* 统计概览 */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
         <Card>
           <CardContent className="p-6">
             <div className="flex items-center gap-4">
@@ -178,8 +178,8 @@ const CustomsAnalysisPage = () => {
         </Card>
       </div>
 
-      <Tabs defaultValue="analysis" className="space-y-6">
-        <TabsList className="grid w-full grid-cols-4 h-16 bg-white border shadow-sm rounded-xl p-2">
+      <Tabs defaultValue="analysis" className="space-y-4">
+        <TabsList className="grid w-full grid-cols-4 h-14 bg-white border shadow-sm rounded-xl p-1">
           <TabsTrigger 
             value="analysis" 
             className="flex items-center gap-3 px-6 py-3 text-base font-semibold data-[state=active]:bg-blue-500 data-[state=active]:text-white data-[state=active]:shadow-lg transition-all duration-200 hover:bg-blue-50"
