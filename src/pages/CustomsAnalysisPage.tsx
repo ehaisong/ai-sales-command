@@ -241,39 +241,46 @@ const CustomsAnalysisPage = () => {
       </div>
 
       <Tabs defaultValue="analysis" className="space-y-6 w-full">
-        <TabsList className="grid w-full grid-cols-4 h-20 bg-gradient-to-r from-white to-gray-50 border-2 shadow-lg rounded-2xl p-3 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-green-500/5 to-purple-500/5"></div>
+        <TabsList className="grid w-full grid-cols-4 bg-card shadow-sm rounded-lg p-1 border">
           <TabsTrigger 
             value="analysis" 
-            className="relative flex flex-col items-center gap-1 px-4 py-2 text-sm font-semibold rounded-xl transition-all duration-300 data-[state=active]:bg-gradient-to-br data-[state=active]:from-blue-500 data-[state=active]:to-blue-600 data-[state=active]:text-white data-[state=active]:shadow-xl data-[state=active]:scale-105 hover:bg-blue-50 hover:shadow-md group"
+            className="relative flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-md transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground hover:bg-muted/50"
           >
-            <BarChart3 className="h-5 w-5 transition-transform group-data-[state=active]:scale-110" />
-            <span className="text-xs">数据分析</span>
+            <div className="p-1.5 bg-blue-100 rounded-md data-[state=active]:bg-white/20 dark:bg-blue-900 dark:data-[state=active]:bg-white/20">
+              <BarChart3 className="h-4 w-4 text-blue-600 dark:text-blue-400 data-[state=active]:text-white" />
+            </div>
+            <span>数据分析</span>
           </TabsTrigger>
           <TabsTrigger 
             value="customers" 
-            className="relative flex flex-col items-center gap-1 px-4 py-2 text-sm font-semibold rounded-xl transition-all duration-300 data-[state=active]:bg-gradient-to-br data-[state=active]:from-green-500 data-[state=active]:to-green-600 data-[state=active]:text-white data-[state=active]:shadow-xl data-[state=active]:scale-105 hover:bg-green-50 hover:shadow-md group"
+            className="relative flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-md transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground hover:bg-muted/50"
           >
-            <Users className="h-5 w-5 transition-transform group-data-[state=active]:scale-110" />
-            <span className="text-xs">潜在客户</span>
-            <Badge variant="secondary" className="absolute -top-1 -right-1 bg-green-100 text-green-800 text-[10px] px-1 py-0 min-w-5 h-4">
+            <div className="p-1.5 bg-green-100 rounded-md data-[state=active]:bg-white/20 dark:bg-green-900 dark:data-[state=active]:bg-white/20">
+              <Users className="h-4 w-4 text-green-600 dark:text-green-400 data-[state=active]:text-white" />
+            </div>
+            <span>潜在客户</span>
+            <Badge variant="secondary" className="ml-auto bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300 text-xs px-2 py-0.5">
               {potentialCustomers.length}
             </Badge>
           </TabsTrigger>
           <TabsTrigger 
             value="reports" 
-            className="relative flex flex-col items-center gap-1 px-4 py-2 text-sm font-semibold rounded-xl transition-all duration-300 data-[state=active]:bg-gradient-to-br data-[state=active]:from-purple-500 data-[state=active]:to-purple-600 data-[state=active]:text-white data-[state=active]:shadow-xl data-[state=active]:scale-105 hover:bg-purple-50 hover:shadow-md group"
+            className="relative flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-md transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground hover:bg-muted/50"
           >
-            <Download className="h-5 w-5 transition-transform group-data-[state=active]:scale-110" />
-            <span className="text-xs">分析报告</span>
-            <div className="absolute -top-1 -right-1 w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
+            <div className="p-1.5 bg-purple-100 rounded-md data-[state=active]:bg-white/20 dark:bg-purple-900 dark:data-[state=active]:bg-white/20">
+              <Download className="h-4 w-4 text-purple-600 dark:text-purple-400 data-[state=active]:text-white" />
+            </div>
+            <span>分析报告</span>
+            <div className="ml-auto w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
           </TabsTrigger>
           <TabsTrigger 
             value="settings" 
-            className="relative flex flex-col items-center gap-1 px-4 py-2 text-sm font-semibold rounded-xl transition-all duration-300 data-[state=active]:bg-gradient-to-br data-[state=active]:from-orange-500 data-[state=active]:to-orange-600 data-[state=active]:text-white data-[state=active]:shadow-xl data-[state=active]:scale-105 hover:bg-orange-50 hover:shadow-md group"
+            className="relative flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-md transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground hover:bg-muted/50"
           >
-            <Settings className="h-5 w-5 transition-transform group-data-[state=active]:scale-110" />
-            <span className="text-xs">监控设置</span>
+            <div className="p-1.5 bg-orange-100 rounded-md data-[state=active]:bg-white/20 dark:bg-orange-900 dark:data-[state=active]:bg-white/20">
+              <Settings className="h-4 w-4 text-orange-600 dark:text-orange-400 data-[state=active]:text-white" />
+            </div>
+            <span>监控设置</span>
           </TabsTrigger>
         </TabsList>
 
