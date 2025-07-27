@@ -98,7 +98,7 @@ const BrandStrategyGenerationPage = () => {
               {/* 平台选择 */}
               {!isGenerating && (
                 <div className="space-y-4">
-                  <h3 className="text-lg font-medium text-foreground">选择平台:</h3>
+                  <h3 className="text-lg font-medium text-foreground">更多品牌信息导入</h3>
                   <div className="flex flex-wrap gap-3 justify-center">
                     {availablePlatforms.map((platform) => (
                       <Badge
