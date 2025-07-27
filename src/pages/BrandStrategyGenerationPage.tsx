@@ -85,7 +85,7 @@ const BrandStrategyGenerationPage = () => {
               {/* 标题和描述 */}
               <div className="space-y-2">
                 <h1 className="text-2xl font-semibold text-foreground">
-                  {isGenerating ? '生成内容策略' : '内容策略生成完成'}
+                  {isGenerating ? '生成内容策略' : '品牌知识库创建完成'}
                 </h1>
                 <p className="text-muted-foreground max-w-lg mx-auto">
                   {isGenerating 
