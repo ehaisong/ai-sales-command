@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, ChevronRight } from 'lucide-react';
+import { ArrowLeft, ChevronRight, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -12,7 +12,10 @@ const BrandManagementPage = () => {
   const [formData, setFormData] = useState({
     brandName: '',
     website: '',
-    additionalContext: ''
+    additionalContext: '',
+    targetAudience: '',
+    brandTone: '',
+    keySellingPoints: ''
   });
 
   const handleNext = () => {
@@ -25,6 +28,15 @@ const BrandManagementPage = () => {
     setFormData(prev => ({
       ...prev,
       [field]: value
+    }));
+  };
+
+  const handleAutofill = () => {
+    setFormData(prev => ({
+      ...prev,
+      targetAudience: '25-35岁的都市白领，注重生活品质，具有一定消费能力，关注健康和时尚趋势，活跃在社交媒体平台，喜欢尝试新鲜事物...',
+      brandTone: '友好而专业，富有创新精神，积极正面，简洁明了，具有亲和力，注重用户体验，传达品质和可靠性...',
+      keySellingPoints: '• 高品质产品保证\n• 创新的用户体验设计\n• 优质的客户服务\n• 具有竞争力的价格\n• 环保可持续发展理念\n• 快速便捷的交付服务'
     }));
   };
 
@@ -136,18 +148,78 @@ const BrandManagementPage = () => {
 
             {currentStep === 2 && (
               <div className="space-y-6">
-                <div>
-                  <h1 className="text-2xl font-semibold text-foreground mb-6">品牌详情</h1>
-                </div>
-                
-                <div className="text-center py-12 text-muted-foreground">
-                  <p>品牌详情页面开发中...</p>
+                <div className="flex items-center justify-between">
+                  <h1 className="text-2xl font-semibold text-foreground">品牌详情</h1>
                   <Button 
                     variant="outline" 
-                    className="mt-4"
+                    onClick={handleAutofill}
+                    className="flex items-center gap-2"
+                  >
+                    <Sparkles className="h-4 w-4" />
+                    自动填充
+                  </Button>
+                </div>
+
+                <div className="space-y-6">
+                  <div>
+                    <h3 className="text-lg font-semibold text-foreground mb-4">品牌策略</h3>
+                    
+                    <div className="space-y-4">
+                      <div>
+                        <Label htmlFor="targetAudience" className="text-base font-medium">
+                          目标受众
+                        </Label>
+                        <Textarea
+                          id="targetAudience"
+                          placeholder="描述您的理想客户 - 他们的人口统计、兴趣、痛点和行为..."
+                          value={formData.targetAudience}
+                          onChange={(e) => handleInputChange('targetAudience', e.target.value)}
+                          className="mt-2 min-h-[120px] resize-none"
+                        />
+                      </div>
+
+                      <div>
+                        <Label htmlFor="brandTone" className="text-base font-medium">
+                          品牌调性
+                        </Label>
+                        <Textarea
+                          id="brandTone"
+                          placeholder="描述您品牌的个性和沟通风格 - 正式、随意、友好、权威、有趣等..."
+                          value={formData.brandTone}
+                          onChange={(e) => handleInputChange('brandTone', e.target.value)}
+                          className="mt-2 min-h-[120px] resize-none"
+                        />
+                      </div>
+
+                      <div>
+                        <Label htmlFor="keySellingPoints" className="text-base font-medium">
+                          关键卖点
+                        </Label>
+                        <Textarea
+                          id="keySellingPoints"
+                          placeholder="列出您品牌的独特价值主张和竞争优势..."
+                          value={formData.keySellingPoints}
+                          onChange={(e) => handleInputChange('keySellingPoints', e.target.value)}
+                          className="mt-2 min-h-[120px] resize-none"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex justify-between pt-6">
+                  <Button 
+                    variant="outline"
                     onClick={() => setCurrentStep(1)}
+                    className="px-8 h-12 text-base"
                   >
                     返回上一步
+                  </Button>
+                  <Button 
+                    className="px-8 h-12 text-base"
+                    disabled={!formData.targetAudience || !formData.brandTone}
+                  >
+                    完成
                   </Button>
                 </div>
               </div>
