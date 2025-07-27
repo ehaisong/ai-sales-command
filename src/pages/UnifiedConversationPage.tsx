@@ -221,26 +221,26 @@ const UnifiedConversationPage = () => {
   };
 
   return (
-    <div className="p-6 h-full bg-gray-50">
-      {/* Header */}
-      <div className="mb-6">
+    <div className="page-container">
+      {/* Page Header */}
+      <div className="page-header">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center space-x-3">
-            <MessageSquare className="h-6 w-6 text-emerald-600" />
-            <h1 className="text-2xl font-bold text-gray-900">营销对话中心</h1>
+            <MessageSquare className="h-6 w-6 text-primary" />
+            <h1 className="page-title">营销对话中心</h1>
           </div>
           
           <div className="flex items-center space-x-3">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
                 placeholder="搜索客户、公司或邮箱..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 w-80 bg-white border-gray-200 focus:border-emerald-500 focus:ring-emerald-500"
+                className="pl-10 w-80 bg-card border-border focus:border-primary focus:ring-primary"
               />
             </div>
-            <Button variant="outline" size="sm" className="border-gray-200 hover:border-emerald-500">
+            <Button variant="outline" size="sm" className="monday-button border-border hover:border-primary">
               <Filter className="mr-2 h-4 w-4" />
               筛选
             </Button>
@@ -248,61 +248,61 @@ const UnifiedConversationPage = () => {
         </div>
 
         {/* Enhanced Stats Cards */}
-        <div className="grid grid-cols-4 gap-4 mb-4">
-          <Card className="bg-white border-gray-200 hover:shadow-md transition-shadow">
+        <div className="grid-stats">
+          <Card className="monday-card-small card-hover">
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600">活跃对话</p>
-                  <p className="text-2xl font-bold text-gray-900">{filteredCustomers.length}</p>
-                  <p className="text-xs text-green-600 mt-1">↗ +12% 本周</p>
+                  <p className="card-subtitle">活跃对话</p>
+                  <p className="text-2xl font-bold text-foreground">{filteredCustomers.length}</p>
+                  <p className="text-xs text-success mt-1">↗ +12% 本周</p>
                 </div>
-                <Users className="h-8 w-8 text-blue-500" />
+                <Users className="h-8 w-8 text-primary" />
               </div>
             </CardContent>
           </Card>
           
-          <Card className="bg-white border-gray-200 hover:shadow-md transition-shadow">
+          <Card className="monday-card-small card-hover">
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600">AI自动管理</p>
-                  <p className="text-2xl font-bold text-emerald-600">
+                  <p className="card-subtitle">AI自动管理</p>
+                  <p className="text-2xl font-bold text-success">
                     {filteredCustomers.filter(c => c.isAIManaged).length}
                   </p>
-                  <p className="text-xs text-emerald-600 mt-1">效率提升 85%</p>
+                  <p className="text-xs text-success mt-1">效率提升 85%</p>
                 </div>
-                <Bot className="h-8 w-8 text-emerald-500" />
+                <Bot className="h-8 w-8 text-success" />
               </div>
             </CardContent>
           </Card>
           
-          <Card className="bg-white border-gray-200 hover:shadow-md transition-shadow">
+          <Card className="monday-card-small card-hover">
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600">待处理消息</p>
-                  <p className="text-2xl font-bold text-orange-600">
+                  <p className="card-subtitle">待处理消息</p>
+                  <p className="text-2xl font-bold text-warning">
                     {filteredCustomers.reduce((sum, c) => sum + c.unreadCount, 0)}
                   </p>
-                  <p className="text-xs text-orange-600 mt-1">需要关注</p>
+                  <p className="text-xs text-warning mt-1">需要关注</p>
                 </div>
-                <MessageSquare className="h-8 w-8 text-orange-500" />
+                <MessageSquare className="h-8 w-8 text-warning" />
               </div>
             </CardContent>
           </Card>
           
-          <Card className="bg-white border-gray-200 hover:shadow-md transition-shadow">
+          <Card className="monday-card-small card-hover">
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600">高优先级</p>
-                  <p className="text-2xl font-bold text-red-600">
+                  <p className="card-subtitle">高优先级</p>
+                  <p className="text-2xl font-bold text-error">
                     {filteredCustomers.filter(c => c.priority === 'high').length}
                   </p>
-                  <p className="text-xs text-red-600 mt-1">重点跟进</p>
+                  <p className="text-xs text-error mt-1">重点跟进</p>
                 </div>
-                <AlertTriangle className="h-8 w-8 text-red-500" />
+                <AlertTriangle className="h-8 w-8 text-error" />
               </div>
             </CardContent>
           </Card>

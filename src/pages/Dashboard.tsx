@@ -10,15 +10,21 @@ import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
   return (
-    <div className="p-6 h-full">
-      {/* Enterprise CRM Access Button */}
-      <div className="mb-4">
-        <Button asChild className="bg-gradient-to-r from-monday-blue to-monday-purple hover:from-monday-blue-dark hover:to-monday-purple-dark">
-          <Link to="/enterprise-crm">
-            <Rocket className="h-4 w-4 mr-2" />
-            L3级AI自动化营销系统
-          </Link>
-        </Button>
+    <div className="page-container">
+      {/* Page Header */}
+      <div className="page-header">
+        <h1 className="page-title">工作台</h1>
+        <p className="page-subtitle">管理您的营销活动和客户关系</p>
+        
+        {/* Enterprise CRM Access Button */}
+        <div className="mt-4">
+          <Button asChild className="monday-button bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90">
+            <Link to="/enterprise-crm">
+              <Rocket className="h-4 w-4 mr-2" />
+              L3级AI自动化营销系统
+            </Link>
+          </Button>
+        </div>
       </div>
 
       {/* 主要内容区域 - 改为8:4比例布局 */}
@@ -26,15 +32,15 @@ const Dashboard = () => {
         {/* 左列：统计卡片 + AI工作流 - 占8/12宽度 */}
         <div className="lg:col-span-8 flex flex-col space-y-6">
           {/* 统计卡片区域 - 单行4列网格 */}
-          <div className="grid grid-cols-4 gap-4">
+          <div className="grid-stats">
             <StatCard 
               title="待处理信息" 
               value={12} 
               icon={Mail} 
               trend="+2 新消息" 
               trendUp={true} 
-              iconColor="#4f46e5" 
-              bgColor="bg-blue-50 border-blue-200"
+              iconColor="hsl(var(--primary))" 
+              bgColor="monday-card-small bg-card hover:shadow-monday"
             />
             <StatCard 
               title="今日客户" 
@@ -42,8 +48,8 @@ const Dashboard = () => {
               icon={Users} 
               trend="+12% 较昨日" 
               trendUp={true} 
-              iconColor="#FF5724" 
-              bgColor="bg-orange-50 border-orange-200"
+              iconColor="hsl(var(--warning))" 
+              bgColor="monday-card-small bg-card hover:shadow-monday"
             />
             <StatCard 
               title="今日发信" 
@@ -51,8 +57,8 @@ const Dashboard = () => {
               icon={Send} 
               trend="+8% 较昨日" 
               trendUp={true} 
-              iconColor="#0EA5E9" 
-              bgColor="bg-cyan-50 border-cyan-200"
+              iconColor="hsl(var(--accent))" 
+              bgColor="monday-card-small bg-card hover:shadow-monday"
             />
             <StatCard 
               title="今日收信" 
@@ -60,8 +66,8 @@ const Dashboard = () => {
               icon={MailOpen} 
               trend="+23% 较昨日" 
               trendUp={true} 
-              iconColor="#10B981" 
-              bgColor="bg-green-50 border-green-200"
+              iconColor="hsl(var(--success))" 
+              bgColor="monday-card-small bg-card hover:shadow-monday"
             />
           </div>
 

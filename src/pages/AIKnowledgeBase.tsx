@@ -18,23 +18,23 @@ const AIKnowledgeBase = () => {
   const [showConfig, setShowConfig] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
+    <div className="page-container">
       <div className="max-w-full mx-auto">
-        {/* 页面标题和描述 */}
-        <div className="mb-6">
+        {/* Page Header */}
+        <div className="page-header">
           <div className="flex items-center gap-3 mb-2">
-            <h1 className="text-2xl font-bold text-gray-900">我的品牌</h1>
+            <h1 className="page-title">AI知识库</h1>
             <Button
               variant="outline"
               size="sm"
               onClick={() => navigate('/brand/profile')}
-              className="flex items-center gap-2"
+              className="flex items-center gap-2 monday-button"
             >
               <Edit className="w-4 h-4" />
-              编辑
+              编辑品牌
             </Button>
           </div>
-          <p className="text-gray-600">
+          <p className="page-subtitle">
             管理公司与产品相关知识，通过AI分析提取产品标签，为精准营销提供支持
           </p>
         </div>
@@ -43,12 +43,8 @@ const AIKnowledgeBase = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* 左侧主要内容区域 */}
           <div className="lg:col-span-2 space-y-6">
-            {/* 顶部工具栏 */}
-            
-
             {/* 数据源管理卡片 */}
             <div>
-              
               <DataSourceCards onUploadFile={() => setShowFileUpload(true)} onConfig={() => setShowConfig(true)} />
             </div>
 
@@ -64,13 +60,13 @@ const AIKnowledgeBase = () => {
           {/* 右侧AI聊天助手 */}
           <div className="lg:col-span-1">
             <div className="sticky top-6">
-              <div className="bg-white rounded-lg shadow-sm border">
-                <div className="p-4 border-b border-gray-200">
-                  <h3 className="text-lg font-semibold flex items-center gap-2">
-                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+              <div className="monday-card-medium">
+                <div className="p-4 border-b border-border">
+                  <h3 className="card-title flex items-center gap-2">
+                    <div className="w-2 h-2 bg-success rounded-full"></div>
                     AI助手
                   </h3>
-                  <p className="text-sm text-gray-500 mt-1">智能分析与知识管理</p>
+                  <p className="card-subtitle">智能分析与知识管理</p>
                 </div>
                 <AIChat onAddEntry={() => {
                   console.log("添加知识库条目");
