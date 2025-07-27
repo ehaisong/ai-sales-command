@@ -21,6 +21,7 @@ import TrendAnalysisPage from "@/pages/TrendAnalysisPage";
 import ProfilePage from "@/pages/ProfilePage";
 import SettingsPage from "@/pages/SettingsPage";
 import BrandProfilePage from "@/pages/BrandProfilePage";
+import BrandManagementPage from "@/pages/BrandManagementPage";
 import InfluencerPage from "@/pages/InfluencerPage";
 import AdsAssistantPage from "@/pages/AdsAssistantPage";
 import CompetitorMonitoringPage from "@/pages/CompetitorMonitoringPage";
@@ -62,6 +63,7 @@ const App = () => (
                   <Route path="/brand/seo" element={<AutoSEOPage />} />
                   <Route path="/brand/traffic" element={<TrafficHeatingPage />} />
                   <Route path="/brand/profile" element={<BrandProfilePage />} />
+                  <Route path="/brand-management" element={<BrandManagementPage />} />
                   
                   {/* 营销工具 */}
                   <Route path="/tools/trends" element={<TrendAnalysisPage />} />
