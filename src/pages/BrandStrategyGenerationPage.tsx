@@ -13,7 +13,7 @@ const BrandStrategyGenerationPage = () => {
 
   // 模拟品牌数据 - 在实际应用中这些数据会从前一页传递过来
   const brandData = {
-    name: 'Ben AI',
+    name: '思拓智能外贸助手',
     website: 'https://www.benai.co/',
     icon: '🤖'
   };
