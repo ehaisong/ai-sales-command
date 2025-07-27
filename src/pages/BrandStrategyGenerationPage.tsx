@@ -8,7 +8,7 @@ import { Badge } from '@/components/ui/badge';
 const BrandStrategyGenerationPage = () => {
   const navigate = useNavigate();
   const [isGenerating, setIsGenerating] = useState(true);
-  const [selectedPlatforms, setSelectedPlatforms] = useState(['微博', '小红书', '抖音']);
+  const [selectedPlatforms, setSelectedPlatforms] = useState(['Linkedin', 'Facebook', 'X']);
   const [generationComplete, setGenerationComplete] = useState(false);
 
   // 模拟品牌数据 - 在实际应用中这些数据会从前一页传递过来
@@ -19,7 +19,7 @@ const BrandStrategyGenerationPage = () => {
   };
 
   const availablePlatforms = [
-    '微博', '小红书', '抖音', '微信公众号', 'B站', '知乎', '快手', 'YouTube'
+    'Linkedin', 'Facebook', 'X', '上传文件'
   ];
 
   useEffect(() => {
