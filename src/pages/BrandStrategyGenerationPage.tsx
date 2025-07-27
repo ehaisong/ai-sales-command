@@ -90,7 +90,7 @@ const BrandStrategyGenerationPage = () => {
                 <p className="text-muted-foreground max-w-lg mx-auto">
                   {isGenerating 
                     ? `为 ${brandData.name} 创建AI驱动的内容角度，指导您的内容创作`
-                    : '已成功为您的品牌生成个性化内容策略和平台建议'
+                    : "已成功创建品牌知识库并定期更新"
                   }
                 </p>
               </div>
