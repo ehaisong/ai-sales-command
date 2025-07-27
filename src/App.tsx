@@ -33,12 +33,12 @@ const App = () => (
     <Toaster />
     <Sonner />
     <BrowserRouter>
-        <div className="min-h-screen flex w-full bg-monday-gray-50">
-          <SidebarProvider>
-            <AppSidebar />
-            <main className="flex-1 flex flex-col" style={{ backgroundColor: '#F7F8FA' }}>
-              <TopNavbar />
-              <div className="flex-1 overflow-auto">
+      <SidebarProvider>
+        <div className="min-h-screen flex w-full">
+          <AppSidebar />
+          <main className="flex-1 flex flex-col" style={{ backgroundColor: '#F7F8FA' }}>
+            <TopNavbar />
+            <div className="flex-1 overflow-auto">
                 <Routes>
                   <Route path="/" element={<Dashboard />} />
                   {/* 营销对话 */}
@@ -84,9 +84,9 @@ const App = () => (
                 </Routes>
               </div>
             </main>
-          </SidebarProvider>
         </div>
-      </BrowserRouter>
+      </SidebarProvider>
+    </BrowserRouter>
     </TooltipProvider>
 );
 

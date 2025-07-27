@@ -100,7 +100,7 @@ const CustomsAnalysisPage = () => {
   ];
 
   return (
-    <div className="p-4 space-y-4 bg-gray-50 min-h-screen max-w-none">
+    <div className="p-6 space-y-6 bg-gray-50 min-h-screen w-full">
       {/* 页面标题 */}
       <div className="flex justify-between items-center">
         <div>
@@ -120,7 +120,7 @@ const CustomsAnalysisPage = () => {
       </div>
 
       {/* 统计概览 */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         <Card>
           <CardContent className="p-6">
             <div className="flex items-center gap-4">
@@ -178,8 +178,8 @@ const CustomsAnalysisPage = () => {
         </Card>
       </div>
 
-      <Tabs defaultValue="analysis" className="space-y-4">
-        <TabsList className="grid w-full grid-cols-4 h-14 bg-white border shadow-sm rounded-xl p-1">
+      <Tabs defaultValue="analysis" className="space-y-6 w-full">
+        <TabsList className="grid w-full grid-cols-4 h-16 bg-white border shadow-sm rounded-xl p-2">
           <TabsTrigger 
             value="analysis" 
             className="flex items-center gap-3 px-6 py-3 text-base font-semibold data-[state=active]:bg-blue-500 data-[state=active]:text-white data-[state=active]:shadow-lg transition-all duration-200 hover:bg-blue-50"
@@ -260,11 +260,17 @@ const CustomsAnalysisPage = () => {
                       <div className="flex-1">
                         <div className="flex items-center gap-3 mb-2">
                           <h3 className="font-semibold">{data.country} - {data.product}</h3>
-                          <Badge variant={data.trend === 'up' ? 'default' : 'secondary'}>
+                          <Badge 
+                            variant="outline" 
+                            className={`${data.trend === 'up' 
+                              ? 'text-green-700 border-green-300 bg-green-50' 
+                              : 'text-red-700 border-red-300 bg-red-50'
+                            }`}
+                          >
                             {data.trend === 'up' ? (
-                              <ArrowUp className="h-3 w-3 mr-1" />
+                              <ArrowUp className="h-3 w-3 mr-1 text-green-700" />
                             ) : (
-                              <ArrowDown className="h-3 w-3 mr-1" />
+                              <ArrowDown className="h-3 w-3 mr-1 text-red-700" />
                             )}
                             {Math.abs(data.changePercent)}%
                           </Badge>
