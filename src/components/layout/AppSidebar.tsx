@@ -10,7 +10,7 @@ const AppSidebar = () => {
   const isCollapsed = state === "collapsed";
 
   return (
-    <Sidebar className="w-72 bg-white border-r border-gray-200 shadow-sm">
+    <Sidebar className={`${isCollapsed ? 'w-16' : 'w-64'} bg-sidebar-background border-r border-sidebar-border shadow-sm transition-all duration-300`}>
       <AppSidebarHeader isCollapsed={isCollapsed} />
       <SidebarMenuContent isCollapsed={isCollapsed} />
       <AppSidebarFooter isCollapsed={isCollapsed} />

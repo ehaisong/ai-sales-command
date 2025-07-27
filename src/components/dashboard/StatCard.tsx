@@ -24,14 +24,14 @@ const StatCard: React.FC<StatCardProps> = ({
 }) => {
   return (
     <Card className={`card-hover ${bgColor}`}>
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 px-4 pt-4">
-        <CardTitle className="text-sm font-medium text-muted-foreground">
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1 px-3 pt-3">
+        <CardTitle className="text-xs font-medium text-muted-foreground">
           {title}
         </CardTitle>
-        <Icon className="h-4 w-4" style={{ color: iconColor }} />
+        <Icon className="h-3 w-3" style={{ color: iconColor }} />
       </CardHeader>
-      <CardContent className="px-4 pb-4">
-        <div className="text-2xl font-din font-bold mb-1">{value}</div>
+      <CardContent className="px-3 pb-3">
+        <div className="text-xl font-din font-bold mb-1">{value}</div>
         {trend && (
           <p className={`text-sm ${trendUp ? 'text-green-600' : 'text-red-600'}`}>
             {trend}

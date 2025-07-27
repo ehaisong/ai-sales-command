@@ -11,10 +11,10 @@ interface SidebarFooterProps {
 
 const AppSidebarFooter = ({ isCollapsed }: SidebarFooterProps) => {
   return (
-    <SidebarFooter className="p-4 border-t border-gray-100 bg-white">
+    <SidebarFooter className="p-3 border-t border-sidebar-border bg-sidebar-background">
       {!isCollapsed ? (
         <>
-          <Link to="/profile" className="flex items-center space-x-3 mb-3 hover:bg-gray-50 rounded-lg p-2 transition-colors">
+          <Link to="/profile" className="flex items-center space-x-2 mb-2 hover:bg-sidebar-accent rounded-lg p-2 transition-colors">
             <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
               <User className="h-5 w-5 text-white" />
             </div>

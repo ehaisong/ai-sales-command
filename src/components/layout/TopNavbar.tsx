@@ -7,7 +7,7 @@ import { SidebarTrigger } from '@/components/ui/sidebar';
 import { Search, Bell, HelpCircle, ChevronDown, User, Settings, CreditCard, Monitor } from 'lucide-react';
 import { Link } from 'react-router-dom';
 const TopNavbar = () => {
-  return <header className="h-16 bg-white border-b border-border px-6 flex items-center justify-between w-full py-[34px]">
+  return <header className="h-14 bg-card border-b border-border px-4 flex items-center justify-between w-full">
       {/* 左侧抽屉控制和DEMO标识 */}
       <div className="flex items-center space-x-4">
         <SidebarTrigger />
