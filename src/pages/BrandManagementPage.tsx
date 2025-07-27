@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ArrowLeft, ChevronRight, Sparkles } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -8,6 +8,7 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent } from '@/components/ui/card';
 
 const BrandManagementPage = () => {
+  const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
     brandName: '',
@@ -216,6 +217,7 @@ const BrandManagementPage = () => {
                     返回上一步
                   </Button>
                   <Button 
+                    onClick={() => navigate('/brand-strategy-generation')}
                     className="px-8 h-12 text-base"
                     disabled={!formData.targetAudience || !formData.brandTone}
                   >
