@@ -15,7 +15,7 @@ const BrandStrategyGenerationPage = () => {
   const brandData = {
     name: '思拓出海',
     website: 'https://situo-overseas.com',
-    icon: '/lovable-uploads/be55e235-0b1c-45c0-b936-f0587eb24b04.png'
+    icon: '/lovable-uploads/091c7feb-f82f-4bf3-9a42-4801f946d1a6.png'
   };
 
   const availablePlatforms = [
