@@ -13,7 +13,7 @@ const TabsList = React.forwardRef<
   <TabsPrimitive.List
     ref={ref}
     className={cn(
-      "inline-flex h-10 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground transition-all duration-300",
+      "inline-flex min-h-14 items-center justify-center rounded-xl bg-gradient-to-r from-muted/40 to-muted/60 backdrop-blur-sm p-2 text-muted-foreground transition-all duration-500 border border-border/50 shadow-lg",
       className
     )}
     {...props}
@@ -28,7 +28,13 @@ const TabsTrigger = React.forwardRef<
   <TabsPrimitive.Trigger
     ref={ref}
     className={cn(
-      "inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all duration-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm hover:bg-background/50 hover:text-foreground/80 transform hover:scale-105 data-[state=active]:scale-105",
+      "relative inline-flex items-center justify-center whitespace-nowrap rounded-lg px-6 py-3.5 text-sm font-semibold ring-offset-background transition-all duration-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 min-h-12 min-w-fit",
+      "data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-lg data-[state=active]:shadow-primary/10 data-[state=active]:border data-[state=active]:border-border/30",
+      "hover:bg-background/60 hover:text-foreground/90 hover:shadow-md hover:shadow-primary/5",
+      "transform hover:scale-[1.02] data-[state=active]:scale-[1.02] active:scale-[0.98]",
+      "before:absolute before:inset-0 before:rounded-lg before:bg-gradient-to-r before:from-primary/0 before:to-primary/0 before:transition-all before:duration-500",
+      "data-[state=active]:before:from-primary/5 data-[state=active]:before:to-primary/10",
+      "touch-manipulation select-none",
       className
     )}
     {...props}
@@ -43,7 +49,9 @@ const TabsContent = React.forwardRef<
   <TabsPrimitive.Content
     ref={ref}
     className={cn(
-      "mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 animate-fade-in animate-scale-in transition-all duration-500",
+      "mt-6 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+      "animate-fade-in animate-scale-in transition-all duration-500 opacity-0 data-[state=active]:opacity-100",
+      "transform translate-y-2 data-[state=active]:translate-y-0",
       className
     )}
     {...props}
