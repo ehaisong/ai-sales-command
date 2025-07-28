@@ -356,13 +356,13 @@ const TrendAnalysisPage = () => {
                         <div className="flex-1">
                           <div className="flex justify-between items-start mb-2">
                             <h3 className="font-semibold text-lg">{product.name}</h3>
-                            <div className="flex items-center gap-2 flex-shrink-0 min-w-fit">
+                            <div className="flex items-center gap-3 flex-shrink-0 min-w-fit">
                               <Badge variant={getDemandBadgeColor(product.predictedDemand)} className="whitespace-nowrap">
                                 {getDemandText(product.predictedDemand)}
                               </Badge>
-                              <div className="text-right flex-shrink-0 min-w-fit">
-                                <div className="text-sm text-muted-foreground whitespace-nowrap">趋势评分</div>
-                                <div className="font-bold text-lg whitespace-nowrap">{product.trendScore}</div>
+                              <div className="flex items-center gap-2 text-right flex-shrink-0 min-w-fit">
+                                <span className="text-sm text-muted-foreground whitespace-nowrap">趋势评分</span>
+                                <span className="font-bold text-lg whitespace-nowrap">{product.trendScore}</span>
                               </div>
                             </div>
                           </div>
