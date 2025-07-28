@@ -13,9 +13,9 @@ const BrandStrategyGenerationPage = () => {
 
   // 模拟品牌数据 - 在实际应用中这些数据会从前一页传递过来
   const brandData = {
-    name: '思拓智能外贸助手',
-    website: 'https://seatob.com',
-    icon: '🤖'
+    name: '思拓出海',
+    website: 'https://situo-overseas.com',
+    icon: '/lovable-uploads/be55e235-0b1c-45c0-b936-f0587eb24b04.png'
   };
 
   const availablePlatforms = [
@@ -59,7 +59,9 @@ const BrandStrategyGenerationPage = () => {
         {/* 品牌信息显示 */}
         <div className="flex items-center mb-8">
           <div className="flex items-center bg-primary/10 rounded-lg px-4 py-3">
-            <div className="text-2xl mr-3">{brandData.icon}</div>
+            <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center border border-gray-200 shadow-sm mr-3">
+              <img alt="思拓出海" className="h-8 w-auto object-contain" src={brandData.icon} />
+            </div>
             <div>
               <h2 className="text-lg font-semibold text-foreground">{brandData.name}</h2>
               <p className="text-sm text-muted-foreground">{brandData.website}</p>
