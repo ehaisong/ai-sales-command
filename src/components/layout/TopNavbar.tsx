@@ -4,8 +4,9 @@ import { Input } from '@/components/ui/input';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
 import { Badge } from '@/components/ui/badge';
 import { SidebarTrigger } from '@/components/ui/sidebar';
-import { Search, Bell, HelpCircle, ChevronDown, User, Settings, CreditCard, Monitor, Building2, Plus } from 'lucide-react';
+import { Search, HelpCircle, ChevronDown, User, Settings, CreditCard, Monitor, Building2, Plus } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import NotificationDropdown from './NotificationDropdown';
 const TopNavbar = () => {
   return <header className="h-14 bg-card border-b border-border px-4 flex items-center justify-between w-full">
       {/* 左侧抽屉控制和DEMO标识 */}
@@ -28,12 +29,7 @@ const TopNavbar = () => {
       {/* 右侧快捷操作 */}
       <div className="flex items-center space-x-3">
         {/* 通知 */}
-        <Button variant="ghost" size="icon" className="relative">
-          <Bell className="h-5 w-5" />
-          <Badge variant="destructive" className="absolute -top-1 -right-1 h-5 w-5 p-0 flex items-center justify-center text-xs">
-            3
-          </Badge>
-        </Button>
+        <NotificationDropdown />
 
         {/* 帮助 */}
         <Button variant="ghost" size="icon">
