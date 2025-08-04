@@ -8,7 +8,7 @@ import { Search, HelpCircle, ChevronDown, User, Settings, CreditCard, Monitor, B
 import { Link } from 'react-router-dom';
 import NotificationDropdown from './NotificationDropdown';
 const TopNavbar = () => {
-  return <header className="h-14 bg-card border-b border-border px-4 flex items-center justify-between w-full">
+  return <header className="sticky top-0 z-50 h-14 bg-card border-b border-border px-4 flex items-center justify-between w-full">
       {/* 左侧抽屉控制和DEMO标识 */}
       <div className="flex items-center space-x-4">
         <SidebarTrigger />

@@ -38,9 +38,9 @@ const App = () => (
       <SidebarProvider>
         <div className="min-h-screen flex w-full">
           <AppSidebar />
-          <main className="flex-1 flex flex-col" style={{ backgroundColor: '#F7F8FA' }}>
+          <main className="flex-1 overflow-auto" style={{ backgroundColor: '#F7F8FA' }}>
             <TopNavbar />
-            <div className="flex-1 overflow-auto">
+            <div className="min-h-full">
                 <Routes>
                   <Route path="/" element={<Dashboard />} />
                   {/* 营销对话 */}
