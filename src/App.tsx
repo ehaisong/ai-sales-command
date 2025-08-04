@@ -38,7 +38,7 @@ const App = () => (
       <SidebarProvider>
         <div className="min-h-screen flex w-full">
           <AppSidebar />
-          <main className="flex-1 flex flex-col" style={{ backgroundColor: '#F7F8FA' }}>
+          <main className="flex-1 flex flex-col pt-14" style={{ backgroundColor: '#F7F8FA' }}>
             <TopNavbar />
             <div className="flex-1 overflow-auto">
                 <Routes>
