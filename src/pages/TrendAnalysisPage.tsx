@@ -31,7 +31,7 @@ const mockTrendingProducts: TrendingProduct[] = [
   {
     id: "1",
     name: "AI智能蓝牙耳机 Pro",
-    image: "/lovable-uploads/b1e201d5-373b-4a29-a877-7fb546061682.png",
+    image: "/lovable-uploads/5202474d-8274-4c8d-b3ea-7f6dcb686ad5.png",
     price: 299,
     originalPrice: 499,
     sales: 15678,
