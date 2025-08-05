@@ -63,7 +63,7 @@ const mockTrendingProducts: TrendingProduct[] = [
   {
     id: "3",
     name: "无线快充充电宝 20000mAh",
-    image: "/lovable-uploads/35e69ba5-3e0b-4322-9357-bde4d618adb3.png",
+    image: "/lovable-uploads/29feb998-ef36-4668-a8ef-d885ac962b95.png",
     price: 159,
     originalPrice: 239,
     sales: 8970,
