@@ -351,6 +351,13 @@ const TrendAnalysisPage = () => {
                             src={product.image} 
                             alt={product.name}
                             className="w-20 h-20 object-cover rounded-lg bg-gray-100"
+                            onError={(e) => {
+                              console.log('Image load error:', product.image);
+                              e.currentTarget.style.border = '2px solid red';
+                            }}
+                            onLoad={() => {
+                              console.log('Image loaded successfully:', product.image);
+                            }}
                           />
                         </div>
                         <div className="flex-1">
