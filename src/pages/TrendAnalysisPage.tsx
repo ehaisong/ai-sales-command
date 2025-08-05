@@ -31,7 +31,7 @@ const mockTrendingProducts: TrendingProduct[] = [
   {
     id: "1",
     name: "AI智能蓝牙耳机 Pro",
-    image: "/lovable-uploads/515beaa6-06a7-4d91-85dd-09233ccbf7d0.png",
+    image: "/lovable-uploads/37d0bae3-ea1e-4824-8e30-414d99a261e6.png",
     price: 299,
     originalPrice: 499,
     sales: 15678,
@@ -47,7 +47,7 @@ const mockTrendingProducts: TrendingProduct[] = [
   {
     id: "2", 
     name: "智能运动手表 X5",
-    image: "/lovable-uploads/863076f0-5e79-4bb1-a8e5-587a8c9ce88c.png",
+    image: "/lovable-uploads/13707db7-0bb0-4c4a-acde-5e3df43f9531.png",
     price: 899,
     originalPrice: 1299,
     sales: 12340,
@@ -63,7 +63,7 @@ const mockTrendingProducts: TrendingProduct[] = [
   {
     id: "3",
     name: "无线快充充电宝 20000mAh",
-    image: "/lovable-uploads/a6b20fef-de43-4809-b7fc-a1d7b088160d.png",
+    image: "/lovable-uploads/35e783d3-832a-47c9-9ceb-d9741e6dd9b5.png",
     price: 159,
     originalPrice: 239,
     sales: 8970,
@@ -79,7 +79,7 @@ const mockTrendingProducts: TrendingProduct[] = [
   {
     id: "4",
     name: "智能家居音箱 Mini",
-    image: "/lovable-uploads/be55e235-0b1c-45c0-b936-f0587eb24b04.png",
+    image: "/lovable-uploads/6eab5b6f-f148-4757-befa-5649a2585396.png",
     price: 199,
     originalPrice: 299,
     sales: 6789,
