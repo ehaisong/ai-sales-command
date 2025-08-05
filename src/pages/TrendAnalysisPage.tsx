@@ -45,9 +45,9 @@ const mockTrendingProducts: TrendingProduct[] = [
     tags: ["AI", "蓝牙", "降噪"]
   },
   {
-    id: "2", 
+    id: "2",
     name: "智能运动手表 X5",
-    image: "/lovable-uploads/0f249b3c-1548-4350-8ecc-d6f2035b6de7.png",
+    image: "/lovable-uploads/214dde54-eeea-4014-8058-0bf92268d98a.png",
     price: 899,
     originalPrice: 1299,
     sales: 12340,
