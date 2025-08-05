@@ -79,7 +79,7 @@ const mockTrendingProducts: TrendingProduct[] = [
   {
     id: "4",
     name: "智能家居音箱 Mini",
-    image: "/lovable-uploads/4df540b4-6a10-475f-aa91-f370945c97ef.png",
+    image: "/lovable-uploads/d013a19b-a0cc-434d-83da-4ee395646e98.png",
     price: 199,
     originalPrice: 299,
     sales: 6789,
