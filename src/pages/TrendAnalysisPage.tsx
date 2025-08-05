@@ -31,7 +31,7 @@ const mockTrendingProducts: TrendingProduct[] = [
   {
     id: "1",
     name: "AI智能蓝牙耳机 Pro",
-    image: "/lovable-uploads/5202474d-8274-4c8d-b3ea-7f6dcb686ad5.png",
+    image: "/lovable-uploads/b1e201d5-373b-4a29-a877-7fb546061682.png",
     price: 299,
     originalPrice: 499,
     sales: 15678,
@@ -79,7 +79,7 @@ const mockTrendingProducts: TrendingProduct[] = [
   {
     id: "4",
     name: "智能家居音箱 Mini",
-    image: "/lovable-uploads/d013a19b-a0cc-434d-83da-4ee395646e98.png",
+    image: "/lovable-uploads/4df540b4-6a10-475f-aa91-f370945c97ef.png",
     price: 199,
     originalPrice: 299,
     sales: 6789,
