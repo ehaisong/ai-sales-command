@@ -47,7 +47,7 @@ const mockTrendingProducts: TrendingProduct[] = [
   {
     id: "2",
     name: "智能运动手表 X5",
-    image: "/lovable-uploads/214dde54-eeea-4014-8058-0bf92268d98a.png",
+    image: "/lovable-uploads/68aae36a-c411-47a4-861b-528e36df6415.png",
     price: 899,
     originalPrice: 1299,
     sales: 12340,
