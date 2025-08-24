@@ -6,9 +6,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import AppSidebar from "@/components/layout/AppSidebar";
 import TopNavbar from "@/components/layout/TopNavbar";
-import { AuthProvider } from "@/contexts/AuthContext";
-import { AuthPage } from "@/components/auth/AuthPage";
-import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import Dashboard from "@/pages/Dashboard";
 import EmailPage from "@/pages/EmailPage";
 import UnifiedConversationPage from "@/pages/UnifiedConversationPage";
@@ -30,7 +27,6 @@ import InfluencerPage from "@/pages/InfluencerPage";
 import AdsAssistantPage from "@/pages/AdsAssistantPage";
 import CompetitorMonitoringPage from "@/pages/CompetitorMonitoringPage";
 import CustomsAnalysisPage from "@/pages/CustomsAnalysisPage";
-import ICPAnalysisPage from "@/pages/ICPAnalysisPage";
 
 import EnterpriseCRM from "@/pages/EnterpriseCRM";
 
@@ -39,19 +35,14 @@ const App = () => (
     <Toaster />
     <Sonner />
     <BrowserRouter>
-      <AuthProvider>
-        <Routes>
-          <Route path="/auth" element={<AuthPage />} />
-          <Route path="/*" element={
-            <ProtectedRoute>
-              <SidebarProvider>
-                <div className="min-h-screen flex w-full">
-                  <AppSidebar />
-                  <main className="flex-1 overflow-auto" style={{ backgroundColor: '#F7F8FA' }}>
-                    <TopNavbar />
-                    <div className="min-h-full">
-                      <Routes>
-                        <Route path="/" element={<Dashboard />} />
+      <SidebarProvider>
+        <div className="min-h-screen flex w-full">
+          <AppSidebar />
+          <main className="flex-1 overflow-auto" style={{ backgroundColor: '#F7F8FA' }}>
+            <TopNavbar />
+            <div className="min-h-full">
+                <Routes>
+                  <Route path="/" element={<Dashboard />} />
                   {/* 营销对话 */}
                   <Route path="/marketing/conversations" element={<UnifiedConversationPage />} />
                   <Route path="/marketing/email" element={<EmailPage />} />
@@ -67,7 +58,6 @@ const App = () => (
                   {/* AI助手 */}
                   <Route path="/ai-agent/knowledge" element={<AIKnowledgeBase />} />
                   <Route path="/ai-agent/settings" element={<AISettings />} />
-                  <Route path="/ai-agent/icp-analysis" element={<ICPAnalysisPage />} />
                   
                   {/* 品牌建设 */}
                   <Route path="/brand/social-media" element={<SocialMediaManagement />} />
@@ -93,19 +83,15 @@ const App = () => (
                   {/* 设置 */}
                   <Route path="/settings" element={<SettingsPage />} />
                   
-                        {/* 404页面 */}
-                        <Route path="*" element={<NotFound />} />
-                      </Routes>
-                    </div>
-                  </main>
-                </div>
-              </SidebarProvider>
-            </ProtectedRoute>
-          } />
-        </Routes>
-      </AuthProvider>
+                  {/* 404页面 */}
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </div>
+            </main>
+        </div>
+      </SidebarProvider>
     </BrowserRouter>
-  </TooltipProvider>
+    </TooltipProvider>
 );
 
 export default App;

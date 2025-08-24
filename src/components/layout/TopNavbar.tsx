@@ -4,24 +4,10 @@ import { Input } from '@/components/ui/input';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
 import { Badge } from '@/components/ui/badge';
 import { SidebarTrigger } from '@/components/ui/sidebar';
-import { Search, HelpCircle, ChevronDown, User, Settings, CreditCard, Monitor, Building2, Plus, LogOut } from 'lucide-react';
+import { Search, HelpCircle, ChevronDown, User, Settings, CreditCard, Monitor, Building2, Plus } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import NotificationDropdown from './NotificationDropdown';
-import { useAuth } from '@/contexts/AuthContext';
-import { toast } from '@/hooks/use-toast';
 const TopNavbar = () => {
-  const { user, signOut } = useAuth();
-
-  const handleSignOut = async () => {
-    const { error } = await signOut();
-    if (error) {
-      toast({
-        title: '错误',
-        description: '登出失败',
-        variant: 'destructive',
-      });
-    }
-  };
   return <header className="sticky top-0 z-50 h-14 bg-card border-b border-border px-4 flex items-center justify-between w-full">
       {/* 左侧抽屉控制和DEMO标识 */}
       <div className="flex items-center space-x-4">
@@ -99,8 +85,8 @@ const TopNavbar = () => {
                 <User className="h-4 w-4 text-white" />
               </div>
               <div className="text-left hidden md:block">
-                <div className="text-sm font-medium">{user?.user_metadata?.full_name || user?.email}</div>
-                <div className="text-xs text-gray-500 dark:text-gray-400">{user?.email}</div>
+                <div className="text-sm font-medium">张三</div>
+                <div className="text-xs text-gray-500 dark:text-gray-400">科技有限公司</div>
               </div>
               <ChevronDown className="h-4 w-4" />
             </Button>
@@ -117,11 +103,6 @@ const TopNavbar = () => {
                 <Settings className="mr-2 h-4 w-4" />
                 <span>设置</span>
               </Link>
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={handleSignOut}>
-              <LogOut className="mr-2 h-4 w-4" />
-              <span>登出</span>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
