@@ -29,48 +29,8 @@ const Dashboard = () => {
 
       {/* 主要内容区域 - 改为8:4比例布局 */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 h-full">
-        {/* 左列：统计卡片 + AI工作流 - 占8/12宽度 */}
-        <div className="lg:col-span-8 flex flex-col space-y-6">
-          {/* 统计卡片区域 - 单行4列网格 */}
-          <div className="grid-stats">
-            <StatCard 
-              title="待处理信息" 
-              value={12} 
-              icon={Mail} 
-              trend="+2 新消息" 
-              trendUp={true} 
-              iconColor="hsl(var(--primary))" 
-              bgColor="monday-card-small bg-card hover:shadow-monday"
-            />
-            <StatCard 
-              title="今日客户" 
-              value={321} 
-              icon={Users} 
-              trend="+12% 较昨日" 
-              trendUp={true} 
-              iconColor="hsl(var(--warning))" 
-              bgColor="monday-card-small bg-card hover:shadow-monday"
-            />
-            <StatCard 
-              title="今日发信" 
-              value={185} 
-              icon={Send} 
-              trend="+8% 较昨日" 
-              trendUp={true} 
-              iconColor="hsl(var(--accent))" 
-              bgColor="monday-card-small bg-card hover:shadow-monday"
-            />
-            <StatCard 
-              title="今日收信" 
-              value={15} 
-              icon={MailOpen} 
-              trend="+23% 较昨日" 
-              trendUp={true} 
-              iconColor="hsl(var(--success))" 
-              bgColor="monday-card-small bg-card hover:shadow-monday"
-            />
-          </div>
-
+        {/* 左列：AI工作流 - 占8/12宽度 */}
+        <div className="lg:col-span-8 flex flex-col">
           {/* AI工作流区域 */}
           <div className="flex-1">
             <AIWorkflow />
