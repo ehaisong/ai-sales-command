@@ -7,8 +7,9 @@ import { Plus, Target, Users, TrendingUp, Building2 } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/contexts/AuthContext';
 import { ICPConfiguration, KnowledgeBase } from '@/types/icp';
-import { ICPConfigurationDialog } from '@/components/icp/ICPConfigurationDialog';
+import { ICPGenerateDialog } from '@/components/icp/ICPGenerateDialog';
 import { ICPAnalysisCard } from '@/components/icp/ICPAnalysisCard';
+import { ProspectList } from '@/components/icp/ProspectList';
 import { toast } from '@/hooks/use-toast';
 
 export default function ICPAnalysisPage() {
@@ -104,7 +105,7 @@ export default function ICPAnalysisPage() {
           </div>
           <Button onClick={() => setShowCreateDialog(true)} className="monday-button">
             <Plus className="h-4 w-4 mr-2" />
-            创建ICP
+            创建智能ICP
           </Button>
         </div>
       </div>
@@ -181,7 +182,7 @@ export default function ICPAnalysisPage() {
                     </p>
                     <Button onClick={() => setShowCreateDialog(true)}>
                       <Plus className="h-4 w-4 mr-2" />
-                      创建ICP配置
+                      创建智能ICP
                     </Button>
                   </CardContent>
                 </Card>
@@ -196,12 +197,19 @@ export default function ICPAnalysisPage() {
                   ))}
                 </div>
               )}
+              
+              {/* 潜在客户列表 */}
+              {icpConfigurations.length > 0 && (
+                <div className="mt-8">
+                  <ProspectList knowledgeBaseId={selectedKnowledgeBase} />
+                </div>
+              )}
             </div>
           </TabsContent>
         ))}
       </Tabs>
 
-      <ICPConfigurationDialog
+      <ICPGenerateDialog
         open={showCreateDialog}
         onOpenChange={setShowCreateDialog}
         knowledgeBaseId={selectedKnowledgeBase}

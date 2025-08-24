@@ -15,7 +15,8 @@ import {
   Eye,
   TrendingUp,
   Zap,
-  BarChart3
+  BarChart3,
+  Target
 } from 'lucide-react';
 
 export interface MenuItem {
@@ -122,5 +123,10 @@ export const menuItems: MenuItem[] = [
         icon: Settings,
       },
     ],
+  },
+  {
+    title: "理想客户画像ICP",
+    url: "/ai-agent/icp-analysis",
+    icon: Target,
   },
 ];
