@@ -13,10 +13,8 @@ const Dashboard = () => {
     <div className="page-container">
       {/* Page Header */}
       <div className="page-header">
-        <div className="flex items-center justify-between">
-          <h1 className="page-title">工作台</h1>
-          <p className="page-subtitle">管理您的营销活动和客户关系</p>
-        </div>
+        <h1 className="page-title">工作台</h1>
+        <p className="page-subtitle">管理您的营销活动和客户关系</p>
         
         {/* Enterprise CRM Access Button */}
         <div className="mt-4">
