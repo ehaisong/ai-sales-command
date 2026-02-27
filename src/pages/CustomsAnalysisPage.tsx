@@ -50,7 +50,7 @@ const CustomsAnalysisPage = () => {
       trend: 'up',
       changePercent: 12.5,
       topCompanies: ['Apple Inc.', 'Microsoft Corp.', 'Amazon.com Inc.'],
-      lastUpdated: '2024-01-15'
+      lastUpdated: '2025-08-15'
     },
     {
       id: 2,
@@ -61,7 +61,7 @@ const CustomsAnalysisPage = () => {
       trend: 'down',
       changePercent: -8.3,
       topCompanies: ['BMW AG', 'Mercedes-Benz Group', 'Volkswagen AG'],
-      lastUpdated: '2024-01-14'
+      lastUpdated: '2025-08-14'
     },
     {
       id: 3,
@@ -72,7 +72,7 @@ const CustomsAnalysisPage = () => {
       trend: 'up',
       changePercent: 15.8,
       topCompanies: ['Next PLC', 'ASOS PLC', 'Primark'],
-      lastUpdated: '2024-01-15'
+      lastUpdated: '2025-08-15'
     }
   ];
 
@@ -114,22 +114,22 @@ const CustomsAnalysisPage = () => {
   const reports = [
     {
       id: 'report1',
-      title: '2024年1月海关数据月报',
+      title: '2025年8月海关数据月报',
       description: '包含28个国家的贸易数据分析和客户挖掘建议',
-      date: '2024-01-15',
+      date: '2025-08-15',
       status: 'completed'
     },
     {
       id: 'report2',
       title: '电子产品贸易趋势分析',
       description: '专项分析报告 - 重点关注美国、德国市场',
-      date: '2024-01-14',
+      date: '2025-08-14',
       status: 'completed'
     },
     {
       id: 'report3',
       title: '服装行业周报',
-      description: '预计完成时间: 2024-01-16 15:00',
+      description: '预计完成时间: 2025-08-16 15:00',
       status: 'generating'
     }
   ];

@@ -24,7 +24,7 @@ const mockInfluencers: Influencer[] = [
     platform: 'instagram',
     topics: ['Family', 'Lifestyle', 'Travel', 'Parenting'],
     verified: true,
-    lastActiveAt: '2024-01-26',
+    lastActiveAt: '2025-10-26',
     avgLikes: 280000,
     avgComments: 15000,
     brandMatchScore: 96
@@ -42,7 +42,7 @@ const mockInfluencers: Influencer[] = [
     platform: 'instagram',
     topics: ['Beauty', 'Skincare', 'Fashion', 'Wellness'],
     verified: true,
-    lastActiveAt: '2024-01-25',
+    lastActiveAt: '2025-10-25',
     avgLikes: 350000,
     avgComments: 22000,
     brandMatchScore: 94
@@ -60,7 +60,7 @@ const mockInfluencers: Influencer[] = [
     platform: 'instagram',
     topics: ['Beauty', 'Makeup', 'Cosmetics', 'Tutorial'],
     verified: true,
-    lastActiveAt: '2024-01-26',
+    lastActiveAt: '2025-10-26',
     avgLikes: 420000,
     avgComments: 28000,
     brandMatchScore: 92
@@ -78,7 +78,7 @@ const mockInfluencers: Influencer[] = [
     platform: 'instagram',
     topics: ['Fashion', 'Luxury', 'Style', 'Events'],
     verified: true,
-    lastActiveAt: '2024-01-24',
+    lastActiveAt: '2025-10-24',
     avgLikes: 310000,
     avgComments: 18500,
     brandMatchScore: 90
@@ -96,7 +96,7 @@ const mockInfluencers: Influencer[] = [
     platform: 'instagram',
     topics: ['Music', 'Entertainment', 'Performance', 'Art'],
     verified: true,
-    lastActiveAt: '2024-01-25',
+    lastActiveAt: '2025-10-25',
     avgLikes: 520000,
     avgComments: 35000,
     brandMatchScore: 88
@@ -114,7 +114,7 @@ const mockInfluencers: Influencer[] = [
     platform: 'youtube',
     topics: ['Couple Goals', 'Travel', 'Adventure', 'Vlogs'],
     verified: true,
-    lastActiveAt: '2024-01-26',
+    lastActiveAt: '2025-10-26',
     avgLikes: 185000,
     avgComments: 12000,
     brandMatchScore: 86
@@ -132,7 +132,7 @@ const mockInfluencers: Influencer[] = [
     platform: 'instagram',
     topics: ['Fitness', 'Health', 'Yoga', 'Wellness'],
     verified: true,
-    lastActiveAt: '2024-01-23',
+    lastActiveAt: '2025-10-23',
     avgLikes: 295000,
     avgComments: 19000,
     brandMatchScore: 84
@@ -150,7 +150,7 @@ const mockInfluencers: Influencer[] = [
     platform: 'youtube',
     topics: ['Technology', 'Gaming', 'Reviews', 'Innovation'],
     verified: true,
-    lastActiveAt: '2024-01-24',
+    lastActiveAt: '2025-10-24',
     avgLikes: 240000,
     avgComments: 16500,
     brandMatchScore: 82
@@ -168,7 +168,7 @@ const mockInfluencers: Influencer[] = [
     platform: 'tiktok',
     topics: ['Cooking', 'Food', 'Recipes', 'Culture'],
     verified: true,
-    lastActiveAt: '2024-01-25',
+    lastActiveAt: '2025-10-25',
     avgLikes: 210000,
     avgComments: 14200,
     brandMatchScore: 80
@@ -186,7 +186,7 @@ const mockInfluencers: Influencer[] = [
     platform: 'instagram',
     topics: ['Fashion', 'Menswear', 'Street Style', 'K-Fashion'],
     verified: true,
-    lastActiveAt: '2024-01-26',
+    lastActiveAt: '2025-10-26',
     avgLikes: 165000,
     avgComments: 11800,
     brandMatchScore: 78

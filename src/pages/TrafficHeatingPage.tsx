@@ -20,11 +20,11 @@ const mockHistoryRecords: TrafficHeatingRecord[] = [
     dailyTraffic: 1000,
     durationDays: 7,
     pointsDeducted: 665,
-    startTime: "2024-01-10",
-    endTime: "2024-01-17",
+    startTime: "2025-08-10",
+    endTime: "2025-08-17",
     status: "running",
     remainingDays: 3,
-    createdAt: "2024-01-10"
+    createdAt: "2025-08-10"
   },
   {
     id: "2",
@@ -33,10 +33,10 @@ const mockHistoryRecords: TrafficHeatingRecord[] = [
     dailyTraffic: 500,
     durationDays: 3,
     pointsDeducted: 150,
-    startTime: "2024-01-05",
-    endTime: "2024-01-08",
+    startTime: "2025-07-05",
+    endTime: "2025-07-08",
     status: "completed",
-    createdAt: "2024-01-05"
+    createdAt: "2025-07-05"
   }
 ];
 
@@ -161,11 +161,7 @@ const TrafficHeatingPage = () => {
   };
 
   const handleRecharge = () => {
-    console.log("跳转到充值页面");
-    toast({
-      title: "跳转充值",
-      description: "正在跳转到积分充值页面...",
-    });
+    window.location.href = '/credits/recharge';
   };
 
   const handlePause = (id: string) => {

@@ -49,7 +49,7 @@ const CustomerInfoPanel: React.FC<CustomerInfoPanelProps> = ({ conversation }) =
     position: '采购经理',
     location: '美国纽约',
     website: 'https://abc-manufacturing.com',
-    lastContact: '2024-01-10',
+    lastContact: '2025-08-10',
     totalOrders: 15,
     totalValue: '$125,000',
     responseRate: '92%',
