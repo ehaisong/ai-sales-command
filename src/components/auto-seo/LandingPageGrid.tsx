@@ -28,8 +28,8 @@ const mockLandingPages: LandingPage[] = [
     status: "published",
     loadSpeed: 1200,
     mobileOptimized: true,
-    createdAt: "2024-01-10",
-    updatedAt: "2024-01-15"
+    createdAt: "2025-05-10",
+    updatedAt: "2025-05-15"
   },
   {
     id: "2",
@@ -53,8 +53,8 @@ const mockLandingPages: LandingPage[] = [
     status: "published",
     loadSpeed: 980,
     mobileOptimized: true,
-    createdAt: "2024-01-08",
-    updatedAt: "2024-01-14"
+    createdAt: "2025-04-08",
+    updatedAt: "2025-04-14"
   },
   {
     id: "3",
@@ -78,8 +78,8 @@ const mockLandingPages: LandingPage[] = [
     status: "optimizing",
     loadSpeed: 1450,
     mobileOptimized: true,
-    createdAt: "2024-01-12",
-    updatedAt: "2024-01-15"
+    createdAt: "2025-06-12",
+    updatedAt: "2025-06-15"
   }
 ];
 

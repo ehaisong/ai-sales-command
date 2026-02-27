@@ -40,7 +40,7 @@ const CompetitorMonitoringPage = () => {
       name: 'Amazon',
       url: 'https://amazon.com/dp/B08N5WRWNW',
       favicon: '/lovable-uploads/0f249b3c-1548-4350-8ecc-d6f2035b6de7.png',
-      lastChecked: '2024-01-26 14:30',
+      lastChecked: '2025-10-26 14:30',
       status: 'active',
       changes: [
         {
@@ -49,20 +49,20 @@ const CompetitorMonitoringPage = () => {
           description: '价格下调',
           oldValue: '$299.99',
           newValue: '$249.99',
-          timestamp: '2024-01-26 14:30'
+          timestamp: '2025-10-26 14:30'
         }
       ],
       hasNewChanges: true,
       currentPrice: '$249.99',
       lastNews: 'Echo Dot特价促销活动',
-      addedAt: '2024-01-25 10:00'
+      addedAt: '2025-10-25 10:00'
     },
     {
       id: '2',
       name: 'Apple Store',
       url: 'https://apple.com/iphone-15',
       favicon: '/lovable-uploads/4df540b4-6a10-475f-aa91-f370945c97ef.png',
-      lastChecked: '2024-01-26 14:25',
+      lastChecked: '2025-10-26 14:25',
       status: 'active',
       changes: [
         {
@@ -70,26 +70,26 @@ const CompetitorMonitoringPage = () => {
           type: 'news',
           description: '发布新产品公告',
           newValue: 'iPhone 15 Pro Max新颜色上市',
-          timestamp: '2024-01-26 13:15'
+          timestamp: '2025-10-26 13:15'
         }
       ],
       hasNewChanges: true,
       currentPrice: '$1199',
       lastNews: 'iPhone 15 Pro Max新颜色上市',
-      addedAt: '2024-01-24 15:30'
+      addedAt: '2025-10-24 15:30'
     },
     {
       id: '3',
       name: 'Best Buy',
       url: 'https://bestbuy.com/laptop-deals',
       favicon: '/lovable-uploads/afb27241-f57c-4aa7-8066-a6b587213c5e.png',
-      lastChecked: '2024-01-26 14:20',
+      lastChecked: '2025-10-26 14:20',
       status: 'active',
       changes: [],
       hasNewChanges: false,
       currentPrice: '$899.99',
       lastNews: '年终清仓特价活动',
-      addedAt: '2024-01-23 09:15'
+      addedAt: '2025-10-23 09:15'
     }
   ]);
 

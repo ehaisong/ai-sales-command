@@ -12,15 +12,15 @@ export const mockCustomers: Customer[] = [
     contactMethod: 'zhangming@email.com',
     dataSource: 'LinkedIn',
     customerScore: 85,
-    updatedDate: '2024-01-15',
+    updatedDate: '2025-06-15',
     email: 'zhangming@email.com',
     phone: '+86 138 0000 1234',
     status: 'client',
     isActive: true,
-    lastContact: '2024-01-10',
+    lastContact: '2025-06-10',
     conversationHistory: [
       {
-        date: '2024-01-10',
+        date: '2025-06-10',
         type: 'email',
         summary: '讨论了新产品的价格方案'
       }
@@ -35,15 +35,15 @@ export const mockCustomers: Customer[] = [
     contactMethod: 'wangli@email.com',
     dataSource: 'Meta',
     customerScore: 68,
-    updatedDate: '2024-01-13',
+    updatedDate: '2025-05-13',
     email: 'wangli@email.com',
     phone: '+86 139 0000 5678',
     status: 'active',
     isActive: true,
-    lastContact: '2024-01-08',
+    lastContact: '2025-05-08',
     conversationHistory: [
       {
-        date: '2024-01-08',
+        date: '2025-05-08',
         type: 'call',
         summary: '初次联系，了解需求'
       }
@@ -58,15 +58,15 @@ export const mockCustomers: Customer[] = [
     contactMethod: 'liuqiang@email.com',
     dataSource: 'Google',
     customerScore: 72,
-    updatedDate: '2024-01-12',
+    updatedDate: '2025-04-12',
     email: 'liuqiang@email.com',
     phone: '+86 136 0000 9999',
     status: 'prospect',
     isActive: true,
-    lastContact: '2024-01-11',
+    lastContact: '2025-04-11',
     conversationHistory: [
       {
-        date: '2024-01-11',
+        date: '2025-04-11',
         type: 'meeting',
         summary: '产品咨询会议，展现购买意向'
       }
@@ -81,15 +81,15 @@ export const mockCustomers: Customer[] = [
     contactMethod: 'chenhua@email.com',
     dataSource: 'Import',
     customerScore: 45,
-    updatedDate: '2024-01-05',
+    updatedDate: '2025-02-05',
     email: 'chenhua@email.com',
     phone: '+86 135 0000 1111',
     status: 'inactive',
     isActive: false,
-    lastContact: '2023-12-20',
+    lastContact: '2025-01-20',
     conversationHistory: [
       {
-        date: '2023-12-20',
+        date: '2025-01-20',
         type: 'email',
         summary: '长期未响应邮件联系'
       }
@@ -106,15 +106,15 @@ export const mockCustomers: Customer[] = [
     contactMethod: 'lijingli@tech.com',
     dataSource: 'Google',
     customerScore: 92,
-    updatedDate: '2024-01-14',
+    updatedDate: '2025-07-14',
     email: 'lijingli@tech.com',
     phone: '+86 400 888 9999',
     status: 'client',
     isActive: true,
-    lastContact: '2024-01-12',
+    lastContact: '2025-07-12',
     conversationHistory: [
       {
-        date: '2024-01-12',
+        date: '2025-07-12',
         type: 'meeting',
         summary: '签署正式合作协议'
       }
@@ -130,15 +130,15 @@ export const mockCustomers: Customer[] = [
     contactMethod: 'chen@innovation.com',
     dataSource: 'Manual',
     customerScore: 78,
-    updatedDate: '2024-01-11',
+    updatedDate: '2025-03-11',
     email: 'chen@innovation.com',
     phone: '+86 021 6666 8888',
     status: 'prospect',
     isActive: true,
-    lastContact: '2024-01-09',
+    lastContact: '2025-03-09',
     conversationHistory: [
       {
-        date: '2024-01-09',
+        date: '2025-03-09',
         type: 'email',
         summary: '正在商谈合作细节'
       }
@@ -154,15 +154,15 @@ export const mockCustomers: Customer[] = [
     contactMethod: 'zhang@aitech.com',
     dataSource: 'LinkedIn',
     customerScore: 66,
-    updatedDate: '2024-01-10',
+    updatedDate: '2025-04-10',
     email: 'zhang@aitech.com',
     phone: '+86 010 8888 6666',
     status: 'active',
     isActive: true,
-    lastContact: '2024-01-07',
+    lastContact: '2025-04-07',
     conversationHistory: [
       {
-        date: '2024-01-07',
+        date: '2025-04-07',
         type: 'call',
         summary: '了解AI解决方案需求'
       }
@@ -178,15 +178,15 @@ export const mockCustomers: Customer[] = [
     contactMethod: 'wang@trade.com',
     dataSource: 'Import',
     customerScore: 38,
-    updatedDate: '2024-01-03',
+    updatedDate: '2025-01-03',
     email: 'wang@trade.com',
     phone: '+86 027 5555 3333',
     status: 'inactive',
     isActive: false,
-    lastContact: '2023-11-15',
+    lastContact: '2025-01-15',
     conversationHistory: [
       {
-        date: '2023-11-15',
+        date: '2025-01-15',
         type: 'email',
         summary: '多次联系无回应，暂停跟进'
       }
@@ -202,15 +202,15 @@ export const mockCustomers: Customer[] = [
     contactMethod: 'zhaomin@email.com',
     dataSource: 'LinkedIn',
     customerScore: 88,
-    updatedDate: '2024-01-16',
+    updatedDate: '2025-08-16',
     email: 'zhaomin@email.com',
     phone: '+86 137 0000 2222',
     status: 'client',
     isActive: true,
-    lastContact: '2024-01-14',
+    lastContact: '2025-08-14',
     conversationHistory: [
       {
-        date: '2024-01-14',
+        date: '2025-08-14',
         type: 'meeting',
         summary: '年度续约会议，讨论服务升级'
       }
@@ -225,15 +225,15 @@ export const mockCustomers: Customer[] = [
     contactMethod: 'sunlin@email.com',
     dataSource: 'Meta',
     customerScore: 71,
-    updatedDate: '2024-01-15',
+    updatedDate: '2025-07-15',
     email: 'sunlin@email.com',
     phone: '+86 134 0000 3333',
     status: 'active',
     isActive: true,
-    lastContact: '2024-01-13',
+    lastContact: '2025-07-13',
     conversationHistory: [
       {
-        date: '2024-01-13',
+        date: '2025-07-13',
         type: 'email',
         summary: '咨询最新产品功能'
       }
@@ -248,15 +248,15 @@ export const mockCustomers: Customer[] = [
     contactMethod: 'zhoujie@email.com',
     dataSource: 'Google',
     customerScore: 79,
-    updatedDate: '2024-01-14',
+    updatedDate: '2025-09-14',
     email: 'zhoujie@email.com',
     phone: '+86 133 0000 4444',
     status: 'prospect',
     isActive: true,
-    lastContact: '2024-01-12',
+    lastContact: '2025-09-12',
     conversationHistory: [
       {
-        date: '2024-01-12',
+        date: '2025-09-12',
         type: 'call',
         summary: '投资方案咨询'
       }
@@ -271,15 +271,15 @@ export const mockCustomers: Customer[] = [
     contactMethod: 'wuyan@email.com',
     dataSource: 'Manual',
     customerScore: 74,
-    updatedDate: '2024-01-13',
+    updatedDate: '2025-10-13',
     email: 'wuyan@email.com',
     phone: '+86 132 0000 5555',
     status: 'active',
     isActive: true,
-    lastContact: '2024-01-11',
+    lastContact: '2025-10-11',
     conversationHistory: [
       {
-        date: '2024-01-11',
+        date: '2025-10-11',
         type: 'meeting',
         summary: '教育解决方案需求分析'
       }
@@ -294,15 +294,15 @@ export const mockCustomers: Customer[] = [
     contactMethod: 'zhengkai@email.com',
     dataSource: 'Import',
     customerScore: 56,
-    updatedDate: '2024-01-10',
+    updatedDate: '2025-03-10',
     email: 'zhengkai@email.com',
     phone: '+86 131 0000 6666',
     status: 'prospect',
     isActive: true,
-    lastContact: '2024-01-09',
+    lastContact: '2025-03-09',
     conversationHistory: [
       {
-        date: '2024-01-09',
+        date: '2025-03-09',
         type: 'email',
         summary: '创业项目合作探讨'
       }
@@ -319,15 +319,15 @@ export const mockCustomers: Customer[] = [
     contactMethod: 'lin@newenergy.com',
     dataSource: 'LinkedIn',
     customerScore: 89,
-    updatedDate: '2024-01-16',
+    updatedDate: '2025-11-16',
     email: 'lin@newenergy.com',
     phone: '+86 025 7777 8888',
     status: 'client',
     isActive: true,
-    lastContact: '2024-01-15',
+    lastContact: '2025-11-15',
     conversationHistory: [
       {
-        date: '2024-01-15',
+        date: '2025-11-15',
         type: 'meeting',
         summary: '新能源项目合作洽谈'
       }
@@ -343,15 +343,15 @@ export const mockCustomers: Customer[] = [
     contactMethod: 'wang@finance.com',
     dataSource: 'Google',
     customerScore: 94,
-    updatedDate: '2024-01-17',
+    updatedDate: '2025-12-17',
     email: 'wang@finance.com',
     phone: '+86 010 9999 0000',
     status: 'client',
     isActive: true,
-    lastContact: '2024-01-16',
+    lastContact: '2025-12-16',
     conversationHistory: [
       {
-        date: '2024-01-16',
+        date: '2025-12-16',
         type: 'meeting',
         summary: '年度合作计划制定'
       }
@@ -367,15 +367,15 @@ export const mockCustomers: Customer[] = [
     contactMethod: 'liu@medical.com',
     dataSource: 'Meta',
     customerScore: 76,
-    updatedDate: '2024-01-12',
+    updatedDate: '2025-05-12',
     email: 'liu@medical.com',
     phone: '+86 028 3333 4444',
     status: 'prospect',
     isActive: true,
-    lastContact: '2024-01-10',
+    lastContact: '2025-05-10',
     conversationHistory: [
       {
-        date: '2024-01-10',
+        date: '2025-05-10',
         type: 'call',
         summary: '医疗设备采购需求沟通'
       }
@@ -391,15 +391,15 @@ export const mockCustomers: Customer[] = [
     contactMethod: 'zhang@ecommerce.com',
     dataSource: 'Manual',
     customerScore: 82,
-    updatedDate: '2024-01-14',
+    updatedDate: '2025-08-14',
     email: 'zhang@ecommerce.com',
     phone: '+86 0571 5555 6666',
     status: 'active',
     isActive: true,
-    lastContact: '2024-01-13',
+    lastContact: '2025-08-13',
     conversationHistory: [
       {
-        date: '2024-01-13',
+        date: '2025-08-13',
         type: 'email',
         summary: '电商平台技术支持方案讨论'
       }
@@ -415,15 +415,15 @@ export const mockCustomers: Customer[] = [
     contactMethod: 'li@realestate.com',
     dataSource: 'Import',
     customerScore: 69,
-    updatedDate: '2024-01-11',
+    updatedDate: '2025-02-11',
     email: 'li@realestate.com',
     phone: '+86 020 7777 8888',
     status: 'prospect',
     isActive: true,
-    lastContact: '2024-01-08',
+    lastContact: '2025-02-08',
     conversationHistory: [
       {
-        date: '2024-01-08',
+        date: '2025-02-08',
         type: 'meeting',
         summary: '智能楼宇解决方案介绍'
       }
@@ -439,15 +439,15 @@ export const mockCustomers: Customer[] = [
     contactMethod: 'ma@education.com',
     dataSource: 'LinkedIn',
     customerScore: 73,
-    updatedDate: '2024-01-13',
+    updatedDate: '2025-09-13',
     email: 'ma@education.com',
     phone: '+86 0755 2222 3333',
     status: 'active',
     isActive: true,
-    lastContact: '2024-01-12',
+    lastContact: '2025-09-12',
     conversationHistory: [
       {
-        date: '2024-01-12',
+        date: '2025-09-12',
         type: 'call',
         summary: '在线教育平台技术需求沟通'
       }
@@ -463,15 +463,15 @@ export const mockCustomers: Customer[] = [
     contactMethod: 'zhou@logistics.com',
     dataSource: 'Google',
     customerScore: 64,
-    updatedDate: '2024-01-09',
+    updatedDate: '2025-01-09',
     email: 'zhou@logistics.com',
     phone: '+86 0532 4444 5555',
     status: 'inactive',
     isActive: false,
-    lastContact: '2023-12-15',
+    lastContact: '2025-01-15',
     conversationHistory: [
       {
-        date: '2023-12-15',
+        date: '2025-01-15',
         type: 'email',
         summary: '物流管理系统升级暂缓'
       }

@@ -17,19 +17,19 @@ const PhotoLibrary: React.FC = () => {
       id: "1",
       url: `https://images.unsplash.com/photo-1649972904349-6e44c42644a7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80`,
       name: "工作照片1.jpg",
-      uploaded: "2024-01-15"
+      uploaded: "2025-06-15"
     },
     {
       id: "2", 
       url: `https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80`,
       name: "生活照片1.jpg",
-      uploaded: "2024-01-10"
+      uploaded: "2025-05-10"
     },
     {
       id: "3",
       url: `https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80`,
       name: "商务照片1.jpg", 
-      uploaded: "2024-01-08"
+      uploaded: "2025-04-08"
     }
   ]);
 

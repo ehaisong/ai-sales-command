@@ -99,9 +99,22 @@ const TopNavbar = () => {
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
+              <Link to="/credits" className="flex items-center w-full">
+                <CreditCard className="mr-2 h-4 w-4" />
+                <span>积分管理</span>
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
               <Link to="/settings" className="flex items-center w-full">
                 <Settings className="mr-2 h-4 w-4" />
                 <span>设置</span>
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem asChild>
+              <Link to="/login" className="flex items-center w-full">
+                <User className="mr-2 h-4 w-4" />
+                <span>登录/注册</span>
               </Link>
             </DropdownMenuItem>
           </DropdownMenuContent>

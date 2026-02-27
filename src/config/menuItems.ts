@@ -15,7 +15,8 @@ import {
   Eye,
   TrendingUp,
   Zap,
-  BarChart3
+  BarChart3,
+  CreditCard
 } from 'lucide-react';
 
 export interface MenuItem {
@@ -112,5 +113,10 @@ export const menuItems: MenuItem[] = [
         icon: Settings,
       },
     ],
+  },
+  {
+    title: "积分管理",
+    url: "/credits",
+    icon: CreditCard,
   },
 ];

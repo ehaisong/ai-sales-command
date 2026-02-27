@@ -17,7 +17,7 @@ const mockKeywords: SEOKeyword[] = [
     currentRank: 15,
     targetRank: 3,
     relatedKeywords: ["服装批发", "外贸服装", "批发市场"],
-    createdAt: "2024-01-15"
+    createdAt: "2025-06-15"
   },
   {
     id: "2",
@@ -28,7 +28,7 @@ const mockKeywords: SEOKeyword[] = [
     currentRank: 25,
     targetRank: 5,
     relatedKeywords: ["跨境电商", "电商平台", "海外销售"],
-    createdAt: "2024-01-15"
+    createdAt: "2025-06-15"
   },
   {
     id: "3",
@@ -39,7 +39,7 @@ const mockKeywords: SEOKeyword[] = [
     currentRank: 8,
     targetRank: 1,
     relatedKeywords: ["贸易代理", "进出口代理", "外贸代理"],
-    createdAt: "2024-01-15"
+    createdAt: "2025-06-15"
   },
   {
     id: "4",
@@ -50,7 +50,7 @@ const mockKeywords: SEOKeyword[] = [
     currentRank: 12,
     targetRank: 5,
     relatedKeywords: ["服装出口", "纺织品出口"],
-    createdAt: "2024-01-15"
+    createdAt: "2025-06-15"
   },
   {
     id: "5",
@@ -61,7 +61,7 @@ const mockKeywords: SEOKeyword[] = [
     currentRank: 6,
     targetRank: 2,
     relatedKeywords: ["批发市场", "商品批发"],
-    createdAt: "2024-01-15"
+    createdAt: "2025-06-15"
   }
 ];
 
