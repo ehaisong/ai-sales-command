@@ -11,10 +11,10 @@ const AppSidebarHeader = ({
           <div className="flex items-center space-x-4">
             {!isCollapsed ? <>
                 <a href="https://seatob.com" target="_blank" rel="noopener noreferrer">
-                  <img alt="思拓出海" className="h-12 w-auto object-contain cursor-pointer hover:opacity-80 transition-opacity" src="/lovable-uploads/091c7feb-f82f-4bf3-9a42-4801f946d1a6.png" />
+                  <img alt="智能外贸助手" className="h-12 w-auto object-contain cursor-pointer hover:opacity-80 transition-opacity" src="/lovable-uploads/logo.png" />
                 </a>
-              </> : <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center">
-                <Zap className="h-7 w-7 text-white" />
+              </> : <div className="w-12 h-12 flex items-center justify-center">
+                <img alt="智能外贸助手" className="h-10 w-10 object-contain" src="/lovable-uploads/logo.png" />
               </div>}
       </div>
     </SidebarHeader>;
