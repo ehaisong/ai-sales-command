@@ -53,7 +53,7 @@ const LoginPage = () => {
         </div>
         <div className="relative z-10 flex flex-col justify-center px-16 text-white">
           <div className="flex items-center gap-3 mb-8">
-            <img src="/favicon.gif" alt="Logo" className="w-12 h-12 rounded-xl" />
+            <img src="/lovable-uploads/logo.png" alt="Logo" className="w-12 h-12" />
             <h1 className="text-3xl font-bold">智能外贸助手</h1>
           </div>
           <p className="text-xl text-white/80 mb-12 leading-relaxed">
@@ -81,7 +81,7 @@ const LoginPage = () => {
       <div className="flex-1 flex items-center justify-center bg-secondary p-8">
         <div className="w-full max-w-md">
           <div className="lg:hidden flex items-center gap-2 mb-8 justify-center">
-            <img src="/favicon.gif" alt="Logo" className="w-10 h-10 rounded-xl" />
+            <img src="/lovable-uploads/logo.png" alt="Logo" className="w-10 h-10" />
             <h1 className="text-2xl font-bold text-foreground">智能外贸助手</h1>
           </div>
 
